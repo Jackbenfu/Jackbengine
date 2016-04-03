@@ -14,6 +14,7 @@ TagComponent::TagComponent()
 
 TagComponent::~TagComponent()
 {
+    free(m_tag);
 }
 
 const char* TagComponent::getTag() const
@@ -23,5 +24,5 @@ const char* TagComponent::getTag() const
 
 void TagComponent::setTag(const char *tag)
 {
-    m_tag = tag;
+    m_tag = strdup(tag);
 }

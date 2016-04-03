@@ -25,7 +25,7 @@ public:
     void setTag(const char *tag);
 
 private:
-    const char *m_tag = nullptr;
+    char *m_tag = nullptr;
 };
 
 NS_END_JKB

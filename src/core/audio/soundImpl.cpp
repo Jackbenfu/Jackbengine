@@ -57,7 +57,8 @@ bool SoundImpl::loadFromMemory(const void *data, size_t dataSize)
         return true;
     }
 
-    return false;}
+    return false;
+}
 
 void SoundImpl::play(bool loop)
 {

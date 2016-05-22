@@ -17,7 +17,7 @@ SoundImpl::~SoundImpl()
     Mix_FreeChunk(m_chunk);
 }
 
-bool SoundImpl::load(const char *file)
+bool SoundImpl::loadFromFile(const char *file)
 {
     if (!m_isInitialized)
     {
@@ -34,6 +34,30 @@ bool SoundImpl::load(const char *file)
 
     return false;
 }
+
+bool SoundImpl::loadFromMemory(const void *data, size_t dataSize)
+{
+    if (!m_isInitialized)
+    {
+        auto *rWops = SDL_RWFromConstMem(data, dataSize);
+        if (!rWops)
+        {
+            printf("%s\n", SDL_GetError());
+            return false;
+        }
+
+        m_chunk = Mix_LoadWAV_RW(rWops, 1);
+        if (!m_chunk)
+        {
+            printf("%s\n", Mix_GetError());
+            return false;
+        }
+
+        m_isInitialized = true;
+        return true;
+    }
+
+    return false;}
 
 void SoundImpl::play(bool loop)
 {

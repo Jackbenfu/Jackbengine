@@ -17,13 +17,39 @@ FontImpl::~FontImpl()
     TTF_CloseFont(m_font);
 }
 
-bool FontImpl::load(const char *file, int size)
+bool FontImpl::loadFromFile(const char *file, int size)
 {
     if (!m_isInitialized)
     {
         m_font = TTF_OpenFont(file, size);
         if (!m_font)
         {
+            printf("%s\n", TTF_GetError());
+            return false;
+        }
+
+        m_isInitialized = true;
+        return true;
+    }
+
+    return false;
+}
+
+bool FontImpl::loadFromMemory(const void *data, size_t dataSize, int size)
+{
+    if (!m_isInitialized)
+    {
+        auto *rWops = SDL_RWFromConstMem(data, dataSize);
+        if (!rWops)
+        {
+            printf("%s\n", SDL_GetError());
+            return false;
+        }
+
+        m_font = TTF_OpenFontRW(rWops, 1, size);
+        if (!m_font)
+        {
+            SDL_FreeRW(rWops);
             printf("%s\n", TTF_GetError());
             return false;
         }

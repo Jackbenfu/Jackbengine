@@ -33,6 +33,22 @@ bool SpriteComponent::loadFromFile(const Renderer *renderer, const char *file)
     return result;
 }
 
+bool SpriteComponent::loadFromMemory(const Renderer *renderer, const void *data, size_t dataSize)
+{
+    bool result = false;
+
+    if (!m_texture)
+    {
+        m_texture = Texture::create();
+        if (m_texture->loadFromMemory(renderer, data, dataSize))
+        {
+            result = true;
+        }
+    }
+
+    return result;
+}
+
 bool SpriteComponent::loadFromLayer(const Renderer *renderer, const TmxMap *map, const char *layerName)
 {
     bool result = false;

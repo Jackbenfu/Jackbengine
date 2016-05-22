@@ -20,7 +20,8 @@ class FontImpl : public Font
 public:
     ~FontImpl();
 
-    bool load(const char *file, int size) override;
+    bool loadFromFile(const char *file, int size) override;
+    bool loadFromMemory(const void *data, size_t dataSize, int size) override;
 
     bool getGlyphMetrics(ushort glyph, int *minX, int *maxX, int *minY, int *maxY, int *advance) const override;
     bool getGlyphMinX(ushort glyph, int *minX) const override;

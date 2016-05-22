@@ -22,6 +22,7 @@ public:
     virtual ~Texture();
 
     virtual bool loadFromFile(const Renderer *renderer, const char *file) = 0;
+    virtual bool loadFromMemory(const Renderer *renderer, const void *data, size_t dataSize) = 0;
     virtual bool loadFromLayer(const Renderer *renderer, const TmxMap *map, const char *layerName) = 0;
     virtual bool loadFromObjectGroup(const Renderer *renderer, const TmxMap *map, const char *objectGroupName) = 0;
     virtual bool loadFromColor(const Renderer *renderer, int width, int height, Color color) = 0;

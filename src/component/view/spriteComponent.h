@@ -24,6 +24,7 @@ public:
     ~SpriteComponent();
 
     bool loadFromFile(const Renderer *renderer, const char *file);
+    bool loadFromMemory(const Renderer *renderer, const void *data, size_t dataSize);
     bool loadFromLayer(const Renderer *renderer, const TmxMap *map, const char *layerName);
     bool loadFromObjectGroup(const Renderer *renderer, const TmxMap *map, const char *objectGroupName);
     bool loadFromColor(const Renderer *renderer, uint width, uint height, Color color);

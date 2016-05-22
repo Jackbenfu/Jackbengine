@@ -18,9 +18,14 @@ AudioSourceComponent::~AudioSourceComponent()
     DELETE_SAFE(m_sound);
 }
 
-bool AudioSourceComponent::load(const char *file) const
+bool AudioSourceComponent::loadFromFile(const char *file) const
 {
-    return m_sound->load(file);
+    return m_sound->loadFromFile(file);
+}
+
+bool AudioSourceComponent::loadFromMemory(const void *data, size_t dataSize) const
+{
+    return m_sound->loadFromMemory(data, dataSize);
 }
 
 void AudioSourceComponent::play() const

@@ -22,7 +22,8 @@ public:
     AudioSourceComponent();
     ~AudioSourceComponent();
 
-    bool load(const char *file) const;
+    bool loadFromFile(const char *file) const;
+    bool loadFromMemory(const void *data, size_t dataSize) const;
 
     void play() const;
     void play(bool loop) const;

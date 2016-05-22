@@ -36,6 +36,27 @@ bool TextureImpl::loadFromFile(const Renderer *renderer, const char *file)
     return false;
 }
 
+bool TextureImpl::loadFromMemory(const Renderer *renderer, const void *data, size_t dataSize)
+{
+    if (!m_isInitialized)
+    {
+        auto *rWops = SDL_RWFromConstMem(data, dataSize);
+        if (!rWops)
+        {
+            printf("%s\n", SDL_GetError());
+            return false;
+        }
+
+        SDL_Surface *surface = IMG_Load_RW(rWops, 1);
+
+        m_isInitialized = loadTextureFromSurface(renderer, surface);
+
+        return m_isInitialized;
+    }
+
+    return false;
+}
+
 bool TextureImpl::loadFromLayer(const Renderer *renderer, const TmxMap *map, const char *layerName)
 {
     if (!m_isInitialized)

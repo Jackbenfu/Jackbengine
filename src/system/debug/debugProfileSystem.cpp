@@ -46,7 +46,7 @@ void DebugProfileSystem::setRenderer(Renderer *renderer)
     m_renderer = renderer;
 
     m_fps = new TextComponent();
-    m_fps->load(m_renderer, "Volter__28Goldfish_29.ttf", 9);
+    m_fps->loadFromFile(m_renderer, "Volter__28Goldfish_29.ttf", 9);
 }
 
 bool DebugProfileSystem::hasRequiredComponents(Entity *entity)

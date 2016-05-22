@@ -18,7 +18,7 @@ TextComponent::~TextComponent()
     DELETE_SAFE(m_texture);
 }
 
-bool TextComponent::load(const Renderer *renderer, const char *file, uint size)
+bool TextComponent::loadFromFile(const Renderer *renderer, const char *file, uint size)
 {
     bool result = false;
 
@@ -32,7 +32,31 @@ bool TextComponent::load(const Renderer *renderer, const char *file, uint size)
         m_font = Font::create();
         if (m_font)
         {
-            result = m_font->load(file, size);
+            result = m_font->loadFromFile(file, size);
+
+            m_isLoaded = result;
+            refreshTexture();
+        }
+    }
+
+    return result;
+}
+
+bool TextComponent::loadFromMemory(const Renderer *renderer, const void *data, size_t dataSize, int size)
+{
+    bool result = false;
+
+    if (renderer && !m_font)
+    {
+        m_renderer = renderer;
+
+        m_boundingRect.w = renderer->getWidth();
+        m_boundingRect.h = renderer->getHeight();
+
+        m_font = Font::create();
+        if (m_font)
+        {
+            result = m_font->loadFromMemory(data, dataSize, size);
 
             m_isLoaded = result;
             refreshTexture();

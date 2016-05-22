@@ -22,6 +22,7 @@ public:
     ~TextureImpl();
 
     bool loadFromFile(const Renderer *renderer, const char *file) override;
+    bool loadFromMemory(const Renderer *renderer, const void *data, size_t dataSize) override;
     bool loadFromLayer(const Renderer *renderer, const TmxMap *map, const char *layerName) override;
     bool loadFromObjectGroup(const Renderer *renderer, const TmxMap *map, const char *objectGroupName) override;
     bool loadFromColor(const Renderer *renderer, int width, int height, Color color) override;

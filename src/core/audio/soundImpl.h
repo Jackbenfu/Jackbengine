@@ -21,7 +21,9 @@ class SoundImpl : public Sound
 public:
     ~SoundImpl();
 
-    bool load(const char *file) override;
+    bool loadFromFile(const char *file) override;
+    bool loadFromMemory(const void *data, size_t dataSize) override;
+
     void play(bool loop) override;
 
 private:

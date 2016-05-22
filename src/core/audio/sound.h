@@ -18,7 +18,9 @@ class Sound
 public:
     virtual ~Sound();
 
-    virtual bool load(const char *file) = 0;
+    virtual bool loadFromFile(const char *file) = 0;
+    virtual bool loadFromMemory(const void *data, size_t dataSize) = 0;
+
     virtual void play(bool loop) = 0;
 
     static Sound* create();

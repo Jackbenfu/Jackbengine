@@ -21,6 +21,7 @@
 #include "core/render/renderer.h"
 #include "core/render/texture.h"
 #include "core/render/window.h"
+#include "core/resource/importResource.h"
 #include "core/time/timer.h"
 #include "core/tmx/tmxMap.h"
 

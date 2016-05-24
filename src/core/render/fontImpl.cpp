@@ -19,49 +19,50 @@ FontImpl::~FontImpl()
 
 bool FontImpl::loadFromFile(const char *file, int size)
 {
-    if (!m_isInitialized)
+    if (m_isInitialized)
     {
-        m_font = TTF_OpenFont(file, size);
-        if (!m_font)
-        {
-            printf("%s\n", TTF_GetError());
-            return false;
-        }
-
-        m_isInitialized = true;
-        return true;
+        return errorAlreadyLoaded();
     }
 
-    return false;
+    m_font = TTF_OpenFont(file, size);
+    if (!m_font)
+    {
+        printf("%s\n", TTF_GetError());
+        return false;
+    }
+
+    m_isInitialized = true;
+    return true;
 }
 
 bool FontImpl::loadFromMemory(const void *data, size_t dataSize, int size)
 {
-    if (!m_isInitialized)
+    if (m_isInitialized)
     {
-        auto *rWops = SDL_RWFromConstMem(data, dataSize);
-        if (!rWops)
-        {
-            printf("%s\n", SDL_GetError());
-            return false;
-        }
-
-        m_font = TTF_OpenFontRW(rWops, 1, size);
-        if (!m_font)
-        {
-            SDL_FreeRW(rWops);
-            printf("%s\n", TTF_GetError());
-            return false;
-        }
-
-        m_isInitialized = true;
-        return true;
+        return errorAlreadyLoaded();
     }
 
-    return false;
+    auto *rWops = SDL_RWFromConstMem(data, dataSize);
+    if (!rWops)
+    {
+        printf("%s\n", SDL_GetError());
+        return false;
+    }
+
+    m_font = TTF_OpenFontRW(rWops, 1, size);
+    if (!m_font)
+    {
+        SDL_FreeRW(rWops);
+        printf("%s\n", TTF_GetError());
+        return false;
+    }
+
+    m_isInitialized = true;
+    return true;
 }
 
-bool FontImpl::getGlyphMetrics(ushort glyph, int *minX, int *maxX, int *minY, int *maxY, int *advance) const
+bool FontImpl::getGlyphMetrics(
+    ushort glyph, int *minX, int *maxX, int *minY, int *maxY, int *advance) const
 {
     return 0 < TTF_GlyphMetrics(m_font, glyph, minX, maxX, minY, maxY, advance);
 }
@@ -134,4 +135,10 @@ int FontImpl::getLineSkip() const
 TTF_Font* FontImpl::getRawFont() const
 {
     return m_font;
+}
+
+bool FontImpl::errorAlreadyLoaded() const
+{
+    printf("Error: Font instance already loaded\n");
+    return false;
 }

@@ -23,7 +23,9 @@ public:
     virtual bool loadFromFile(const char *file, int size) = 0;
     virtual bool loadFromMemory(const void *data, size_t dataSize, int size) = 0;
 
-    virtual bool getGlyphMetrics(ushort glyph, int *minX, int *maxX, int *minY, int *maxY, int *advance) const = 0;
+    virtual bool getGlyphMetrics(
+        ushort glyph, int *minX, int *maxX, int *minY, int *maxY, int *advance) const = 0;
+
     virtual bool getGlyphMinX(ushort glyph, int *minX) const = 0;
     virtual bool getGlyphMaxX(ushort glyph, int *maxX) const = 0;
     virtual bool getGlyphMinY(ushort glyph, int *minY) const = 0;

@@ -47,7 +47,12 @@ enum class AABBCollisionSide
     Left
 };
 
-using AABBCollisionCallback = bool(*)(float delta, Entity *e1, Entity *e2, AABBCollisionSide collisionSide);
+using AABBCollisionCallback = bool(*)(
+    float delta,
+    Entity *e1,
+    Entity *e2,
+    AABBCollisionSide collisionSide
+);
 
 class AABBCollisionSystem :
     public System,

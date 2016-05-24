@@ -49,14 +49,16 @@ bool SpriteComponent::loadFromMemory(const Renderer *renderer, const void *data,
     return result;
 }
 
-bool SpriteComponent::loadFromLayer(const Renderer *renderer, const TmxMap *map, const char *layerName)
+bool SpriteComponent::loadFromLayer(const Renderer *renderer, const TmxMap *map,
+    const char *layerName, const void *tilesetImageData, size_t tilesetImageDataSize)
 {
     bool result = false;
 
     if (!m_texture)
     {
         m_texture = Texture::create();
-        if (m_texture->loadFromLayer(renderer, map, layerName))
+        if (m_texture->loadFromLayer(
+            renderer, map, layerName, tilesetImageData, tilesetImageDataSize))
         {
             result = true;
         }
@@ -65,14 +67,17 @@ bool SpriteComponent::loadFromLayer(const Renderer *renderer, const TmxMap *map,
     return result;
 }
 
-bool SpriteComponent::loadFromObjectGroup(const Renderer *renderer, const TmxMap *map, const char *objectGroupName)
+bool SpriteComponent::loadFromObjectGroup(
+    const Renderer *renderer, const TmxMap *map, const char *objectGroupName,
+    const void *tilesetImageData, size_t tilesetImageDataSize)
 {
     bool result = false;
 
     if (!m_texture)
     {
         m_texture = Texture::create();
-        if (m_texture->loadFromObjectGroup(renderer, map, objectGroupName))
+        if (m_texture->loadFromObjectGroup(
+            renderer, map, objectGroupName, tilesetImageData, tilesetImageDataSize))
         {
             result = true;
         }

@@ -24,7 +24,8 @@ public:
     TmxMap();
     ~TmxMap();
 
-    bool load(const char *file);
+    bool loadFromFile(const char *file);
+    bool loadFromMemory(const void *data, size_t dataSize);
 
     int getWidth() const;
     int getHeight() const;
@@ -49,6 +50,8 @@ public:
     void dump();
 
 private:
+    bool loadContents();
+
     int m_width = 0;
     int m_height = 0;
     int m_tileWidth = 0;

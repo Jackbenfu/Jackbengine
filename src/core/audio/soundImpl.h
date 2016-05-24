@@ -31,6 +31,8 @@ private:
 
     Mix_Chunk *m_chunk = nullptr;
     bool m_isInitialized = false;
+
+    bool errorAlreadyLoaded() const;
 };
 
 NS_END_JKB

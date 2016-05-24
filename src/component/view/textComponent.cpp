@@ -42,7 +42,8 @@ bool TextComponent::loadFromFile(const Renderer *renderer, const char *file, uin
     return result;
 }
 
-bool TextComponent::loadFromMemory(const Renderer *renderer, const void *data, size_t dataSize, int size)
+bool TextComponent::loadFromMemory(
+    const Renderer *renderer, const void *data, size_t dataSize, int size)
 {
     bool result = false;
 
@@ -177,13 +178,13 @@ void TextComponent::refreshTexture()
                 int glyphY;
                 if (static_cast<int>(m_text.length()) - 1 > i)
                 {
-                    m_font->getGlyphMaxY(m_text[i], &glyphY);
+                    m_font->getGlyphMaxY((ushort)m_text[i], &glyphY);
                 }
                 else
                 {
                     int minX;
                     int minY;
-                    m_font->getGlyphMetrics(m_text[i], &minX, &lastGlyphMaxX,
+                    m_font->getGlyphMetrics((ushort)m_text[i], &minX, &lastGlyphMaxX,
                         &minY, &glyphY, &lastGlyphAdvance);
                 }
 

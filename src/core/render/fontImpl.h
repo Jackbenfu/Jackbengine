@@ -23,7 +23,9 @@ public:
     bool loadFromFile(const char *file, int size) override;
     bool loadFromMemory(const void *data, size_t dataSize, int size) override;
 
-    bool getGlyphMetrics(ushort glyph, int *minX, int *maxX, int *minY, int *maxY, int *advance) const override;
+    bool getGlyphMetrics(
+        ushort glyph, int *minX, int *maxX, int *minY, int *maxY, int *advance) const override;
+
     bool getGlyphMinX(ushort glyph, int *minX) const override;
     bool getGlyphMaxX(ushort glyph, int *maxX) const override;
     bool getGlyphMinY(ushort glyph, int *minY) const override;
@@ -41,6 +43,8 @@ private:
 
     TTF_Font *m_font = nullptr;
     bool m_isInitialized = false;
+
+    bool errorAlreadyLoaded() const;
 };
 
 NS_END_JKB

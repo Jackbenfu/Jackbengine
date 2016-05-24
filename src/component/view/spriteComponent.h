@@ -24,9 +24,17 @@ public:
     ~SpriteComponent();
 
     bool loadFromFile(const Renderer *renderer, const char *file);
+
     bool loadFromMemory(const Renderer *renderer, const void *data, size_t dataSize);
-    bool loadFromLayer(const Renderer *renderer, const TmxMap *map, const char *layerName);
-    bool loadFromObjectGroup(const Renderer *renderer, const TmxMap *map, const char *objectGroupName);
+
+    bool loadFromLayer(
+        const Renderer *renderer, const TmxMap *map, const char *layerName,
+        const void *tilesetImageData = nullptr, size_t tilesetImageDataSize = 0);
+
+    bool loadFromObjectGroup(
+        const Renderer *renderer, const TmxMap *map, const char *objectGroupName,
+        const void *tilesetImageData = nullptr, size_t tilesetImageDataSize = 0);
+
     bool loadFromColor(const Renderer *renderer, uint width, uint height, Color color);
 
     float getWidth() const;

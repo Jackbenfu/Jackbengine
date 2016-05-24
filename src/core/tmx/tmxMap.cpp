@@ -33,7 +33,7 @@ TmxMap::~TmxMap()
     DELETE_SAFE(m_doc);
 }
 
-bool TmxMap::load(const char *file)
+bool TmxMap::loadFromFile(const char *file)
 {
     char filePath[255];
 
@@ -61,44 +61,18 @@ bool TmxMap::load(const char *file)
         return false;
     }
 
-    const TiXmlNode *node = m_doc->FirstChild("map");
-    const TiXmlElement *map = node->ToElement();
+    return loadContents();
+}
 
-    map->Attribute("width", &m_width);
-    map->Attribute("height", &m_height);
-    map->Attribute("tilewidth", &m_tileWidth);
-    map->Attribute("tileheight", &m_tileHeight);
-
-    node = map->FirstChild();
-    while (node)
+bool TmxMap::loadFromMemory(const void *data, size_t dataSize)
+{
+    if (!m_doc->Parse((char*)data))
     {
-        if (!strcmp("tileset", node->Value()))
-        {
-            m_tileset = new TmxTileset();
-            m_tileset->load(node->ToElement());
-        }
-        else if (!strcmp("layer", node->Value()))
-        {
-            TmxLayer *layer = new TmxLayer();
-            layer->load(node->ToElement());
-            m_layers.push_back(layer);
-        }
-        else if (!strcmp("objectgroup", node->Value()))
-        {
-            TmxObjectGroup *objectGroup = new TmxObjectGroup();
-            objectGroup->load(node->ToElement());
-            m_objectGroups.push_back(objectGroup);
-        }
-        else if (!strcmp("properties", node->Value()))
-        {
-            m_properties = new TmxPropertyGroup();
-            m_properties->load(node->ToElement());
-        }
-
-        node = node->NextSibling();
+        printf("%s (%i)\n", m_doc->ErrorDesc(), m_doc->ErrorId());
+        return false;
     }
 
-    return true;
+    return loadContents();
 }
 
 int TmxMap::getWidth() const
@@ -227,4 +201,46 @@ void TmxMap::dump()
             objectGroup->dump();
         }
     }
+}
+
+bool TmxMap::loadContents()
+{
+    const TiXmlNode *node = m_doc->FirstChild("map");
+    const TiXmlElement *map = node->ToElement();
+
+    map->Attribute("width", &m_width);
+    map->Attribute("height", &m_height);
+    map->Attribute("tilewidth", &m_tileWidth);
+    map->Attribute("tileheight", &m_tileHeight);
+
+    node = map->FirstChild();
+    while (node)
+    {
+        if (!strcmp("tileset", node->Value()))
+        {
+            m_tileset = new TmxTileset();
+            m_tileset->load(node->ToElement());
+        }
+        else if (!strcmp("layer", node->Value()))
+        {
+            TmxLayer *layer = new TmxLayer();
+            layer->load(node->ToElement());
+            m_layers.push_back(layer);
+        }
+        else if (!strcmp("objectgroup", node->Value()))
+        {
+            TmxObjectGroup *objectGroup = new TmxObjectGroup();
+            objectGroup->load(node->ToElement());
+            m_objectGroups.push_back(objectGroup);
+        }
+        else if (!strcmp("properties", node->Value()))
+        {
+            m_properties = new TmxPropertyGroup();
+            m_properties->load(node->ToElement());
+        }
+
+        node = node->NextSibling();
+    }
+
+    return true;
 }

@@ -27,7 +27,6 @@ void CursorImpl::setCursor(CursorType cursor)
             id = SDL_SYSTEM_CURSOR_HAND;
             break;
 
-        default:
         case CursorType::Default:
             id = SDL_SYSTEM_CURSOR_ARROW;
             break;

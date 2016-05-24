@@ -88,7 +88,13 @@ void RendererImpl::renderLine(float x1, float y1, float x2, float y2, Color colo
 {
     setRenderColor(color);
 
-    SDL_RenderDrawLine(m_renderer, static_cast<int>(x1), static_cast<int>(y1), static_cast<int>(x2), static_cast<int>(y2));
+    SDL_RenderDrawLine(
+        m_renderer,
+        static_cast<int>(x1),
+        static_cast<int>(y1),
+        static_cast<int>(x2),
+        static_cast<int>(y2)
+    );
 }
 
 void RendererImpl::renderPoint(float x, float y, Color color)

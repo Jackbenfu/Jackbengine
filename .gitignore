@@ -1,1 +1,5 @@
+# Mac OS
+.DS_Store
+
+# CLion
 .idea/

@@ -73,7 +73,8 @@ bool Application::init()
             return false;
         }
 
-        if (-1 == Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024))
+        if (-1 == Mix_OpenAudio(
+            MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024))
         {
             printf("%s\n", Mix_GetError());
             return false;

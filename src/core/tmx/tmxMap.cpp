@@ -64,7 +64,7 @@ bool TmxMap::loadFromFile(const char *file)
     return loadContents();
 }
 
-bool TmxMap::loadFromMemory(const void *data, size_t dataSize)
+bool TmxMap::loadFromMemory(const void *data)
 {
     if (!m_doc->Parse((char*)data))
     {

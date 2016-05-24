@@ -9,7 +9,7 @@
 #include "debugProfileSystem.h"
 #include "core/resource/importResource.h"
 
-IMPORT_RESOURCE(default_font)
+IMPORT_BINARY_RESOURCE(default_font)
 
 DebugProfileSystem::DebugProfileSystem()
 {

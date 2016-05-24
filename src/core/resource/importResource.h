@@ -13,8 +13,10 @@
 
 NS_BEGIN_JKB
 
-#define IMPORT_RESOURCE(name)   extern "C" unsigned char name[];  \
-                                extern "C" size_t name##_size;
+#define IMPORT_BINARY_RESOURCE(name)    extern "C" unsigned char name[];  \
+                                        extern "C" size_t name##_size;
+
+#define IMPORT_TEXT_RESOURCE(name)      extern "C" unsigned char name[];
 
 NS_END_JKB
 

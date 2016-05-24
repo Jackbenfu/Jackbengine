@@ -25,7 +25,7 @@ public:
     ~TmxMap();
 
     bool loadFromFile(const char *file);
-    bool loadFromMemory(const void *data, size_t dataSize);
+    bool loadFromMemory(const void *data);
 
     int getWidth() const;
     int getHeight() const;

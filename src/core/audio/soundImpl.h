@@ -11,6 +11,7 @@
 
 #include "common.h"
 #include "sound.h"
+#include "platform.h"
 
 NS_BEGIN_JKB
 

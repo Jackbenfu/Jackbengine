@@ -10,6 +10,8 @@
 #define __VECTOR2D_H__
 
 #include "common.h"
+#include <math.h>
+#include <stdlib.h>
 
 NS_BEGIN_JKB
 

@@ -11,6 +11,7 @@
 
 #include "window.h"
 #include "core/math/vector2d.h"
+#include "platform.h"
 
 NS_BEGIN_JKB
 

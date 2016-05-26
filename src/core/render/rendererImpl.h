@@ -11,6 +11,7 @@
 
 #include "renderer.h"
 #include "color.h"
+#include "platform.h"
 
 NS_BEGIN_JKB
 

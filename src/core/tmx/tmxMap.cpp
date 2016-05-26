@@ -7,6 +7,7 @@
 //
 
 #include "tmxMap.h"
+#include "platform.h"
 
 TmxMap::TmxMap()
 {

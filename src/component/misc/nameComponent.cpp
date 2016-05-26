@@ -7,6 +7,8 @@
 //
 
 #include "nameComponent.h"
+#include <stdlib.h>
+#include <string.h>
 
 NameComponent::NameComponent()
 {

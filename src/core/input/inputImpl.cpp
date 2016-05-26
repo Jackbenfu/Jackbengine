@@ -7,6 +7,7 @@
 //
 
 #include "inputImpl.h"
+#include "platform.h"
 
 InputImpl::InputImpl()
 {

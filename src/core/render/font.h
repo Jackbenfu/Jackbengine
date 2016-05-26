@@ -10,6 +10,7 @@
 #define __FONT_H__
 
 #include "common.h"
+#include <stdlib.h>
 
 NS_BEGIN_JKB
 

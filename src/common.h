@@ -30,11 +30,4 @@ using byte = unsigned char;
 #define NS_END_JKB      } using namespace Jackbengine;
 #define NS_STD          using namespace std;
 
-// Platform specific includes
-#if defined(__APPLE__)
-    #include "core/platform/osx.h"
-#elif defined(WIN32)
-    #include "core/platform/win32.h"
-#endif
-
 #endif // __COMMON_H__

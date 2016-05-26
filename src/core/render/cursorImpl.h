@@ -10,6 +10,7 @@
 #define __CURSOR_IMPL_H__
 
 #include "cursor.h"
+#include "platform.h"
 
 NS_BEGIN_JKB
 

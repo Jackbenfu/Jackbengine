@@ -7,6 +7,7 @@
 //
 
 #include "timerImpl.h"
+#include "platform.h"
 
 TimerImpl::TimerImpl()
 {

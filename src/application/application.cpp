@@ -7,6 +7,7 @@
 //
 
 #include "application.h"
+#include "platform.h"
 
 Application::Application()
 {

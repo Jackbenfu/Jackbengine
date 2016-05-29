@@ -58,7 +58,7 @@ bool TmxMap::loadFromFile(const char *file)
 
     if (!m_doc->LoadFile(filePath))
     {
-        printf("%s: %s (%i)\n", filePath, m_doc->ErrorDesc(), m_doc->ErrorId());
+        LOG_ERROR("%s: %s (%i)", filePath, m_doc->ErrorDesc(), m_doc->ErrorId())
         return false;
     }
 
@@ -69,7 +69,7 @@ bool TmxMap::loadFromMemory(const void *data)
 {
     if (!m_doc->Parse((char*)data))
     {
-        printf("%s (%i)\n", m_doc->ErrorDesc(), m_doc->ErrorId());
+        LOG_ERROR("%s (%i)", m_doc->ErrorDesc(), m_doc->ErrorId())
         return false;
     }
 

@@ -41,12 +41,14 @@ Application::~Application()
 
 int Application::run()
 {
-    if (init())
+    if (!init())
     {
-        while (running())
-        {
-            loop();
-        }
+        return -1;
+    }
+
+    while (running())
+    {
+        loop();
     }
 
     return 0;
@@ -58,26 +60,26 @@ bool Application::init()
     {
         if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
         {
-            printf("%s\n", SDL_GetError());
+            LOG_ERROR("%s", SDL_GetError())
             return false;
         }
 
         if (TTF_Init() < 0)
         {
-            printf("%s\n", TTF_GetError());
+            LOG_ERROR("%s", TTF_GetError())
             return false;
         }
 
         if (!Mix_Init(MIX_INIT_FLAC | MIX_INIT_MOD | MIX_INIT_MP3 | MIX_INIT_OGG))
         {
-            printf("%s\n", Mix_GetError());
+            LOG_ERROR("%s", Mix_GetError())
             return false;
         }
 
         if (-1 == Mix_OpenAudio(
             MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024))
         {
-            printf("%s\n", Mix_GetError());
+            LOG_ERROR("%s", Mix_GetError())
             return false;
         }
 

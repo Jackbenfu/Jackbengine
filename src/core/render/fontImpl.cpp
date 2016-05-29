@@ -27,7 +27,7 @@ bool FontImpl::loadFromFile(const char *file, int size)
     m_font = TTF_OpenFont(file, size);
     if (!m_font)
     {
-        printf("%s\n", TTF_GetError());
+        LOG_ERROR("%s", TTF_GetError())
         return false;
     }
 
@@ -45,7 +45,7 @@ bool FontImpl::loadFromMemory(const void *data, size_t dataSize, int size)
     auto *rWops = SDL_RWFromConstMem(data, dataSize);
     if (!rWops)
     {
-        printf("%s\n", SDL_GetError());
+        LOG_ERROR("%s", SDL_GetError())
         return false;
     }
 
@@ -53,7 +53,7 @@ bool FontImpl::loadFromMemory(const void *data, size_t dataSize, int size)
     if (!m_font)
     {
         SDL_FreeRW(rWops);
-        printf("%s\n", TTF_GetError());
+        LOG_ERROR("%s", TTF_GetError())
         return false;
     }
 
@@ -139,6 +139,6 @@ TTF_Font* FontImpl::getRawFont() const
 
 bool FontImpl::errorAlreadyLoaded() const
 {
-    printf("Error: Font instance already loaded\n");
+    LOG_ERROR("Font instance already loaded")
     return false;
 }

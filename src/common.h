@@ -30,4 +30,35 @@ using byte = unsigned char;
 #define NS_END_JKB      } using namespace Jackbengine;
 #define NS_STD          using namespace std;
 
+// Logging macros
+#include <stdio.h>
+#include <time.h>
+#include <string.h>
+#define LOG(fd, level, message, ...)                                \
+    {                                                               \
+        char *slash = strrchr(__FILE__, '/');                       \
+                                                                    \
+        auto DATE_BUFFER_SIZE = 64;                                 \
+        char dateBuffer[DATE_BUFFER_SIZE];                          \
+        time_t rawTime;                                             \
+        struct tm *timeInfo;                                        \
+        time(&rawTime);                                             \
+        timeInfo = localtime(&rawTime);                             \
+        strftime(dateBuffer, DATE_BUFFER_SIZE, "%c", timeInfo);     \
+                                                                    \
+        fprintf(fd, "[%s] [%-5s] [%s] [%3d] ",                      \
+            dateBuffer,                                             \
+            level,                                                  \
+            slash ? slash + 1 : __FILE__,                           \
+            __LINE__                                                \
+        );                                                          \
+        fprintf(fd, message, ##__VA_ARGS__);                        \
+        fprintf(fd, "\n");                                          \
+        fflush(fd);                                                 \
+    }
+
+#define LOG_ERROR(message, ...)     LOG(stderr, "ERROR", message, ##__VA_ARGS__)
+#define LOG_DEBUG(message, ...)     LOG(stdout, "DEBUG", message, ##__VA_ARGS__)
+#define LOG_INFO (message, ...)     LOG(stdout, "INFO",  message, ##__VA_ARGS__)
+
 #endif // __COMMON_H__

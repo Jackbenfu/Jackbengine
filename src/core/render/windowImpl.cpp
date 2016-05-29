@@ -38,7 +38,7 @@ bool WindowImpl::init(const char *title, int width, int height, bool fullscreen)
     m_window = SDL_CreateWindow(title, x, y, width, height, flags);
     if (!m_window)
     {
-        printf("%s\n", SDL_GetError());
+        LOG_ERROR("%s", SDL_GetError())
         return false;
     }
 
@@ -68,7 +68,7 @@ void WindowImpl::setWindowIcon()
     HINSTANCE handle = GetModuleHandle(nullptr);
     if (!handle)
     {
-        printf("GetModuleHandle: %d\n", GetLastError());
+        LOG_ERROR("GetModuleHandle Win32 function: %d", GetLastError())
     }
 
     const uint maskR = 0x00ff0000;
@@ -81,25 +81,25 @@ void WindowImpl::setWindowIcon()
     HICON icon = (HICON)LoadImage(handle, MAKEINTRESOURCE(101), IMAGE_ICON, size, size, LR_SHARED);
     if (!icon)
     {
-        printf("LoadImage: %d\n", GetLastError());
+        LOG_ERROR("LoadImage Win32 function: %d", GetLastError())
     }
 
     ICONINFO iconInfo;
     if (!GetIconInfo(icon, &iconInfo))
     {
-        printf("GetIconInfo: %d\n", GetLastError());
+        LOG_ERROR("GetIconInfo Win32 function: %d", GetLastError())
     }
 
     HDC deviceContext = CreateCompatibleDC(nullptr);
     if (!deviceContext)
     {
-        printf("CreateCompatibleDC: %d\n", GetLastError());
+        LOG_ERROR("CreateCompatibleDC Win32 function: %d", GetLastError())
     }
 
     SDL_Surface *surface = SDL_CreateRGBSurface(0, size, size, bpp, maskR, maskG, maskB, maskA);
     if (!surface)
     {
-        printf("%s\n", IMG_GetError());
+        LOG_ERROR("%s", IMG_GetError())
     }
 
     BITMAPINFO bmi;

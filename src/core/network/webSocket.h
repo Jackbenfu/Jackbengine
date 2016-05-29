@@ -101,7 +101,7 @@ void WebSocket<TListener>::poll()
             auto itd = m_deserializers.find(messageType);
             if (m_deserializers.end() == itd)
             {
-                printf("ERROR Invalid network message [%u]\n", messageType);
+                LOG_ERROR("Invalid network message [%u]", messageType)
                 return;
             }
 
@@ -110,7 +110,7 @@ void WebSocket<TListener>::poll()
             auto itc = m_callbacks.find(messageType);
             if (m_callbacks.end() == itc)
             {
-                printf("ERROR No callback found for message %u\n", messageType);
+                LOG_ERROR("No callback found for message [%u]", messageType)
                 return;
             }
 

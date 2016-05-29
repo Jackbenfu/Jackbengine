@@ -46,7 +46,7 @@ bool TextureImpl::loadFromMemory(const Renderer *renderer, const void *data, siz
     auto *rWops = SDL_RWFromConstMem(data, dataSize);
     if (!rWops)
     {
-        printf("%s\n", SDL_GetError());
+        LOG_ERROR("%s", SDL_GetError())
         return false;
     }
 
@@ -69,7 +69,7 @@ bool TextureImpl::loadFromLayer(
     const TmxLayer *layer = map->getLayer(layerName);
     if (!layer)
     {
-        printf("Layer not found in map: %s\n", layerName);
+        LOG_ERROR("Layer [%s] not found in map", layerName)
         return false;
     }
 
@@ -85,7 +85,7 @@ bool TextureImpl::loadFromLayer(
         auto *rWops = SDL_RWFromConstMem(tilesetImageData, (int)tilesetImageDataSize);
         if (!rWops)
         {
-            printf("%s\n", SDL_GetError());
+            LOG_ERROR("%s", SDL_GetError())
             return false;
         }
 
@@ -94,7 +94,7 @@ bool TextureImpl::loadFromLayer(
 
     if (!tilesetSurface)
     {
-        printf("%s\n", IMG_GetError());
+        LOG_ERROR("%s", IMG_GetError())
         return false;
     }
 
@@ -113,7 +113,7 @@ bool TextureImpl::loadFromLayer(
 
     if (!surface)
     {
-        printf("%s\n", IMG_GetError());
+        LOG_ERROR("%s", IMG_GetError())
 
         SDL_FreeSurface(tilesetSurface);
         return false;
@@ -171,7 +171,7 @@ bool TextureImpl::loadFromObjectGroup(
     const TmxObjectGroup *objectGroup = map->getObjectGroup(objectGroupName);
     if (!objectGroup)
     {
-        printf("Object group not found in map: %s\n", objectGroupName);
+        LOG_ERROR("Object group [%s] not found in map", objectGroupName)
         return false;
     }
 
@@ -209,7 +209,7 @@ bool TextureImpl::loadFromObjectGroup(
             auto *rWops = SDL_RWFromConstMem(tilesetImageData, (int)tilesetImageDataSize);
             if (!rWops)
             {
-                printf("%s\n", SDL_GetError());
+                LOG_ERROR("%s", SDL_GetError())
                 return false;
             }
 
@@ -217,7 +217,7 @@ bool TextureImpl::loadFromObjectGroup(
         }
         if (!tilesetSurface)
         {
-            printf("%s\n", IMG_GetError());
+            LOG_ERROR("%s", IMG_GetError())
             return false;
         }
 
@@ -233,7 +233,7 @@ bool TextureImpl::loadFromObjectGroup(
 
         if (!surface)
         {
-            printf("%s\n", IMG_GetError());
+            LOG_ERROR("%s", IMG_GetError())
 
             SDL_FreeSurface(tilesetSurface);
             return false;
@@ -289,13 +289,13 @@ bool TextureImpl::loadFromColor(const Renderer *renderer, int width, int height,
     SDL_Surface *surface = SDL_CreateRGBSurface(0, width, height, 32, 0, 0, 0, 0);
     if (!surface)
     {
-        printf("%s\n", SDL_GetError());
+        LOG_ERROR("%s", SDL_GetError())
         return false;
     }
 
     if (SDL_FillRect(surface, nullptr, SDL_MapRGB(surface->format, color.r, color.g, color.b)) < 0)
     {
-        printf("%s\n", SDL_GetError());
+        LOG_ERROR("%s", SDL_GetError())
 
         SDL_FreeSurface(surface);
         return false;
@@ -328,7 +328,7 @@ bool TextureImpl::loadFromFont(
         surface = TTF_RenderUTF8_Solid(fontImpl->getRawFont(), text.c_str(), sdlForeground);
         if (!surface)
         {
-            printf("%s\n", SDL_GetError());
+            LOG_ERROR("%s", SDL_GetError())
             return false;
         }
 
@@ -366,13 +366,13 @@ bool TextureImpl::loadTextureFromSurface(const Renderer *renderer, SDL_Surface *
     m_texture = SDL_CreateTextureFromSurface(rendererImpl->getRawRenderer(), surface);
     if (!m_texture)
     {
-        printf("%s\n", SDL_GetError());
+        LOG_ERROR("%s", SDL_GetError())
         return false;
     }
 
     if (0 > SDL_QueryTexture(m_texture, nullptr, nullptr, &m_rect.w, &m_rect.h))
     {
-        printf("%s\n", SDL_GetError());
+        LOG_ERROR("%s", SDL_GetError())
         return false;
     }
 
@@ -383,6 +383,6 @@ bool TextureImpl::loadTextureFromSurface(const Renderer *renderer, SDL_Surface *
 
 bool TextureImpl::errorAlreadyLoaded() const
 {
-    printf("Error: Texture instance already loaded\n");
+    LOG_ERROR("Texture instance already loaded")
     return false;
 }

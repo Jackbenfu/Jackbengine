@@ -27,7 +27,7 @@ bool SoundImpl::loadFromFile(const char *file)
     m_chunk = Mix_LoadWAV(file);
     if (!m_chunk)
     {
-        printf("%s\n", Mix_GetError());
+        LOG_ERROR("%s", Mix_GetError())
         return false;
     }
 
@@ -45,14 +45,14 @@ bool SoundImpl::loadFromMemory(const void *data, size_t dataSize)
     auto *rWops = SDL_RWFromConstMem(data, dataSize);
     if (!rWops)
     {
-        printf("%s\n", SDL_GetError());
+        LOG_ERROR("%s", SDL_GetError())
         return false;
     }
 
     m_chunk = Mix_LoadWAV_RW(rWops, 1);
     if (!m_chunk)
     {
-        printf("%s\n", Mix_GetError());
+        LOG_ERROR("%s", Mix_GetError())
         return false;
     }
 
@@ -67,6 +67,6 @@ void SoundImpl::play(bool loop)
 
 bool SoundImpl::errorAlreadyLoaded() const
 {
-    printf("Error: Sound instance already loaded\n");
+    LOG_ERROR("Sound instance already loaded")
     return false;
 }

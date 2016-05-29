@@ -27,7 +27,11 @@ public:
     {
         clock_t diff = clock() - _start;
         u_long ms = diff * 1000 / CLOCKS_PER_SEC;
-        printf("Time taken for %s: %lu seconds %lu milliseconds\n", _name, ms / 1000, ms % 1000);
+        LOG_DEBUG(
+            "Time taken for %s: %lu seconds %lu milliseconds",
+            _name,
+            ms / 1000, ms % 1000
+        )
     }
 
 private:

@@ -24,7 +24,7 @@ bool RendererImpl::init(const Window *window)
     WindowImpl *windowImpl = (WindowImpl*)window;
     if (!windowImpl)
     {
-        printf("%s\n", SDL_GetError());
+        LOG_ERROR("%s", SDL_GetError())
         return false;
     }
 
@@ -38,7 +38,7 @@ bool RendererImpl::init(const Window *window)
     m_renderer = SDL_CreateRenderer(sdlRawWindow, -1, SDL_RENDERER_ACCELERATED);
     if (!m_renderer)
     {
-        printf("%s\n", SDL_GetError());
+        LOG_ERROR("%s", SDL_GetError())
         return false;
     }
 
@@ -65,7 +65,7 @@ void RendererImpl::setRenderColor(Color color)
 {
     if (SDL_SetRenderDrawColor(m_renderer, color.r, color.g, color.b, color.a) < 0)
     {
-        printf("%s\n", SDL_GetError());
+        LOG_ERROR("%s", SDL_GetError())
     }
 }
 

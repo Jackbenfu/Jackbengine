@@ -16,7 +16,7 @@ NS_BEGIN_JKB
 // Platform specific includes
 #if defined(__APPLE__)
     #include "core/platform/osx.h"
-#elif defined(WIN32)
+#elif defined(_WIN32)
     #include "core/platform/win32.h"
 #endif
 

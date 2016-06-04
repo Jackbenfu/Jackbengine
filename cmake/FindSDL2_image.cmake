@@ -123,6 +123,7 @@ IF(CMAKE_SIZEOF_VOID_P EQUAL 8)
 		/opt/local
 		/opt/csw
 		/opt
+		C:/MinGW/lib
 	)
 # On 32bit build find the 32bit libs
 ELSE(CMAKE_SIZEOF_VOID_P EQUAL 8)

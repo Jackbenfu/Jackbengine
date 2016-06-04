@@ -7,8 +7,7 @@
 //
 
 #include "nameComponent.h"
-#include <stdlib.h>
-#include <string.h>
+#include "platform.h"
 
 NameComponent::NameComponent()
 {

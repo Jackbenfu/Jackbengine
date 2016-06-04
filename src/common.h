@@ -36,7 +36,8 @@ using byte = unsigned char;
 #include <string.h>
 #define LOG(fd, level, message, ...)                                \
     {                                                               \
-        char *slash = strrchr(__FILE__, '/');                       \
+        auto slash = strrchr(__FILE__, '/');                        \
+        slash = slash ? slash : strrchr(__FILE__, '\\');            \
                                                                     \
         auto DATE_BUFFER_SIZE = 64;                                 \
         char dateBuffer[DATE_BUFFER_SIZE];                          \
@@ -49,7 +50,7 @@ using byte = unsigned char;
         fprintf(fd, "[%s] [%-5s] [%s] [%3d] ",                      \
             dateBuffer,                                             \
             level,                                                  \
-            slash ? slash + 1 : __FILE__,                           \
+            slash ? ++slash : __FILE__,                             \
             __LINE__                                                \
         );                                                          \
         fprintf(fd, message, ##__VA_ARGS__);                        \
@@ -59,6 +60,6 @@ using byte = unsigned char;
 
 #define LOG_ERROR(message, ...)     LOG(stderr, "ERROR", message, ##__VA_ARGS__)
 #define LOG_DEBUG(message, ...)     LOG(stdout, "DEBUG", message, ##__VA_ARGS__)
-#define LOG_INFO (message, ...)     LOG(stdout, "INFO",  message, ##__VA_ARGS__)
+#define LOG_INFO(message, ...)      LOG(stdout, "INFO", message, ##__VA_ARGS__)
 
 #endif // __COMMON_H__

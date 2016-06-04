@@ -15,6 +15,9 @@
 #include <SDL2_ttf/SDL_ttf.h>
 #include <SDL2_mixer/SDL_mixer.h>
 
+#include <stdlib.h>
+#include <string.h>
+
 // Used for CoreFoundation framework (CFBundleRef, CFStringRef etc...)
 #include "CoreFoundation/CFBundle.h"
 

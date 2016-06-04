@@ -61,7 +61,7 @@ SDL_Window* WindowImpl::getRawWindow() const
 
 void WindowImpl::setWindowIcon()
 {
-#ifdef WIN32
+#ifdef _WIN32
 
     // Thanks to this Gist: https://gist.github.com/noct/9884320
 
@@ -78,7 +78,7 @@ void WindowImpl::setWindowIcon()
     const int size = 32;
     const int bpp = 32;
 
-    HICON icon = (HICON)LoadImage(handle, MAKEINTRESOURCE(101), IMAGE_ICON, size, size, LR_SHARED);
+    HICON icon = (HICON)LoadImage(handle, "icon", IMAGE_ICON, size, size, LR_SHARED);
     if (!icon)
     {
         LOG_ERROR("LoadImage Win32 function: %d", GetLastError())

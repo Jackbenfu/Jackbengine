@@ -7,6 +7,7 @@
 //
 
 #include "tmxLayer.h"
+#include "platform.h"
 
 TmxLayer::TmxLayer()
 {

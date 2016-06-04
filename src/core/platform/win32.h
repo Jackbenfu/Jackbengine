@@ -10,16 +10,19 @@
 #define __WIN32_H__
 
 // SDL2
-#include <SDL.h>
-#include <SDL_image.h>
-#include <SDL_ttf.h>
-#include <SDL_mixer.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_mixer.h>
 
 #include <windows.h>
 #include <time.h>
 #include <stdio.h>
+#include <shlwapi.h>
+#include <stdlib.h>
 
-#define strdup _strdup
+extern "C" char* strdup(const char *str);
+
 #define snprintf _snprintf
 
 #endif // __WIN32_H__

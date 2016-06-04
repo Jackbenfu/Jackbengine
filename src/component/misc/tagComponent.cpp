@@ -7,8 +7,7 @@
 //
 
 #include "tagComponent.h"
-#include <stdlib.h>
-#include <string.h>
+#include "platform.h"
 
 TagComponent::TagComponent()
 {

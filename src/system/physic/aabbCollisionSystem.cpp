@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Damien Bendejacq. All rights reserved.
 //
 
+#include <limits>
 #include "aabbCollisionSystem.h"
 #include "component/body/shape/boxShapeComponent.h"
 #include "component/body/transformComponent.h"

@@ -22,11 +22,11 @@ include_directories(${PROJECT_SOURCE_DIR}/external)
 include_directories(${PROJECT_SOURCE_DIR}/src)
 
 # Win32 source files
-if(WIN32)
+if(MINGW)
     set(PLATFORM_SOURCE_FILES
         src/core/platform/win32.cpp
     )
-endif(WIN32)
+endif(MINGW)
 
 # Jackbengine source files
 set(SOURCE_FILES

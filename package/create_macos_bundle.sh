@@ -74,6 +74,9 @@ function relocateLibrary() {
 relocateLibrary "libc++.1.dylib" "/usr/lib/"
 relocateLibrary "libSystem.B.dylib" "/usr/lib/"
 
+printf "Checking relocation results\n"
+otool -L ${target_directory}/${bundle_executable}
+
 printf "Archiving target\n"
 archiveName="${target_name}.tar.gz"
 cd ${target_directory}

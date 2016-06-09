@@ -1,8 +1,14 @@
 #!/bin/bash
 
-if [ $# = 0 ]
+if [ $# != 2 ]
 then
     printf "Usage: create_macos_bundle.sh {target_directory} {target_name}\n"
+    exit
+fi
+
+if [ ! -d $1 ]
+then
+    printf "Target directory ($1) does not exists!\n"
     exit
 fi
 

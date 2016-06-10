@@ -5,10 +5,10 @@ set -e
 NORMAL=$(tput sgr0)
 BOLD=$(tput bold)
 MAGENTA=$(tput setaf 5)
-printTitle() {
+function printTitle() {
     printf "${BOLD}${MAGENTA}$1\n${NORMAL}"
 }
-printText() {
+function printText() {
     printf "${NORMAL}$1\n"
 }
 
@@ -40,7 +40,7 @@ printTitle "Building target bundle"
 cmake --build ${project_path} --target ${target_name} -- -j 4
 
 printTitle "Copying frameworks into target bundle"
-copyFramework() {
+function copyFramework() {
     printText "  Copying $1"
 
     framework_name=$1
@@ -72,7 +72,7 @@ relocateFramework "SDL2_ttf" "A"
 relocateFramework "SDL2_mixer" "A"
 
 printTitle "Copying libraries into target bundle"
-copyLibrary() {
+function copyLibrary() {
     printText "  Copying $1"
 
     library_system_path=$2

@@ -1,33 +1,51 @@
 #!/bin/bash
 
+set -e
+
+NORMAL=$(tput sgr0)
+BOLD=$(tput bold)
+MAGENTA=$(tput setaf 5)
+printTitle() {
+    printf "${BOLD}${MAGENTA}$1\n${NORMAL}"
+}
+printText() {
+    printf "${NORMAL}$1\n"
+}
+
 if [ $# != 2 ]
 then
-    printf "Usage: create_macos_bundle.sh {target_directory} {target_name}\n"
+    printText "Usage: create_macos_bundle.sh project_path target_name"
+    printText ""
+    printText "  project_path  The path to the CMake project."
+    printText "  target_name   The CMake target to build."
     exit
 fi
 
 if [ ! -d $1 ]
 then
-    printf "Target directory ($1) does not exists!\n"
+    printText "Project path ($1) does not exist!"
     exit
 fi
 
-target_directory=$1
+project_path=$1
 target_name=$2
 bundle_framework_dir=${target_name}.app/Contents/Frameworks
 bundle_target_dir=${target_name}.app/Contents/MacOS
 bundle_executable=${bundle_target_dir}/${target_name}
 
-printf "Building target bundle\n"
-cmake --build ${target_directory} --target ${target_name} -- -j 4
+printTitle "Configuring CMake"
+cmake -D CMAKE_BUILD_TYPE:STRING=Release ${project_path}
 
-printf "Copying frameworks into target bundle\n"
+printTitle "Building target bundle"
+cmake --build ${project_path} --target ${target_name} -- -j 4
+
+printTitle "Copying frameworks into target bundle"
 copyFramework() {
-    printf "  Copying $1\n"
+    printText "  Copying $1"
 
     framework_name=$1
     framework_system_path=$2
-    framework_dir=${target_directory}/${bundle_framework_dir}/${framework_name}.framework
+    framework_dir=${project_path}/${bundle_framework_dir}/${framework_name}.framework
 
     rm -rf ${framework_dir}
     mkdir -p ${framework_dir}
@@ -38,27 +56,27 @@ copyFramework "SDL2_image" "/Library/Frameworks/"
 copyFramework "SDL2_ttf" "/Library/Frameworks/"
 copyFramework "SDL2_mixer" "/Library/Frameworks/"
 
-printf "Relocating frameworks\n"
+printTitle "Relocating frameworks"
 function relocateFramework() {
-    printf "  Relocating $1\n"
+    printText "  Relocating $1"
 
     framework_name=$1
     framework_version=$2
     framework_name_with_path=$1.framework/Versions/${framework_version}/$1
 
-    install_name_tool -change @rpath/${framework_name_with_path} @executable_path/../Frameworks/${framework_name_with_path} ${target_directory}/${bundle_executable}
+    install_name_tool -change @rpath/${framework_name_with_path} @executable_path/../Frameworks/${framework_name_with_path} ${project_path}/${bundle_executable}
 }
 relocateFramework "SDL2" "A"
 relocateFramework "SDL2_image" "A"
 relocateFramework "SDL2_ttf" "A"
 relocateFramework "SDL2_mixer" "A"
 
-printf "Copying libraries into target bundle\n"
+printTitle "Copying libraries into target bundle"
 copyLibrary() {
-    printf "  Copying $1\n"
+    printText "  Copying $1"
 
     library_system_path=$2
-    framework_dir=${target_directory}/${bundle_framework_dir}/$1
+    framework_dir=${project_path}/${bundle_framework_dir}/$1
 
     mkdir -p ${framework_dir}
     cp -f ${library_system_path}$1 ${framework_dir}
@@ -66,20 +84,20 @@ copyLibrary() {
 copyLibrary "libc++.1.dylib" "/usr/lib/"
 copyLibrary "libSystem.B.dylib" "/usr/lib/"
 
-printf "Relocating libraries\n"
+printTitle "Relocating libraries"
 function relocateLibrary() {
-    printf "  Relocating $1\n"
-    install_name_tool -change $2$1 @executable_path/../Frameworks/$1 ${target_directory}/${bundle_executable}
+    printText "  Relocating $1"
+    install_name_tool -change $2$1 @executable_path/../Frameworks/$1 ${project_path}/${bundle_executable}
 }
 relocateLibrary "libc++.1.dylib" "/usr/lib/"
 relocateLibrary "libSystem.B.dylib" "/usr/lib/"
 
-printf "Checking relocation results\n"
-otool -L ${target_directory}/${bundle_executable}
+printTitle "Checking relocation results"
+otool -L ${project_path}/${bundle_executable}
 
-printf "Archiving target\n"
+printTitle "Archiving target"
 archiveName="${target_name}.tar.gz"
-cd ${target_directory}
+cd ${project_path}
 tar -czf ${archiveName} ${target_name}.app/*
 
-printf "Archive ${archiveName} is available in folder: ${target_directory}\n"
+printTitle "Archive ${archiveName} is available in folder: ${project_path}"

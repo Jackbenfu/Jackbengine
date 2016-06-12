@@ -34,6 +34,5 @@ set archive_name="%executable_dir%%executable_name%.zip"
 goto :eof
 
 :usage
-echo Usage: package_win.sh target
-echo.
+echo Usage: package_win.bat target
 echo   target    The target executable including its full path.

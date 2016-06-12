@@ -19,7 +19,7 @@ CursorImpl::~CursorImpl()
 
 void CursorImpl::setCursor(CursorType cursor)
 {
-    SDL_SystemCursor id;
+    SDL_SystemCursor id = SDL_SYSTEM_CURSOR_ARROW;
 
     switch (cursor)
     {

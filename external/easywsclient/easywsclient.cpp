@@ -12,7 +12,7 @@
     #include <fcntl.h>
     #include <WinSock2.h>
     #include <WS2tcpip.h>
-    #pragma comment( lib, "ws2_32" )
+    //#pragma comment( lib, "ws2_32" )
     #include <stdio.h>
     #include <stdlib.h>
     #include <string.h>

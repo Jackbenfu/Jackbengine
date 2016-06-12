@@ -89,7 +89,7 @@ relocateLibrary "libSystem.B.dylib" "/usr/lib/"
 printTitle "Checking relocation results"
 otool -L ${bundle_dir}/${bundle_executable}
 
-printTitle "Archiving target"
+printTitle "Creating final archive"
 archiveName="${bundle_name}.tar.gz"
 cd ${bundle_dir}
 tar -czf ${archiveName} ${bundle_name}.app/*

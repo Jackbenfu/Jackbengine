@@ -68,7 +68,7 @@ void WindowImpl::setWindowIcon()
     HINSTANCE handle = GetModuleHandle(nullptr);
     if (!handle)
     {
-        LOG_ERROR("GetModuleHandle Win32 function: %d", GetLastError())
+        LOG_ERROR("GetModuleHandle Win32 function: %lu", GetLastError())
     }
 
     const uint maskR = 0x00ff0000;
@@ -81,19 +81,19 @@ void WindowImpl::setWindowIcon()
     HICON icon = (HICON)LoadImage(handle, "icon", IMAGE_ICON, size, size, LR_SHARED);
     if (!icon)
     {
-        LOG_ERROR("LoadImage Win32 function: %d", GetLastError())
+        LOG_ERROR("LoadImage Win32 function: %lu", GetLastError())
     }
 
     ICONINFO iconInfo;
     if (!GetIconInfo(icon, &iconInfo))
     {
-        LOG_ERROR("GetIconInfo Win32 function: %d", GetLastError())
+        LOG_ERROR("GetIconInfo Win32 function: %lu", GetLastError())
     }
 
     HDC deviceContext = CreateCompatibleDC(nullptr);
     if (!deviceContext)
     {
-        LOG_ERROR("CreateCompatibleDC Win32 function: %d", GetLastError())
+        LOG_ERROR("CreateCompatibleDC Win32 function: %lu", GetLastError())
     }
 
     SDL_Surface *surface = SDL_CreateRGBSurface(0, size, size, bpp, maskR, maskG, maskB, maskA);

@@ -19,7 +19,9 @@ TimerImpl::~TimerImpl()
 
 void TimerImpl::delay(uint ms)
 {
+#ifndef EMSCRIPTEN
     SDL_Delay(ms);
+#endif
 }
 
 uint TimerImpl::getTicks() const

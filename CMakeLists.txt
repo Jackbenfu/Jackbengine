@@ -56,7 +56,7 @@ set(SOURCE_FILES
     src/core/render/color.cpp
     src/core/render/cursor.cpp
     src/core/render/cursorImpl.cpp
-    src/core/render/defaultFont.c
+    src/core/render/defaultFont.cpp
     src/core/render/font.cpp
     src/core/render/fontImpl.cpp
     src/core/render/renderer.cpp

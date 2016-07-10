@@ -18,6 +18,8 @@ NS_BEGIN_JKB
     #include "core/platform/osx.h"
 #elif defined(_WIN32)
     #include "core/platform/win32.h"
+#elif defined(EMSCRIPTEN)
+    #include "core/platform/emscripten.h"
 #endif
 
 NS_END_JKB

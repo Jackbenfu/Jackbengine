@@ -19,8 +19,6 @@ class Component
     friend class Entity;
 
 public:
-    virtual ~Component();
-
     bool isEnabled() const;
 
 protected:

@@ -21,7 +21,9 @@ class Application
 public:
     virtual ~Application();
 
-    int run();
+    bool init();
+    bool running() const;
+    void loop();
 
 protected:
     Application();
@@ -32,10 +34,6 @@ protected:
     bool addScene();
 
 private:
-    bool init();
-    bool running() const;
-    void loop();
-
     Scene* getScene(const char *name);
 
     Scene *m_currentScene = nullptr;

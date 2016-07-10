@@ -36,29 +36,20 @@ Application::~Application()
 
     Mix_Quit();
     TTF_Quit();
+#ifndef EMSCRIPTEN
     SDL_Quit();
-}
-
-int Application::run()
-{
-    if (!init())
-    {
-        return -1;
-    }
-
-    while (running())
-    {
-        loop();
-    }
-
-    return 0;
+#endif
 }
 
 bool Application::init()
 {
     if (configure(m_config))
     {
+#ifdef EMSCRIPTEN
+        if (SDL_Init(SDL_INIT_EVERYTHING & ~(SDL_INIT_TIMER | SDL_INIT_HAPTIC)) < 0)
+#else
         if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
+#endif
         {
             LOG_ERROR("%s", SDL_GetError())
             return false;

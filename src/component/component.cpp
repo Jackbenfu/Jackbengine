@@ -12,10 +12,6 @@ Component::Component()
 {
 }
 
-Component::~Component()
-{
-}
-
 void Component::enable()
 {
     m_enabled = true;

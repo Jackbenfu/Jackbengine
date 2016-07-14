@@ -49,7 +49,7 @@ void DebugProfileSystem::setRenderer(Renderer *renderer)
     m_renderer = renderer;
 
     m_fps = new TextComponent();
-    m_fps->loadFromMemory(m_renderer, default_font, default_font_size, 9);
+    m_fps->setFontFromMemory(m_renderer, default_font, default_font_size, 9);
 }
 
 bool DebugProfileSystem::hasRequiredComponents(Entity *entity)

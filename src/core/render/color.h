@@ -31,8 +31,9 @@ struct Color
 #define Color_Blue          Color(0, 0, 255)
 #define Color_Green         Color(0, 255, 0)
 #define Color_Red           Color(255, 0, 0)
-#define Color_YellowGold    Color(239, 216, 7)
+#define Color_YellowGold    Color(221, 173, 29)
 #define Color_White         Color(255, 255, 255)
+#define Color_DarkGrey      Color(100, 100, 100)
 
 NS_END_JKB
 

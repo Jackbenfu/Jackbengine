@@ -18,16 +18,13 @@ TextComponent::~TextComponent()
     DELETE_SAFE(m_texture);
 }
 
-bool TextComponent::loadFromFile(const Renderer *renderer, const char *file, uint size)
+bool TextComponent::setFontFromFile(const Renderer *renderer, const char *file, uint size)
 {
     bool result = false;
 
     if (renderer && !m_font)
     {
         m_renderer = renderer;
-
-        m_boundingRect.w = renderer->getWidth();
-        m_boundingRect.h = renderer->getHeight();
 
         m_font = Font::create();
         if (m_font)
@@ -42,7 +39,7 @@ bool TextComponent::loadFromFile(const Renderer *renderer, const char *file, uin
     return result;
 }
 
-bool TextComponent::loadFromMemory(
+bool TextComponent::setFontFromMemory(
     const Renderer *renderer, const void *data, size_t dataSize, int size)
 {
     bool result = false;
@@ -50,9 +47,6 @@ bool TextComponent::loadFromMemory(
     if (renderer && !m_font)
     {
         m_renderer = renderer;
-
-        m_boundingRect.w = renderer->getWidth();
-        m_boundingRect.h = renderer->getHeight();
 
         m_font = Font::create();
         if (m_font)
@@ -184,8 +178,10 @@ void TextComponent::refreshTexture()
                 {
                     int minX;
                     int minY;
-                    m_font->getGlyphMetrics((ushort)m_text[i], &minX, &lastGlyphMaxX,
-                        &minY, &glyphY, &lastGlyphAdvance);
+                    m_font->getGlyphMetrics(
+                        (ushort)m_text[i], &minX, &lastGlyphMaxX,
+                        &minY, &glyphY, &lastGlyphAdvance
+                    );
                 }
 
                 if (glyphY > glyphMaxY)

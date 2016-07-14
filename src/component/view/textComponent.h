@@ -40,8 +40,8 @@ public:
     TextComponent();
     ~TextComponent();
 
-    bool loadFromFile(const Renderer *renderer, const char *file, uint size);
-    bool loadFromMemory(const Renderer *renderer, const void *data, size_t dataSize, int size);
+    bool setFontFromFile(const Renderer *renderer, const char *file, uint size);
+    bool setFontFromMemory(const Renderer *renderer, const void *data, size_t dataSize, int size);
 
     const string& getText() const;
     void setText(const string& text);

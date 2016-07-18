@@ -48,6 +48,7 @@ This collection of components and systems can be extended.
 
 ## TODO
 I have an huge list of things I'd like to add in the engine (maybe when I'll have more free time :wink:), including:
+- [ ] Add animation system.
 - [ ] Add a level loader that automatically populates entities in a scene from a TMX file.
 - [ ] Check for memory leaks using dedicated tools.
 - [ ] Add documentation.

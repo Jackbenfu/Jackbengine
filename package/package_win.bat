@@ -11,7 +11,7 @@ set rar_tool_bin="C:\Program Files\WinRAR\Rar.exe"
 set mingw_bin_dir="C:\MinGW\bin"
 set archive_name="%executable_dir%%executable_name%.zip"
 
-%rar_tool_bin% a -m5 -ep %archive_name% %executable_full_path%
+%rar_tool_bin% a -m5 -ep %archive_name% %1
 %rar_tool_bin% a -m5 -ep %archive_name% %mingw_bin_dir%\libFLAC-8.dll
 %rar_tool_bin% a -m5 -ep %archive_name% %mingw_bin_dir%\libfreetype-6.dll
 %rar_tool_bin% a -m5 -ep %archive_name% %mingw_bin_dir%\libjpeg-9.dll

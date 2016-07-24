@@ -27,7 +27,8 @@ public:
     bool disableEntity(Entity *entity) const;
     bool isEntityEnabled(Entity *entity) const;
 
-    template<typename C> C* getComponent(Entity *entity) const;
+    template<typename C> C* getComponent(Entity *entity, bool returnIfDisabled = true) const;
+    template<typename C> C* getComponentIfEnabled(Entity *entity) const;
     template<typename C> C* addComponent(Entity *entity);
     template<typename C> bool removeComponent(Entity *entity) const;
     template<typename C> bool enableComponent(Entity *entity) const;
@@ -43,14 +44,20 @@ private:
 };
 
 template<typename C>
-C* EntityManager::getComponent(Entity *entity) const
+C* EntityManager::getComponent(Entity *entity, bool returnIfDisabled) const
 {
     if (entity)
     {
-        return entity->getComponent<C>();
+        return entity->getComponent<C>(returnIfDisabled);
     }
 
     return nullptr;
+}
+
+template<typename C>
+C* EntityManager::getComponentIfEnabled(Entity *entity) const
+{
+    return getComponent<C>(entity, false);
 }
 
 template<typename C>

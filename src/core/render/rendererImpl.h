@@ -30,6 +30,7 @@ public:
     void setRenderColor(Color color) override;
 
     void renderTexture(int x, int y, const Texture *texture) override;
+    void renderTexture(int x, int y, const Texture *texture, double angle) override;
     void renderLine(float x1, float y1, float x2, float y2, Color color) override;
     void renderPoint(float x, float y, Color color) override;
 

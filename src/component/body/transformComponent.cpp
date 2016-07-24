@@ -47,35 +47,14 @@ void TransformComponent::setPositionY(float y)
     m_position.y = y;
 }
 
-const Vec2f& TransformComponent::getRotation() const
+double TransformComponent::getRotation() const
 {
-    return m_rotation;
+    return m_angle;
 }
 
-float TransformComponent::getRotationX() const
+void TransformComponent::setRotation(double angle)
 {
-    return m_rotation.x;
-}
-
-float TransformComponent::getRotationY() const
-{
-    return m_rotation.y;
-}
-
-void TransformComponent::setRotation(float x, float y)
-{
-    m_rotation.x = x;
-    m_rotation.y = y;
-}
-
-void TransformComponent::setRotationX(float x)
-{
-    m_rotation.x = x;
-}
-
-void TransformComponent::setRotationY(float y)
-{
-    m_rotation.y = y;
+    m_angle = angle;
 }
 
 const Vec2f& TransformComponent::getScale() const

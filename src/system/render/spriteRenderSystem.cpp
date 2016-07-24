@@ -26,25 +26,28 @@ void SpriteRenderSystem::update(float delta)
     {
         if (em()->isEntityEnabled(entity))
         {
-            SpriteComponent *sprite = em()->getComponent<SpriteComponent>(entity);
-            TransformComponent *transform = em()->getComponent<TransformComponent>(entity);
+            auto sprite = em()->getComponentIfEnabled<SpriteComponent>(entity);
+            auto transform = em()->getComponentIfEnabled<TransformComponent>(entity);
 
-            if (sprite->isEnabled())
+            if (!sprite || !transform)
             {
-                m_renderer->renderTexture(
-                    static_cast<int>(transform->getPositionX()),
-                    static_cast<int>(transform->getPositionY()),
-                    sprite->getTexture()
-                );
+                continue;
             }
+
+            m_renderer->renderTexture(
+                static_cast<int>(transform->getPositionX()),
+                static_cast<int>(transform->getPositionY()),
+                sprite->getTexture(),
+                transform->getRotation()
+            );
         }
     }
 }
 
 bool SpriteRenderSystem::hasRequiredComponents(Entity *entity)
 {
-    return em()->getComponent<SpriteComponent>(entity) &&
-        em()->getComponent<TransformComponent>(entity);
+    return em()->getComponentIfEnabled<SpriteComponent>(entity) &&
+        em()->getComponentIfEnabled<TransformComponent>(entity);
 }
 
 void SpriteRenderSystem::setRenderer(Renderer *renderer)

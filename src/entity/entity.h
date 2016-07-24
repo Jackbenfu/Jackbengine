@@ -27,7 +27,7 @@ class Entity
     void disable();
     bool isEnabled() const;
 
-    template<typename C> C* getComponent();
+    template<typename C> C* getComponent(bool returnIfDisabled = true);
     template<typename C> C* addComponent();
     template<typename C> bool removeComponent();
     template<typename C> bool enableComponent();
@@ -38,11 +38,17 @@ class Entity
 };
 
 template<typename C>
-C* Entity::getComponent()
+C* Entity::getComponent(bool returnIfDisabled)
 {
     uint type = C::getType();
     map<uint, Component*>::const_iterator it = m_components.find(type);
-    if (m_components.end() != it)
+    if (m_components.end() == it)
+    {
+        return nullptr;
+    }
+
+    if (it->second->isEnabled() ||
+        (returnIfDisabled && !it->second->isEnabled()))
     {
         return static_cast<C*>(it->second);
     }

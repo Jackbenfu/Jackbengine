@@ -27,17 +27,19 @@ void TextRenderSystem::update(float delta)
     {
         if (em()->isEntityEnabled(entity))
         {
-            bool doRender = false;
-
-            TextComponent *text = em()->getComponent<TextComponent>(entity);
-            ContainerComponent *container = em()->getComponent<ContainerComponent>(entity);
+            auto text = em()->getComponentIfEnabled<TextComponent>(entity);
+            if (!text)
+            {
+                continue;
+            }
 
             Vec2f pos;
+            auto rotation = 0.0;
 
-            if (container && container->isEnabled())
+            auto transform = em()->getComponentIfEnabled<TransformComponent>(entity);
+            auto container = em()->getComponentIfEnabled<ContainerComponent>(entity);
+            if (container)
             {
-                doRender = true;
-
                 switch (text->getLayout())
                 {
                     case TextLayout::LeftTop:
@@ -133,35 +135,33 @@ void TextRenderSystem::update(float delta)
                         break;
                     }
                 }
-            }
-            else
-            {
-                TransformComponent *transform = em()->getComponent<TransformComponent>(entity);
 
-                if (transform->isEnabled())
+                if (transform)
                 {
-                    doRender = true;
-                    pos = transform->getPosition();
+                    rotation = transform->getRotation();
                 }
             }
-
-            if (doRender)
+            else if (transform)
             {
-                m_renderer->renderTexture(
-                    static_cast<int>(pos.x),
-                    static_cast<int>(pos.y),
-                    text->getTexture()
-                );
+                pos = transform->getPosition();
+                rotation = transform->getRotation();
             }
+
+            m_renderer->renderTexture(
+                static_cast<int>(pos.x),
+                static_cast<int>(pos.y),
+                text->getTexture(),
+                rotation
+            );
         }
     }
 }
 
 bool TextRenderSystem::hasRequiredComponents(Entity *entity)
 {
-    return em()->getComponent<TextComponent>(entity) &&
-        (em()->getComponent<ContainerComponent>(entity) ||
-         em()->getComponent<TransformComponent>(entity));
+    return em()->getComponentIfEnabled<TextComponent>(entity) &&
+        (em()->getComponentIfEnabled<ContainerComponent>(entity) ||
+         em()->getComponentIfEnabled<TransformComponent>(entity));
 }
 
 void TextRenderSystem::setRenderer(Renderer *renderer)

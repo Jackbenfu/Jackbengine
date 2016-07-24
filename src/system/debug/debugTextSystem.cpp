@@ -27,12 +27,11 @@ void DebugTextSystem::update(float delta)
     {
         if (em()->isEntityEnabled(entity))
         {
-            TextComponent *text = em()->getComponent<TextComponent>(entity);
-
             Vec2f position;
-            float w = 0.0f;
-            float h = 0.0f;
-            ContainerComponent *container = em()->getComponent<ContainerComponent>(entity);
+            float w;
+            float h;
+
+            auto container = em()->getComponentIfEnabled<ContainerComponent>(entity);
             if (container)
             {
                 position.x = container->getX();
@@ -42,7 +41,12 @@ void DebugTextSystem::update(float delta)
             }
             else
             {
-                TransformComponent *transform = em()->getComponent<TransformComponent>(entity);
+                auto transform = em()->getComponentIfEnabled<TransformComponent>(entity);
+                auto text = em()->getComponentIfEnabled<TextComponent>(entity);
+                if (!transform || !text)
+                {
+                    continue;
+                }
 
                 position.x = transform->getPositionX();
                 position.y = transform->getPositionY();
@@ -50,10 +54,10 @@ void DebugTextSystem::update(float delta)
                 h = text->getHeight();
             }
 
-            float x1 = position.x;
-            float x2 = position.x + w;
-            float y1 = position.y;
-            float y2 = position.y + h;
+            auto x1 = position.x;
+            auto x2 = position.x + w;
+            auto y1 = position.y;
+            auto y2 = position.y + h;
 
             m_renderer->renderLine(x1, y1, x2, y1, Color_Red);
             m_renderer->renderLine(x2, y1, x2, y2, Color_Red);
@@ -65,9 +69,9 @@ void DebugTextSystem::update(float delta)
 
 bool DebugTextSystem::hasRequiredComponents(Entity *entity)
 {
-    return em()->getComponent<TextComponent>(entity) &&
-        (em()->getComponent<ContainerComponent>(entity) ||
-         em()->getComponent<TransformComponent>(entity));
+    return em()->getComponentIfEnabled<TextComponent>(entity) &&
+        (em()->getComponentIfEnabled<ContainerComponent>(entity) ||
+         em()->getComponentIfEnabled<TransformComponent>(entity));
 }
 
 void DebugTextSystem::setRenderer(Renderer *renderer)

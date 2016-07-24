@@ -26,13 +26,17 @@ void MouseEventTriggerSystem::update(float delta)
     {
         if (em()->isEntityEnabled(entity))
         {
-            ContainerComponent *container = em()->getComponent<ContainerComponent>(entity);
-            MouseListenerComponent *mouseListener = em()->getComponent<MouseListenerComponent>(entity);
+            auto container = em()->getComponentIfEnabled<ContainerComponent>(entity);
+            auto mouseListener = em()->getComponentIfEnabled<MouseListenerComponent>(entity);
 
-            bool hadEnter = mouseListener->hasEvent(MouseEvent_Enter);
+            if (!container || !mouseListener)
+            {
+                continue;
+            }
 
-            Vec2i mousePos = m_input->getMousePosition();
-            bool move = m_input->mouseMove();
+            auto hadEnter = mouseListener->hasEvent(MouseEvent_Enter);
+            auto mousePos = m_input->getMousePosition();
+            auto move = m_input->mouseMove();
 
             if (container->contains(mousePos))
             {
@@ -68,8 +72,8 @@ void MouseEventTriggerSystem::update(float delta)
 
 bool MouseEventTriggerSystem::hasRequiredComponents(Entity *entity)
 {
-    return em()->getComponent<ContainerComponent>(entity) &&
-        em()->getComponent<MouseListenerComponent>(entity);
+    return em()->getComponentIfEnabled<ContainerComponent>(entity) &&
+        em()->getComponentIfEnabled<MouseListenerComponent>(entity);
 }
 
 void MouseEventTriggerSystem::setBubblingActive(bool active)

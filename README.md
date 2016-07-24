@@ -1,5 +1,5 @@
 # Jackbengine
-A multi-platform C++ 2D game engine that I develop in my spare time :smile:.
+A multi-platform C++ 2D game engine that I develop in my spare time.
 
 ## Features
 
@@ -47,9 +47,8 @@ This collection of components and systems can be extended.
 - My main IDE is [CLion](https://www.jetbrains.com/clion/), the powerfull cross-platform C/C++ IDE from JetBrains!
 
 ## TODO
-I have an huge list of things I'd like to add in the engine (maybe when I'll have more free time :wink:), including:
+I have a huge list of things I'd like to add in the engine (maybe when I'll have more free time), including:
 - [ ] Add animation system.
-- [ ] Add a level loader that automatically populates entities in a scene from a TMX file.
 - [ ] Check for memory leaks using dedicated tools.
 - [ ] Add documentation.
 - [ ] Monitor and improve overall performance (reduce draw calls, use texture atlases...).

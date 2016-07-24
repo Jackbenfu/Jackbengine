@@ -24,21 +24,23 @@ void MotionSystem::update(float delta)
     {
         if (em()->isEntityEnabled(entity))
         {
-            TransformComponent *transform = em()->getComponent<TransformComponent>(entity);
-            VelocityComponent *velocity = em()->getComponent<VelocityComponent>(entity);
+            auto transform = em()->getComponentIfEnabled<TransformComponent>(entity);
+            auto *velocity = em()->getComponentIfEnabled<VelocityComponent>(entity);
 
-            if (velocity->isEnabled())
+            if (!velocity || !transform)
             {
-                Vec2f velocityVec = velocity->getVelocity();
-                if (!velocityVec.isZero())
-                {
-                    Vec2f positionVec = transform->getPosition();
+                continue;
+            }
 
-                    transform->setPosition(
-                        positionVec.x + velocityVec.x * delta,
-                        positionVec.y + velocityVec.y * delta
-                    );
-                }
+            Vec2f velocityVec = velocity->getVelocity();
+            if (!velocityVec.isZero())
+            {
+                Vec2f positionVec = transform->getPosition();
+
+                transform->setPosition(
+                    positionVec.x + velocityVec.x * delta,
+                    positionVec.y + velocityVec.y * delta
+                );
             }
         }
     }
@@ -46,6 +48,6 @@ void MotionSystem::update(float delta)
 
 bool MotionSystem::hasRequiredComponents(Entity *entity)
 {
-    return em()->getComponent<TransformComponent>(entity) &&
-        em()->getComponent<VelocityComponent>(entity);
+    return em()->getComponentIfEnabled<TransformComponent>(entity) &&
+        em()->getComponentIfEnabled<VelocityComponent>(entity);
 }

@@ -71,7 +71,12 @@ void RendererImpl::setRenderColor(Color color)
 
 void RendererImpl::renderTexture(int x, int y, const Texture *texture)
 {
-    TextureImpl *textureImpl = (TextureImpl*)texture;
+    renderTexture(x, y, texture, 0.0);
+}
+
+void RendererImpl::renderTexture(int x, int y, const Texture *texture, double angle)
+{
+    auto textureImpl = (TextureImpl*)texture;
     if (textureImpl)
     {
         SDL_Rect rect;
@@ -80,7 +85,15 @@ void RendererImpl::renderTexture(int x, int y, const Texture *texture)
         rect.w = texture->getWidth();
         rect.h = texture->getHeight();
 
-        SDL_RenderCopy(m_renderer, textureImpl->getRawTexture(), nullptr, &rect);
+        SDL_RenderCopyEx(
+            m_renderer,
+            textureImpl->getRawTexture(),
+            nullptr,
+            &rect,
+            angle,
+            nullptr,
+            SDL_FLIP_NONE
+        );
     }
 }
 

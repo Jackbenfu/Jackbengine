@@ -29,12 +29,8 @@ public:
     void setPositionX(float x);
     void setPositionY(float y);
 
-    const Vec2f& getRotation() const;
-    float getRotationX() const;
-    float getRotationY() const;
-    void setRotation(float x, float y);
-    void setRotationX(float x);
-    void setRotationY(float y);
+    double getRotation() const;
+    void setRotation(double angle);
 
     const Vec2f& getScale() const;
     float getScaleX() const;
@@ -45,7 +41,7 @@ public:
 
 private:
     Vec2f m_position = Vec2f(0.0f, 0.0f);
-    Vec2f m_rotation = Vec2f(0.0f, 0.0f);
+    double m_angle = 0.0;
     Vec2f m_scale = Vec2f(1.0f, 1.0f);
 };
 

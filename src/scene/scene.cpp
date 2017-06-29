@@ -1,24 +1,13 @@
 //
-//  scene.cpp
-//  Jackbengine
+// scene.cpp
+// jackbengine
 //
-//  Created by Damien Bendejacq on 18/07/2015.
-//  Copyright (c) 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 18/07/2015.
+// Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
 #include "scene.h"
-
-EntityManager *Scene::s_entityManager = new EntityManager();
-SystemManager *Scene::s_systemManager = new SystemManager(s_entityManager);
-
-Cursor *Scene::s_cursor = nullptr;
-Input *Scene::s_input = nullptr;
-Renderer *Scene::s_renderer = nullptr;
-Timer *Scene::s_timer = nullptr;
-Window *Scene::s_window = nullptr;
-
-bool Scene::s_running = false;
-const char *Scene::s_nextScene = nullptr;
+#include "application/application.h"
 
 Scene::Scene()
 {
@@ -26,47 +15,59 @@ Scene::Scene()
 
 Scene::~Scene()
 {
-    reset();
+    clear();
+}
 
-    DELETE_SAFE(s_systemManager);
-    DELETE_SAFE(s_entityManager);
+bool Scene::isEntityEnabled(Entity *entity) const
+{
+    return m_ecsManager->isEntityEnabled(entity);
+}
+
+Entity* Scene::getEntity(const char *name) const
+{
+    return m_ecsManager->getEntity(name);
 }
 
 Entity* Scene::addEntity(const char *name)
 {
-    Entity *entity = s_entityManager->addEntity(name);
-
-    if (entity)
-    {
-        s_systemManager->addEntity(entity);
-    }
-
-    return entity;
+    return m_ecsManager->addEntity(name);
 }
 
-bool Scene::removeEntity(Entity *entity)
+void Scene::removeEntity(Entity *entity)
 {
-    return s_entityManager->removeEntity(entity) &&
-        s_systemManager->removeEntity(entity);
+    m_ecsManager->removeEntity(entity);
 }
 
-bool Scene::enableEntity(Entity *entity)
+bool Scene::removeEntity(const char *name)
 {
-    return s_entityManager->enableEntity(entity) &&
-        s_systemManager->enableEntity(entity);
+    return m_ecsManager->removeEntity(name);
 }
 
-bool Scene::disableEntity(Entity *entity)
+void Scene::enableEntity(Entity *entity)
 {
-    return s_entityManager->disableEntity(entity) &&
-        s_systemManager->disableEntity(entity);
+    m_ecsManager->enableEntity(entity);
+}
+
+void Scene::enableEntity(const char *name)
+{
+    m_ecsManager->enableEntity(name);
+}
+
+void Scene::disableEntity(Entity *entity)
+{
+    m_ecsManager->disableEntity(entity);
+}
+
+void Scene::disableEntity(const char *name)
+{
+    m_ecsManager->disableEntity(name);
 }
 
 bool Scene::loadScene(const char *name)
 {
-    if (name && !s_nextScene)
+    if (name && !m_nextScene)
     {
-        s_nextScene = name;
+        m_nextScene = name;
         return true;
     }
 
@@ -75,96 +76,99 @@ bool Scene::loadScene(const char *name)
 
 void Scene::exit()
 {
-    s_running = false;
+    m_running = false;
 }
 
 bool Scene::init()
 {
-    s_running = initContents();
+    m_ecsManager = new EcsManager();
+    m_running = initContents();
 
-    return s_running;
+    return m_running;
 }
 
 void Scene::loop()
 {
-    s_timer->start();
-    float delta = s_timer->getElapsedMilliseconds() * 0.001f;
+    timer()->start();
+    float delta = timer()->getElapsedMilliseconds() * 0.001f;
 
-    s_renderer->clear();
-    s_input->update(delta);
-    s_systemManager->update(delta);
+    renderer()->clear();
+    input()->update(delta);
+    m_ecsManager->update(delta);
 
     frame(delta);
 
-    s_renderer->present();
+    renderer()->present();
 
-    if (s_input->quit())
+    if (input()->quit())
     {
         exit();
     }
 
-    s_timer->snapshot();
+    timer()->snapshot();
 }
 
 bool Scene::running() const
 {
-    return s_running;
+    return m_running;
 }
 
-EntityManager* Scene::entityManager()
+Cursor* Scene::cursor() const
 {
-    return s_entityManager;
+    return m_cursor;
 }
 
-EntityManager* Scene::em()
+void Scene::setCursor(Cursor *cursor)
 {
-    return s_entityManager;
+    m_cursor = cursor;
 }
 
-SystemManager* Scene::systemManager()
+Input* Scene::input() const
 {
-    return s_systemManager;
+    return m_input;
 }
 
-SystemManager* Scene::sm()
+void Scene::setInput(Input *input)
 {
-    return s_systemManager;
+    m_input = input;
 }
 
-Cursor* Scene::cursor()
+Renderer* Scene::renderer() const
 {
-    return s_cursor;
+    return m_renderer;
 }
 
-Input* Scene::input()
+void Scene::setRenderer(Renderer *renderer)
 {
-    return s_input;
+    m_renderer = renderer;
 }
 
-Renderer* Scene::renderer()
+Timer* Scene::timer() const
 {
-    return s_renderer;
+    return m_timer;
 }
 
-Timer* Scene::timer()
+void Scene::setTimer(Timer *timer)
 {
-    return s_timer;
+    m_timer = timer;
 }
 
-Window* Scene::window()
+Window* Scene::window() const
 {
-    return s_window;
+    return m_window;
 }
 
-void Scene::reset()
+void Scene::setWindow(Window *window)
 {
-    if (s_systemManager)
+    m_window = window;
+}
+
+void Scene::clear()
+{
+    if (m_ecsManager)
     {
-        s_systemManager->clear();
+        m_ecsManager->clear();
     }
 
-    if (s_entityManager)
-    {
-        s_entityManager->clear();
-    }
+    DELETE_SAFE(m_ecsManager);
 }

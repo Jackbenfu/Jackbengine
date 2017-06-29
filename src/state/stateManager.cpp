@@ -1,9 +1,9 @@
 //
-//  stateManager.cpp
-//  Jackbengine
+// stateManager.cpp
+// jackbengine
 //
-//  Created by Damien Bendejacq on 28/07/2015.
-//  Copyright (c) 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 28/07/2015.
+// Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
 #include "stateManager.h"

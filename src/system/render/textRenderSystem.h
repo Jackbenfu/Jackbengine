@@ -1,9 +1,9 @@
 //
-//  textRenderSystem.h
-//  Jackbengine
+// textRenderSystem.h
+// jackbengine
 //
-//  Created by Damien Bendejacq on 14/06/15.
-//  Copyright (c) 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 14/06/15.
+// Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __TEXT_RENDER_SYSTEM_H__
@@ -11,6 +11,10 @@
 
 #include "system/system.h"
 #include "core/render/renderer.h"
+
+#include "component/layout/containerComponent.h"
+#include "component/view/textComponent.h"
+#include "component/body/transformComponent.h"
 
 NS_BEGIN_JKB
 

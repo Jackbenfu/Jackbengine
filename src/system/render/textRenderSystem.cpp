@@ -1,9 +1,9 @@
 //
-//  textRenderSystem.cpp
-//  Jackbengine
+// textRenderSystem.cpp
+// jackbengine
 //
-//  Created by Damien Bendejacq on 14/06/15.
-//  Copyright (c) 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 14/06/15.
+// Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
 #include "textRenderSystem.h"
@@ -21,13 +21,13 @@ TextRenderSystem::~TextRenderSystem()
 
 void TextRenderSystem::update(float delta)
 {
-    UNUSED(delta)
+    UNUSED(delta);
 
     for (auto entity : m_entities)
     {
-        if (em()->isEntityEnabled(entity))
+        if (entity->isEnabled())
         {
-            auto text = em()->getComponentIfEnabled<TextComponent>(entity);
+            auto text = entity->getComponentIfEnabled<TextComponent>();
             if (!text)
             {
                 continue;
@@ -36,8 +36,8 @@ void TextRenderSystem::update(float delta)
             Vec2f pos;
             auto rotation = 0.0;
 
-            auto transform = em()->getComponentIfEnabled<TransformComponent>(entity);
-            auto container = em()->getComponentIfEnabled<ContainerComponent>(entity);
+            auto transform = entity->getComponentIfEnabled<TransformComponent>();
+            auto container = entity->getComponentIfEnabled<ContainerComponent>();
             if (container)
             {
                 switch (text->getLayout())
@@ -159,9 +159,9 @@ void TextRenderSystem::update(float delta)
 
 bool TextRenderSystem::hasRequiredComponents(Entity *entity)
 {
-    return em()->getComponentIfEnabled<TextComponent>(entity) &&
-        (em()->getComponentIfEnabled<ContainerComponent>(entity) ||
-         em()->getComponentIfEnabled<TransformComponent>(entity));
+    return entity->getComponentIfEnabled<TextComponent>() &&
+        (entity->getComponentIfEnabled<ContainerComponent>() ||
+         entity->getComponentIfEnabled<TransformComponent>());
 }
 
 void TextRenderSystem::setRenderer(Renderer *renderer)

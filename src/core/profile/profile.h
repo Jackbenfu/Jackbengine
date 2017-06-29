@@ -1,9 +1,9 @@
 //
-//  profile.h
-//  Jackbengine
+// profile.h
+// jackbengine
 //
-//  Created by Damien Bendejacq on 02/07/15.
-//  Copyright (c) 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 02/07/15.
+// Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __PROFILE_H__
@@ -31,7 +31,7 @@ public:
             "Time taken for %s: %lu seconds %lu milliseconds",
             _name,
             ms / 1000, ms % 1000
-        )
+        );
     }
 
 private:

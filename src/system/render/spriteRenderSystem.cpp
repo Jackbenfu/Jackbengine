@@ -1,9 +1,9 @@
 //
-//  spriteRenderSystem.cpp
-//  Jackbengine
+// spriteRenderSystem.cpp
+// jackbengine
 //
-//  Created by Damien Bendejacq on 02/05/14.
-//  Copyright (c) 2014 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 02/05/14.
+// Copyright © 2014 Damien Bendejacq. All rights reserved.
 //
 
 #include "spriteRenderSystem.h"
@@ -20,14 +20,14 @@ SpriteRenderSystem::~SpriteRenderSystem()
 
 void SpriteRenderSystem::update(float delta)
 {
-    UNUSED(delta)
+    UNUSED(delta);
 
     for (auto entity : m_entities)
     {
-        if (em()->isEntityEnabled(entity))
+        if (entity->isEnabled())
         {
-            auto sprite = em()->getComponentIfEnabled<SpriteComponent>(entity);
-            auto transform = em()->getComponentIfEnabled<TransformComponent>(entity);
+            auto sprite = entity->getComponentIfEnabled<SpriteComponent>();
+            auto transform = entity->getComponentIfEnabled<TransformComponent>();
 
             if (!sprite || !transform)
             {
@@ -46,8 +46,8 @@ void SpriteRenderSystem::update(float delta)
 
 bool SpriteRenderSystem::hasRequiredComponents(Entity *entity)
 {
-    return em()->getComponentIfEnabled<SpriteComponent>(entity) &&
-        em()->getComponentIfEnabled<TransformComponent>(entity);
+    return entity->getComponentIfEnabled<SpriteComponent>() &&
+        entity->getComponentIfEnabled<TransformComponent>();
 }
 
 void SpriteRenderSystem::setRenderer(Renderer *renderer)

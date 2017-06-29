@@ -1,9 +1,9 @@
 //
 // platform.h
-// Jackbengine
+// jackbengine
 //
 // Created by Damien Bendejacq on 26/05/2016.
-// Copyright (c) 2016 Damien Bendejacq. All rights reserved.
+// Copyright © 2016 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __PLATFORM_H__

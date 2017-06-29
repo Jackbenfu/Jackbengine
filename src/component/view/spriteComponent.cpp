@@ -1,9 +1,9 @@
 //
-//  spriteComponent.cpp
-//  Jackbengine
+// spriteComponent.cpp
+// jackbengine
 //
-//  Created by Damien Bendejacq on 25/04/14.
-//  Copyright (c) 2014 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 25/04/14.
+// Copyright © 2014 Damien Bendejacq. All rights reserved.
 //
 
 #include "spriteComponent.h"
@@ -98,6 +98,15 @@ bool SpriteComponent::loadFromColor(const Renderer *renderer, uint width, uint h
     }
 
     return false;
+}
+
+bool SpriteComponent::loadFromTexture(const Renderer *renderer, Texture *texture)
+{
+    UNUSED(renderer);
+
+    m_texture = texture;
+
+    return true;
 }
 
 float SpriteComponent::getWidth() const

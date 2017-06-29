@@ -1,9 +1,9 @@
 //
-//  cursor.cpp
-//  Jackbengine
+// cursor.cpp
+// jackbengine
 //
-//  Created by Damien Bendejacq on 10/07/15.
-//  Copyright (c) 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 10/07/15.
+// Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
 #include "cursor.h"

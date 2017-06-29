@@ -1,9 +1,9 @@
 //
-//  emscripten.h
-//  Jackbengine
+// emscripten.h
+// jackbengine
 //
-//  Created by Damien Bendejacq on 08/07/16.
-//  Copyright (c) 2016 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 08/07/16.
+// Copyright © 2016 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __EMSCRIPTEN_H__

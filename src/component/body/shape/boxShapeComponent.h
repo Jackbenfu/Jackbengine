@@ -1,9 +1,9 @@
 //
-//  boxShapeComponent.h
-//  Jackbengine
+// boxShapeComponent.h
+// jackbengine
 //
-//  Created by Damien Bendejacq on 05/02/15.
-//  Copyright (c) 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 05/02/15.
+// Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __BOX_SHAPE_COMPONENT_H__

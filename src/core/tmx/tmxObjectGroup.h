@@ -1,9 +1,9 @@
 //
-//  tmxObjectGroup.h
-//  Jackbengine
+// tmxObjectGroup.h
+// jackbengine
 //
-//  Created by Damien Bendejacq on 29/10/14.
-//  Copyright (c) 2014 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 29/10/14.
+// Copyright © 2014 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __TMX_OBJECTGROUP_H__
@@ -32,6 +32,7 @@ public:
     int getOriginX() const;
     int getOriginY() const;
 
+    bool hasProperty(const char *name) const;
     const TmxPropertyGroup* getProperties() const;
 
     void dump() const;

@@ -1,9 +1,9 @@
 //
-//  debugProfileSystem.cpp
-//  Jackbengine
+// debugProfileSystem.cpp
+// jackbengine
 //
-//  Created by Damien Bendejacq on 23/06/15.
-//  Copyright (c) 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 23/06/15.
+// Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
 #include "debugProfileSystem.h"
@@ -23,7 +23,7 @@ DebugProfileSystem::~DebugProfileSystem()
 
 void DebugProfileSystem::update(float delta)
 {
-    UNUSED(delta)
+    UNUSED(delta);
 
     if (m_showFps)
     {
@@ -54,7 +54,7 @@ void DebugProfileSystem::setRenderer(Renderer *renderer)
 
 bool DebugProfileSystem::hasRequiredComponents(Entity *entity)
 {
-    UNUSED(entity)
+    UNUSED(entity);
 
     return false;
 }

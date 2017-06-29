@@ -1,9 +1,9 @@
 //
-//  aabbCollisionSystem.cpp
-//  Jackbengine
+// aabbCollisionSystem.cpp
+// jackbengine
 //
-//  Created by Damien Bendejacq on 24/01/15.
-//  Copyright (c) 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 24/01/15.
+// Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
 #include <limits>
@@ -35,9 +35,9 @@ void AABBCollisionSystem::update(float delta)
 
         for (auto entity1 : m_entities)
         {
-            if (em()->isEntityEnabled(entity1))
+            if (entity1->isEnabled())
             {
-                auto tag1 = em()->getComponentIfEnabled<TagComponent>(entity1);
+                auto tag1 = entity1->getComponentIfEnabled<TagComponent>();
 
                 if (!tag1)
                 {
@@ -48,9 +48,9 @@ void AABBCollisionSystem::update(float delta)
                 {
                     for (auto entity2 : m_entities)
                     {
-                        if (em()->isEntityEnabled(entity2) && entity1 != entity2)
+                        if (entity2->isEnabled() && entity1 != entity2)
                         {
-                            auto tag2 = em()->getComponentIfEnabled<TagComponent>(entity2);
+                            auto tag2 = entity2->getComponentIfEnabled<TagComponent>();
 
                             if (!tag2)
                             {
@@ -71,10 +71,10 @@ void AABBCollisionSystem::update(float delta)
 
 bool AABBCollisionSystem::hasRequiredComponents(Entity *entity)
 {
-    return em()->getComponentIfEnabled<BoxShapeComponent>(entity) &&
-        em()->getComponentIfEnabled<TagComponent>(entity) &&
-        em()->getComponentIfEnabled<TransformComponent>(entity) &&
-        em()->getComponentIfEnabled<VelocityComponent>(entity);
+    return entity->getComponentIfEnabled<BoxShapeComponent>() &&
+        entity->getComponentIfEnabled<TagComponent>() &&
+        entity->getComponentIfEnabled<TransformComponent>() &&
+        entity->getComponentIfEnabled<VelocityComponent>();
 }
 
 bool AABBCollisionSystem::addCollisionGroup(const char *tag1, const char *tag2)
@@ -135,25 +135,25 @@ bool AABBCollisionSystem::setCallback(AABBCollisionCallback callback)
 
 void AABBCollisionSystem::testCollision(float delta, Entity *entity1, Entity *entity2) const
 {
-    auto transform1 = em()->getComponentIfEnabled<TransformComponent>(entity1);
+    auto transform1 = entity1->getComponentIfEnabled<TransformComponent>();
     auto x1 = transform1->getPositionX();
     auto y1 = transform1->getPositionY();
 
-    auto boxShape1 = em()->getComponentIfEnabled<BoxShapeComponent>(entity1);
+    auto boxShape1 = entity1->getComponentIfEnabled<BoxShapeComponent>();
     auto w1 = boxShape1->getWidth();
     auto h1 = boxShape1->getHeight();
 
-    auto transform2 = em()->getComponentIfEnabled<TransformComponent>(entity2);
+    auto transform2 = entity2->getComponentIfEnabled<TransformComponent>();
     auto x2 = transform2->getPositionX();
     auto y2 = transform2->getPositionY();
 
-    auto boxShape2 = em()->getComponentIfEnabled<BoxShapeComponent>(entity2);
+    auto boxShape2 = entity2->getComponentIfEnabled<BoxShapeComponent>();
     auto w2 = boxShape2->getWidth();
     auto h2 = boxShape2->getHeight();
 
     if (!(x1 >= x2 + w2 || x1 + w1 <= x2 || y1 >= y2 + h2 || y1 + h1 <= y2))
     {
-        auto velocity1 = em()->getComponentIfEnabled<VelocityComponent>(entity1);
+        auto velocity1 = entity1->getComponentIfEnabled<VelocityComponent>();
         auto vX1 = velocity1->getX();
         auto vY1 = velocity1->getY();
 

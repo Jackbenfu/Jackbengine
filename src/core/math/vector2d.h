@@ -1,9 +1,9 @@
 //
-//  vector2d.h
-//  Jackbengine
+// vector2d.h
+// jackbengine
 //
-//  Created by Damien Bendejacq on 10/09/13.
-//  Copyright (c) 2013 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 10/09/13.
+// Copyright © 2013 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __VECTOR2D_H__

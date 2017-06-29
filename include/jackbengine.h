@@ -1,9 +1,9 @@
 //
-//  Jackbengine.h
-//  Jackbengine
+// jackbengine.h
+// jackbengine
 //
-//  Created by Damien Bendejacq on 22/04/14.
-//  Copyright (c) 2014 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 22/04/14.
+// Copyright © 2014 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __JACKBENGINE_H__
@@ -27,7 +27,6 @@
 
 // Entity
 #include "entity/entity.h"
-#include "entity/entityManager.h"
 
 // Component
 #include "component/component.h"
@@ -38,6 +37,8 @@
 #include "component/generic/genericComponent.h"
 #include "component/input/mouseListenerComponent.h"
 #include "component/layout/containerComponent.h"
+#include "component/layout/zOrderComponent.h"
+#include "component/misc/nameComponent.h"
 #include "component/misc/tagComponent.h"
 #include "component/view/colorComponent.h"
 #include "component/view/spriteComponent.h"
@@ -56,5 +57,8 @@
 
 // Application
 #include "application/application.h"
+
+// Scene
+#include "scene/loader/tmx/tmxSceneLoader.h"
 
 #endif // __JACKBENGINE_H__

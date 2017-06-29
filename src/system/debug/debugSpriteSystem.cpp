@@ -1,9 +1,9 @@
 //
-//  debugSpriteSystem.cpp
-//  Jackbengine
+// debugSpriteSystem.cpp
+// jackbengine
 //
-//  Created by Damien Bendejacq on 24/06/15.
-//  Copyright (c) 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 24/06/15.
+// Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
 #include "debugSpriteSystem.h"
@@ -20,14 +20,14 @@ DebugSpriteSystem::~DebugSpriteSystem()
 
 void DebugSpriteSystem::update(float delta)
 {
-    UNUSED(delta)
+    UNUSED(delta);
 
     for (auto entity : m_entities)
     {
-        if (em()->isEntityEnabled(entity))
+        if (entity->isEnabled())
         {
-            auto boxShape = em()->getComponentIfEnabled<BoxShapeComponent>(entity);
-            auto transform = em()->getComponentIfEnabled<TransformComponent>(entity);
+            auto boxShape = entity->getComponentIfEnabled<BoxShapeComponent>();
+            auto transform = entity->getComponentIfEnabled<TransformComponent>();
 
             if (!boxShape || !transform)
             {
@@ -52,8 +52,8 @@ void DebugSpriteSystem::update(float delta)
 
 bool DebugSpriteSystem::hasRequiredComponents(Entity *entity)
 {
-    return em()->getComponentIfEnabled<BoxShapeComponent>(entity) &&
-        em()->getComponentIfEnabled<TransformComponent>(entity);
+    return entity->getComponentIfEnabled<BoxShapeComponent>() &&
+        entity->getComponentIfEnabled<TransformComponent>();
 }
 
 void DebugSpriteSystem::setRenderer(Renderer *renderer)

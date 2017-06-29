@@ -1,9 +1,9 @@
 //
-//  system.cpp
-//  Jackbengine
+// system.cpp
+// jackbengine
 //
-//  Created by Damien Bendejacq on 18/07/2015.
-//  Copyright (c) 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 18/07/2015.
+// Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
 #include "system.h"
@@ -66,19 +66,4 @@ bool System::removeEntity(Entity *entity)
     }
 
     return false;
-}
-
-EntityManager* System::entityManager() const
-{
-    return m_entityManager;
-}
-
-EntityManager* System::em() const
-{
-    return m_entityManager;
-}
-
-void System::setEntityManager(EntityManager *entityManager)
-{
-    m_entityManager = entityManager;
 }

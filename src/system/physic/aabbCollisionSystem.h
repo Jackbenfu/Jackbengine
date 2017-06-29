@@ -1,9 +1,9 @@
 //
-//  aabbCollisionSystem.h
-//  Jackbengine
+// aabbCollisionSystem.h
+// jackbengine
 //
-//  Created by Damien Bendejacq on 24/01/15.
-//  Copyright (c) 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 24/01/15.
+// Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __AABB_COLLISION_SYSTEM_H__
@@ -11,6 +11,7 @@
 
 #include <string>
 #include <vector>
+#include <scene/scene.h>
 #include "system/system.h"
 
 NS_BEGIN_JKB

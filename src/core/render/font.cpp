@@ -1,9 +1,9 @@
 //
-//  font.cpp
-//  Jackbengine
+// font.cpp
+// jackbengine
 //
-//  Created by Damien Bendejacq on 18/04/14.
-//  Copyright (c) 2014 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 18/04/14.
+// Copyright © 2014 Damien Bendejacq. All rights reserved.
 //
 
 #include "font.h"

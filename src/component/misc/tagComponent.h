@@ -1,9 +1,9 @@
 //
-//  tagComponent.h
-//  Jackbengine
+// tagComponent.h
+// jackbengine
 //
-//  Created by Damien Bendejacq on 12/05/15.
-//  Copyright (c) 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 12/05/15.
+// Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __TAG_COMPONENT_H__

@@ -1,9 +1,9 @@
 //
-//  tmxMap.cpp
-//  Jackbengine
+// tmxMap.cpp
+// jackbengine
 //
-//  Created by Damien Bendejacq on 26/10/14.
-//  Copyright (c) 2014 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 26/10/14.
+// Copyright © 2014 Damien Bendejacq. All rights reserved.
 //
 
 #include "tmxMap.h"
@@ -65,7 +65,7 @@ bool TmxMap::loadFromFile(const char *file)
     return loadContents();
 }
 
-bool TmxMap::loadFromMemory(const void *data)
+bool TmxMap::loadFromMemory(const unsigned char *data)
 {
     if (!m_doc->Parse((char*)data))
     {
@@ -101,7 +101,7 @@ const TmxTileset* TmxMap::getTileset() const
     return m_tileset;
 }
 
-const TmxLayer* TmxMap::getLayer(uint index) const
+const TmxLayer* TmxMap::getLayer(int index) const
 {
     if (m_layers.size() > index)
     {
@@ -129,7 +129,7 @@ int TmxMap::getLayerCount() const
     return (int)m_layers.size();
 }
 
-const TmxObjectGroup* TmxMap::getObjectGroup(uint index) const
+const TmxObjectGroup* TmxMap::getObjectGroup(int index) const
 {
     if (m_objectGroups.size() > index)
     {

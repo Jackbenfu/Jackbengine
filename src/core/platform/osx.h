@@ -1,9 +1,9 @@
 //
-//  osx.h
-//  Jackbengine
+// osx.h
+// jackbengine
 //
-//  Created by Damien Bendejacq on 11/07/15.
-//  Copyright (c) 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 11/07/15.
+// Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __OSX_H__

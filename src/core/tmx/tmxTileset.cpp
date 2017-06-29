@@ -1,9 +1,9 @@
 //
-//  tmxTileset.cpp
-//  Jackbengine
+// tmxTileset.cpp
+// jackbengine
 //
-//  Created by Damien Bendejacq on 26/10/14.
-//  Copyright (c) 2014 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 26/10/14.
+// Copyright © 2014 Damien Bendejacq. All rights reserved.
 //
 
 #include "tmxTileset.h"

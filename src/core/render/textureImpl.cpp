@@ -1,9 +1,9 @@
 //
-//  textureImpl.cpp
-//  Jackbengine
+// textureImpl.cpp
+// jackbengine
 //
-//  Created by Damien Bendejacq on 17/04/14.
-//  Copyright (c) 2014 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 17/04/14.
+// Copyright © 2014 Damien Bendejacq. All rights reserved.
 //
 
 #include "textureImpl.h"
@@ -43,7 +43,7 @@ bool TextureImpl::loadFromMemory(const Renderer *renderer, const void *data, siz
         return errorAlreadyLoaded();
     }
 
-    auto *rWops = SDL_RWFromConstMem(data, dataSize);
+    auto *rWops = SDL_RWFromConstMem(data, (int)dataSize);
     if (!rWops)
     {
         LOG_ERROR("%s", SDL_GetError())
@@ -185,7 +185,7 @@ bool TextureImpl::loadFromObjectGroup(
         for (int i = 0; i < objectCount; ++i)
         {
             const TmxObject *object = objectGroup->getObject(i);
-            if (0 < object->getGid())
+            if (object->hasGid())
             {
                 int x = object->getX();
                 int y = object->getY();

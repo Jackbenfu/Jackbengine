@@ -1,9 +1,9 @@
 //
-//  tmxPropertyGroup.h
-//  Jackbengine
+// tmxPropertyGroup.h
+// jackbengine
 //
-//  Created by Damien Bendejacq on 17/11/14.
-//  Copyright (c) 2014 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 17/11/14.
+// Copyright © 2014 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __TMX_PROPERTYGROUP_H__
@@ -27,6 +27,8 @@ class TmxPropertyGroup
 
 public:
     ~TmxPropertyGroup();
+
+    bool hasProperty(const char *name) const;
 
     const char* getProperty(const char *name) const;
     bool getIntProperty(const char *name, int *value) const;

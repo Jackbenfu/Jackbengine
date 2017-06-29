@@ -1,9 +1,9 @@
 //
-//  typedObject.h
-//  Jackbengine
+// typedObject.h
+// jackbengine
 //
-//  Created by Damien Bendejacq on 20/02/2016.
-//  Copyright (c) 2016 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 20/02/2016.
+// Copyright © 2016 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __TYPED_OBJECT_H__

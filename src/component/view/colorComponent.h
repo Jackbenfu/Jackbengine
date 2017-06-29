@@ -1,9 +1,9 @@
 //
-//  colorComponent.h
-//  Jackbengine
+// colorComponent.h
+// jackbengine
 //
-//  Created by Damien Bendejacq on 10/05/14.
-//  Copyright (c) 2014 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 10/05/14.
+// Copyright © 2014 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __COLOR_COMPONENT_H__

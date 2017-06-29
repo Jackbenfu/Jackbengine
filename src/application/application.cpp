@@ -1,9 +1,9 @@
 //
-//  application.cpp
-//  Jackbengine
+// application.cpp
+// jackbengine
 //
-//  Created by Damien Bendejacq on 10/08/2015.
-//  Copyright (c) 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 10/08/2015.
+// Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
 #include "application.h"
@@ -43,6 +43,8 @@ Application::~Application()
 
 bool Application::init()
 {
+    srand(static_cast<uint>(time(nullptr)));
+
     if (configure(m_config))
     {
 #ifdef EMSCRIPTEN
@@ -95,12 +97,6 @@ bool Application::init()
             return false;
         }
 
-        Scene::s_cursor = m_cursor;
-        Scene::s_input = m_input;
-        Scene::s_renderer = m_renderer;
-        Scene::s_timer = m_timer;
-        Scene::s_window = m_window;
-
         if (!m_currentScene)
         {
             return false;
@@ -123,20 +119,20 @@ void Application::loop()
 {
     m_currentScene->loop();
 
-    if (m_currentScene->s_nextScene)
+    if (m_currentScene->m_nextScene)
     {
-        if (0 == strcmp(m_currentScene->name(), m_currentScene->s_nextScene))
+        if (0 == strcmp(m_currentScene->name(), m_currentScene->m_nextScene))
         {
-            m_currentScene->s_nextScene = nullptr;
+            m_currentScene->m_nextScene = nullptr;
         }
         else
         {
             map<uint, Scene*>::const_iterator it = m_scenes.begin();
             while (m_scenes.end() != it)
             {
-                if (0 == strcmp(it->second->name(), m_currentScene->s_nextScene))
+                if (0 == strcmp(it->second->name(), m_currentScene->m_nextScene))
                 {
-                    m_currentScene->reset();
+                    m_currentScene->clear();
                     m_currentScene = it->second;
                     m_currentScene->init();
 
@@ -146,7 +142,7 @@ void Application::loop()
                 ++it;
             }
 
-            m_currentScene->s_nextScene = nullptr;
+            m_currentScene->m_nextScene = nullptr;
         }
     }
 }

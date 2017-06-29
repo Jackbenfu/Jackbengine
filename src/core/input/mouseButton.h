@@ -1,9 +1,9 @@
 //
-//  mouseButton.h
-//  Jackbengine
+// mouseButton.h
+// jackbengine
 //
-//  Created by Damien Bendejacq on 28/06/15.
-//  Copyright (c) 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 28/06/15.
+// Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __MOUSE_BUTTON_H__

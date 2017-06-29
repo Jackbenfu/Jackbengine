@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.5)
 project(jackbengine)
 
 # CMake configuration
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -Wall")
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
 # SDL2 include directories
@@ -44,6 +44,7 @@ set(SOURCE_FILES
     src/component/component.cpp
     src/component/input/mouseListenerComponent.cpp
     src/component/layout/containerComponent.cpp
+    src/component/layout/zOrderComponent.cpp
     src/component/misc/nameComponent.cpp
     src/component/misc/tagComponent.cpp
     src/component/view/colorComponent.cpp
@@ -76,8 +77,10 @@ set(SOURCE_FILES
     src/core/tmx/tmxPropertyGroup.cpp
     src/core/tmx/tmxTileset.cpp
     src/entity/entity.cpp
-    src/entity/entityManager.cpp
     src/scene/scene.cpp
+    src/scene/loader/sceneLoader.cpp
+    src/ecs/ecsManager.cpp
+    src/scene/loader/tmx/tmxSceneLoader.cpp
     src/state/state.cpp
     src/state/stateManager.cpp
     src/system/animation/motionSystem.cpp
@@ -89,7 +92,6 @@ set(SOURCE_FILES
     src/system/render/spriteRenderSystem.cpp
     src/system/render/textRenderSystem.cpp
     src/system/system.cpp
-    src/system/systemManager.cpp
     ${PLATFORM_SOURCE_FILES}
 )
 

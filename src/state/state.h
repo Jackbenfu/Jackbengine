@@ -1,9 +1,9 @@
 //
-//  state.h
-//  Jackbengine
+// state.h
+// jackbengine
 //
-//  Created by Damien Bendejacq on 27/07/2015.
-//  Copyright (c) 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 27/07/2015.
+// Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __STATE_H__

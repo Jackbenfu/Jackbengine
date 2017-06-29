@@ -1,9 +1,9 @@
 //
-//  color.h
-//  Jackbengine
+// color.h
+// jackbengine
 //
-//  Created by Damien Bendejacq on 18/06/15.
-//  Copyright (c) 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 18/06/15.
+// Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __COLOR_H__

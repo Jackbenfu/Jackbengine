@@ -1,9 +1,8 @@
 CC                  = emcc
 
-CFLAGS              = -O2                               \
-                      -g0                               \
+CFLAGS              = -Oz                               \
                       -Wall                             \
-                      -std=c++11                        \
+                      -std=c++14                        \
                       -s USE_SDL=2                      \
                       -s USE_SDL_TTF=2                  \
                       -s USE_SDL_IMAGE=2                \
@@ -14,66 +13,68 @@ CFLAGS              = -O2                               \
 INCLUDES            = -Iexternal                        \
                       -Isrc
 
-SOURCES             =	external/easywsclient/easywsclient.cpp          \
-						external/tinyxml/tinystr.cpp                    \
-						external/tinyxml/tinyxml.cpp                    \
-						external/tinyxml/tinyxmlerror.cpp               \
-						external/tinyxml/tinyxmlparser.cpp              \
-						src/application/application.cpp                 \
-						src/application/applicationConfig.cpp           \
-						src/component/audio/audioSourceComponent.cpp    \
-						src/component/body/shape/boxShapeComponent.cpp  \
-						src/component/body/transformComponent.cpp       \
-						src/component/body/velocityComponent.cpp        \
-						src/component/component.cpp                     \
-						src/component/input/mouseListenerComponent.cpp  \
-						src/component/layout/containerComponent.cpp     \
-						src/component/misc/nameComponent.cpp            \
-						src/component/misc/tagComponent.cpp             \
-						src/component/view/colorComponent.cpp           \
-						src/component/view/spriteComponent.cpp          \
-						src/component/view/textComponent.cpp            \
-						src/core/audio/sound.cpp                        \
-						src/core/audio/soundImpl.cpp                    \
-						src/core/input/input.cpp                        \
-						src/core/input/inputImpl.cpp                    \
-						src/core/render/color.cpp                       \
-						src/core/render/cursor.cpp                      \
-						src/core/render/cursorImpl.cpp                  \
-						src/core/render/defaultFont.cpp                 \
-						src/core/render/font.cpp                        \
-						src/core/render/fontImpl.cpp                    \
-						src/core/render/renderer.cpp                    \
-						src/core/render/rendererImpl.cpp                \
-						src/core/render/texture.cpp                     \
-						src/core/render/textureImpl.cpp                 \
-						src/core/render/window.cpp                      \
-						src/core/render/windowImpl.cpp                  \
-						src/core/time/timer.cpp                         \
-						src/core/time/timerImpl.cpp                     \
-						src/core/tmx/tmxImage.cpp                       \
-						src/core/tmx/tmxLayer.cpp                       \
-						src/core/tmx/tmxMap.cpp                         \
-						src/core/tmx/tmxObject.cpp                      \
-						src/core/tmx/tmxObjectGroup.cpp                 \
-						src/core/tmx/tmxProperty.cpp                    \
-						src/core/tmx/tmxPropertyGroup.cpp               \
-						src/core/tmx/tmxTileset.cpp                     \
-						src/entity/entity.cpp                           \
-						src/entity/entityManager.cpp                    \
-						src/scene/scene.cpp                             \
-						src/state/state.cpp                             \
-						src/state/stateManager.cpp                      \
-						src/system/animation/motionSystem.cpp           \
-						src/system/debug/debugProfileSystem.cpp         \
-						src/system/debug/debugSpriteSystem.cpp          \
-						src/system/debug/debugTextSystem.cpp            \
-						src/system/input/mouseEventTriggerSystem.cpp    \
-						src/system/physic/aabbCollisionSystem.cpp       \
-						src/system/render/spriteRenderSystem.cpp        \
-						src/system/render/textRenderSystem.cpp          \
-						src/system/system.cpp                           \
-						src/system/systemManager.cpp
+SOURCES             =	external/easywsclient/easywsclient.cpp                              \
+						external/tinyxml/tinystr.cpp                                        \
+						external/tinyxml/tinyxml.cpp                                        \
+						external/tinyxml/tinyxmlerror.cpp                                   \
+						external/tinyxml/tinyxmlparser.cpp                                  \
+						src/application/application.cpp                                     \
+						src/application/applicationConfig.cpp                               \
+						src/component/audio/audioSourceComponent.cpp                        \
+						src/component/body/shape/boxShapeComponent.cpp                      \
+						src/component/body/transformComponent.cpp                           \
+						src/component/body/velocityComponent.cpp                            \
+						src/component/component.cpp                                         \
+						src/component/input/mouseListenerComponent.cpp                      \
+						src/component/layout/containerComponent.cpp                         \
+						src/component/layout/zOrderComponent.cpp                            \
+						src/component/misc/nameComponent.cpp                                \
+						src/component/misc/tagComponent.cpp                                 \
+						src/component/view/colorComponent.cpp                               \
+						src/component/view/spriteComponent.cpp                              \
+						src/component/view/textComponent.cpp                                \
+						src/core/audio/sound.cpp                                            \
+						src/core/audio/soundImpl.cpp                                        \
+						src/core/input/input.cpp                                            \
+						src/core/input/inputImpl.cpp                                        \
+						src/core/render/color.cpp                                           \
+						src/core/render/cursor.cpp                                          \
+						src/core/render/cursorImpl.cpp                                      \
+						src/core/render/defaultFont.cpp                                     \
+						src/core/render/font.cpp                                            \
+						src/core/render/fontImpl.cpp                                        \
+						src/core/render/renderer.cpp                                        \
+						src/core/render/rendererImpl.cpp                                    \
+						src/core/render/texture.cpp                                         \
+						src/core/render/textureImpl.cpp                                     \
+						src/core/render/window.cpp                                          \
+						src/core/render/windowImpl.cpp                                      \
+						src/core/time/timer.cpp                                             \
+						src/core/time/timerImpl.cpp                                         \
+						src/core/tmx/tmxImage.cpp                                           \
+						src/core/tmx/tmxLayer.cpp                                           \
+						src/core/tmx/tmxMap.cpp                                             \
+						src/core/tmx/tmxObject.cpp                                          \
+						src/core/tmx/tmxObjectGroup.cpp                                     \
+						src/core/tmx/tmxProperty.cpp                                        \
+						src/core/tmx/tmxPropertyGroup.cpp                                   \
+						src/core/tmx/tmxTileset.cpp                                         \
+						src/entity/entity.cpp                                               \
+						src/scene/scene.cpp                                                 \
+						src/scene/loader/sceneLoader.cpp                                    \
+						src/ecs/ecsManager.cpp                                              \
+						src/scene/loader/tmx/tmxSceneLoader.cpp                             \
+						src/state/state.cpp                                                 \
+						src/state/stateManager.cpp                                          \
+						src/system/animation/motionSystem.cpp                               \
+						src/system/debug/debugProfileSystem.cpp                             \
+						src/system/debug/debugSpriteSystem.cpp                              \
+						src/system/debug/debugTextSystem.cpp                                \
+						src/system/input/mouseEventTriggerSystem.cpp                        \
+						src/system/physic/aabbCollisionSystem.cpp                           \
+						src/system/render/spriteRenderSystem.cpp                            \
+						src/system/render/textRenderSystem.cpp                              \
+						src/system/system.cpp
 
 OUT                 = libjackbengine.bc
 

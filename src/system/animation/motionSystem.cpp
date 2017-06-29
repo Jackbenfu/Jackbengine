@@ -1,9 +1,9 @@
 //
-//  motionSystem.cpp
-//  Jackbengine
+// motionSystem.cpp
+// jackbengine
 //
-//  Created by Damien Bendejacq on 17/05/15.
-//  Copyright (c) 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 17/05/15.
+// Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
 #include "motionSystem.h"
@@ -22,10 +22,10 @@ void MotionSystem::update(float delta)
 {
     for (auto entity : m_entities)
     {
-        if (em()->isEntityEnabled(entity))
+        if (entity->isEnabled())
         {
-            auto transform = em()->getComponentIfEnabled<TransformComponent>(entity);
-            auto *velocity = em()->getComponentIfEnabled<VelocityComponent>(entity);
+            auto transform = entity->getComponentIfEnabled<TransformComponent>();
+            auto *velocity = entity->getComponentIfEnabled<VelocityComponent>();
 
             if (!velocity || !transform)
             {
@@ -48,6 +48,6 @@ void MotionSystem::update(float delta)
 
 bool MotionSystem::hasRequiredComponents(Entity *entity)
 {
-    return em()->getComponentIfEnabled<TransformComponent>(entity) &&
-        em()->getComponentIfEnabled<VelocityComponent>(entity);
+    return entity->getComponentIfEnabled<TransformComponent>() &&
+        entity->getComponentIfEnabled<VelocityComponent>();
 }

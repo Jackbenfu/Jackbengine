@@ -1,9 +1,9 @@
 //
-//  debugSpriteSystem.h
-//  Jackbengine
+// debugSpriteSystem.h
+// jackbengine
 //
-//  Created by Damien Bendejacq on 24/06/15.
-//  Copyright (c) 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 24/06/15.
+// Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __DEBUG_SPRITE_SYSTEM_H__

@@ -1,9 +1,9 @@
 //
-//  win32.cpp
-//  Jackbengine
+// win32.cpp
+// jackbengine
 //
-//  Created by Damien Bendejacq on 31/05/16.
-//  Copyright (c) 2016 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 31/05/16.
+// Copyright © 2016 Damien Bendejacq. All rights reserved.
 //
 
 #include "win32.h"

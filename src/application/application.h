@@ -1,9 +1,9 @@
 //
-//  application.h
-//  Jackbengine
+// application.h
+// jackbengine
 //
-//  Created by Damien Bendejacq on 10/08/2015.
-//  Copyright (c) 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 10/08/2015.
+// Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __APPLICATION_H__
@@ -19,14 +19,13 @@ NS_STD
 class Application
 {
 public:
-    virtual ~Application();
-
     bool init();
     bool running() const;
     void loop();
 
 protected:
     Application();
+    virtual ~Application();
 
     virtual bool configure(ApplicationConfig& config) = 0;
 
@@ -64,6 +63,12 @@ bool Application::addScene()
         }
 
         m_scenes.insert(make_pair(S::getType(), scene));
+
+        scene->setCursor(m_cursor);
+        scene->setInput(m_input);
+        scene->setRenderer(m_renderer);
+        scene->setTimer(m_timer);
+        scene->setWindow(m_window);
 
         if (1 == m_scenes.size())
         {

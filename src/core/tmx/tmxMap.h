@@ -1,9 +1,9 @@
 //
-//  tmxMap.h
-//  Jackbengine
+// tmxMap.h
+// jackbengine
 //
-//  Created by Damien Bendejacq on 26/10/14.
-//  Copyright (c) 2014 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 26/10/14.
+// Copyright © 2014 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __TMX_MAP_H__
@@ -25,7 +25,7 @@ public:
     ~TmxMap();
 
     bool loadFromFile(const char *file);
-    bool loadFromMemory(const void *data);
+    bool loadFromMemory(const unsigned char *data);
 
     int getWidth() const;
     int getHeight() const;
@@ -34,11 +34,11 @@ public:
 
     const TmxTileset* getTileset() const;
 
-    const TmxLayer* getLayer(uint index) const;
+    const TmxLayer* getLayer(int index) const;
     const TmxLayer* getLayer(const char *name) const;
     int getLayerCount() const;
 
-    const TmxObjectGroup* getObjectGroup(uint index) const;
+    const TmxObjectGroup* getObjectGroup(int index) const;
     const TmxObjectGroup* getObjectGroup(const char *name) const;
     int getObjectGroupCount() const;
 

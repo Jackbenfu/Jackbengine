@@ -1,9 +1,9 @@
 //
-//  webSocketEvent.h
-//  Jackbengine
+// webSocketEvent.h
+// jackbengine
 //
-//  Created by Damien Bendejacq on 01/03/2016.
-//  Copyright (c) 2016 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 01/03/2016.
+// Copyright © 2016 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __WEB_SOCKET_EVENT_H__

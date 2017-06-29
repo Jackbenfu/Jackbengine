@@ -1,9 +1,9 @@
 //
-//  common.h
-//  Jackbengine
+// common.h
+// jackbengine
 //
-//  Created by Damien Bendejacq on 28/01/15.
-//  Copyright (c) 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 28/01/15.
+// Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __COMMON_H__
@@ -15,7 +15,7 @@ using ushort = unsigned short;
 using byte = unsigned char;
 
 // Compiler macros
-#define UNUSED(a)       (void)a;
+#define UNUSED(a)       (void)a
 
 // Mathematic macros
 #define MAX(a, b)       ((a > b) ? a : b)
@@ -58,8 +58,12 @@ using byte = unsigned char;
         fflush(fd);                                                 \
     }
 
+#if defined(NDEBUG)
+    #define LOG_DEBUG(message, ...)
+#else
+    #define LOG_DEBUG(message, ...)     LOG(stdout, "DEBUG", message, ##__VA_ARGS__)
+#endif
 #define LOG_ERROR(message, ...)     LOG(stderr, "ERROR", message, ##__VA_ARGS__)
-#define LOG_DEBUG(message, ...)     LOG(stdout, "DEBUG", message, ##__VA_ARGS__)
 #define LOG_INFO(message, ...)      LOG(stdout, "INFO", message, ##__VA_ARGS__)
 
 #endif // __COMMON_H__

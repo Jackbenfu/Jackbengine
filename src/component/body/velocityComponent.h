@@ -1,9 +1,9 @@
 //
-//  velocityComponent.h
-//  Jackbengine
+// velocityComponent.h
+// jackbengine
 //
-//  Created by Damien Bendejacq on 13/05/15.
-//  Copyright (c) 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 13/05/15.
+// Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __VELOCITY_COMPONENT_H__

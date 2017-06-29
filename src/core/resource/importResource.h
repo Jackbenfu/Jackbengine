@@ -1,9 +1,9 @@
 //
 // importResource.h
-// Jackbengine
+// jackbengine
 //
 // Created by Damien Bendejacq on 22/05/2016.
-// Copyright (c) 2016 Damien Bendejacq. All rights reserved.
+// Copyright © 2016 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __IMPORT_RESOURCE_H__

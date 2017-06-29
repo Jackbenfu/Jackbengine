@@ -1,9 +1,9 @@
 //
-//  tmxProperty.h
-//  Jackbengine
+// tmxProperty.h
+// jackbengine
 //
-//  Created by Damien Bendejacq on 17/11/14.
-//  Copyright (c) 2014 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 17/11/14.
+// Copyright © 2014 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __TMX_PROPERTY_H__

@@ -1,9 +1,9 @@
 //
-//  timerImpl.cpp
-//  Jackbengine
+// timerImpl.cpp
+// jackbengine
 //
-//  Created by Damien Bendejacq on 17/04/14.
-//  Copyright (c) 2014 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 17/04/14.
+// Copyright © 2014 Damien Bendejacq. All rights reserved.
 //
 
 #include "timerImpl.h"

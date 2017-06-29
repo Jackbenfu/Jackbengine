@@ -1,9 +1,9 @@
 //
-//  debugTextSystem.cpp
-//  Jackbengine
+// debugTextSystem.cpp
+// jackbengine
 //
-//  Created by Damien Bendejacq on 24/06/15.
-//  Copyright (c) 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 24/06/15.
+// Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
 #include "debugTextSystem.h"
@@ -21,17 +21,17 @@ DebugTextSystem::~DebugTextSystem()
 
 void DebugTextSystem::update(float delta)
 {
-    UNUSED(delta)
+    UNUSED(delta);
 
     for (auto entity : m_entities)
     {
-        if (em()->isEntityEnabled(entity))
+        if (entity->isEnabled())
         {
             Vec2f position;
             float w;
             float h;
 
-            auto container = em()->getComponentIfEnabled<ContainerComponent>(entity);
+            auto container = entity->getComponentIfEnabled<ContainerComponent>();
             if (container)
             {
                 position.x = container->getX();
@@ -41,8 +41,8 @@ void DebugTextSystem::update(float delta)
             }
             else
             {
-                auto transform = em()->getComponentIfEnabled<TransformComponent>(entity);
-                auto text = em()->getComponentIfEnabled<TextComponent>(entity);
+                auto transform = entity->getComponentIfEnabled<TransformComponent>();
+                auto text = entity->getComponentIfEnabled<TextComponent>();
                 if (!transform || !text)
                 {
                     continue;
@@ -69,9 +69,9 @@ void DebugTextSystem::update(float delta)
 
 bool DebugTextSystem::hasRequiredComponents(Entity *entity)
 {
-    return em()->getComponentIfEnabled<TextComponent>(entity) &&
-        (em()->getComponentIfEnabled<ContainerComponent>(entity) ||
-         em()->getComponentIfEnabled<TransformComponent>(entity));
+    return entity->getComponentIfEnabled<TextComponent>() &&
+        (entity->getComponentIfEnabled<ContainerComponent>() ||
+         entity->getComponentIfEnabled<TransformComponent>());
 }
 
 void DebugTextSystem::setRenderer(Renderer *renderer)

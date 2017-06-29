@@ -1,9 +1,9 @@
 //
-//  genericComponent.h
-//  Jackbengine
+// genericComponent.h
+// jackbengine
 //
-//  Created by Damien Bendejacq on 06/07/15.
-//  Copyright (c) 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 06/07/15.
+// Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __GENERIC_COMPONENT_H__
@@ -55,6 +55,7 @@ void GenericComponent<T>::decrement(T by)
     _value -= by;
 }
 
+using ByteComponent = GenericComponent<byte>;
 using IntComponent = GenericComponent<int>;
 using UintComponent = GenericComponent<uint>;
 using FloatComponent = GenericComponent<float>;

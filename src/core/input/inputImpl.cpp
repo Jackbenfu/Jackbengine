@@ -1,9 +1,9 @@
 //
-//  inputImpl.cpp
-//  Jackbengine
+// inputImpl.cpp
+// jackbengine
 //
-//  Created by Damien Bendejacq on 20/04/14.
-//  Copyright (c) 2014 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 20/04/14.
+// Copyright © 2014 Damien Bendejacq. All rights reserved.
 //
 
 #include "inputImpl.h"
@@ -39,7 +39,7 @@ InputImpl::~InputImpl()
 
 void InputImpl::update(float delta)
 {
-    UNUSED(delta)
+    UNUSED(delta);
 
     memset(m_keyboardKeysPress, 0, sizeof(bool) * SDL_NUM_SCANCODES);
     memset(m_mouseButtonsClick, 0, sizeof(bool) * m_maxMouseButtons);

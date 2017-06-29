@@ -1,9 +1,9 @@
 //
-//  nameComponent.h
-//  Jackbengine
+// nameComponent.h
+// jackbengine
 //
-//  Created by Damien Bendejacq on 20/07/2015.
-//  Copyright (c) 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 20/07/2015.
+// Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __NAME_COMPONENT_H__

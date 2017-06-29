@@ -1,9 +1,9 @@
 //
-//  tmxObject.cpp
-//  Jackbengine
+// tmxObject.cpp
+// jackbengine
 //
-//  Created by Damien Bendejacq on 29/10/14.
-//  Copyright (c) 2014 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 29/10/14.
+// Copyright © 2014 Damien Bendejacq. All rights reserved.
 //
 
 #include "tmxObject.h"
@@ -27,6 +27,11 @@ int TmxObject::getGid() const
     return m_gid;
 }
 
+bool TmxObject::hasGid() const
+{
+    return m_gid > 0;
+}
+
 int TmxObject::getX() const
 {
     return m_x;
@@ -47,6 +52,21 @@ int TmxObject::getHeight() const
     return m_height;
 }
 
+const char* TmxObject::getType() const
+{
+    return m_type;
+}
+
+bool TmxObject::hasProperty(const char *name) const
+{
+    if (nullptr == m_properties)
+    {
+        return false;
+    }
+
+    return m_properties->hasProperty(name);
+}
+
 const TmxPropertyGroup* TmxObject::getProperties() const
 {
     return m_properties;
@@ -55,6 +75,7 @@ const TmxPropertyGroup* TmxObject::getProperties() const
 void TmxObject::dump() const
 {
     printf("[tmxObject][name] %s\n", getName());
+    printf("[tmxObject][type] %s\n", getType());
     printf("[tmxObject][gid] %i\n", getGid());
     printf("[tmxObject][x] %i\n", getX());
     printf("[tmxObject][y] %i\n", getY());
@@ -69,6 +90,7 @@ void TmxObject::dump() const
 bool TmxObject::load(const TiXmlElement *element)
 {
     m_name = element->Attribute("name");
+    m_type = element->Attribute("type");
     element->Attribute("gid", &m_gid);
     element->Attribute("x", &m_x);
     element->Attribute("y", &m_y);

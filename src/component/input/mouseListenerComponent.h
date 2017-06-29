@@ -1,20 +1,21 @@
 //
-//  mouseListenerComponent.h
-//  Jackbengine
+// mouseListenerComponent.h
+// jackbengine
 //
-//  Created by Damien Bendejacq on 28/06/15.
-//  Copyright (c) 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 28/06/15.
+// Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __MOUSE_LISTENER_COMPONENT_H__
 #define __MOUSE_LISTENER_COMPONENT_H__
 
 #include "component/component.h"
+#include "scene/scene.h"
 #include "common.h"
 
 NS_BEGIN_JKB
 
-using MouseCallback = void(*)(void *data);
+using MouseCallback = void(*)(Scene *scene, void *data);
 
 enum MouseEvent
 {
@@ -33,7 +34,7 @@ class MouseListenerComponent :
     friend class MouseEventTriggerSystem;
 
 public:
-    MouseListenerComponent();
+    MouseListenerComponent(Scene *scene);
     ~MouseListenerComponent();
 
     void onLeftClick(MouseCallback callback, void *data = nullptr);
@@ -57,6 +58,8 @@ public:
     bool exit() const;
 
 private:
+    Scene *m_scene {nullptr};
+
     MouseCallback m_onLeftClick = nullptr;
     void *m_onLeftClickData = nullptr;
     void callLeftClick();
@@ -69,9 +72,9 @@ private:
     void *m_onMiddleClickData = nullptr;
     void callMiddleClick();
 
-    MouseCallback _onMiddleDown = nullptr;
-    void *_onMiddleDownData = nullptr;
-    void _callMiddleDown() const;
+    MouseCallback m_onMiddleDown = nullptr;
+    void *m_onMiddleDownData = nullptr;
+    void callMiddleDown() const;
 
     MouseCallback m_onRightClick = nullptr;
     void *m_onRightClickData = nullptr;
@@ -98,7 +101,6 @@ private:
     void removeEvent(MouseEvent event);
     bool hasEvent(MouseEvent event) const;
     bool hasAndRemoveEvent(MouseEvent event);
-    void resetEvents();
 };
 
 NS_END_JKB

@@ -1,9 +1,9 @@
 //
-//  timer.h
-//  Jackbengine
+// timer.h
+// jackbengine
 //
-//  Created by Damien Bendejacq on 17/04/14.
-//  Copyright (c) 2014 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 17/04/14.
+// Copyright © 2014 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __TIME_H__

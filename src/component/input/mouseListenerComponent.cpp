@@ -1,14 +1,15 @@
 //
-//  mouseListenerComponent.cpp
-//  Jackbengine
+// mouseListenerComponent.cpp
+// jackbengine
 //
-//  Created by Damien Bendejacq on 28/06/15.
-//  Copyright (c) 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 28/06/15.
+// Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
 #include "mouseListenerComponent.h"
 
-MouseListenerComponent::MouseListenerComponent()
+MouseListenerComponent::MouseListenerComponent(Scene *scene)
+    : m_scene(scene)
 {
 }
 
@@ -27,7 +28,7 @@ void MouseListenerComponent::callLeftClick()
     addEvent(MouseEvent_LeftClick);
     if (m_onLeftClick)
     {
-        m_onLeftClick(m_onLeftClickData);
+        m_onLeftClick(m_scene, m_onLeftClickData);
     }
 }
 
@@ -41,7 +42,7 @@ void MouseListenerComponent::callLeftDown() const
 {
     if (m_onLeftDown)
     {
-        m_onLeftDown(m_onLeftDownData);
+        m_onLeftDown(m_scene, m_onLeftDownData);
     }
 }
 
@@ -56,21 +57,21 @@ void MouseListenerComponent::callMiddleClick()
     addEvent(MouseEvent_MiddleClick);
     if (m_onMiddleClick)
     {
-        m_onMiddleClick(m_onMiddleClickData);
+        m_onMiddleClick(m_scene, m_onMiddleClickData);
     }
 }
 
 void MouseListenerComponent::onMiddleDown(MouseCallback callback, void *data)
 {
-    _onMiddleDown = callback;
-    _onMiddleDownData = data;
+    m_onMiddleDown = callback;
+    m_onMiddleDownData = data;
 }
 
-void MouseListenerComponent::_callMiddleDown() const
+void MouseListenerComponent::callMiddleDown() const
 {
-    if (_onMiddleDown)
+    if (m_onMiddleDown)
     {
-        _onMiddleDown(_onMiddleDownData);
+        m_onMiddleDown(m_scene, m_onMiddleDownData);
     }
 }
 
@@ -85,7 +86,7 @@ void MouseListenerComponent::callRightClick()
     addEvent(MouseEvent_RightClick);
     if (m_onRightClick)
     {
-        m_onRightClick(m_onRightClickData);
+        m_onRightClick(m_scene, m_onRightClickData);
     }
 }
 
@@ -99,7 +100,7 @@ void MouseListenerComponent::callRightDown() const
 {
     if (m_onRightDown)
     {
-        m_onRightDown(m_onRightDownData);
+        m_onRightDown(m_scene, m_onRightDownData);
     }
 }
 
@@ -114,7 +115,7 @@ void MouseListenerComponent::callOnHover()
     addEvent(MouseEvent_Hover);
     if (m_onHover)
     {
-        m_onHover(m_onHoverData);
+        m_onHover(m_scene, m_onHoverData);
     }
 }
 
@@ -129,7 +130,7 @@ void MouseListenerComponent::callOnEnter()
     addEvent(MouseEvent_Enter);
     if (m_onEnter)
     {
-        m_onEnter(m_onEnterData);
+        m_onEnter(m_scene, m_onEnterData);
     }
 }
 
@@ -144,7 +145,7 @@ void MouseListenerComponent::callOnExit()
     addEvent(MouseEvent_Exit);
     if (m_onExit)
     {
-        m_onExit(m_onExitData);
+        m_onExit(m_scene, m_onExitData);
     }
 }
 
@@ -199,9 +200,4 @@ bool MouseListenerComponent::hasAndRemoveEvent(MouseEvent event)
 bool MouseListenerComponent::hasEvent(MouseEvent event) const
 {
     return event == (m_events & event);
-}
-
-void MouseListenerComponent::resetEvents()
-{
-    m_events = 0;
 }

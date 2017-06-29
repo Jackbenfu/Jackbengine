@@ -1,9 +1,9 @@
 //
-//  textComponent.cpp
-//  Jackbengine
+// textComponent.cpp
+// jackbengine
 //
-//  Created by Damien Bendejacq on 14/06/15.
-//  Copyright (c) 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 14/06/15.
+// Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
 #include "textComponent.h"
@@ -18,7 +18,7 @@ TextComponent::~TextComponent()
     DELETE_SAFE(m_texture);
 }
 
-bool TextComponent::setFontFromFile(const Renderer *renderer, const char *file, uint size)
+bool TextComponent::setFontFromFile(const Renderer *renderer, const char *file, int size)
 {
     bool result = false;
 

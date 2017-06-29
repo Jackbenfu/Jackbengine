@@ -1,9 +1,9 @@
 //
-//  tmxObjectGroup.cpp
-//  Jackbengine
+// tmxObjectGroup.cpp
+// jackbengine
 //
-//  Created by Damien Bendejacq on 29/10/14.
-//  Copyright (c) 2014 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 29/10/14.
+// Copyright © 2014 Damien Bendejacq. All rights reserved.
 //
 
 #include "tmxObjectGroup.h"
@@ -88,6 +88,16 @@ int TmxObjectGroup::getOriginY() const
     }
 
     return originY;
+}
+
+bool TmxObjectGroup::hasProperty(const char *name) const
+{
+    if (nullptr == m_properties)
+    {
+        return false;
+    }
+
+    return m_properties->hasProperty(name);
 }
 
 const TmxPropertyGroup* TmxObjectGroup::getProperties() const

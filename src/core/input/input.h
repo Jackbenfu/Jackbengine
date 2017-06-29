@@ -1,9 +1,9 @@
 //
-//  input.h
-//  Jackbengine
+// input.h
+// jackbengine
 //
-//  Created by Damien Bendejacq on 20/04/14.
-//  Copyright (c) 2014 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 20/04/14.
+// Copyright © 2014 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __INPUT_H__

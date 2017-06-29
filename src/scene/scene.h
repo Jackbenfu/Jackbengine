@@ -1,18 +1,16 @@
 //
-//  scene.h
-//  Jackbengine
+// scene.h
+// jackbengine
 //
-//  Created by Damien Bendejacq on 18/07/2015.
-//  Copyright (c) 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 18/07/2015.
+// Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __SCENE_H__
 #define __SCENE_H__
 
 #include "common.h"
-
-#include "entity/entityManager.h"
-#include "system/systemManager.h"
+#include "ecs/ecsManager.h"
 
 #include "core/render/cursor.h"
 #include "core/input/input.h"
@@ -25,65 +23,75 @@ NS_BEGIN_JKB
 class Scene
 {
     friend class Application;
+    friend class SceneLoader;
 
 public:
-    virtual ~Scene();
+    bool isEntityEnabled(Entity *entity) const;
+    Entity* getEntity(const char *name) const;
+    Entity* addEntity(const char *name);
+    void removeEntity(Entity *entity);
+    bool removeEntity(const char *name);
+    void enableEntity(Entity *entity);
+    void enableEntity(const char *name);
+    void disableEntity(Entity *entity);
+    void disableEntity(const char *name);
+
+    template<typename C> C* getComponent(Entity *entity);
+    template<typename C> C* addComponent(Entity *entity);
+    template<typename C> bool setComponent(Entity *entity, C *component);
+    template<typename C, typename Param> C* addComponent(Entity *entity, Param param);
+    template<typename C> void removeComponent(Entity *entity);
+    template<typename C> void enableComponent(Entity *entity);
+    template<typename C> void disableComponent(Entity *entity);
+
+    template<typename S> S* getSystem();
+    template<typename S> S* addSystem();
+    template<typename S> void enableSystem();
+    template<typename S> void disableSystem();
+
+    Cursor* cursor() const;
+    void setCursor(Cursor *cursor);
+
+    Input* input() const;
+    void setInput(Input *input);
+
+    Renderer* renderer() const;
+    void setRenderer(Renderer *renderer);
+
+    Timer* timer() const;
+    void setTimer(Timer *timer);
+
+    Window* window() const;
+    void setWindow(Window *window);
+
+    bool loadScene(const char *name);
+    void exit();
 
 protected:
     Scene();
+    virtual ~Scene();
 
     virtual void frame(float delta) = 0;
     virtual const char* name() = 0;
     virtual bool initContents() = 0;
-
-    static Entity* addEntity(const char *name);
-    static bool removeEntity(Entity *entity);
-    static bool enableEntity(Entity *entity);
-    static bool disableEntity(Entity *entity);
-
-    template<typename C> static C* getComponent(Entity *entity);
-    template<typename C> static C* addComponent(Entity *entity);
-    template<typename C> static bool removeComponent(Entity *entity);
-    template<typename C> static bool enableComponent(Entity *entity);
-    template<typename C> static bool disableComponent(Entity *entity);
-
-    template<typename S> static S* addSystem();
-    template<typename S> static bool enableSystem();
-    template<typename S> static bool disableSystem();
-
-    static EntityManager* entityManager();
-    static EntityManager* em();
-
-    static SystemManager* systemManager();
-    static SystemManager* sm();
-
-    static Cursor* cursor();
-    static Input* input();
-    static Renderer* renderer();
-    static Timer* timer();
-    static Window* window();
-
-    static bool loadScene(const char *name);
-    static void exit();
 
 private:
     bool init();
     void loop();
     bool running() const;
 
-    static void reset();
+    void clear();
 
-    static EntityManager *s_entityManager;
-    static SystemManager *s_systemManager;
+    EcsManager *m_ecsManager {nullptr};
 
-    static Cursor *s_cursor;
-    static Input *s_input;
-    static Renderer *s_renderer;
-    static Timer *s_timer;
-    static Window *s_window;
+    Cursor *m_cursor {nullptr};
+    Input *m_input {nullptr};
+    Renderer *m_renderer {nullptr};
+    Timer *m_timer {nullptr};
+    Window *m_window {nullptr};
 
-    static bool s_running;
-    static const char *s_nextScene;
+    bool m_running {false};
+    const char *m_nextScene {nullptr};
 };
 
 template<typename T>
@@ -96,59 +104,68 @@ class TypedScene :
 template<typename C>
 C* Scene::getComponent(Entity *entity)
 {
-    return s_entityManager->getComponent<C>(entity);
+    return m_ecsManager->getComponent<C>(entity);
 }
 
 template<typename C>
 C* Scene::addComponent(Entity *entity)
 {
-    C* component = s_entityManager->addComponent<C>(entity);
-
-    if (component)
-    {
-        s_systemManager->addEntity(entity);
-    }
-
-    return component;
+    return m_ecsManager->addComponent<C>(entity);
 }
 
 template<typename C>
-bool Scene::removeComponent(Entity *entity)
+bool Scene::setComponent(Entity *entity, C *component)
 {
-    return s_entityManager->removeComponent<C>(entity) &&
-        s_systemManager->removeEntity(entity);
+    return m_ecsManager->setComponent(entity, component);
+}
+
+template<typename C, typename Param>
+C* Scene::addComponent(Entity *entity, Param param)
+{
+    return m_ecsManager->addComponent<C>(entity, param);
+};
+
+template<typename C>
+void Scene::removeComponent(Entity *entity)
+{
+    m_ecsManager->removeComponent<C>(entity);
+    m_ecsManager->removeEntity(entity);
 }
 
 template<typename C>
-bool Scene::enableComponent(Entity *entity)
+void Scene::enableComponent(Entity *entity)
 {
-    return s_entityManager->enableComponent<C>(entity) &&
-        s_systemManager->enableEntity(entity);
+    m_ecsManager->enableComponent<C>(entity);
 }
 
 template<typename C>
-bool Scene::disableComponent(Entity *entity)
+void Scene::disableComponent(Entity *entity)
 {
-    return s_entityManager->disableComponent<C>(entity) &&
-        s_systemManager->disableEntity(entity);
+    m_ecsManager->disableComponent<C>(entity);
+}
+
+template<typename S>
+S* Scene::getSystem()
+{
+    return m_ecsManager->getSystem<S>();
 }
 
 template<typename S>
 S* Scene::addSystem()
 {
-    return s_systemManager->addSystem<S>();
+    return m_ecsManager->addSystem<S>();
 }
 
 template<typename S>
-bool Scene::enableSystem()
+void Scene::enableSystem()
 {
-    return s_systemManager->enableSystem<S>();
+    m_ecsManager->enableSystem<S>();
 }
 
 template<typename S>
-bool Scene::disableSystem()
+void Scene::disableSystem()
 {
-    return s_systemManager->disableSystem<S>();
+    m_ecsManager->disableSystem<S>();
 }
 
 NS_END_JKB

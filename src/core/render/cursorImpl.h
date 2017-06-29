@@ -1,9 +1,9 @@
 //
-//  cursorImpl.h
-//  Jackbengine
+// cursorImpl.h
+// jackbengine
 //
-//  Created by Damien Bendejacq on 10/07/15.
-//  Copyright (c) 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 10/07/15.
+// Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __CURSOR_IMPL_H__

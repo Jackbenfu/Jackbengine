@@ -1,9 +1,9 @@
 //
-//  textComponent.h
-//  Jackbengine
+// textComponent.h
+// jackbengine
 //
-//  Created by Damien Bendejacq on 14/06/15.
-//  Copyright (c) 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 14/06/15.
+// Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __TEXT_COMPONENT_H__
@@ -40,7 +40,7 @@ public:
     TextComponent();
     ~TextComponent();
 
-    bool setFontFromFile(const Renderer *renderer, const char *file, uint size);
+    bool setFontFromFile(const Renderer *renderer, const char *file, int size);
     bool setFontFromMemory(const Renderer *renderer, const void *data, size_t dataSize, int size);
 
     const string& getText() const;

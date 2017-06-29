@@ -1,9 +1,9 @@
 //
-//  spriteRenderSystem.h
-//  Jackbengine
+// spriteRenderSystem.h
+// jackbengine
 //
-//  Created by Damien Bendejacq on 02/05/14.
-//  Copyright (c) 2014 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 02/05/14.
+// Copyright © 2014 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __SPRITE_RENDER_SYSTEM_H__

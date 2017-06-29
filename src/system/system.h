@@ -1,30 +1,28 @@
 //
-//  system.h
-//  Jackbengine
+// system.h
+// jackbengine
 //
-//  Created by Damien Bendejacq on 18/07/2015.
-//  Copyright (c) 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 18/07/2015.
+// Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __SYSTEM_H__
 #define __SYSTEM_H__
 
+#include <vector>
 #include "core/type/typedObject.h"
-#include "entity/entityManager.h"
+#include "entity/entity.h"
 
 NS_BEGIN_JKB
 NS_STD
 
 class System
 {
-    friend class SystemManager;
+    friend class EcsManager;
 
 protected:
     System();
     virtual ~System();
-
-    EntityManager* entityManager() const;
-    EntityManager* em() const;
 
     vector<Entity*> m_entities;
 
@@ -39,9 +37,6 @@ private:
     bool addEntity(Entity *entity);
     bool removeEntity(Entity *entity);
 
-    void setEntityManager(EntityManager *entityManager);
-
-    EntityManager *m_entityManager = nullptr;
     bool m_enabled = true;
 };
 

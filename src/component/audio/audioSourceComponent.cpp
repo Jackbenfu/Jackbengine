@@ -1,9 +1,9 @@
 //
-//  audioSourceComponent.cpp
-//  Jackbengine
+// audioSourceComponent.cpp
+// jackbengine
 //
-//  Created by Damien Bendejacq on 04/06/15.
-//  Copyright (c) 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 04/06/15.
+// Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
 #include "audioSourceComponent.h"

@@ -6,11 +6,11 @@
 // Copyright © 2014 Damien Bendejacq. All rights reserved.
 //
 
-#include "tmxTileset.h"
+#include "tmxTileset.hpp"
 
-TmxTileset::TmxTileset()
-{
-}
+using namespace Jackbengine;
+
+TmxTileset::TmxTileset() = default;
 
 TmxTileset::~TmxTileset()
 {

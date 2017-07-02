@@ -6,15 +6,13 @@
 // Copyright © 2014 Damien Bendejacq. All rights reserved.
 //
 
-#include "colorComponent.h"
+#include "colorComponent.hpp"
 
-ColorComponent::ColorComponent()
-{
-}
+using namespace Jackbengine;
 
-ColorComponent::~ColorComponent()
-{
-}
+ColorComponent::ColorComponent() = default;
+
+ColorComponent::~ColorComponent() = default;
 
 Color ColorComponent::getColor() const
 {

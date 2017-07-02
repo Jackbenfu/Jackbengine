@@ -6,16 +6,14 @@
 // Copyright © 2014 Damien Bendejacq. All rights reserved.
 //
 
-#include "texture.h"
-#include "textureImpl.h"
+#include "texture.hpp"
+#include "textureImpl.hpp"
 
-Texture::Texture()
-{
-}
+using namespace Jackbengine;
 
-Texture::~Texture()
-{
-}
+Texture::Texture() = default;
+
+Texture::~Texture() = default;
 
 Texture* Texture::create()
 {

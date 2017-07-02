@@ -6,11 +6,11 @@
 // Copyright © 2014 Damien Bendejacq. All rights reserved.
 //
 
-#include "spriteComponent.h"
+#include "spriteComponent.hpp"
 
-SpriteComponent::SpriteComponent()
-{
-}
+using namespace Jackbengine;
+
+SpriteComponent::SpriteComponent() = default;
 
 SpriteComponent::~SpriteComponent()
 {

@@ -6,16 +6,14 @@
 // Copyright © 2014 Damien Bendejacq. All rights reserved.
 //
 
-#include "sound.h"
-#include "soundImpl.h"
+#include "sound.hpp"
+#include "soundImpl.hpp"
 
-Sound::Sound()
-{
-}
+using namespace Jackbengine;
 
-Sound::~Sound()
-{
-}
+Sound::Sound() = default;
+
+Sound::~Sound() = default;
 
 Sound* Sound::create()
 {

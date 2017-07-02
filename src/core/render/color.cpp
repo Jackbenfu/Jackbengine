@@ -6,7 +6,9 @@
 // Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
-#include "color.h"
+#include "color.hpp"
+
+using namespace Jackbengine;
 
 Color::Color()
     : r(0),
@@ -14,6 +16,7 @@ Color::Color()
       b(0),
       a(0)
 {
+    // Nothing
 }
 
 Color::Color(byte r, byte g, byte b)
@@ -22,6 +25,7 @@ Color::Color(byte r, byte g, byte b)
       b(b),
       a(255)
 {
+    // Nothing
 }
 
 Color::Color(byte r, byte g, byte b, byte a)
@@ -30,8 +34,7 @@ Color::Color(byte r, byte g, byte b, byte a)
       b(b),
       a(a)
 {
+    // Nothing
 }
 
-Color::~Color()
-{
-}
+Color::~Color() = default;

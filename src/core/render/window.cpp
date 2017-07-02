@@ -6,16 +6,14 @@
 // Copyright © 2014 Damien Bendejacq. All rights reserved.
 //
 
-#include "window.h"
-#include "windowImpl.h"
+#include "window.hpp"
+#include "windowImpl.hpp"
 
-Window::Window()
-{
-}
+using namespace Jackbengine;
 
-Window::~Window()
-{
-}
+Window::Window() = default;
+
+Window::~Window() = default;
 
 Window* Window::create()
 {

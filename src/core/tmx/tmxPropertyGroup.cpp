@@ -6,11 +6,12 @@
 // Copyright © 2014 Damien Bendejacq. All rights reserved.
 //
 
-#include "tmxPropertyGroup.h"
+#include "tmxPropertyGroup.hpp"
 
-TmxPropertyGroup::TmxPropertyGroup()
-{
-}
+using namespace std;
+using namespace Jackbengine;
+
+TmxPropertyGroup::TmxPropertyGroup() = default;
 
 TmxPropertyGroup::~TmxPropertyGroup()
 {

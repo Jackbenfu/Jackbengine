@@ -6,17 +6,15 @@
 // Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
-#include "debugSpriteSystem.h"
-#include "component/body/shape/boxShapeComponent.h"
-#include "component/body/transformComponent.h"
+#include "debugSpriteSystem.hpp"
+#include "component/body/shape/boxShapeComponent.hpp"
+#include "component/body/transformComponent.hpp"
 
-DebugSpriteSystem::DebugSpriteSystem()
-{
-}
+using namespace Jackbengine;
 
-DebugSpriteSystem::~DebugSpriteSystem()
-{
-}
+DebugSpriteSystem::DebugSpriteSystem() = default;
+
+DebugSpriteSystem::~DebugSpriteSystem() = default;
 
 void DebugSpriteSystem::update(float delta)
 {

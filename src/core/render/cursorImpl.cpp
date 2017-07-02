@@ -6,11 +6,11 @@
 // Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
-#include "cursorImpl.h"
+#include "cursorImpl.hpp"
 
-CursorImpl::CursorImpl()
-{
-}
+using namespace Jackbengine;
+
+CursorImpl::CursorImpl() = default;
 
 CursorImpl::~CursorImpl()
 {
@@ -19,7 +19,7 @@ CursorImpl::~CursorImpl()
 
 void CursorImpl::setCursor(CursorType cursor)
 {
-    SDL_SystemCursor id = SDL_SYSTEM_CURSOR_ARROW;
+    SDL_SystemCursor id;
 
     switch (cursor)
     {
@@ -32,7 +32,7 @@ void CursorImpl::setCursor(CursorType cursor)
             break;
     }
 
-    if (m_cursor)
+    if (nullptr == m_cursor)
     {
         SDL_FreeCursor(m_cursor);
     }

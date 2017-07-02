@@ -6,12 +6,12 @@
 // Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
-#include "tagComponent.h"
-#include "platform.h"
+#include "tagComponent.hpp"
+#include "platform.hpp"
 
-TagComponent::TagComponent()
-{
-}
+using namespace Jackbengine;
+
+TagComponent::TagComponent() = default;
 
 TagComponent::~TagComponent()
 {

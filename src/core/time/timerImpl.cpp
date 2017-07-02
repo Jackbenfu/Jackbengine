@@ -6,16 +6,14 @@
 // Copyright © 2014 Damien Bendejacq. All rights reserved.
 //
 
-#include "timerImpl.h"
-#include "platform.h"
+#include "timerImpl.hpp"
+#include "platform.hpp"
 
-TimerImpl::TimerImpl()
-{
-}
+using namespace Jackbengine;
 
-TimerImpl::~TimerImpl()
-{
-}
+TimerImpl::TimerImpl() = default;
+
+TimerImpl::~TimerImpl() = default;
 
 void TimerImpl::delay(uint ms)
 {

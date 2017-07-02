@@ -6,11 +6,11 @@
 // Copyright © 2014 Damien Bendejacq. All rights reserved.
 //
 
-#include "fontImpl.h"
+#include "fontImpl.hpp"
 
-FontImpl::FontImpl()
-{
-}
+using namespace Jackbengine;
+
+FontImpl::FontImpl() = default;
 
 FontImpl::~FontImpl()
 {

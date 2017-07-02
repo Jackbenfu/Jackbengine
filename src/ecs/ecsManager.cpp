@@ -6,12 +6,13 @@
 // Copyright © 2016 Damien Bendejacq. All rights reserved.
 //
 
-#include "ecsManager.h"
-#include "component/misc/nameComponent.h"
+#include "ecsManager.hpp"
+#include "component/misc/nameComponent.hpp"
 
-EcsManager::EcsManager()
-{
-}
+using namespace std;
+using namespace Jackbengine;
+
+EcsManager::EcsManager() = default;
 
 EcsManager::~EcsManager()
 {

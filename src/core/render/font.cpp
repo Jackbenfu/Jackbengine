@@ -6,16 +6,14 @@
 // Copyright © 2014 Damien Bendejacq. All rights reserved.
 //
 
-#include "font.h"
-#include "fontImpl.h"
+#include "font.hpp"
+#include "fontImpl.hpp"
 
-Font::Font()
-{
-}
+using namespace Jackbengine;
 
-Font::~Font()
-{
-}
+Font::Font() = default;
+
+Font::~Font() = default;
 
 Font* Font::create()
 {

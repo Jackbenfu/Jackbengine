@@ -6,13 +6,13 @@
 // Copyright © 2014 Damien Bendejacq. All rights reserved.
 //
 
-#include "rendererImpl.h"
-#include "windowImpl.h"
-#include "textureImpl.h"
+#include "rendererImpl.hpp"
+#include "windowImpl.hpp"
+#include "textureImpl.hpp"
 
-RendererImpl::RendererImpl()
-{
-}
+using namespace Jackbengine;
+
+RendererImpl::RendererImpl() = default;
 
 RendererImpl::~RendererImpl()
 {

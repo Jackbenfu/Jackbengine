@@ -6,11 +6,11 @@
 // Copyright © 2014 Damien Bendejacq. All rights reserved.
 //
 
-#include "windowImpl.h"
+#include "windowImpl.hpp"
 
-WindowImpl::WindowImpl()
-{
-}
+using namespace Jackbengine;
+
+WindowImpl::WindowImpl() = default;
 
 WindowImpl::~WindowImpl()
 {

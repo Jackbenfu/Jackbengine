@@ -6,15 +6,13 @@
 // Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
-#include "boxShapeComponent.h"
+#include "boxShapeComponent.hpp"
 
-BoxShapeComponent::BoxShapeComponent()
-{
-}
+using namespace Jackbengine;
 
-BoxShapeComponent::~BoxShapeComponent()
-{
-}
+BoxShapeComponent::BoxShapeComponent() = default;
+
+BoxShapeComponent::~BoxShapeComponent() = default;
 
 float BoxShapeComponent::getWidth() const
 {

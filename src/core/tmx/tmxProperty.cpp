@@ -6,15 +6,13 @@
 // Copyright © 2014 Damien Bendejacq. All rights reserved.
 //
 
-#include "tmxProperty.h"
+#include "tmxProperty.hpp"
 
-TmxProperty::TmxProperty()
-{
-}
+using namespace Jackbengine;
 
-TmxProperty::~TmxProperty()
-{
-}
+TmxProperty::TmxProperty() = default;
+
+TmxProperty::~TmxProperty() = default;
 
 const char* TmxProperty::getName() const
 {

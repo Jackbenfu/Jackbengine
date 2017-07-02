@@ -6,8 +6,11 @@
 // Copyright © 2014 Damien Bendejacq. All rights reserved.
 //
 
-#include "textureImpl.h"
-#include "fontImpl.h"
+#include "textureImpl.hpp"
+#include "fontImpl.hpp"
+
+using namespace Jackbengine;
+using namespace std;
 
 TextureImpl::TextureImpl()
 {

@@ -6,16 +6,14 @@
 // Copyright © 2014 Damien Bendejacq. All rights reserved.
 //
 
-#include "input.h"
-#include "inputImpl.h"
+#include "input.hpp"
+#include "inputImpl.hpp"
 
-Input::Input()
-{
-}
+using namespace Jackbengine;
 
-Input::~Input()
-{
-}
+Input::Input() = default;
+
+Input::~Input() = default;
 
 Input* Input::create()
 {

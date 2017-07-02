@@ -6,16 +6,17 @@
 // Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
-#include "mouseListenerComponent.h"
+#include "mouseListenerComponent.hpp"
+
+using namespace Jackbengine;
 
 MouseListenerComponent::MouseListenerComponent(Scene *scene)
     : m_scene(scene)
 {
+    // Nothing
 }
 
-MouseListenerComponent::~MouseListenerComponent()
-{
-}
+MouseListenerComponent::~MouseListenerComponent() = default;
 
 void MouseListenerComponent::onLeftClick(MouseCallback callback, void *data)
 {

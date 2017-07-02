@@ -6,18 +6,16 @@
 // Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
-#include "debugTextSystem.h"
-#include "component/layout/containerComponent.h"
-#include "component/view/textComponent.h"
-#include "component/body/transformComponent.h"
+#include "debugTextSystem.hpp"
+#include "component/layout/containerComponent.hpp"
+#include "component/view/textComponent.hpp"
+#include "component/body/transformComponent.hpp"
 
-DebugTextSystem::DebugTextSystem()
-{
-}
+using namespace Jackbengine;
 
-DebugTextSystem::~DebugTextSystem()
-{
-}
+DebugTextSystem::DebugTextSystem() = default;
+
+DebugTextSystem::~DebugTextSystem() = default;
 
 void DebugTextSystem::update(float delta)
 {

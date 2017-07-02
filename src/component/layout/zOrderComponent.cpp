@@ -6,15 +6,13 @@
 // Copyright © 2016 Damien Bendejacq. All rights reserved.
 //
 
-#include "zOrderComponent.h"
+#include "zOrderComponent.hpp"
 
-ZOrderComponent::ZOrderComponent()
-{
-}
+using namespace Jackbengine;
 
-ZOrderComponent::~ZOrderComponent()
-{
-}
+ZOrderComponent::ZOrderComponent() = default;
+
+ZOrderComponent::~ZOrderComponent() = default;
 
 int ZOrderComponent::getIndex() const
 {

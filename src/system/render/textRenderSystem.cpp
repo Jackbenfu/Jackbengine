@@ -6,18 +6,16 @@
 // Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
-#include "textRenderSystem.h"
-#include "component/layout/containerComponent.h"
-#include "component/view/textComponent.h"
-#include "component/body/transformComponent.h"
+#include "textRenderSystem.hpp"
+#include "component/layout/containerComponent.hpp"
+#include "component/view/textComponent.hpp"
+#include "component/body/transformComponent.hpp"
 
-TextRenderSystem::TextRenderSystem()
-{
-}
+using namespace Jackbengine;
 
-TextRenderSystem::~TextRenderSystem()
-{
-}
+TextRenderSystem::TextRenderSystem() = default;
+
+TextRenderSystem::~TextRenderSystem() = default;
 
 void TextRenderSystem::update(float delta)
 {

@@ -6,8 +6,10 @@
 // Copyright © 2014 Damien Bendejacq. All rights reserved.
 //
 
-#include "tmxMap.h"
-#include "platform.h"
+#include "tmxMap.hpp"
+#include "platform.hpp"
+
+using namespace Jackbengine;
 
 TmxMap::TmxMap()
 {

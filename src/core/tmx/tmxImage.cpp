@@ -6,15 +6,13 @@
 // Copyright © 2014 Damien Bendejacq. All rights reserved.
 //
 
-#include "tmxImage.h"
+#include "tmxImage.hpp"
 
-TmxImage::TmxImage()
-{
-}
+using namespace Jackbengine;
 
-TmxImage::~TmxImage()
-{
-}
+TmxImage::TmxImage() = default;
+
+TmxImage::~TmxImage() = default;
 
 const char* TmxImage::getSource() const
 {

@@ -6,12 +6,11 @@
 // Copyright © 2014 Damien Bendejacq. All rights reserved.
 //
 
-#include "tmxLayer.h"
-#include "platform.h"
+#include "tmxLayer.hpp"
 
-TmxLayer::TmxLayer()
-{
-}
+using namespace Jackbengine;
+
+TmxLayer::TmxLayer() = default;
 
 TmxLayer::~TmxLayer()
 {

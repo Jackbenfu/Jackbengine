@@ -6,11 +6,14 @@
 // Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
-#include "audioSourceComponent.h"
+#include "audioSourceComponent.hpp"
+
+using namespace Jackbengine;
 
 AudioSourceComponent::AudioSourceComponent()
+    : m_sound(Sound::create())
 {
-    m_sound = Sound::create();
+    // Nothing
 }
 
 AudioSourceComponent::~AudioSourceComponent()

@@ -6,7 +6,7 @@
 // Copyright © 2016 Damien Bendejacq. All rights reserved.
 //
 
-#include "win32.h"
+#include "win32.hpp"
 
 char* strdup(const char *str)
 {

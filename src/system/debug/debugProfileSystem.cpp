@@ -6,8 +6,10 @@
 // Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
-#include "debugProfileSystem.h"
-#include "core/resource/importResource.h"
+#include "debugProfileSystem.hpp"
+#include "core/resource/importResource.hpp"
+
+using namespace Jackbengine;
 
 IMPORT_BINARY_RESOURCE(default_font)
 

@@ -6,8 +6,10 @@
 // Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
-#include "entity.h"
-#include "component/misc/nameComponent.h"
+#include "entity.hpp"
+#include "component/misc/nameComponent.hpp"
+
+using namespace Jackbengine;
 
 Entity::Entity(const char *name)
 {
@@ -16,10 +18,10 @@ Entity::Entity(const char *name)
 
 Entity::~Entity()
 {
-    /*for (auto pair : m_components)
+    for (auto pair : m_components)
     {
         DELETE_SAFE(pair.second);
-    }*/
+    }
     m_components.clear();
 }
 

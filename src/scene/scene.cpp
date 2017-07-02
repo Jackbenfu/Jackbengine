@@ -6,12 +6,12 @@
 // Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
-#include "scene.h"
-#include "application/application.h"
+#include "scene.hpp"
 
-Scene::Scene()
-{
-}
+using namespace std;
+using namespace Jackbengine;
+
+Scene::Scene() = default;
 
 Scene::~Scene()
 {
@@ -65,13 +65,13 @@ void Scene::disableEntity(const char *name)
 
 bool Scene::loadScene(const char *name)
 {
-    if (name && !m_nextScene)
+    if (nullptr == name)
     {
-        m_nextScene = name;
-        return true;
+        throw invalid_argument(name);
     }
 
-    return false;
+    m_nextScene = name;
+    return true;
 }
 
 void Scene::exit()
@@ -165,7 +165,7 @@ void Scene::setWindow(Window *window)
 
 void Scene::clear()
 {
-    if (m_ecsManager)
+    if (nullptr != m_ecsManager)
     {
         m_ecsManager->clear();
     }

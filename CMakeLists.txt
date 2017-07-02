@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.5)
 project(jackbengine)
 
 # CMake configuration
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -Wall")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1z -Wall")
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
 # SDL2 include directories
@@ -79,10 +79,8 @@ set(SOURCE_FILES
     src/entity/entity.cpp
     src/scene/scene.cpp
     src/scene/loader/sceneLoader.cpp
-    src/ecs/ecsManager.cpp
     src/scene/loader/tmx/tmxSceneLoader.cpp
-    src/state/state.cpp
-    src/state/stateManager.cpp
+    src/ecs/ecsManager.cpp
     src/system/animation/motionSystem.cpp
     src/system/debug/debugProfileSystem.cpp
     src/system/debug/debugSpriteSystem.cpp

@@ -6,11 +6,11 @@
 // Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
-#include "component.h"
+#include "component.hpp"
 
-Component::Component()
-{
-}
+using namespace Jackbengine;
+
+Component::Component() = default;
 
 void Component::enable()
 {

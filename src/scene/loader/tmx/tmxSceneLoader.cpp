@@ -6,18 +6,21 @@
 // Copyright © 2016 Damien Bendejacq. All rights reserved.
 //
 
-#include "tmxSceneLoader.h"
-#include "core/resource/importResource.h"
+#include "tmxSceneLoader.hpp"
+#include "core/resource/importResource.hpp"
 
-#include "component/layout/containerComponent.h"
-#include "component/body/transformComponent.h"
-#include "component/view/spriteComponent.h"
+#include "component/layout/containerComponent.hpp"
+#include "component/body/transformComponent.hpp"
+#include "component/view/spriteComponent.hpp"
+
+using namespace Jackbengine;
 
 IMPORT_BINARY_RESOURCE(default_font);
 
 TmxSceneLoader::TmxSceneLoader(Scene *scene)
     : SceneLoader(scene)
 {
+    // Nothing
 }
 
 TmxSceneLoader::~TmxSceneLoader()

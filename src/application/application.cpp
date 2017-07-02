@@ -6,8 +6,10 @@
 // Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
-#include "application.h"
-#include "platform.h"
+#include "application.hpp"
+#include "platform.hpp"
+
+using namespace Jackbengine;
 
 Application::Application()
 {
@@ -127,7 +129,7 @@ void Application::loop()
         }
         else
         {
-            map<uint, Scene*>::const_iterator it = m_scenes.begin();
+            auto it = m_scenes.begin();
             while (m_scenes.end() != it)
             {
                 if (0 == strcmp(it->second->name(), m_currentScene->m_nextScene))
@@ -149,7 +151,7 @@ void Application::loop()
 
 Scene* Application::getScene(const char *name)
 {
-    map<uint, Scene*>::const_iterator it = m_scenes.begin();
+    auto it = m_scenes.begin();
     while (m_scenes.end() != it)
     {
         if (0 == strcmp(it->second->name(), name))
@@ -161,4 +163,13 @@ Scene* Application::getScene(const char *name)
     }
 
     return nullptr;
+}
+
+void Application::setSceneFeatures(Scene &scene)
+{
+    scene.setCursor(m_cursor);
+    scene.setInput(m_input);
+    scene.setRenderer(m_renderer);
+    scene.setTimer(m_timer);
+    scene.setWindow(m_window);
 }

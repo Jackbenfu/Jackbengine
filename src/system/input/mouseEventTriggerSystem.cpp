@@ -6,24 +6,22 @@
 // Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
-#include "mouseEventTriggerSystem.h"
-#include "component/layout/containerComponent.h"
-#include "component/input/mouseListenerComponent.h"
-#include "component/layout/zOrderComponent.h"
+#include "mouseEventTriggerSystem.hpp"
+#include "component/layout/containerComponent.hpp"
+#include "component/input/mouseListenerComponent.hpp"
+#include "component/layout/zOrderComponent.hpp"
 
-MouseEventTriggerSystem::MouseEventTriggerSystem()
-{
-}
+using namespace Jackbengine;
 
-MouseEventTriggerSystem::~MouseEventTriggerSystem()
-{
-}
+MouseEventTriggerSystem::MouseEventTriggerSystem() = default;
+
+MouseEventTriggerSystem::~MouseEventTriggerSystem() = default;
 
 void MouseEventTriggerSystem::update(float delta)
 {
     UNUSED(delta);
 
-    MouseListenerComponent *clickedMouseListener {nullptr};
+    MouseListenerComponent *clickedMouseListener = nullptr;
     auto maxZOrder = 0;
 
     for (auto entity : m_entities)

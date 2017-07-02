@@ -6,15 +6,13 @@
 // Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
-#include "velocityComponent.h"
+#include "velocityComponent.hpp"
 
-VelocityComponent::VelocityComponent()
-{
-}
+using namespace Jackbengine;
 
-VelocityComponent::~VelocityComponent()
-{
-}
+VelocityComponent::VelocityComponent() = default;
+
+VelocityComponent::~VelocityComponent() = default;
 
 const Vec2f& VelocityComponent::getVelocity() const
 {

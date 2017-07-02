@@ -6,17 +6,15 @@
 // Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
-#include "motionSystem.h"
-#include "component/body/transformComponent.h"
-#include "component/body/velocityComponent.h"
+#include "motionSystem.hpp"
+#include "component/body/transformComponent.hpp"
+#include "component/body/velocityComponent.hpp"
 
-MotionSystem::MotionSystem()
-{
-}
+using namespace Jackbengine;
 
-MotionSystem::~MotionSystem()
-{
-}
+MotionSystem::MotionSystem() = default;
+
+MotionSystem::~MotionSystem() = default;
 
 void MotionSystem::update(float delta)
 {

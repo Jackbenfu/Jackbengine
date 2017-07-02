@@ -6,11 +6,11 @@
 // Copyright © 2014 Damien Bendejacq. All rights reserved.
 //
 
-#include "soundImpl.h"
+#include "soundImpl.hpp"
 
-SoundImpl::SoundImpl()
-{
-}
+using namespace Jackbengine;
+
+SoundImpl::SoundImpl() = default;
 
 SoundImpl::~SoundImpl()
 {

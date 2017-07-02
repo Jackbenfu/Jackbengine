@@ -1,21 +1,23 @@
 //
-// loader.cpp
+// sceneLoader.cpp
 // jackbengine
 //
 // Created by Damien Bendejacq on 25/07/2016.
 // Copyright © 2016 Damien Bendejacq. All rights reserved.
 //
 
-#include "sceneLoader.h"
+#include "sceneLoader.hpp"
+
+using namespace std;
+using namespace Jackbengine;
 
 SceneLoader::SceneLoader(Scene *scene)
     : m_scene(scene)
 {
+    // Nothing
 }
 
-SceneLoader::~SceneLoader()
-{
-}
+SceneLoader::~SceneLoader() = default;
 
 bool SceneLoader::addResourceDependency(const string& name, unsigned char *data)
 {

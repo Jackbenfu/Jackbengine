@@ -6,16 +6,14 @@
 // Copyright © 2014 Damien Bendejacq. All rights reserved.
 //
 
-#include "renderer.h"
-#include "rendererImpl.h"
+#include "renderer.hpp"
+#include "rendererImpl.hpp"
 
-Renderer::Renderer()
-{
-}
+using namespace Jackbengine;
 
-Renderer::~Renderer()
-{
-}
+Renderer::Renderer() = default;
+
+Renderer::~Renderer() = default;
 
 Renderer* Renderer::create()
 {

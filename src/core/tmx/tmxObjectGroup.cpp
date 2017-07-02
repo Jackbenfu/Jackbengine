@@ -6,11 +6,11 @@
 // Copyright © 2014 Damien Bendejacq. All rights reserved.
 //
 
-#include "tmxObjectGroup.h"
+#include "tmxObjectGroup.hpp"
 
-TmxObjectGroup::TmxObjectGroup()
-{
-}
+using namespace Jackbengine;
+
+TmxObjectGroup::TmxObjectGroup() = default;
 
 TmxObjectGroup::~TmxObjectGroup()
 {

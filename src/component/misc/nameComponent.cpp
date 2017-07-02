@@ -6,12 +6,12 @@
 // Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
-#include "nameComponent.h"
-#include "platform.h"
+#include "nameComponent.hpp"
+#include "platform.hpp"
 
-NameComponent::NameComponent()
-{
-}
+using namespace Jackbengine;
+
+NameComponent::NameComponent() = default;
 
 NameComponent::~NameComponent()
 {

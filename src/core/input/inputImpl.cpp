@@ -6,8 +6,10 @@
 // Copyright © 2014 Damien Bendejacq. All rights reserved.
 //
 
-#include "inputImpl.h"
-#include "platform.h"
+#include "inputImpl.hpp"
+#include "platform.hpp"
+
+using namespace Jackbengine;
 
 InputImpl::InputImpl()
 {

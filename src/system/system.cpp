@@ -6,11 +6,12 @@
 // Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
-#include "system.h"
+#include "system.hpp"
 
-System::System()
-{
-}
+using namespace std;
+using namespace Jackbengine;
+
+System::System() = default;
 
 System::~System()
 {

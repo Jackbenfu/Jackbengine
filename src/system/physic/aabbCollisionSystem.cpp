@@ -7,15 +7,16 @@
 //
 
 #include <limits>
-#include "aabbCollisionSystem.h"
-#include "component/body/shape/boxShapeComponent.h"
-#include "component/body/transformComponent.h"
-#include "component/body/velocityComponent.h"
-#include "component/misc/tagComponent.h"
+#include "aabbCollisionSystem.hpp"
+#include "component/body/shape/boxShapeComponent.hpp"
+#include "component/body/transformComponent.hpp"
+#include "component/body/velocityComponent.hpp"
+#include "component/misc/tagComponent.hpp"
 
-AABBCollisionSystem::AABBCollisionSystem()
-{
-}
+using namespace std;
+using namespace Jackbengine;
+
+AABBCollisionSystem::AABBCollisionSystem() = default;
 
 AABBCollisionSystem::~AABBCollisionSystem()
 {

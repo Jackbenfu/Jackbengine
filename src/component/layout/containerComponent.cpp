@@ -6,15 +6,13 @@
 // Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
-#include "containerComponent.h"
+#include "containerComponent.hpp"
 
-ContainerComponent::ContainerComponent()
-{
-}
+using namespace Jackbengine;
 
-ContainerComponent::~ContainerComponent()
-{
-}
+ContainerComponent::ContainerComponent() = default;
+
+ContainerComponent::~ContainerComponent() = default;
 
 const Recti& ContainerComponent::getRect() const
 {

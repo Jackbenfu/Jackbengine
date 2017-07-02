@@ -6,17 +6,15 @@
 // Copyright © 2014 Damien Bendejacq. All rights reserved.
 //
 
-#include "spriteRenderSystem.h"
-#include "component/view/spriteComponent.h"
-#include "component/body/transformComponent.h"
+#include "spriteRenderSystem.hpp"
+#include "component/view/spriteComponent.hpp"
+#include "component/body/transformComponent.hpp"
 
-SpriteRenderSystem::SpriteRenderSystem()
-{
-}
+using namespace Jackbengine;
 
-SpriteRenderSystem::~SpriteRenderSystem()
-{
-}
+SpriteRenderSystem::SpriteRenderSystem() = default;
+
+SpriteRenderSystem::~SpriteRenderSystem() = default;
 
 void SpriteRenderSystem::update(float delta)
 {

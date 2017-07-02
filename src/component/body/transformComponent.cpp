@@ -6,15 +6,13 @@
 // Copyright © 2014 Damien Bendejacq. All rights reserved.
 //
 
-#include "transformComponent.h"
+#include "transformComponent.hpp"
 
-TransformComponent::TransformComponent()
-{
-}
+using namespace Jackbengine;
 
-TransformComponent::~TransformComponent()
-{
-}
+TransformComponent::TransformComponent() = default;
+
+TransformComponent::~TransformComponent() = default;
 
 const Vec2f& TransformComponent::getPosition() const
 {

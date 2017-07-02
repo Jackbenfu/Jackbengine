@@ -6,11 +6,11 @@
 // Copyright © 2014 Damien Bendejacq. All rights reserved.
 //
 
-#include "tmxObject.h"
+#include "tmxObject.hpp"
 
-TmxObject::TmxObject()
-{
-}
+using namespace Jackbengine;
+
+TmxObject::TmxObject() = default;
 
 TmxObject::~TmxObject()
 {

@@ -6,7 +6,9 @@
 // Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
-#include "applicationConfig.h"
+#include "applicationConfig.hpp"
+
+using namespace Jackbengine;
 
 ApplicationConfig::ApplicationConfig()
 {

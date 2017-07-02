@@ -6,16 +6,14 @@
 // Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
-#include "cursor.h"
-#include "cursorImpl.h"
+#include "cursor.hpp"
+#include "cursorImpl.hpp"
 
-Cursor::Cursor()
-{
-}
+using namespace Jackbengine;
 
-Cursor::~Cursor()
-{
-}
+Cursor::Cursor() = default;
+
+Cursor::~Cursor() = default;
 
 Cursor* Cursor::create()
 {

@@ -6,16 +6,14 @@
 // Copyright © 2014 Damien Bendejacq. All rights reserved.
 //
 
-#include "timer.h"
-#include "timerImpl.h"
+#include "timer.hpp"
+#include "timerImpl.hpp"
 
-Timer::Timer()
-{
-}
+using namespace Jackbengine;
 
-Timer::~Timer()
-{
-}
+Timer::Timer() = default;
+
+Timer::~Timer() = default;
 
 void Timer::start()
 {

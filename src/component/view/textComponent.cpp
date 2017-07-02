@@ -6,11 +6,12 @@
 // Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
-#include "textComponent.h"
+#include "textComponent.hpp"
 
-TextComponent::TextComponent()
-{
-}
+using namespace std;
+using namespace Jackbengine;
+
+TextComponent::TextComponent() = default;
 
 TextComponent::~TextComponent()
 {

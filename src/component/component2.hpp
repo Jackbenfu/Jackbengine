@@ -18,10 +18,8 @@ class Component2
     DISALLOW_COPY_AND_MOVE(Component2)
 
 public:
-    Component2();
-    virtual ~Component2();
-
-private:
+    Component2() = default;
+    virtual ~Component2() = default;
 };
 
 } // namespace Jackbengine

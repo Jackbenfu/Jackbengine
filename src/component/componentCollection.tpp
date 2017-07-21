@@ -21,7 +21,7 @@ void ComponentCollection::add(Args&&... args)
         );
     }
 
-    auto typeId = GET_TYPE_ID(TComponent);
+    const auto typeId = GET_TYPE_ID(TComponent);
 
     m_components[typeId] = std::make_tuple(
         true,
@@ -32,13 +32,47 @@ void ComponentCollection::add(Args&&... args)
 template<typename TComponent>
 TComponent& ComponentCollection::get()
 {
-    return std::get<1>(find<TComponent>());
+    ASSERT_IS_BASE_OF(Jackbengine::Component2, TComponent);
+
+    auto& tuple = find<TComponent>();
+
+    return dynamic_cast<TComponent&>(*std::get<1>(tuple));
+}
+
+template<typename TComponent>
+void ComponentCollection::remove()
+{
+    ASSERT_IS_BASE_OF(Jackbengine::Component2, TComponent);
+
+    const auto typeId = GET_TYPE_ID(TComponent);
+
+    m_components.erase(typeId);
+}
+
+template<typename TComponent>
+void ComponentCollection::enable()
+{
+    ASSERT_IS_BASE_OF(Jackbengine::Component2, TComponent);
+
+    auto& tuple = find<TComponent>();
+
+    std::get<0>(tuple) = true;
+}
+
+template<typename TComponent>
+void ComponentCollection::disable()
+{
+    ASSERT_IS_BASE_OF(Jackbengine::Component2, TComponent);
+
+    auto& tuple = find<TComponent>();
+
+    std::get<0>(tuple) = false;
 }
 
 template<typename TComponent>
 auto& ComponentCollection::find()
 {
-    auto typeId = GET_TYPE_ID(TComponent);
+    const auto typeId = GET_TYPE_ID(TComponent);
 
     auto it = m_components.find(typeId);
     if (it == m_components.end())
@@ -54,7 +88,7 @@ auto& ComponentCollection::find()
 template<typename TComponent>
 bool ComponentCollection::any()
 {
-    auto typeId = GET_TYPE_ID(TComponent);
+    const auto typeId = GET_TYPE_ID(TComponent);
 
     return m_components.find(typeId) != m_components.end();
 }

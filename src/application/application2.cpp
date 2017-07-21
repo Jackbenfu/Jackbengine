@@ -33,7 +33,7 @@ void Application2::loop()
     const auto deltaMultiplier = 0.001f;
 
     m_timer.start();
-    auto delta = m_timer.getElapsedMilliseconds() * deltaMultiplier;
+    const auto delta = m_timer.getElapsedMilliseconds() * deltaMultiplier;
 
     m_renderer.clear();
     m_input.update();

@@ -22,14 +22,23 @@ class ComponentCollection
     DISALLOW_COPY_AND_MOVE(ComponentCollection)
 
 public:
-    ComponentCollection();
-    ~ComponentCollection();
+    ComponentCollection() = default;
+    ~ComponentCollection() = default;
 
     template<typename TComponent, typename... Args>
     void add(Args&&... args);
 
     template<typename TComponent>
     TComponent& get();
+
+    template<typename TComponent>
+    void remove();
+
+    template<typename TComponent>
+    void enable();
+
+    template<typename TComponent>
+    void disable();
 
 private:
     template<typename TComponent>

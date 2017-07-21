@@ -39,9 +39,8 @@ set(SOURCE_FILES
     src/application/abstract/abstractApplication.cpp
     src/application/application.cpp
     src/application/application2.cpp
-    src/component/component2.cpp
-    src/component/componentCollection.cpp
     src/component/audio/audioSourceComponent.cpp
+    src/component/audio/audioSourceComponent2.cpp
     src/component/body/shape/boxShapeComponent.cpp
     src/component/body/transformComponent.cpp
     src/component/body/velocityComponent.cpp
@@ -99,7 +98,7 @@ set(SOURCE_FILES
     src/core/tmx/tmxPropertyGroup.cpp
     src/core/tmx/tmxTileset.cpp
     src/entity/entity.cpp
-    src/entity/entityCollection.cpp
+    src/entity/entityManager.cpp
     src/scene/scene.cpp
     src/scene/loader/sceneLoader.cpp
     src/scene/loader/tmx/tmxSceneLoader.cpp

@@ -1,24 +1,16 @@
 //
-// sdlWindow.cpp
+// window2.impl.cpp
 // jackbengine
 //
-// Created by Damien Bendejacq on 16/04/14.
-// Copyright © 2014 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 11/07/2017.
+// Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
-#include "common.hpp"
-#include "windowImpl.hpp"
+#include "window2.impl.hpp"
 
 using namespace Jackbengine;
 
-WindowImpl::WindowImpl() = default;
-
-WindowImpl::~WindowImpl()
-{
-    SDL_DestroyWindow(m_window);
-}
-
-bool WindowImpl::init(const char *title, int width, int height, bool fullscreen)
+Window2::Impl::Impl(const std::string &title, int width, int height, bool fullscreen)
 {
     SDL_WindowFlags flags;
     int x;
@@ -36,40 +28,48 @@ bool WindowImpl::init(const char *title, int width, int height, bool fullscreen)
         y = SDL_WINDOWPOS_CENTERED;
     }
 
-    m_window = SDL_CreateWindow(title, x, y, width, height, flags);
-    if (!m_window)
+    m_window = SDL_CreateWindow(title.c_str(), x, y, width, height, flags);
+    if (nullptr == m_window)
     {
-        LOG_ERROR("%s", SDL_GetError())
-        return false;
+        throw std::runtime_error(SDL_GetError());
     }
 
+    SDL_GetWindowSize(m_window, &m_width, &m_height);
+
     setWindowIcon();
-
     SDL_ShowWindow(m_window);
-
-    return true;
 }
 
-void WindowImpl::showCursor(bool visible)
+Window2::Impl::~Impl()
 {
-    SDL_ShowCursor(visible ? SDL_ENABLE : SDL_DISABLE);
+    SDL_DestroyWindow(m_window);
 }
 
-SDL_Window* WindowImpl::getRawWindow() const
+int Window2::Impl::getWidth() const
+{
+    return m_width;
+}
+
+int Window2::Impl::getHeight() const
+{
+    return m_height;
+}
+
+SDL_Window* Window2::Impl::getInternalObject() const
 {
     return m_window;
 }
 
-void WindowImpl::setWindowIcon()
+void Window2::Impl::setWindowIcon()
 {
 #ifdef _WIN32
 
     // Thanks to this Gist: https://gist.github.com/noct/9884320
 
-    HINSTANCE handle = GetModuleHandle(nullptr);
+    auto handle = GetModuleHandle(nullptr);
     if (!handle)
     {
-        LOG_ERROR("GetModuleHandle Win32 function: %lu", GetLastError())
+        throw std::runtime_error(GetLastError());
     }
 
     const uint maskR = 0x00ff0000;
@@ -79,28 +79,28 @@ void WindowImpl::setWindowIcon()
     const int size = 32;
     const int bpp = 32;
 
-    HICON icon = (HICON)LoadImage(handle, "icon", IMAGE_ICON, size, size, LR_SHARED);
-    if (!icon)
+    auto icon = (HICON)LoadImage(handle, "icon", IMAGE_ICON, size, size, LR_SHARED);
+    if (nullptr == icon)
     {
-        LOG_ERROR("LoadImage Win32 function: %lu", GetLastError())
+        throw std::runtime_error(GetLastError());
     }
 
     ICONINFO iconInfo;
-    if (!GetIconInfo(icon, &iconInfo))
+    if (nullptr == GetIconInfo(icon, &iconInfo))
     {
-        LOG_ERROR("GetIconInfo Win32 function: %lu", GetLastError())
+        throw std::runtime_error(GetLastError());
     }
 
-    HDC deviceContext = CreateCompatibleDC(nullptr);
-    if (!deviceContext)
+    auto deviceContext = CreateCompatibleDC(nullptr);
+    if (nullptr == deviceContext)
     {
-        LOG_ERROR("CreateCompatibleDC Win32 function: %lu", GetLastError())
+        throw std::runtime_error(GetLastError());
     }
 
-    SDL_Surface *surface = SDL_CreateRGBSurface(0, size, size, bpp, maskR, maskG, maskB, maskA);
-    if (!surface)
+    auto surface = SDL_CreateRGBSurface(0, size, size, bpp, maskR, maskG, maskB, maskA);
+    if (nullptr == surface)
     {
-        LOG_ERROR("%s", IMG_GetError())
+        throw std::runtime_error(IMG_GetError());
     }
 
     BITMAPINFO bmi;

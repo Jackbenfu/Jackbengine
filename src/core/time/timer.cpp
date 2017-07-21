@@ -26,7 +26,7 @@ void Timer::snapshot()
 
     m_elapsedMilliseconds = getTicks() - m_start;
     m_effectiveElapsedMilliseconds = m_elapsedMilliseconds;
-    int delayTime = 0;
+    uint delayTime = 0;
 
     if (0 < m_fixedFps &&
         m_elapsedMilliseconds < m_fixedFpsDelayTime)

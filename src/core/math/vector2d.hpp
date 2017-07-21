@@ -9,7 +9,6 @@
 #ifndef __VECTOR2D_H__
 #define __VECTOR2D_H__
 
-#include "common.hpp"
 #include <cstdlib>
 #include <cmath>
 
@@ -18,9 +17,24 @@ namespace Jackbengine {
 template<typename T>
 struct Vector2d
 {
-    Vector2d() : x(0), y(0) { }
-    Vector2d(T x, T y) : x(x), y(y) { }
-    ~Vector2d() { }
+    Vector2d()
+        : x(0),
+          y(0)
+    {
+        // Nothing
+    }
+
+    Vector2d(T x, T y)
+        : x(x),
+          y(y)
+    {
+        // Nothing
+    }
+
+    ~Vector2d()
+    {
+        // Nothing
+    }
 
     void absolute()
     {

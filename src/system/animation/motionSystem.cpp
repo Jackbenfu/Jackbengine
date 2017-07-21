@@ -23,7 +23,7 @@ void MotionSystem::update(float delta)
         if (entity->isEnabled())
         {
             auto transform = entity->getComponentIfEnabled<TransformComponent>();
-            auto *velocity = entity->getComponentIfEnabled<VelocityComponent>();
+            auto velocity = entity->getComponentIfEnabled<VelocityComponent>();
 
             if (!velocity || !transform)
             {

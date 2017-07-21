@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.5)
 project(jackbengine)
 
 # CMake configuration
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1z -Wall")
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
@@ -35,8 +36,11 @@ set(SOURCE_FILES
     external/tinyxml/tinyxml.cpp
     external/tinyxml/tinyxmlerror.cpp
     external/tinyxml/tinyxmlparser.cpp
+    src/application/abstract/abstractApplication.cpp
     src/application/application.cpp
-    src/application/applicationConfig.cpp
+    src/application/application2.cpp
+    src/component/component2.cpp
+    src/component/componentCollection.cpp
     src/component/audio/audioSourceComponent.cpp
     src/component/body/shape/boxShapeComponent.cpp
     src/component/body/transformComponent.cpp
@@ -50,24 +54,42 @@ set(SOURCE_FILES
     src/component/view/colorComponent.cpp
     src/component/view/spriteComponent.cpp
     src/component/view/textComponent.cpp
+    src/core/sdl/io/sdlRwops.cpp
+    src/core/sdl/surface/sdlSurface.cpp
     src/core/audio/sound.cpp
     src/core/audio/soundImpl.cpp
+    src/core/audio/sound2.cpp
+    src/core/audio/sound2.impl.cpp
     src/core/input/input.cpp
     src/core/input/inputImpl.cpp
+    src/core/input/input2.cpp
+    src/core/input/input2.impl.cpp
     src/core/render/color.cpp
     src/core/render/cursor.cpp
     src/core/render/cursorImpl.cpp
+    src/core/render/cursor/cursor2.cpp
+    src/core/render/cursor/cursor2.impl.cpp
     src/core/render/defaultFont.cpp
     src/core/render/font.cpp
     src/core/render/fontImpl.cpp
+    src/core/render/font/font2.cpp
+    src/core/render/font/font2.impl.cpp
     src/core/render/renderer.cpp
     src/core/render/rendererImpl.cpp
+    src/core/render/renderer/renderer2.cpp
+    src/core/render/renderer/renderer2.impl.cpp
     src/core/render/texture.cpp
     src/core/render/textureImpl.cpp
+    src/core/render/texture/texture2.cpp
+    src/core/render/texture/texture2.impl.cpp
     src/core/render/window.cpp
     src/core/render/windowImpl.cpp
+    src/core/render/window/window2.cpp
+    src/core/render/window/window2.impl.cpp
     src/core/time/timer.cpp
     src/core/time/timerImpl.cpp
+    src/core/time/timer2.cpp
+    src/core/time/timer2.impl.cpp
     src/core/tmx/tmxImage.cpp
     src/core/tmx/tmxLayer.cpp
     src/core/tmx/tmxMap.cpp
@@ -77,6 +99,7 @@ set(SOURCE_FILES
     src/core/tmx/tmxPropertyGroup.cpp
     src/core/tmx/tmxTileset.cpp
     src/entity/entity.cpp
+    src/entity/entityCollection.cpp
     src/scene/scene.cpp
     src/scene/loader/sceneLoader.cpp
     src/scene/loader/tmx/tmxSceneLoader.cpp

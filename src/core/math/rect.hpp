@@ -9,8 +9,6 @@
 #ifndef __RECT_H__
 #define __RECT_H__
 
-#include "common.hpp"
-
 namespace Jackbengine {
 
 template<typename T>

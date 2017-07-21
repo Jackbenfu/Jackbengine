@@ -166,10 +166,10 @@ TSystem* EcsManager::getSystem()
 {
     ASSERT_IS_BASE_OF(System, TSystem);
 
-    auto hashCode = GET_HASH_CODE(TSystem);
+    auto typeId = GET_TYPE_ID(TSystem);
     for (auto i = 0; i < m_systemTypes.size(); ++i)
     {
-        if (m_systemTypes[i] == hashCode)
+        if (m_systemTypes[i] == typeId)
         {
             return static_cast<TSystem*>(m_systems[i]);
         }
@@ -190,7 +190,7 @@ TSystem* EcsManager::addSystem()
     {
         system = new TSystem();
 
-        m_systemTypes.push_back(GET_HASH_CODE(TSystem));
+        m_systemTypes.push_back(GET_TYPE_ID(TSystem));
         m_systems.push_back(system);
 
         freshlyAdded = true;
@@ -229,9 +229,9 @@ void EcsManager::disableSystem()
 {
     ASSERT_IS_BASE_OF(System, TSystem);
 
-    auto hashCode = GET_HASH_CODE(TSystem);
+    auto typeId = GET_TYPE_ID(TSystem);
 
-    auto itType = find(m_systemTypes.begin(), m_systemTypes.end(), hashCode);
+    auto itType = find(m_systemTypes.begin(), m_systemTypes.end(), typeId);
     if (m_systemTypes.end() != itType)
     {
         m_systemTypes.erase(itType);

@@ -61,4 +61,16 @@
 // Scene
 #include "scene/loader/tmx/tmxSceneLoader.hpp"
 
+// NEW
+#include "core/audio/sound2.hpp"
+#include "core/input/input2.hpp"
+#include "core/render/cursor/cursor2.hpp"
+#include "core/render/font/font2.hpp"
+#include "core/render/renderer/renderer2.hpp"
+#include "core/render/texture/texture2.hpp"
+#include "core/render/window/window2.hpp"
+#include "core/time/timer2.hpp"
+
+#include "application/application2.hpp"
+
 #endif // __JACKBENGINE_H__

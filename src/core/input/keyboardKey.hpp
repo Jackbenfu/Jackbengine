@@ -75,7 +75,7 @@ enum class KeyboardKey
     Right,
     Left,
     Down,
-    Up
+    Up,
 };
 
 } // namespace Jackbengine

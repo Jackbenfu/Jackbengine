@@ -14,8 +14,8 @@ TComponent* Entity::getComponent(bool returnIfDisabled)
 {
     ASSERT_IS_BASE_OF(Component, TComponent);
 
-    auto hashCode = GET_HASH_CODE(TComponent);
-    auto it = m_components.find(hashCode);
+    auto typeId = GET_TYPE_ID(TComponent);
+    auto it = m_components.find(typeId);
     if (m_components.end() == it)
     {
         return nullptr;
@@ -43,15 +43,15 @@ TComponent* Entity::addComponent()
 {
     ASSERT_IS_BASE_OF(Component, TComponent);
 
-    auto hashCode = GET_HASH_CODE(TComponent);
-    auto it = m_components.find(hashCode);
+    auto typeId = GET_TYPE_ID(TComponent);
+    auto it = m_components.find(typeId);
     if (m_components.end() != it)
     {
         return nullptr;
     }
 
     auto component = new TComponent();
-    m_components.insert(std::make_pair(hashCode, component));
+    m_components.insert(std::make_pair(typeId, component));
 
     return component;
 }
@@ -61,15 +61,15 @@ TComponent* Entity::addComponent(TParam param)
 {
     ASSERT_IS_BASE_OF(Component, TComponent);
 
-    auto hashCode = GET_HASH_CODE(TComponent);
-    auto it = m_components.find(hashCode);
+    auto typeId = GET_TYPE_ID(TComponent);
+    auto it = m_components.find(typeId);
     if (m_components.end() != it)
     {
         return nullptr;
     }
 
     auto component = new TComponent(param);
-    m_components.insert(std::make_pair(hashCode, component));
+    m_components.insert(std::make_pair(typeId, component));
 
     return component;
 }
@@ -79,16 +79,16 @@ bool Entity::setComponent(TComponent *component)
 {
     ASSERT_IS_BASE_OF(Component, TComponent);
 
-    auto hashCode = GET_HASH_CODE(TComponent);
-    auto it = m_components.find(hashCode);
+    auto typeId = GET_TYPE_ID(TComponent);
+    auto it = m_components.find(typeId);
 
     if (m_components.end() != it)
     {
-        m_components[hashCode] = component;
+        m_components[typeId] = component;
     }
     else
     {
-        m_components.insert(make_pair(hashCode, component));
+        m_components.insert(make_pair(typeId, component));
     }
 
     return true;
@@ -99,8 +99,8 @@ bool Entity::removeComponent()
 {
     ASSERT_IS_BASE_OF(Component, TComponent);
 
-    auto hashCode = GET_HASH_CODE(TComponent);
-    auto it = m_components.find(hashCode);
+    auto typeId = GET_TYPE_ID(TComponent);
+    auto it = m_components.find(typeId);
     if (m_components.end() == it)
     {
         return false;

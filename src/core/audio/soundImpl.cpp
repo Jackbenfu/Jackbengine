@@ -42,7 +42,7 @@ bool SoundImpl::loadFromMemory(const void *data, size_t dataSize)
         return errorAlreadyLoaded();
     }
 
-    auto *rWops = SDL_RWFromConstMem(data, dataSize);
+    auto rWops = SDL_RWFromConstMem(data, dataSize);
     if (!rWops)
     {
         LOG_ERROR("%s", SDL_GetError())

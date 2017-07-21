@@ -18,11 +18,11 @@ void Application::addScene()
 {
     ASSERT_IS_BASE_OF(Scene, TScene);
 
-    const auto hashCode = GET_HASH_CODE(TScene);
+    const auto typeId = GET_TYPE_ID(TScene);
 
     const auto predicate = [&](const auto pair)
     {
-        return pair.first == hashCode;
+        return pair.first == typeId;
     };
 
     if (any_of(m_scenes.begin(), m_scenes.end(), predicate))
@@ -39,7 +39,7 @@ void Application::addScene()
         return false;
     }*/
 
-    m_scenes.insert(make_pair(hashCode, scene));
+    m_scenes.insert(make_pair(typeId, scene));
 
     if (1 == m_scenes.size())
     {

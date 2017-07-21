@@ -46,7 +46,7 @@ bool TextureImpl::loadFromMemory(const Renderer *renderer, const void *data, siz
         return errorAlreadyLoaded();
     }
 
-    auto *rWops = SDL_RWFromConstMem(data, (int)dataSize);
+    auto rWops = SDL_RWFromConstMem(data, (int)dataSize);
     if (!rWops)
     {
         LOG_ERROR("%s", SDL_GetError())
@@ -85,7 +85,7 @@ bool TextureImpl::loadFromLayer(
     }
     else
     {
-        auto *rWops = SDL_RWFromConstMem(tilesetImageData, (int)tilesetImageDataSize);
+        auto rWops = SDL_RWFromConstMem(tilesetImageData, (int)tilesetImageDataSize);
         if (!rWops)
         {
             LOG_ERROR("%s", SDL_GetError())
@@ -209,7 +209,7 @@ bool TextureImpl::loadFromObjectGroup(
         }
         else
         {
-            auto *rWops = SDL_RWFromConstMem(tilesetImageData, (int)tilesetImageDataSize);
+            auto rWops = SDL_RWFromConstMem(tilesetImageData, (int)tilesetImageDataSize);
             if (!rWops)
             {
                 LOG_ERROR("%s", SDL_GetError())

@@ -17,7 +17,7 @@ enum class MouseButton
 {
     Left,
     Middle,
-    Right
+    Right,
 };
 
 } // namespace Jackbengine

@@ -18,6 +18,9 @@
 #include "core/render/window/window2.hpp"
 #include "core/time/timer2.hpp"
 
+// TODO remove
+#include "entity/entityManager.hpp"
+
 namespace Jackbengine {
 
 class Application2 : public AbstractApplication
@@ -26,10 +29,11 @@ class Application2 : public AbstractApplication
 
 public:
     explicit Application2(ApplicationConfig& config);
-    virtual ~Application2() = default;
+    virtual ~Application2() override;
 
     bool running() const;
     void loop();
+    virtual void frame(float delta) = 0;
 
 private:
     Timer2 m_timer;
@@ -39,6 +43,9 @@ private:
     Renderer2 m_renderer;
 
     bool m_running {true};
+
+    // TODO remove
+    EntityManager m_entityManager;
 };
 
 } // namespace Jackbengine

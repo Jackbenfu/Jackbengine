@@ -9,11 +9,8 @@
 #ifndef __COMPONENT_COLLECTION_H__
 #define __COMPONENT_COLLECTION_H__
 
-#include <string>
-#include <unordered_map>
-#include <tuple>
-
 #include "component/component2.hpp"
+#include "core/collection/heterogeneousCollection.hpp"
 
 namespace Jackbengine {
 
@@ -41,13 +38,7 @@ public:
     void disable();
 
 private:
-    template<typename TComponent>
-    auto& find();
-
-    template<typename TComponent>
-    bool any();
-
-    std::unordered_map<size_t, std::tuple<bool, std::unique_ptr<Component2>>> m_components;
+    HeterogeneousCollection<Component2> m_components;
 };
 
 #include "componentCollection.tpp"

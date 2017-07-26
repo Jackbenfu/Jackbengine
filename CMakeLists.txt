@@ -112,6 +112,8 @@ set(SOURCE_FILES
     src/system/render/spriteRenderSystem.cpp
     src/system/render/textRenderSystem.cpp
     src/system/system.cpp
+    src/system/system2.cpp
+    src/system/systemManager.cpp
     ${PLATFORM_SOURCE_FILES}
 )
 

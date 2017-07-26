@@ -18,7 +18,7 @@ void EntityManager::add(Entity2 entity, Args&&... args)
 }
 
 template<typename TComponent>
-TComponent& EntityManager::get(Entity2 entity)
+TComponent& EntityManager::get(Entity2 entity) const
 {
     auto& tuple = find(entity);
     auto& componentCollection = std::get<1>(tuple);

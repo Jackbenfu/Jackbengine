@@ -3,7 +3,7 @@ project(jackbengine)
 
 # CMake configuration
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1z -Wall")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
 # SDL2 include directories
@@ -42,17 +42,29 @@ set(SOURCE_FILES
     src/component/audio/audioSourceComponent.cpp
     src/component/audio/audioSourceComponent2.cpp
     src/component/body/shape/boxShapeComponent.cpp
+    src/component/body/shape/boxShapeComponent2.cpp
     src/component/body/transformComponent.cpp
+    src/component/body/transformComponent2.cpp
     src/component/body/velocityComponent.cpp
+    src/component/body/velocityComponent2.cpp
     src/component/component.cpp
     src/component/input/mouseListenerComponent.cpp
+    src/component/input/mouseListenerComponent2.cpp
     src/component/layout/containerComponent.cpp
+    src/component/layout/containerComponent2.cpp
     src/component/layout/zOrderComponent.cpp
+    src/component/layout/zOrderComponent2.cpp
     src/component/misc/nameComponent.cpp
+    src/component/misc/nameComponent2.cpp
     src/component/misc/tagComponent.cpp
+    src/component/misc/tagComponent2.cpp
     src/component/view/colorComponent.cpp
+    src/component/view/colorComponent2.cpp
     src/component/view/spriteComponent.cpp
+    src/component/view/spriteComponent2.cpp
     src/component/view/textComponent.cpp
+    src/component/view/textComponent2.cpp
+    src/component/generic/stringComponent.cpp
     src/core/sdl/io/sdlRwops.cpp
     src/core/sdl/surface/sdlSurface.cpp
     src/core/audio/sound.cpp

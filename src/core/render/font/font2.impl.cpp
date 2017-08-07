@@ -36,13 +36,62 @@ Font2::Impl::~Impl()
     TTF_CloseFont(m_font);
 }
 
-void Font2::Impl::getGlyphMetrics(
-    ushort glyph, int *minX, int *maxX, int *minY, int *maxY, int *advance) const
+void Font2::Impl::getGlyphMetrics(ushort glyph, int *minX, int *maxX, int *minY, int *maxY, int *advance) const
 {
     if (TTF_GlyphMetrics(m_font, glyph, minX, maxX, minY, maxY, advance) < 0)
     {
         throw std::runtime_error(TTF_GetError());
     }
+}
+
+void Font2::Impl::getGlyphMinX(ushort glyph, int *minX) const
+{
+    int maxX;
+    int minY;
+    int maxY;
+    int advance;
+
+    getGlyphMetrics(glyph, minX, &maxX, &minY, &maxY, &advance);
+}
+
+void Font2::Impl::getGlyphMaxX(ushort glyph, int *maxX) const
+{
+    int minX;
+    int minY;
+    int maxY;
+    int advance;
+
+    return getGlyphMetrics(glyph, &minX, maxX, &minY, &maxY, &advance);
+}
+
+void Font2::Impl::getGlyphMinY(ushort glyph, int *minY) const
+{
+    int minX;
+    int maxX;
+    int maxY;
+    int advance;
+
+    return getGlyphMetrics(glyph, &minX, &maxX, minY, &maxY, &advance);
+}
+
+void Font2::Impl::getGlyphMaxY(ushort glyph, int *maxY) const
+{
+    int minX;
+    int maxX;
+    int minY;
+    int advance;
+
+    return getGlyphMetrics(glyph, &minX, &maxX, &minY, maxY, &advance);
+}
+
+void Font2::Impl::getGlyphAdvance(ushort glyph, int *advance) const
+{
+    int minX;
+    int maxX;
+    int minY;
+    int maxY;
+
+    getGlyphMetrics(glyph, &minX, &maxX, &minY, &maxY, advance);
 }
 
 int Font2::Impl::getAscent() const

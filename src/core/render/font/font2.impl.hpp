@@ -22,8 +22,13 @@ public:
 
     ~Impl();
 
-    void getGlyphMetrics(
-        ushort glyph, int *minX, int *maxX, int *minY, int *maxY, int *advance) const;
+    void getGlyphMetrics(ushort glyph, int *minX, int *maxX, int *minY, int *maxY, int *advance) const;
+
+    void getGlyphMinX(ushort glyph, int *minX) const;
+    void getGlyphMaxX(ushort glyph, int *maxX) const;
+    void getGlyphMinY(ushort glyph, int *minY) const;
+    void getGlyphMaxY(ushort glyph, int *maxY) const;
+    void getGlyphAdvance(ushort glyph, int *advance) const;
 
     int getAscent() const;
     int getDescent() const;

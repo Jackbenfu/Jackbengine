@@ -16,8 +16,10 @@ namespace Jackbengine {
 struct Color
 {
     Color();
+    Color(const Color&) = default;
     Color(byte r, byte g, byte b);
     Color(byte r, byte g, byte b, byte a);
+
     ~Color();
 
     byte r;

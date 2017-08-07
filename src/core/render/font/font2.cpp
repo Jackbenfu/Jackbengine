@@ -25,10 +25,34 @@ Font2::Font2(const void *data, size_t dataSize, int size)
 
 Font2::~Font2() = default;
 
-void Font2::getGlyphMetrics(
-    ushort glyph, int *minX, int *maxX, int *minY, int *maxY, int *advance) const
+void Font2::getGlyphMetrics(ushort glyph, int *minX, int *maxX, int *minY, int *maxY, int *advance) const
 {
     m_impl->getGlyphMetrics(glyph, minX, maxX, minY, maxY, advance);
+}
+
+void Font2::getGlyphMinX(ushort glyph, int *minX) const
+{
+    m_impl->getGlyphMinX(glyph, minX);
+}
+
+void Font2::getGlyphMaxX(ushort glyph, int *maxX) const
+{
+    m_impl->getGlyphMaxX(glyph, maxX);
+}
+
+void Font2::getGlyphMinY(ushort glyph, int *minY) const
+{
+    m_impl->getGlyphMinY(glyph, minY);
+}
+
+void Font2::getGlyphMaxY(ushort glyph, int *maxY) const
+{
+    m_impl->getGlyphMaxY(glyph, maxY);
+}
+
+void Font2::getGlyphAdvance(ushort glyph, int *advance) const
+{
+    m_impl->getGlyphMinX(glyph, advance);
 }
 
 int Font2::getAscent() const

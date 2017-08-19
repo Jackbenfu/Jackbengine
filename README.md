@@ -47,7 +47,7 @@ This collection of components and systems can be extended.
 - My main IDE is [CLion](https://www.jetbrains.com/clion/), the powerfull cross-platform C/C++ IDE from JetBrains!
 
 ## TODO
-I have a huge list of things I'd like to add in the engine (maybe when I'll have more free time), including:
+I have a huge list of things I'd like to addEntity in the engine (maybe when I'll have more free time), including:
 - [ ] Add animation system.
 - [ ] Check for memory leaks using dedicated tools.
 - [ ] Add documentation.

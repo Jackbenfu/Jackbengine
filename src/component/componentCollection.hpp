@@ -26,7 +26,10 @@ public:
     void add(Args&&... args);
 
     template<typename TComponent>
-    TComponent& get();
+    TComponent& get() const;
+
+    template<typename TComponent>
+    bool any() const;
 
     template<typename TComponent>
     void remove();

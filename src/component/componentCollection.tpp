@@ -16,9 +16,15 @@ void ComponentCollection::add(Args&&... args)
 }
 
 template<typename TComponent>
-TComponent& ComponentCollection::get()
+TComponent& ComponentCollection::get() const
 {
     return m_components.get<TComponent>();
+}
+
+template<typename TComponent>
+bool ComponentCollection::any() const
+{
+    return m_components.any<TComponent>();
 }
 
 template<typename TComponent>

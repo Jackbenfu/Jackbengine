@@ -29,7 +29,7 @@ class Application2 : public AbstractApplication
 
 public:
     explicit Application2(ApplicationConfig& config);
-    virtual ~Application2() override;
+    virtual ~Application2() = default;
 
     bool running() const;
     void loop();

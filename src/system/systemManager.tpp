@@ -10,25 +10,25 @@
 #define __SYSTEM_MANAGER_TPP__
 
 template<typename TSystem, typename... Args>
-void SystemManager::add(Args&&... args)
+void SystemManager::addSystem(Args&&... args)
 {
     m_systems.add<TSystem>(std::forward<Args>(args)...);
 }
 
 template<typename TSystem>
-void SystemManager::remove()
+void SystemManager::removeSystem()
 {
     m_systems.remove<TSystem>();
 }
 
 template<typename TSystem>
-void SystemManager::enable()
+void SystemManager::enableSystem()
 {
     m_systems.enable<TSystem>();
 }
 
 template<typename TSystem>
-void SystemManager::disable()
+void SystemManager::disableSystem()
 {
     m_systems.disable<TSystem>();
 }

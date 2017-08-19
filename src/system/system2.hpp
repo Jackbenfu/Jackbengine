@@ -15,19 +15,23 @@ namespace Jackbengine {
 
 class System2
 {
+    friend class SystemManager;
+
     DISALLOW_COPY_AND_MOVE(System2)
 
 public:
-    explicit System2(const EntityManager& entityManager);
-    virtual ~System2();
-
-    virtual void update(float delta) = 0;
+    System2() = default;
+    virtual ~System2() = default;
 
 protected:
-    inline const EntityManager& em() const;
+    std::unordered_map<Entity2, ComponentCollection*> m_entities;
 
 private:
-    const EntityManager& m_entityManager;
+    virtual void update(float delta) = 0;
+    virtual bool hasRequiredComponents(ComponentCollection& components) const = 0;
+
+    void addEntity(Entity2 entity, ComponentCollection& components);
+    void removeEntity(Entity2 entity);
 };
 
 } // namespace Jackbengine

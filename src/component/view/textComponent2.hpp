@@ -61,6 +61,8 @@ public:
     TextLayout2 getLayout() const;
     void setLayout(TextLayout2 layout);
 
+    Texture2& getTexture() const;
+
 private:
     void refreshTexture();
 

@@ -15,7 +15,7 @@
 # Don't forget to include SDLmain.h and SDLmain.m your project for the
 # OS X framework based version. (Other versions link to -lSDL2main which
 # this module will try to find on your behalf.) Also for OS X, this
-# module will automatically add the -framework Cocoa on your behalf.
+# module will automatically addEntity the -framework Cocoa on your behalf.
 #
 #
 # Additional Note: If you see an empty SDL2_LIBRARY_TEMP in your configuration

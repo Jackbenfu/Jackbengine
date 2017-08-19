@@ -114,6 +114,11 @@ void TextComponent2::setLayout(TextLayout2 layout)
     m_layout = layout;
 }
 
+Texture2& TextComponent2::getTexture() const
+{
+    return *m_texture;
+}
+
 void TextComponent2::refreshTexture()
 {
     m_texture = std::make_unique<Texture2>(m_renderer, m_font, m_text, m_foreground);

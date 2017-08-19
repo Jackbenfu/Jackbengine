@@ -10,15 +10,17 @@
 
 using namespace Jackbengine;
 
-System2::System2(const EntityManager& entityManager)
-    : m_entityManager {entityManager}
+void System2::addEntity(Entity2 entity, ComponentCollection& components)
 {
-    // Nothing
+    if (!hasRequiredComponents(components))
+    {
+        return;
+    }
+
+    m_entities[entity] = &components;
 }
 
-System2::~System2() = default;
-
-const EntityManager& System2::em() const
+void System2::removeEntity(Entity2 entity)
 {
-    return m_entityManager;
+    m_entities.erase(entity);
 }

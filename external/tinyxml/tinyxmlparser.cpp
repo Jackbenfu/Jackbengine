@@ -614,7 +614,7 @@ const char* TiXmlBase::ReadText(	const char* p,
 			}
 			else
 			{
-				// If we've found whitespace, add it before the
+				// If we've found whitespace, addEntity it before the
 				// new character. Any whitespace just becomes a space.
 				if ( whitespace )
 				{

@@ -11,13 +11,22 @@
 
 template<typename TBase>
 template<typename TItem>
-TItem& HeterogeneousCollection<TBase>::get()
+TItem& HeterogeneousCollection<TBase>::get() const
 {
     ASSERT_IS_BASE_OF(TBase, TItem);
 
     auto& tuple = find<TItem>();
 
     return dynamic_cast<TItem&>(*std::get<1>(tuple));
+}
+
+template<typename TBase>
+template<typename TItem>
+bool HeterogeneousCollection<TBase>::any() const
+{
+    const auto typeId = GET_TYPE_ID(TItem);
+
+    return m_collection.find(typeId) != m_collection.end();
 }
 
 template<typename TBase>
@@ -37,7 +46,7 @@ void HeterogeneousCollection<TBase>::add(Args&&... args)
 
     m_collection[typeId] = std::make_tuple(
         true,
-        std:: make_unique<TItem>(std::forward<Args>(args)...)
+        std::make_unique<TItem>(std::forward<Args>(args)...)
     );
 }
 
@@ -75,17 +84,27 @@ void HeterogeneousCollection<TBase>::disable()
 }
 
 template<typename TBase>
-template<typename TItem>
-bool HeterogeneousCollection<TBase>::any()
+template<typename TFunction>
+void HeterogeneousCollection<TBase>::apply(TFunction function)
 {
-    const auto typeId = GET_TYPE_ID(TItem);
+    for (auto& pair : m_collection)
+    {
+        auto& tuple = pair.second;
 
-    return m_collection.find(typeId) != m_collection.end();
+        auto isEnabled = std::get<0>(tuple);
+        if (!isEnabled)
+        {
+            continue;
+        }
+
+        auto& item = *std::get<1>(tuple);
+        function(item);
+    }
 }
 
 template<typename TBase>
 template<typename TItem>
-auto& HeterogeneousCollection<TBase>::find()
+auto& HeterogeneousCollection<TBase>::find() const
 {
     const auto typeId = GET_TYPE_ID(TItem);
 

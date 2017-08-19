@@ -23,33 +23,34 @@ public:
     EntityManager() = default;
     ~EntityManager() = default;
 
-    Entity2 add();
-    void remove(Entity2 entity);
-    bool isEnabled(Entity2 entity) const;
-    void enable(Entity2 entity);
-    void disable(Entity2 entity);
+    Entity2 addEntity();
+    void removeEntity(Entity2 entity);
+    bool isEntityEnabled(Entity2 entity) const;
+    void enableEntity(Entity2 entity);
+    void disableEntity(Entity2 entity);
+    ComponentCollection& getEntity(Entity2 entity) const;
 
     template<typename TComponent, typename... Args>
-    void add(Entity2 entity, Args&&... args);
+    void addComponent(Entity2 entity, Args&&... args);
 
     template<typename TComponent>
-    TComponent& get(Entity2 entity) const;
+    void removeComponent(Entity2 entity);
 
     template<typename TComponent>
-    void remove(Entity2 entity);
+    TComponent& getComponent(Entity2 entity) const;
 
     template<typename TComponent>
-    void enable(Entity2 entity);
+    void enableComponent(Entity2 entity);
 
     template<typename TComponent>
-    void disable(Entity2 entity);
+    void disableComponent(Entity2 entity);
 
 private:
-    std::tuple<bool, std::unique_ptr<ComponentCollection>>& find(Entity2 entity);
-    const std::tuple<bool, std::unique_ptr<ComponentCollection>>& find(Entity2 entity) const;
+    std::tuple<bool, std::unique_ptr<ComponentCollection>>& findEntity(Entity2 entity);
+    const std::tuple<bool, std::unique_ptr<ComponentCollection>>& findEntity(Entity2 entity) const;
 
     template<typename T>
-    static auto find(T& t, Entity2 entity) -> decltype(t.find(entity));
+    static auto findEntity(T& t, Entity2 entity) -> decltype(t.findEntity(entity));
 
     std::unordered_map<size_t, std::tuple<bool, std::unique_ptr<ComponentCollection>>> m_entities;
 };

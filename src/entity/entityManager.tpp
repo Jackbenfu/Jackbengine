@@ -10,48 +10,48 @@
 #define __ENTITY_MANAGER_TPP__
 
 template<typename TComponent, typename... Args>
-void EntityManager::add(Entity2 entity, Args&&... args)
+void EntityManager::addComponent(Entity2 entity, Args&&... args)
 {
-    auto& tuple = find(entity);
+    auto& tuple = findEntity(entity);
 
     std::get<1>(tuple)->add<TComponent>(std::forward<Args>(args)...);
 }
 
 template<typename TComponent>
-TComponent& EntityManager::get(Entity2 entity) const
+void EntityManager::removeComponent(Entity2 entity)
 {
-    auto& tuple = find(entity);
+    auto& tuple = findEntity(entity);
+
+    std::get<1>(tuple)->remove<TComponent>();
+}
+
+template<typename TComponent>
+TComponent& EntityManager::getComponent(Entity2 entity) const
+{
+    auto& tuple = findEntity(entity);
     auto& componentCollection = std::get<1>(tuple);
 
     return (TComponent&)componentCollection->get<TComponent>();
 }
 
 template<typename TComponent>
-void EntityManager::remove(Entity2 entity)
+void EntityManager::enableComponent(Entity2 entity)
 {
-    auto& tuple = find(entity);
-
-    std::get<1>(tuple)->remove<TComponent>();
-}
-
-template<typename TComponent>
-void EntityManager::enable(Entity2 entity)
-{
-    auto& tuple = find(entity);
+    auto& tuple = findEntity(entity);
 
     std::get<1>(tuple)->enable<TComponent>();
 }
 
 template<typename TComponent>
-void EntityManager::disable(Entity2 entity)
+void EntityManager::disableComponent(Entity2 entity)
 {
-    auto& tuple = find(entity);
+    auto& tuple = findEntity(entity);
 
     std::get<1>(tuple)->disable<TComponent>();
 }
 
 template<typename T>
-auto EntityManager::find(T& t, Entity2 entity) -> decltype(t.find(entity))
+auto EntityManager::findEntity(T& t, Entity2 entity) -> decltype(t.findEntity(entity))
 {
     auto it = t.m_entities.find(entity);
     if (it == t.m_entities.end())

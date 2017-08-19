@@ -25,7 +25,10 @@ public:
     ~HeterogeneousCollection() = default;
 
     template<typename TItem>
-    TItem& get();
+    TItem& get() const;
+
+    template<typename TItem>
+    bool any() const;
 
     template<typename TItem, typename... Args>
     void add(Args&&... args);
@@ -39,12 +42,12 @@ public:
     template<typename TItem>
     void disable();
 
+    template<typename TFunction>
+    void apply(TFunction function);
+
 private:
     template<typename TItem>
-    bool any();
-
-    template<typename TItem>
-    auto& find();
+    auto& find() const;
 
     std::unordered_map<size_t, std::tuple<bool, std::unique_ptr<TBase>>> m_collection;
 };

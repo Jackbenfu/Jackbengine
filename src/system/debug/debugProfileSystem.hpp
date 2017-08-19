@@ -18,7 +18,7 @@ namespace Jackbengine {
 
 #define FPS_BUF_SIZE 16
 
-class DebugProfileSystem : public System
+class DebugProfileSystem final : public System
 {
 public:
     DebugProfileSystem();

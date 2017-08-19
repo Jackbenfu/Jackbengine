@@ -20,19 +20,24 @@ class SystemManager
 
 public:
     explicit SystemManager(const EntityManager& entityManager);
-    ~SystemManager();
+    ~SystemManager() = default;
 
     template<typename TSystem, typename... Args>
-    void add(Args&&... args);
+    void addSystem(Args&&... args);
 
     template<typename TSystem>
-    void remove();
+    void removeSystem();
 
     template<typename TSystem>
-    void enable();
+    void enableSystem();
 
     template<typename TSystem>
-    void disable();
+    void disableSystem();
+
+    void addEntity(Entity2 entity);
+    void removeEntity(Entity2 entity);
+
+    void update(float delta);
 
 private:
     const EntityManager& m_entityManager;

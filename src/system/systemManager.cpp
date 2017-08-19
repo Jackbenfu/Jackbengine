@@ -16,4 +16,36 @@ SystemManager::SystemManager(const EntityManager& entityManager)
     // Nothing
 }
 
-SystemManager::~SystemManager() = default;
+void SystemManager::addEntity(Entity2 entity)
+{
+    auto& components = m_entityManager.getEntity(entity);
+
+    static const auto lambda = [&](System2& system)
+    {
+        system.addEntity(entity, components);
+    };
+
+    m_systems.apply(lambda);
+}
+
+void SystemManager::removeEntity(Entity2 entity)
+{
+    static const auto lambda = [&](System2& system)
+    {
+        system.removeEntity(entity);
+    };
+
+    m_systems.apply(lambda);
+}
+
+void SystemManager::update(float delta)
+{
+    static const auto lambda = [&delta](System2& system)
+    {
+        system.update(delta);
+    };
+
+    // TODO handle system execution order
+
+    m_systems.apply(lambda);
+}

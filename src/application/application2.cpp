@@ -26,12 +26,10 @@ Application2::Application2(ApplicationConfig& config)
     srand(static_cast<uint>(time(nullptr)));
 
     // TODO remove
-    m_entityManager.add();
-    m_entityManager.add<AudioSourceComponent2>(1, "/Users/Jackben/Documents/git/Pong/resources/left.wav");
-    m_entityManager.get<AudioSourceComponent2>(1).play();
+    m_entityManager.addEntity();
+    m_entityManager.addComponent<AudioSourceComponent2>(1, "/Users/Jackben/Documents/git/Pong/resources/left.wav");
+    m_entityManager.getComponent<AudioSourceComponent2>(1).play();
 }
-
-Application2::~Application2() = default;
 
 bool Application2::running() const
 {

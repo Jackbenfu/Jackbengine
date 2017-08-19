@@ -112,11 +112,14 @@ set(SOURCE_FILES
     src/entity/entity.cpp
     src/entity/entityManager.cpp
     src/scene/scene.cpp
+    src/scene/scene2.cpp
     src/scene/loader/sceneLoader.cpp
     src/scene/loader/tmx/tmxSceneLoader.cpp
     src/ecs/ecsManager.cpp
     src/system/animation/motionSystem.cpp
+    src/system/animation/motionSystem2.cpp
     src/system/debug/debugProfileSystem.cpp
+    src/system/debug/debugProfileSystem2.cpp
     src/system/debug/debugSpriteSystem.cpp
     src/system/debug/debugTextSystem.cpp
     src/system/input/mouseEventTriggerSystem.cpp

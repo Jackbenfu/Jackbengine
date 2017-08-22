@@ -71,6 +71,33 @@
 #include "core/render/window/window2.hpp"
 #include "core/time/timer2.hpp"
 
+#include "component/component2.hpp"
+#include "component/audio/audioSourceComponent2.hpp"
+#include "component/body/shape/boxShapeComponent2.hpp"
+#include "component/body/transformComponent2.hpp"
+#include "component/body/velocityComponent2.hpp"
+#include "component/generic/stringComponent.hpp"
+#include "component/generic/numericalComponent.hpp"
+#include "component/input/mouseListenerComponent2.hpp"
+#include "component/layout/containerComponent2.hpp"
+#include "component/layout/zOrderComponent2.hpp"
+#include "component/misc/nameComponent2.hpp"
+#include "component/misc/tagComponent2.hpp"
+#include "component/view/colorComponent2.hpp"
+#include "component/view/spriteComponent2.hpp"
+#include "component/view/textComponent2.hpp"
+
+#include "system/system2.hpp"
+#include "system/animation/motionSystem2.hpp"
+#include "system/debug/debugProfileSystem2.hpp"
+#include "system/debug/debugSpriteSystem2.hpp"
+#include "system/debug/debugTextSystem2.hpp"
+//#include "system/input/mouseEventTriggerSystem2.hpp"
+//#include "system/physic/aabbCollisionSystem2.hpp"
+#include "system/render/spriteRenderSystem2.hpp"
+#include "system/render/textRenderSystem2.hpp"
+
 #include "application/application2.hpp"
+#include "scene/scene2.hpp"
 
 #endif // __JACKBENGINE_H__

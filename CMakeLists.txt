@@ -121,11 +121,15 @@ set(SOURCE_FILES
     src/system/debug/debugProfileSystem.cpp
     src/system/debug/debugProfileSystem2.cpp
     src/system/debug/debugSpriteSystem.cpp
+    src/system/debug/debugSpriteSystem2.cpp
     src/system/debug/debugTextSystem.cpp
+    src/system/debug/debugTextSystem2.cpp
     src/system/input/mouseEventTriggerSystem.cpp
     src/system/physic/aabbCollisionSystem.cpp
     src/system/render/spriteRenderSystem.cpp
+    src/system/render/spriteRenderSystem2.cpp
     src/system/render/textRenderSystem.cpp
+    src/system/render/textRenderSystem2.cpp
     src/system/system.cpp
     src/system/system2.cpp
     src/system/systemManager.cpp

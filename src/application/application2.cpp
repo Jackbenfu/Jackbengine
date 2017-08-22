@@ -8,9 +8,6 @@
 
 #include "application2.hpp"
 
-// TODO remove
-#include "component/audio/audioSourceComponent2.hpp"
-
 using namespace Jackbengine;
 
 Application2::Application2(ApplicationConfig& config)
@@ -24,11 +21,6 @@ Application2::Application2(ApplicationConfig& config)
       m_renderer(m_window)
 {
     srand(static_cast<uint>(time(nullptr)));
-
-    // TODO remove
-    m_entityManager.addEntity();
-    m_entityManager.addComponent<AudioSourceComponent2>(1, "/Users/Jackben/Documents/git/Pong/resources/left.wav");
-    m_entityManager.getComponent<AudioSourceComponent2>(1).play();
 }
 
 bool Application2::running() const
@@ -56,4 +48,29 @@ void Application2::loop()
     }
 
     m_timer.snapshot();
+}
+
+Timer2& Application2::timer() const
+{
+    return m_timer;
+}
+
+Cursor2& Application2::cursor() const
+{
+    return m_cursor;
+}
+
+Input2& Application2::input() const
+{
+    return m_input;
+}
+
+Window2& Application2::window() const
+{
+    return m_window;
+}
+
+Renderer2& Application2::renderer() const
+{
+    return m_renderer;
 }

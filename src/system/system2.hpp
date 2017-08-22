@@ -27,7 +27,7 @@ protected:
     std::unordered_map<Entity2, ComponentCollection*> m_entities;
 
 private:
-    virtual void update(float delta) = 0;
+    virtual void frame(float delta) = 0;
     virtual bool hasRequiredComponents(ComponentCollection& components) const = 0;
 
     void addEntity(Entity2 entity, ComponentCollection& components);

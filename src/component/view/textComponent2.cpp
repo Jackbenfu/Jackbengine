@@ -17,7 +17,7 @@ TextComponent2::TextComponent2(const Renderer2& renderer, const Font2& font,
       m_font {font},
       m_text {text}
 {
-    // Nothing
+    refreshTexture();
 }
 
 TextComponent2::TextComponent2(const Renderer2& renderer, const Font2& font,
@@ -27,7 +27,7 @@ TextComponent2::TextComponent2(const Renderer2& renderer, const Font2& font,
       m_text {text},
       m_layout {layout}
 {
-    // Nothing
+    refreshTexture();
 }
 
 TextComponent2::TextComponent2(const Renderer2& renderer, const Font2& font,
@@ -38,7 +38,7 @@ TextComponent2::TextComponent2(const Renderer2& renderer, const Font2& font,
       m_layout {layout},
       m_foreground {foreground}
 {
-    // Nothing
+    refreshTexture();
 }
 
 const std::string& TextComponent2::getText() const

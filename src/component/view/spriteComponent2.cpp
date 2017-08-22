@@ -42,7 +42,7 @@ SpriteComponent2::SpriteComponent2(const Renderer2& renderer, const TmxMap& map,
     // Nothing
 }
 
-const Texture2& SpriteComponent2::texture() const
+const Texture2& SpriteComponent2::getTexture() const
 {
     return m_texture;
 }

@@ -12,11 +12,11 @@
 
 using namespace Jackbengine;
 
-void MotionSystem2::update(float delta)
+void MotionSystem2::frame(float delta)
 {
-    for (auto pair : m_entities)
+    for (auto& entity : m_entities)
     {
-        auto components = pair.second;
+        auto components = entity.second;
 
         auto& transform = components->get<TransformComponent2>();
         auto& velocity = components->get<VelocityComponent2>();

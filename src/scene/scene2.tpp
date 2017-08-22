@@ -6,8 +6,8 @@
 // Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
-#ifndef __Scene2_TPP__
-#define __Scene2_TPP__
+#ifndef __SCENE_2_TPP__
+#define __SCENE_2_TPP__
 
 template<typename TComponent, typename... Args>
 void Scene2::addComponent(Entity2 entity, Args&&... args)
@@ -67,4 +67,4 @@ void Scene2::disableSystem()
     m_systemManager.disableSystem<TSystem>();
 }
 
-#endif // __Scene2_TPP__
+#endif // __SCENE_2_TPP__

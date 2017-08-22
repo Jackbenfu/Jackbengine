@@ -6,7 +6,6 @@
 // Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
-#include <string>
 #include "abstractApplication.hpp"
 #include "platform.hpp"
 

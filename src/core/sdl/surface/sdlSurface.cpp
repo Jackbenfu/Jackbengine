@@ -41,11 +41,7 @@ SdlSurface::SdlSurface(const Font2& font, const std::string& text, Color foregro
 {
     auto sdlFont = static_cast<TTF_Font*>(font.getInternalObject());
 
-    SDL_Color sdlForeground {};
-    sdlForeground.r = foreground.r;
-    sdlForeground.g = foreground.g;
-    sdlForeground.b = foreground.b;
-    sdlForeground.a = foreground.a;
+    SDL_Color sdlForeground {foreground.r, foreground.g, foreground.b, foreground.a};
 
     m_surface = TTF_RenderUTF8_Solid(sdlFont, text.c_str(), sdlForeground);
     if (nullptr == m_surface)

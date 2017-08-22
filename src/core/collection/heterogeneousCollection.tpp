@@ -24,6 +24,8 @@ template<typename TBase>
 template<typename TItem>
 bool HeterogeneousCollection<TBase>::any() const
 {
+    ASSERT_IS_BASE_OF(TBase, TItem);
+
     const auto typeId = GET_TYPE_ID(TItem);
 
     return m_collection.find(typeId) != m_collection.end();
@@ -108,11 +110,18 @@ auto& HeterogeneousCollection<TBase>::find() const
 {
     const auto typeId = GET_TYPE_ID(TItem);
 
-    auto it = m_collection.find(typeId);
+    const auto it = m_collection.find(typeId);
     if (it == m_collection.end())
     {
         throw std::runtime_error(
             std::string("Item does not exist: ") + std::string(GET_TYPE_NAME(TItem))
+        );
+    }
+
+    if (!std::get<0>(it->second))
+    {
+        throw std::runtime_error(
+            std::string("Item is disabled: ") + std::string(GET_TYPE_NAME(TItem))
         );
     }
 

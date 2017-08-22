@@ -30,7 +30,7 @@ public:
 
     ~SpriteComponent2() override = default;
 
-    const Texture2& texture() const;
+    const Texture2& getTexture() const;
 
 private:
     Texture2 m_texture;

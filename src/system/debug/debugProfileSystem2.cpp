@@ -35,7 +35,7 @@ bool DebugProfileSystem2::hasRequiredComponents(ComponentCollection& components)
     return false;
 }
 
-void DebugProfileSystem2::update(float delta)
+void DebugProfileSystem2::frame(float delta)
 {
     UNUSED(delta);
 

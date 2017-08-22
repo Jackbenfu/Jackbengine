@@ -20,7 +20,7 @@ class SdlRwops
 
 public:
     SdlRwops(const void *data, size_t dataSize);
-    ~SdlRwops();
+    ~SdlRwops() = default;
 
     SDL_RWops* getInternalObject() const;
 

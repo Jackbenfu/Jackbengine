@@ -28,7 +28,7 @@ public:
     void setForeground(Color color);
 
 private:
-    void update(float delta) override;
+    void frame(float delta) override;
     bool hasRequiredComponents(ComponentCollection& components) const override;
 
     const int FontSize = {9};

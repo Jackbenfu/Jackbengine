@@ -18,7 +18,7 @@ class MotionSystem2 final : public System2
     DISALLOW_COPY_AND_MOVE(MotionSystem2)
 
 private:
-    void update(float delta) override;
+    void frame(float delta) override;
     bool hasRequiredComponents(ComponentCollection& components) const override;
 };
 

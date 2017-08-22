@@ -38,11 +38,11 @@ void SystemManager::removeEntity(Entity2 entity)
     m_systems.apply(lambda);
 }
 
-void SystemManager::update(float delta)
+void SystemManager::frame(float delta)
 {
     static const auto lambda = [&delta](System2& system)
     {
-        system.update(delta);
+        system.frame(delta);
     };
 
     // TODO handle system execution order

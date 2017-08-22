@@ -37,7 +37,7 @@ public:
     void addEntity(Entity2 entity);
     void removeEntity(Entity2 entity);
 
-    void update(float delta);
+    void frame(float delta);
 
 private:
     const EntityManager& m_entityManager;

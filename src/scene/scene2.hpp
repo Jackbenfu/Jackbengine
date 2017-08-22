@@ -20,7 +20,7 @@ class Scene2
     DISALLOW_COPY_AND_MOVE(Scene2)
 
 public:
-    explicit Scene2(const Application2& application);
+    explicit Scene2(Application2& application);
 
     virtual ~Scene2() = default;
 
@@ -52,8 +52,16 @@ public:
     template<typename TSystem>
     void disableSystem();
 
+    void frame(float delta);
+
+    Timer2& timer() const;
+    Cursor2& cursor() const;
+    Input2& input() const;
+    Window2& window() const;
+    Renderer2& renderer() const;
+
 private:
-    const Application2& m_application;
+    Application2& m_application;
     EntityManager m_entityManager;
     SystemManager m_systemManager;
 };

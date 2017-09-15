@@ -18,33 +18,31 @@ namespace Jackbengine {
 
 class TmxObjectGroup
 {
+    DISALLOW_COPY_AND_MOVE(TmxObjectGroup)
+
     friend class TmxMap;
 
 public:
-    ~TmxObjectGroup();
+    const char* name() const;
 
-    const char* getName() const;
+    const TmxObject* object(int index) const;
+    const TmxObject* object(const char *name) const;
+    int objectCount() const;
 
-    const TmxObject* getObject(int index) const;
-    const TmxObject* getObject(const char *name) const;
-    int getObjectCount() const;
-
-    int getOriginX() const;
-    int getOriginY() const;
+    int originX() const;
+    int originY() const;
 
     bool hasProperty(const char *name) const;
-    const TmxPropertyGroup* getProperties() const;
-
-    void dump() const;
+    const TmxPropertyGroup* properties() const;
 
 private:
     TmxObjectGroup();
 
-    const char* m_name = nullptr;
-    std::vector<TmxObject*> m_objects;
-    TmxPropertyGroup *m_properties = nullptr;
+    void load(const TiXmlElement *element);
 
-    bool load(const TiXmlElement *element);
+    const char* m_name {nullptr};
+    std::vector<std::unique_ptr<TmxObject>> m_objects;
+    std::unique_ptr<TmxPropertyGroup> m_properties;
 };
 
 } // namespace Jackbengine

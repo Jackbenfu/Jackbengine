@@ -22,19 +22,19 @@ public:
 
     ~Impl();
 
-    void getGlyphMetrics(ushort glyph, int *minX, int *maxX, int *minY, int *maxY, int *advance) const;
+    void glyphMetrics(ushort glyph, int *minX, int *maxX, int *minY, int *maxY, int *advance) const;
 
-    void getGlyphMinX(ushort glyph, int *minX) const;
-    void getGlyphMaxX(ushort glyph, int *maxX) const;
-    void getGlyphMinY(ushort glyph, int *minY) const;
-    void getGlyphMaxY(ushort glyph, int *maxY) const;
-    void getGlyphAdvance(ushort glyph, int *advance) const;
+    void glyphMinX(ushort glyph, int *minX) const;
+    void glyphMaxX(ushort glyph, int *maxX) const;
+    void glyphMinY(ushort glyph, int *minY) const;
+    void glyphMaxY(ushort glyph, int *maxY) const;
+    void glyphAdvance(ushort glyph, int *advance) const;
 
-    int getAscent() const;
-    int getDescent() const;
-    int getLineSkip() const;
+    int ascent() const;
+    int descent() const;
+    int lineSkip() const;
 
-    TTF_Font* getInternalObject() const;
+    TTF_Font* internalObject() const;
 
 private:
     TTF_Font *m_font {nullptr};

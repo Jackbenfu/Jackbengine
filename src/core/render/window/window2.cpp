@@ -19,17 +19,17 @@ Window2::Window2(const std::string& title, int width, int height, bool fullscree
 
 Window2::~Window2() = default;
 
-int Window2::getWidth() const
+int Window2::width() const
 {
-    return m_impl->getWidth();
+    return m_impl->width();
 }
 
-int Window2::getHeight() const
+int Window2::height() const
 {
-    return m_impl->getHeight();
+    return m_impl->height();
 }
 
-void* Window2::getInternalObject() const
+void* Window2::internalObject() const
 {
-    return m_impl->getInternalObject();
+    return m_impl->internalObject();
 }

@@ -17,51 +17,42 @@ using namespace Jackbengine;
 
 IMPORT_BINARY_RESOURCE(default_font);
 
-TmxSceneLoader::TmxSceneLoader(Scene *scene)
+TmxSceneLoader::TmxSceneLoader(Scene& scene)
     : SceneLoader(scene)
 {
     // Nothing
 }
 
-TmxSceneLoader::~TmxSceneLoader()
+void TmxSceneLoader::loadFromFile(const char *file)
 {
-    DELETE_SAFE(m_map);
+    m_map = std::make_unique<TmxMap>();
+
+    m_map->loadFromFile(file);
+    loadContents();
 }
 
-bool TmxSceneLoader::loadFromFile(const char *file)
+void TmxSceneLoader::loadFromMemory(const unsigned char *data)
 {
-    m_map = new TmxMap();
+    m_map = std::make_unique<TmxMap>();
 
-    auto result = m_map->loadFromFile(file);
+    m_map->loadFromMemory(data);
     loadContents();
-
-    return result;
-}
-
-bool TmxSceneLoader::loadFromMemory(const unsigned char *data)
-{
-    m_map = new TmxMap();
-
-    auto result = m_map->loadFromMemory(data);
-    loadContents();
-
-    return result;
 }
 
 TmxMap* TmxSceneLoader::map() const
 {
-    return m_map;
+    return m_map.get();
 }
 
 void TmxSceneLoader::createImageEntityFromLayer(const char *layerName, const char *tilesetFile)
 {
-    auto background = scene()->addEntity(layerName);
+    auto background = scene().addEntity(layerName);
 
-    scene()->addComponent<TransformComponent>(background);
+    scene().addComponent<TransformComponent>(background);
 
-    auto tileset = getBinaryResource(tilesetFile);
-    scene()->addComponent<SpriteComponent>(background)->loadFromLayer(
-        scene()->renderer(),
+    auto tileset = binaryResource(tilesetFile);
+    scene().addComponent<SpriteComponent>(background)->loadFromLayer(
+        scene().renderer(),
         map(),
         layerName,
         tileset->first,
@@ -71,19 +62,16 @@ void TmxSceneLoader::createImageEntityFromLayer(const char *layerName, const cha
 
 void TmxSceneLoader::createTextEntityFromObject(const char *groupName, const char *objectName)
 {
-    auto object = map()->getObjectGroup(groupName)->getObject(objectName);
-    auto objectProperties = object->getProperties();
+    auto object = map()->objectGroup(groupName)->object(objectName);
+    auto objectProperties = object->properties();
 
-    auto entity = scene()->addEntity(objectName);
+    auto entity = scene().addEntity(objectName);
 
-    scene()->addComponent<ContainerComponent>(entity)->setRect(
-        object->getX(),
-        object->getY(),
-        object->getWidth(),
-        object->getHeight()
-    );
+    scene()
+        .addComponent<ContainerComponent>(entity)
+        ->setRect(object->x(), object->y(), object->width(), object->height());
 
-    auto text = scene()->addComponent<TextComponent>(entity);
+    auto text = scene().addComponent<TextComponent>(entity);
     setTextValue(text, objectProperties);
     setTextLayout(text, objectProperties);
     setTextLayout(text, objectProperties);
@@ -93,7 +81,7 @@ void TmxSceneLoader::createTextEntityFromObject(const char *groupName, const cha
 
 void TmxSceneLoader::setTextValue(TextComponent *component, const TmxPropertyGroup *properties)
 {
-    auto text = properties->getProperty(PROPERTY_TEXT_VALUE);
+    auto text = properties->property(PROPERTY_TEXT_VALUE);
     component->setText(text);
 }
 void TmxSceneLoader::setTextColor(TextComponent *component, const TmxPropertyGroup *properties)
@@ -101,14 +89,14 @@ void TmxSceneLoader::setTextColor(TextComponent *component, const TmxPropertyGro
     auto color = DEFAULT_TEXT_COLOR;
     if (properties->hasProperty(PROPERTY_TEXT_COLOR))
     {
-        auto hexColor = properties->getProperty(PROPERTY_TEXT_COLOR);
+        auto hexColor = properties->property(PROPERTY_TEXT_COLOR);
         auto intColor = strtol(hexColor + 3, nullptr, 16);
 
         auto r = (byte)((intColor >> 16) & 0xFF);
         auto g = (byte)((intColor >> 8) & 0xFF);
         auto b = (byte)(intColor & 0xFF);
 
-        color = Color(r, g, b);
+        color = Color32(r, g, b);
     }
 
     component->setForeground(color);
@@ -118,7 +106,7 @@ void TmxSceneLoader::setTextLayout(TextComponent *component, const TmxPropertyGr
 {
     if (properties->hasProperty(PROPERTY_TEXT_LAYOUT))
     {
-        auto textLayoutString = properties->getProperty(PROPERTY_TEXT_LAYOUT);
+        auto textLayoutString = properties->property(PROPERTY_TEXT_LAYOUT);
         auto layout = DEFAULT_TEXT_LAYOUT;
 
         if (0 == strcmp(TEXT_LAYOUT_LEFT_TOP, textLayoutString))
@@ -167,18 +155,18 @@ void TmxSceneLoader::setTextFont(TextComponent *component, const TmxPropertyGrou
     auto textSize = DEFAULT_TEXT_SIZE;
     if (properties->hasProperty(PROPERTY_TEXT_SIZE))
     {
-        properties->getIntProperty(PROPERTY_TEXT_SIZE, &textSize);
+        properties->intProperty(PROPERTY_TEXT_SIZE, &textSize);
     }
 
     if (properties->hasProperty(PROPERTY_TEXT_FONT))
     {
-        auto textFont = properties->getProperty(PROPERTY_TEXT_FONT);
+        auto textFont = properties->property(PROPERTY_TEXT_FONT);
 
         if (hasBinaryResource(textFont))
         {
-            auto pair = getBinaryResource(textFont);
+            auto pair = binaryResource(textFont);
             component->setFontFromMemory(
-                scene()->renderer(),
+                scene().renderer(),
                 pair->first,
                 pair->second,
                 textSize
@@ -187,8 +175,8 @@ void TmxSceneLoader::setTextFont(TextComponent *component, const TmxPropertyGrou
         else
         {
             component->setFontFromFile(
-                scene()->renderer(),
-                properties->getProperty(PROPERTY_TEXT_FONT),
+                scene().renderer(),
+                properties->property(PROPERTY_TEXT_FONT),
                 textSize
             );
         }
@@ -196,7 +184,7 @@ void TmxSceneLoader::setTextFont(TextComponent *component, const TmxPropertyGrou
     else
     {
         component->setFontFromMemory(
-            scene()->renderer(),
+            scene().renderer(),
             default_font,
             default_font_size,
             textSize

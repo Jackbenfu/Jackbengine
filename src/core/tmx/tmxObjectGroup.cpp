@@ -10,81 +10,68 @@
 
 using namespace Jackbengine;
 
-TmxObjectGroup::TmxObjectGroup() = default;
-
-TmxObjectGroup::~TmxObjectGroup()
+TmxObjectGroup::TmxObjectGroup()
+    : m_properties {std::unique_ptr<TmxPropertyGroup>(new TmxPropertyGroup())}
 {
-    DELETE_SAFE(m_properties);
-
-    for (auto object : m_objects)
-    {
-        DELETE_SAFE(object);
-    }
-    m_objects.clear();
+    // Nothing
 }
 
-const char* TmxObjectGroup::getName() const
+const char* TmxObjectGroup::name() const
 {
     return m_name;
 }
 
-const TmxObject* TmxObjectGroup::getObject(int index) const
+const TmxObject* TmxObjectGroup::object(int index) const
 {
     if (0 <= index && static_cast<int>(m_objects.size()) > index)
     {
-        return m_objects[index];
+        return m_objects[index].get();
     }
 
     return nullptr;
 }
 
-const TmxObject* TmxObjectGroup::getObject(const char *name) const
+const TmxObject* TmxObjectGroup::object(const char *name) const
 {
-    for (auto object : m_objects)
+    for (auto& object : m_objects)
     {
-        if (!strcmp(name, object->getName()))
+        if (0 == strcmp(name, object->name()))
         {
-            return object;
+            return object.get();
         }
     }
 
     return nullptr;
 }
 
-int TmxObjectGroup::getObjectCount() const
+int TmxObjectGroup::objectCount() const
 {
     return static_cast<int>(m_objects.size());
 }
 
-int TmxObjectGroup::getOriginX() const
+int TmxObjectGroup::originX() const
 {
-    int originX = 0;
+    auto originX = 0;
 
-    for (auto object : m_objects)
+    for (auto& object : m_objects)
     {
-        if (object)
-        {
-            int objectX = object->getX();
+        auto objectX = object->x();
 
-            originX = objectX < originX ? objectX : originX;
-        }
+        originX = objectX < originX ? objectX : originX;
     }
 
     return originX;
 }
 
-int TmxObjectGroup::getOriginY() const
+int TmxObjectGroup::originY() const
 {
-    int originY = 0;
+    auto originY = 0;
 
-    for (auto object : m_objects)
+    for (auto& object : m_objects)
     {
-        if (object)
-        {
-            int objectY = object->getY();
+        auto objectY = object->y();
 
-            originY = objectY < originY ? objectY : originY;
-        }
+        originY = objectY < originY ? objectY : originY;
     }
 
     return originY;
@@ -100,49 +87,29 @@ bool TmxObjectGroup::hasProperty(const char *name) const
     return m_properties->hasProperty(name);
 }
 
-const TmxPropertyGroup* TmxObjectGroup::getProperties() const
+const TmxPropertyGroup* TmxObjectGroup::properties() const
 {
-    return m_properties;
+    return m_properties.get();
 }
 
-void TmxObjectGroup::dump() const
-{
-    printf("[tmxObjectGroup][name] %s\n", getName());
-    printf("[tmxObjectGroup][objects]\n");
-    for (auto object : m_objects)
-    {
-        if (object)
-        {
-            object->dump();
-        }
-    }
-    if (m_properties)
-    {
-        m_properties->dump();
-    }
-}
-
-bool TmxObjectGroup::load(const TiXmlElement *element)
+void TmxObjectGroup::load(const TiXmlElement *element)
 {
     m_name = element->Attribute("name");
 
-    const TiXmlNode *node = element->FirstChild();
-    while (node)
+    auto node = element->FirstChild();
+    while (nullptr != node)
     {
-        if (!strcmp("object", node->Value()))
+        if (0 == strcmp("object", node->Value()))
         {
-            TmxObject *object = new TmxObject();
+            auto object = std::unique_ptr<TmxObject>(new TmxObject());
             object->load(node->ToElement());
-            m_objects.push_back(object);
+            m_objects.push_back(std::move(object));
         }
-        else if (!strcmp("properties", node->Value()))
+        else if (0 == strcmp("properties", node->Value()))
         {
-            m_properties = new TmxPropertyGroup();
             m_properties->load(node->ToElement());
         }
 
         node = node->NextSibling();
     }
-
-    return true;
 }

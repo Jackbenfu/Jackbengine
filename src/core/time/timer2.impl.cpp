@@ -18,14 +18,14 @@ Timer2::Impl::Impl(uint fps)
 
 void Timer2::Impl::start()
 {
-    m_start = getTicks();
+    m_start = ticks();
 }
 
 void Timer2::Impl::snapshot()
 {
     ++m_totalFrames;
 
-    m_elapsedMilliseconds = getTicks() - m_start;
+    m_elapsedMilliseconds = ticks() - m_start;
     m_effectiveElapsedMilliseconds = m_elapsedMilliseconds;
     uint delayTime = 0;
 
@@ -53,17 +53,17 @@ void Timer2::Impl::snapshot()
     }
 }
 
-uint Timer2::Impl::getElapsedMilliseconds() const
+uint Timer2::Impl::elapsedMilliseconds() const
 {
     return m_elapsedMilliseconds;
 }
 
-uint Timer2::Impl::getEffectiveElapsedMilliseconds() const
+uint Timer2::Impl::effectiveElapsedMilliseconds() const
 {
     return m_effectiveElapsedMilliseconds;
 }
 
-int Timer2::Impl::getFps() const
+int Timer2::Impl::fps() const
 {
     return m_fps;
 }
@@ -73,7 +73,7 @@ bool Timer2::Impl::isFixedFps() const
     return 0 < m_fixedFps;
 }
 
-int Timer2::Impl::getFixedFps() const
+int Timer2::Impl::fixedFps() const
 {
     return m_fixedFps;
 }
@@ -94,7 +94,7 @@ void Timer2::Impl::disableFixedFps()
     m_fixedFps = 0;
 }
 
-uint Timer2::Impl::getTotalFrames() const
+uint Timer2::Impl::totalFrames() const
 {
     return m_totalFrames;
 }
@@ -106,7 +106,7 @@ void Timer2::Impl::delay(uint ms) const
 #endif
 }
 
-uint Timer2::Impl::getTicks() const
+uint Timer2::Impl::ticks() const
 {
     return SDL_GetTicks();
 }

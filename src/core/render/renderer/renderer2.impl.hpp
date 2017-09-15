@@ -11,7 +11,7 @@
 
 #include "renderer2.hpp"
 #include "platform.hpp"
-#include "core/render/color.hpp"
+#include "core/render/color32.hpp"
 
 namespace Jackbengine {
 
@@ -24,20 +24,20 @@ public:
     void clear();
     void present();
 
-    void setClearColor(Color color);
-    void setRenderColor(Color color);
+    void setClearColor(Color32 color);
+    void setRenderColor(Color32 color);
 
     void renderTexture(int x, int y, const Texture2& texture);
     void renderTexture(int x, int y, const Texture2& texture, double angle);
-    void renderLine(float x1, float y1, float x2, float y2, Color color);
-    void renderPoint(float x, float y, Color color);
+    void renderLine(float x1, float y1, float x2, float y2, Color32 color);
+    void renderPoint(float x, float y, Color32 color);
 
-    SDL_Renderer* getInternalObject() const;
+    SDL_Renderer* internalObject() const;
 
 private:
     SDL_Renderer *m_renderer {nullptr};
 
-    Color m_clearColor {Color_Black};
+    Color32 m_clearColor {Color_Black};
 };
 
 } // namespace Jackbengine

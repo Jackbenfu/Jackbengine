@@ -24,9 +24,9 @@ public:
 
     ~BoxShapeComponent2() override = default;
 
-    float getWidth() const;
-    float getHeight() const;
-    const Vec2f& getSize() const;
+    float width() const;
+    float height() const;
+    const Vec2f& size() const;
 
     void setWidth(float width);
     void setHeight(float height);
@@ -35,6 +35,8 @@ public:
 private:
     Vec2f m_vector;
 };
+
+using BoxShape = BoxShapeComponent2;
 
 } // namespace Jackbengine
 

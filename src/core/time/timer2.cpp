@@ -29,19 +29,19 @@ void Timer2::snapshot()
     m_impl->snapshot();
 }
 
-uint Timer2::getElapsedMilliseconds() const
+uint Timer2::elapsedMilliseconds() const
 {
-    return m_impl->getElapsedMilliseconds();
+    return m_impl->elapsedMilliseconds();
 }
 
-uint Timer2::getEffectiveElapsedMilliseconds() const
+uint Timer2::effectiveElapsedMilliseconds() const
 {
-    return m_impl->getEffectiveElapsedMilliseconds();
+    return m_impl->effectiveElapsedMilliseconds();
 }
 
-int Timer2::getFps() const
+int Timer2::fps() const
 {
-    return m_impl->getFps();
+    return m_impl->fps();
 }
 
 bool Timer2::isFixedFps() const
@@ -49,9 +49,9 @@ bool Timer2::isFixedFps() const
     return m_impl->isFixedFps();
 }
 
-int Timer2::getFixedFps() const
+int Timer2::fixedFps() const
 {
-    return m_impl->getFixedFps();
+    return m_impl->fixedFps();
 }
 
 void Timer2::enableFixedFps(uint fps)
@@ -64,7 +64,7 @@ void Timer2::disableFixedFps()
     m_impl->disableFixedFps();
 }
 
-uint Timer2::getTotalFrames() const
+uint Timer2::totalFrames() const
 {
-    return m_impl->getTotalFrames();
+    return m_impl->totalFrames();
 }

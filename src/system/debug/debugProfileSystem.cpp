@@ -66,7 +66,7 @@ void DebugProfileSystem::setTimer(Timer *timer)
     m_timer = timer;
 }
 
-void DebugProfileSystem::setForeground(Color color)
+void DebugProfileSystem::setForeground(Color32 color)
 {
     m_fps->setForeground(color);
 }

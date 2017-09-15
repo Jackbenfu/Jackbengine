@@ -9,8 +9,8 @@
 #ifndef __COMPONENT_COLLECTION_TPP__
 #define __COMPONENT_COLLECTION_TPP__
 
-template<typename TComponent, typename... Args>
-void ComponentCollection::add(Args&&... args)
+template<typename TComponent, typename ...Args>
+void ComponentCollection::add(Args&& ...args)
 {
     m_components.add<TComponent>(std::forward<Args>(args)...);
 }

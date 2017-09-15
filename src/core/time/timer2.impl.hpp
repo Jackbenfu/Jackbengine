@@ -21,21 +21,21 @@ public:
     void start();
     void snapshot();
 
-    uint getElapsedMilliseconds() const;
-    uint getEffectiveElapsedMilliseconds() const;
+    uint elapsedMilliseconds() const;
+    uint effectiveElapsedMilliseconds() const;
 
-    int getFps() const;
+    int fps() const;
 
     bool isFixedFps() const;
-    int getFixedFps() const;
+    int fixedFps() const;
     void enableFixedFps(uint fps);
     void disableFixedFps();
 
-    uint getTotalFrames() const;
+    uint totalFrames() const;
 
 private:
     void delay(uint ms) const;
-    uint getTicks() const;
+    uint ticks() const;
 
     uint m_start {0};
     uint m_elapsedMilliseconds {0};

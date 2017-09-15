@@ -18,6 +18,8 @@ namespace Jackbengine {
 
 class TmxPropertyGroup
 {
+    DISALLOW_COPY_AND_MOVE(TmxPropertyGroup)
+
     friend class TmxMap;
     friend class TmxTileset;
     friend class TmxObjectGroup;
@@ -25,25 +27,21 @@ class TmxPropertyGroup
     friend class TmxLayer;
 
 public:
-    ~TmxPropertyGroup();
-
     bool hasProperty(const char *name) const;
 
-    const char* getProperty(const char *name) const;
-    bool getIntProperty(const char *name, int *value) const;
-    bool getUnsignedIntProperty(const char *name, uint *value) const;
-    bool getBoolProperty(const char *name, bool *value) const;
-    bool getDoubleProperty(const char *name, double *value) const;
-
-    void dump() const;
+    const char* property(const char *name) const;
+    bool intProperty(const char *name, int *value) const;
+    bool unsignedIntProperty(const char *name, uint *value) const;
+    bool boolProperty(const char *name, bool *value) const;
+    bool doubleProperty(const char *name, double *value) const;
 
 private:
-    TmxPropertyGroup();
+    TmxPropertyGroup() = default;
 
-    std::vector<TmxProperty*> m_properties;
-    const TmxProperty *getRawProperty(const char *name) const;
+    void load(const TiXmlElement *element);
+    const TmxProperty *rawProperty(const char *name) const;
 
-    bool load(const TiXmlElement *element);
+    std::vector<std::unique_ptr<TmxProperty>> m_properties;
 };
 
 } // namespace Jackbengine

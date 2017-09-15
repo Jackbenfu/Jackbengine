@@ -30,8 +30,8 @@ public:
     template<typename TItem>
     bool any() const;
 
-    template<typename TItem, typename... Args>
-    void add(Args&&... args);
+    template<typename TItem, typename ...Args>
+    void add(Args&& ...args);
 
     template<typename TItem>
     void remove();

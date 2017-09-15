@@ -17,35 +17,33 @@ namespace Jackbengine {
 
 class TmxLayer
 {
+    DISALLOW_COPY_AND_MOVE(TmxLayer)
+
     friend class TmxMap;
 
 public:
-    ~TmxLayer();
+    ~TmxLayer() = default;
 
-    const char* getName() const;
-    int getWidth() const;
-    int getHeight() const;
+    const char* name() const;
+    int width() const;
+    int height() const;
 
-    int getTileId(int x, int y) const;
+    int tileId(int x, int y) const;
 
-    const int* getData() const;
-    int getDataLength() const;
-
-    const TmxPropertyGroup* getProperties() const;
-
-    void dump() const;
+    const TmxPropertyGroup* properties() const;
 
 private:
     TmxLayer();
 
-    const char *m_name = nullptr;
-    int m_width = 0;
-    int m_height = 0;
-    int *m_data = nullptr;
+    void load(const TiXmlElement *element);
 
-    TmxPropertyGroup *m_properties = nullptr;
+    const char *m_name {nullptr};
+    int m_width {0};
+    int m_height {0};
+    //int *m_data {nullptr};
+    std::vector<int> m_data;
 
-    bool load(const TiXmlElement *element);
+    std::unique_ptr<TmxPropertyGroup> m_properties;
 };
 
 } // namespace Jackbengine

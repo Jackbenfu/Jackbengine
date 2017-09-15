@@ -8,168 +8,161 @@
 
 #include "mouseListenerComponent2.hpp"
 
+#include <utility>
+
 using namespace Jackbengine;
 
-void MouseListenerComponent2::onLeftClick(MouseCallback2 callback, void *data)
+void MouseListenerComponent2::onLeftClick(MouseCallback2 callback)
 {
     m_onLeftClick = callback;
-    m_onLeftClickData = data;
 }
 
 void MouseListenerComponent2::callLeftClick()
 {
-    addEvent(MouseEvent2::MouseEvent_LeftClick);
+    addEvent(MouseEvent2::MouseEvent_LeftClick2);
     if (nullptr != m_onLeftClick)
     {
-        m_onLeftClick(m_onLeftClickData);
+        m_onLeftClick();
     }
 }
 
-void MouseListenerComponent2::onLeftDown(MouseCallback2 callback, void *data)
+void MouseListenerComponent2::onLeftDown(MouseCallback2 callback)
 {
     m_onLeftDown = callback;
-    m_onLeftDownData = data;
 }
 
 void MouseListenerComponent2::callLeftDown() const
 {
     if (nullptr != m_onLeftDown)
     {
-        m_onLeftDown(m_onLeftDownData);
+        m_onLeftDown();
     }
 }
 
-void MouseListenerComponent2::onMiddleClick(MouseCallback2 callback, void *data)
+void MouseListenerComponent2::onMiddleClick(MouseCallback2 callback)
 {
     m_onMiddleClick = callback;
-    m_onMiddleClickData = data;
 }
 
 void MouseListenerComponent2::callMiddleClick()
 {
-    addEvent(MouseEvent2::MouseEvent_MiddleClick);
+    addEvent(MouseEvent2::MouseEvent_MiddleClick2);
     if (nullptr != m_onMiddleClick)
     {
-        m_onMiddleClick(m_onMiddleClickData);
+        m_onMiddleClick();
     }
 }
 
-void MouseListenerComponent2::onMiddleDown(MouseCallback2 callback, void *data)
+void MouseListenerComponent2::onMiddleDown(MouseCallback2 callback)
 {
     m_onMiddleDown = callback;
-    m_onMiddleDownData = data;
 }
 
 void MouseListenerComponent2::callMiddleDown() const
 {
     if (nullptr != m_onMiddleDown)
     {
-        m_onMiddleDown(m_onMiddleDownData);
+        m_onMiddleDown();
     }
 }
 
-void MouseListenerComponent2::onRightClick(MouseCallback2 callback, void *data)
+void MouseListenerComponent2::onRightClick(MouseCallback2 callback)
 {
     m_onRightClick = callback;
-    m_onRightClickData = data;
 }
 
 void MouseListenerComponent2::callRightClick()
 {
-    addEvent(MouseEvent2::MouseEvent_RightClick);
+    addEvent(MouseEvent2::MouseEvent_RightClick2);
     if (nullptr != m_onRightClick)
     {
-        m_onRightClick(m_onRightClickData);
+        m_onRightClick();
     }
 }
 
-void MouseListenerComponent2::onRightDown(MouseCallback2 callback, void *data)
+void MouseListenerComponent2::onRightDown(MouseCallback2 callback)
 {
     m_onRightDown = callback;
-    m_onRightDownData = data;
 }
 
 void MouseListenerComponent2::callRightDown() const
 {
     if (nullptr != m_onRightDown)
     {
-        m_onRightDown(m_onRightDownData);
+        m_onRightDown();
     }
 }
 
-void MouseListenerComponent2::onHover(MouseCallback2 callback, void *data)
+void MouseListenerComponent2::onHover(MouseCallback2 callback)
 {
     m_onHover = callback;
-    m_onHoverData = data;
 }
 
 void MouseListenerComponent2::callOnHover()
 {
-    addEvent(MouseEvent2::MouseEvent_Hover);
+    addEvent(MouseEvent2::MouseEvent_Hover2);
     if (nullptr != m_onHover)
     {
-        m_onHover(m_onHoverData);
+        m_onHover();
     }
 }
 
-void MouseListenerComponent2::onEnter(MouseCallback2 callback, void *data)
+void MouseListenerComponent2::onEnter(MouseCallback2 callback)
 {
     m_onEnter = callback;
-    m_onEnterData = data;
 }
 
 void MouseListenerComponent2::callOnEnter()
 {
-    addEvent(MouseEvent2::MouseEvent_Enter);
+    addEvent(MouseEvent2::MouseEvent_Enter2);
     if (nullptr != m_onEnter)
     {
-        m_onEnter(m_onEnterData);
+        m_onEnter();
     }
 }
 
-void MouseListenerComponent2::onExit(MouseCallback2 callback, void *data)
+void MouseListenerComponent2::onExit(MouseCallback2 callback)
 {
     m_onExit = callback;
-    m_onExitData = data;
 }
 
 void MouseListenerComponent2::callOnExit()
 {
-    addEvent(MouseEvent2::MouseEvent_Exit);
+    addEvent(MouseEvent2::MouseEvent_Exit2);
     if (nullptr != m_onExit)
     {
-        m_onExit(m_onExitData);
+        m_onExit();
     }
 }
 
 bool MouseListenerComponent2::leftClick()
 {
-    return hasAndRemoveEvent(MouseEvent2::MouseEvent_LeftClick);
+    return hasAndRemoveEvent(MouseEvent2::MouseEvent_LeftClick2);
 }
 
 bool MouseListenerComponent2::middleClick()
 {
-    return hasAndRemoveEvent(MouseEvent2::MouseEvent_MiddleClick);
+    return hasAndRemoveEvent(MouseEvent2::MouseEvent_MiddleClick2);
 }
 
 bool MouseListenerComponent2::rightClick()
 {
-    return hasAndRemoveEvent(MouseEvent2::MouseEvent_RightClick);
+    return hasAndRemoveEvent(MouseEvent2::MouseEvent_RightClick2);
 }
 
 bool MouseListenerComponent2::hover() const
 {
-    return hasEvent(MouseEvent2::MouseEvent_Hover);
+    return hasEvent(MouseEvent2::MouseEvent_Hover2);
 }
 
 bool MouseListenerComponent2::enter() const
 {
-    return hasEvent(MouseEvent2::MouseEvent_Enter);
+    return hasEvent(MouseEvent2::MouseEvent_Enter2);
 }
 
 bool MouseListenerComponent2::exit() const
 {
-    return hasEvent(MouseEvent2::MouseEvent_Exit);
+    return hasEvent(MouseEvent2::MouseEvent_Exit2);
 }
 
 void MouseListenerComponent2::addEvent(MouseEvent2 event)

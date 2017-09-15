@@ -25,17 +25,17 @@ public:
     void start();
     void snapshot();
 
-    uint getElapsedMilliseconds() const;
-    uint getEffectiveElapsedMilliseconds() const;
+    uint elapsedMilliseconds() const;
+    uint effectiveElapsedMilliseconds() const;
 
-    int getFps() const;
+    int fps() const;
 
     bool isFixedFps() const;
-    int getFixedFps() const;
+    int fixedFps() const;
     void enableFixedFps(uint fps);
     void disableFixedFps();
 
-    uint getTotalFrames() const;
+    uint totalFrames() const;
 
 private:
     class Impl;

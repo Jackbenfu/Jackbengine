@@ -22,18 +22,16 @@ void SpriteRenderSystem2::frame(float delta)
 {
     UNUSED(delta);
 
-    for (auto entity : m_entities)
+    for (const auto entity : m_entities)
     {
-        auto components = entity.second;
+        const auto components = entity.second;
 
-        auto& sprite = components->get<SpriteComponent2>();
-        auto& transform = components->get<TransformComponent2>();
+        const auto& sprite = components->get<SpriteComponent2>();
+        const auto& transform = components->get<TransformComponent2>();
 
         m_renderer.renderTexture(
-            (int)transform.getPositionX(),
-            (int)transform.getPositionY(),
-            sprite.getTexture(),
-            transform.getAngle()
+            (int) transform.positionX(),
+            (int) transform.positionY(), sprite.texture(), transform.angle()
         );
     }
 }

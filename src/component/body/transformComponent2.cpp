@@ -11,21 +11,19 @@
 using namespace Jackbengine;
 
 TransformComponent2::TransformComponent2(float positionX, float positionY)
-    : m_position {positionX, positionY}
+    : TransformComponent2 {positionX, positionY, 1.0f, 1.0f, 0.0}
 {
     // Nothing
 }
 
 TransformComponent2::TransformComponent2(float positionX, float positionY, double angle)
-    : m_position {positionX, positionY},
-      m_angle {angle}
+    : TransformComponent2 {positionX, positionY, 1.0f, 1.0f, angle}
 {
     // Nothing
 }
 
 TransformComponent2::TransformComponent2(float positionX, float positionY, float scaleX, float scaleY)
-    : m_position {positionX, positionY},
-      m_scale {scaleX, scaleY}
+    : TransformComponent2 {positionX, positionY, scaleX, scaleY, 0.0}
 {
     // Nothing
 }
@@ -39,17 +37,17 @@ TransformComponent2::TransformComponent2(
     // Nothing
 }
 
-const Vec2f& TransformComponent2::getPosition() const
+const Vec2f& TransformComponent2::position() const
 {
     return m_position;
 }
 
-float TransformComponent2::getPositionX() const
+float TransformComponent2::positionX() const
 {
     return m_position.x;
 }
 
-float TransformComponent2::getPositionY() const
+float TransformComponent2::positionY() const
 {
     return m_position.y;
 }
@@ -70,7 +68,7 @@ void TransformComponent2::setPositionY(float y)
     m_position.y = y;
 }
 
-double TransformComponent2::getAngle() const
+double TransformComponent2::angle() const
 {
     return m_angle;
 }
@@ -80,17 +78,17 @@ void TransformComponent2::setAngle(double angle)
     m_angle = angle;
 }
 
-const Vec2f& TransformComponent2::getScale() const
+const Vec2f& TransformComponent2::scale() const
 {
     return m_scale;
 }
 
-float TransformComponent2::getScaleX() const
+float TransformComponent2::scaleX() const
 {
     return m_scale.x;
 }
 
-float TransformComponent2::getScaleY() const
+float TransformComponent2::scaleY() const
 {
     return m_scale.y;
 }

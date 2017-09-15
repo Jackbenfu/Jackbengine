@@ -22,7 +22,7 @@ class SpriteComponent2 : public Component2
 public:
     SpriteComponent2(const Renderer2& renderer, const std::string& file);
     SpriteComponent2(const Renderer2& renderer, const void *data, size_t dataSize);
-    SpriteComponent2(const Renderer2& renderer, int width, int height, Color color);
+    SpriteComponent2(const Renderer2& renderer, int width, int height, Color32 color);
     SpriteComponent2(const Renderer2& renderer, const TmxMap& map, const TmxLayer& layer,
                      const void *tilesetImageData, size_t tilesetImageDataSize);
     SpriteComponent2(const Renderer2& renderer, const TmxMap& map, const TmxObjectGroup& objectGroup,
@@ -30,11 +30,13 @@ public:
 
     ~SpriteComponent2() override = default;
 
-    const Texture2& getTexture() const;
+    const Texture2& texture() const;
 
 private:
     Texture2 m_texture;
 };
+
+using Sprite = SpriteComponent2;
 
 } // namespace Jackbengine
 

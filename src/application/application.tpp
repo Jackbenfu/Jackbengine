@@ -20,7 +20,7 @@ void Application::addScene()
 
     const auto typeId = GET_TYPE_ID(TScene);
 
-    static const auto predicate = [&](const auto& pair)
+    const auto predicate = [&](const auto& pair)
     {
         return pair.first == typeId;
     };

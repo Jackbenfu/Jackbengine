@@ -11,7 +11,7 @@
 
 #include <string>
 #include "component/component.hpp"
-#include "core/render/color.hpp"
+#include "core/render/color32.hpp"
 #include "core/render/font.hpp"
 #include "core/math/rect.hpp"
 #include "core/render/renderer.hpp"
@@ -44,8 +44,8 @@ public:
     const std::string& getText() const;
     void setText(const std::string& text);
 
-    Color getForeground() const;
-    void setForeground(Color color);
+    Color32 getForeground() const;
+    void setForeground(Color32 color);
     void setForeground(byte r, byte g, byte b);
     void setForeground(byte r, byte g, byte b, byte a);
 
@@ -72,7 +72,7 @@ private:
     const Renderer *m_renderer = nullptr;
     Font *m_font = nullptr;
     Texture *m_texture = nullptr;
-    Color m_foreground = Color(Color_White);
+    Color32 m_foreground = Color32(Color_White);
     std::string m_text;
 
     int m_topWhiteSpace = 0;

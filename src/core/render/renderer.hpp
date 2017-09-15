@@ -9,7 +9,7 @@
 #define __RENDERER_H__
 
 #include "window.hpp"
-#include "color.hpp"
+#include "color32.hpp"
 
 namespace Jackbengine {
 
@@ -22,15 +22,15 @@ public:
 
     virtual bool init(const Window *window) = 0;
     virtual void clear() = 0;
-    virtual void setClearColor(Color color) = 0;
+    virtual void setClearColor(Color32 color) = 0;
     virtual void present() = 0;
 
-    virtual void setRenderColor(Color color) = 0;
+    virtual void setRenderColor(Color32 color) = 0;
 
     virtual void renderTexture(int x, int y, const Texture *texture) = 0;
     virtual void renderTexture(int x, int y, const Texture *texture, double angle) = 0;
-    virtual void renderLine(float x1, float y1, float x2, float y2, Color color) = 0;
-    virtual void renderPoint(float x, float y, Color color) = 0;
+    virtual void renderLine(float x1, float y1, float x2, float y2, Color32 color) = 0;
+    virtual void renderPoint(float x, float y, Color32 color) = 0;
 
     virtual int getWidth() const = 0;
     virtual int getHeight() const = 0;

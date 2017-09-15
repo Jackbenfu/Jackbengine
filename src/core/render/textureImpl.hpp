@@ -33,10 +33,10 @@ public:
         const Renderer *renderer, const TmxMap *map, const char *objectGroupName,
         const void *tilesetImageData = nullptr, size_t tilesetImageDataSize = 0) override;
 
-    bool loadFromColor(const Renderer *renderer, int width, int height, Color color) override;
+    bool loadFromColor(const Renderer *renderer, int width, int height, Color32 color) override;
 
     bool loadFromFont(
-        const Renderer *renderer, const Font *font, Color foreground, const std::string& text) override;
+        const Renderer *renderer, const Font *font, Color32 foreground, const std::string& text) override;
 
     int getWidth() const override;
     int getHeight() const override;

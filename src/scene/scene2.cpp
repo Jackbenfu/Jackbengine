@@ -10,8 +10,9 @@
 
 using namespace Jackbengine;
 
-Scene2::Scene2(Application2& application)
+Scene2::Scene2(Application2& application, SceneManager<Scene2>& sceneManager)
     : m_application {application},
+      m_sceneManager {sceneManager},
       m_systemManager {m_entityManager}
 {
     // Nothing
@@ -43,6 +44,7 @@ void Scene2::disableEntity(Entity2 entity)
 void Scene2::frame(float delta)
 {
     m_systemManager.frame(delta);
+    m_sceneManager.trySetNextScene();
 }
 
 Timer2& Scene2::timer() const
@@ -68,4 +70,9 @@ Window2& Scene2::window() const
 Renderer2& Scene2::renderer() const
 {
     return m_application.renderer();
+}
+
+void Scene2::exitApplication()
+{
+    m_application.exit();
 }

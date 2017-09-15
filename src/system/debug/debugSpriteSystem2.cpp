@@ -22,20 +22,20 @@ void DebugSpriteSystem2::frame(float delta)
 {
     UNUSED(delta);
 
-    for (auto& entity : m_entities)
+    for (const auto& entity : m_entities)
     {
-        auto components = entity.second;
+        const auto components = entity.second;
 
-        auto& boxShape = components->get<BoxShapeComponent2>();
-        auto& transform = components->get<TransformComponent2>();
+        const auto& boxShape = components->get<BoxShapeComponent2>();
+        const auto& transform = components->get<TransformComponent2>();
 
-        auto position = transform.getPosition();
-        auto size = boxShape.getSize();
+        const auto position = transform.position();
+        const auto size = boxShape.size();
 
-        auto x1 = position.x;
-        auto x2 = position.x + size.x;
-        auto y1 = position.y;
-        auto y2 = position.y + size.y;
+        const auto x1 = position.x;
+        const auto x2 = position.x + size.x;
+        const auto y1 = position.y;
+        const auto y2 = position.y + size.y;
 
         m_renderer.renderLine(x1, y1, x2, y1, Color_Red);
         m_renderer.renderLine(x2, y1, x2, y2, Color_Red);

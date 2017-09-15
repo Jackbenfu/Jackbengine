@@ -26,10 +26,10 @@ Texture2::Impl::Impl(const Renderer2& renderer, const void *data, size_t dataSiz
     loadTextureFromSurface(renderer, *sdlSurface);
 }
 
-Texture2::Impl::Impl(const Renderer2& renderer, int width, int height, Color color)
+Texture2::Impl::Impl(const Renderer2& renderer, int width, int height, Color32 color)
 {
     const auto sdlSurface = std::make_unique<SdlSurface>(width, height, 32);
-    const auto sdlSurfaceObject = sdlSurface->getInternalObject();
+    const auto sdlSurfaceObject = sdlSurface->internalObject();
 
     const auto rgbUint = SDL_MapRGB(sdlSurfaceObject->format, color.r, color.g, color.b);
     if (SDL_FillRect(sdlSurfaceObject, nullptr, rgbUint) < 0)
@@ -43,20 +43,20 @@ Texture2::Impl::Impl(const Renderer2& renderer, int width, int height, Color col
 Texture2::Impl::Impl(const Renderer2& renderer, const TmxMap& map, const TmxLayer& layer,
                      const void *tilesetImageData, size_t tilesetImageDataSize)
 {
-    const auto tileset = map.getTileset();
+    const auto tileset = map.tileset();
 
     const auto sdlRwops = std::make_unique<SdlRwops>(tilesetImageData, tilesetImageDataSize);
     const auto sdlTilesetSurface = std::make_unique<SdlSurface>(*sdlRwops);
-    const auto sdlTilesetSurfaceObject = sdlTilesetSurface->getInternalObject();
+    const auto sdlTilesetSurfaceObject = sdlTilesetSurface->internalObject();
 
-    const auto layerWidth = layer.getWidth();
-    const auto layerHeight = layer.getHeight();
+    const auto layerWidth = layer.width();
+    const auto layerHeight = layer.height();
 
-    const auto tileWidth = tileset->getTileWidth();
-    const auto tileHeight = tileset->getTileHeight();
+    const auto tileWidth = tileset->tileWidth();
+    const auto tileHeight = tileset->tileHeight();
 
-    const auto surfaceWidth = layerWidth * tileset->getTileWidth();
-    const auto surfaceHeight = layerHeight * tileset->getTileHeight();
+    const auto surfaceWidth = layerWidth * tileset->tileWidth();
+    const auto surfaceHeight = layerHeight * tileset->tileHeight();
 
     const auto sdlSurface = std::make_unique<SdlSurface>(surfaceWidth, surfaceHeight, 32);
 
@@ -64,7 +64,7 @@ Texture2::Impl::Impl(const Renderer2& renderer, const TmxMap& map, const TmxLaye
     {
         for (auto col = 0; col < layerWidth; ++col)
         {
-            auto tileId = layer.getTileId(col, row);
+            auto tileId = layer.tileId(col, row);
 
             if (0 >= tileId)
             {
@@ -91,8 +91,7 @@ Texture2::Impl::Impl(const Renderer2& renderer, const TmxMap& map, const TmxLaye
 
             SDL_BlitSurface(
                 sdlTilesetSurfaceObject,
-                &srcRect,
-                sdlSurface->getInternalObject(),
+                &srcRect, sdlSurface->internalObject(),
                 &dstRect
             );
         }
@@ -104,22 +103,22 @@ Texture2::Impl::Impl(const Renderer2& renderer, const TmxMap& map, const TmxLaye
 Texture2::Impl::Impl(const Renderer2& renderer, const TmxMap& map, const TmxObjectGroup& objectGroup,
                      const void *tilesetImageData, size_t tilesetImageDataSize)
 {
-    const auto objectCount = objectGroup.getObjectCount();
+    const auto objectCount = objectGroup.objectCount();
 
-    auto minX = objectGroup.getObject(0)->getX();
-    auto minY = objectGroup.getObject(0)->getY();
+    auto minX = objectGroup.object(0)->x();
+    auto minY = objectGroup.object(0)->y();
     auto maxX = minX;
     auto maxY = minY;
     for (auto i = 0; i < objectCount; ++i)
     {
-        auto object = objectGroup.getObject(i);
+        auto object = objectGroup.object(i);
         if (!object->hasGid())
         {
             continue;
         }
 
-        int x = object->getX();
-        int y = object->getY();
+        int x = object->x();
+        int y = object->y();
 
         minX = x < minX ? x : minX;
         minY = y < minY ? y : minY;
@@ -127,14 +126,14 @@ Texture2::Impl::Impl(const Renderer2& renderer, const TmxMap& map, const TmxObje
         maxY = y > maxY ? y : maxY;
     }
 
-    const auto tileset = map.getTileset();
+    const auto tileset = map.tileset();
 
     const auto sdlRwops = std::make_unique<SdlRwops>(tilesetImageData, tilesetImageDataSize);
     const auto sdlTilesetSurface = std::make_unique<SdlSurface>(*sdlRwops);
-    const auto sdlTilesetSurfaceObject = sdlTilesetSurface->getInternalObject();
+    const auto sdlTilesetSurfaceObject = sdlTilesetSurface->internalObject();
 
-    const auto tileWidth = tileset->getTileWidth();
-    const auto tileHeight = tileset->getTileHeight();
+    const auto tileWidth = tileset->tileWidth();
+    const auto tileHeight = tileset->tileHeight();
 
     const auto surfaceWidth = tileWidth + maxX - minX;
     const auto surfaceHeight = tileHeight + maxY - minY;
@@ -143,8 +142,8 @@ Texture2::Impl::Impl(const Renderer2& renderer, const TmxMap& map, const TmxObje
 
     for (auto i = 0; i < objectCount; ++i)
     {
-        const auto object = objectGroup.getObject(i);
-        auto tileId = object->getGid();
+        const auto object = objectGroup.object(i);
+        auto tileId = object->gid();
 
         if (tileId <= 0)
         {
@@ -153,8 +152,8 @@ Texture2::Impl::Impl(const Renderer2& renderer, const TmxMap& map, const TmxObje
 
         --tileId;
 
-        const auto x = object->getX() - minX;
-        const auto y = object->getY() - minY;
+        const auto x = object->x() - minX;
+        const auto y = object->y() - minY;
 
         const auto tilesetCol = tileId % (sdlTilesetSurfaceObject->w / tileWidth);
         const auto tilesetRow = tileId / (sdlTilesetSurfaceObject->h / tileHeight);
@@ -173,8 +172,7 @@ Texture2::Impl::Impl(const Renderer2& renderer, const TmxMap& map, const TmxObje
 
         SDL_BlitSurface(
             sdlTilesetSurfaceObject,
-            &srcRect,
-            sdlSurface->getInternalObject(),
+            &srcRect, sdlSurface->internalObject(),
             &dstRect
         );
     }
@@ -183,7 +181,7 @@ Texture2::Impl::Impl(const Renderer2& renderer, const TmxMap& map, const TmxObje
 }
 
 Texture2::Impl::Impl(const Renderer2& renderer, const Font2& font,
-                     const std::string& text, Color foreground)
+                     const std::string& text, Color32 foreground)
 {
     const auto sdlSurface = std::make_unique<SdlSurface>(font, text, foreground);
 
@@ -195,26 +193,26 @@ Texture2::Impl::~Impl()
     SDL_DestroyTexture(m_texture);
 }
 
-int Texture2::Impl::getWidth() const
+int Texture2::Impl::width() const
 {
     return m_rect.w;
 }
 
-int Texture2::Impl::getHeight() const
+int Texture2::Impl::height() const
 {
     return m_rect.h;
 }
 
-SDL_Texture* Texture2::Impl::getInternalObject() const
+SDL_Texture* Texture2::Impl::internalObject() const
 {
     return m_texture;
 }
 
 void Texture2::Impl::loadTextureFromSurface(const Renderer2& renderer, const SdlSurface& surface)
 {
-    const auto sdlRenderer = static_cast<SDL_Renderer*>(renderer.getInternalObject());
+    const auto sdlRenderer = static_cast<SDL_Renderer*>(renderer.internalObject());
 
-    m_texture = SDL_CreateTextureFromSurface(sdlRenderer, surface.getInternalObject());
+    m_texture = SDL_CreateTextureFromSurface(sdlRenderer, surface.internalObject());
     if (nullptr == m_texture)
     {
         throw std::runtime_error(SDL_GetError());

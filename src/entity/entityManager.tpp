@@ -9,8 +9,8 @@
 #ifndef __ENTITY_MANAGER_TPP__
 #define __ENTITY_MANAGER_TPP__
 
-template<typename TComponent, typename... Args>
-void EntityManager::addComponent(Entity2 entity, Args&&... args)
+template<typename TComponent, typename ...Args>
+void EntityManager::addComponent(Entity2 entity, Args&& ...args)
 {
     auto& tuple = findEntity(entity);
 

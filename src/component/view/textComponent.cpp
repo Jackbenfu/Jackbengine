@@ -77,12 +77,12 @@ void TextComponent::setText(const string& text)
     }
 }
 
-Color TextComponent::getForeground() const
+Color32 TextComponent::getForeground() const
 {
     return m_foreground;
 }
 
-void TextComponent::setForeground(Color color)
+void TextComponent::setForeground(Color32 color)
 {
     m_foreground = color;
 
@@ -91,14 +91,14 @@ void TextComponent::setForeground(Color color)
 
 void TextComponent::setForeground(byte r, byte g, byte b)
 {
-    m_foreground = Color(r, g, b);
+    m_foreground = Color32(r, g, b);
 
     refreshTexture();
 }
 
 void TextComponent::setForeground(byte r, byte g, byte b, byte a)
 {
-    m_foreground = Color(r, g, b, a);
+    m_foreground = Color32(r, g, b, a);
 
     refreshTexture();
 }

@@ -22,8 +22,8 @@ public:
     ComponentCollection() = default;
     ~ComponentCollection() = default;
 
-    template<typename TComponent, typename... Args>
-    void add(Args&&... args);
+    template<typename TComponent, typename ...Args>
+    void add(Args&& ...args);
 
     template<typename TComponent>
     TComponent& get() const;

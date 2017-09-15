@@ -51,7 +51,7 @@ void RendererImpl::clear()
     SDL_RenderClear(m_renderer);
 }
 
-void RendererImpl::setClearColor(Color color)
+void RendererImpl::setClearColor(Color32 color)
 {
     m_clearColor = color;
 }
@@ -61,7 +61,7 @@ void RendererImpl::present()
     SDL_RenderPresent(m_renderer);
 }
 
-void RendererImpl::setRenderColor(Color color)
+void RendererImpl::setRenderColor(Color32 color)
 {
     if (SDL_SetRenderDrawColor(m_renderer, color.r, color.g, color.b, color.a) < 0)
     {
@@ -97,7 +97,7 @@ void RendererImpl::renderTexture(int x, int y, const Texture *texture, double an
     }
 }
 
-void RendererImpl::renderLine(float x1, float y1, float x2, float y2, Color color)
+void RendererImpl::renderLine(float x1, float y1, float x2, float y2, Color32 color)
 {
     setRenderColor(color);
 
@@ -110,7 +110,7 @@ void RendererImpl::renderLine(float x1, float y1, float x2, float y2, Color colo
     );
 }
 
-void RendererImpl::renderPoint(float x, float y, Color color)
+void RendererImpl::renderPoint(float x, float y, Color32 color)
 {
     setRenderColor(color);
 

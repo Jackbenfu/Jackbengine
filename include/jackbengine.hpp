@@ -15,7 +15,7 @@
 #include "core/math/rect.hpp"
 #include "core/math/vector2d.hpp"
 #include "core/network/webSocket.hpp"
-#include "core/render/color.hpp"
+#include "core/render/color32.hpp"
 #include "core/render/cursor.hpp"
 #include "core/render/font.hpp"
 #include "core/render/renderer.hpp"
@@ -61,7 +61,11 @@
 // Scene
 #include "scene/loader/tmx/tmxSceneLoader.hpp"
 
+//////
 // NEW
+//////
+
+// Core
 #include "core/audio/sound2.hpp"
 #include "core/input/input2.hpp"
 #include "core/render/cursor/cursor2.hpp"
@@ -71,6 +75,7 @@
 #include "core/render/window/window2.hpp"
 #include "core/time/timer2.hpp"
 
+// Component
 #include "component/component2.hpp"
 #include "component/audio/audioSourceComponent2.hpp"
 #include "component/body/shape/boxShapeComponent2.hpp"
@@ -87,17 +92,21 @@
 #include "component/view/spriteComponent2.hpp"
 #include "component/view/textComponent2.hpp"
 
+// System
 #include "system/system2.hpp"
 #include "system/animation/motionSystem2.hpp"
 #include "system/debug/debugProfileSystem2.hpp"
 #include "system/debug/debugSpriteSystem2.hpp"
 #include "system/debug/debugTextSystem2.hpp"
-//#include "system/input/mouseEventTriggerSystem2.hpp"
-//#include "system/physic/aabbCollisionSystem2.hpp"
+#include "system/input/mouseEventTriggerSystem2.hpp"
 #include "system/render/spriteRenderSystem2.hpp"
 #include "system/render/textRenderSystem2.hpp"
 
+// Application
 #include "application/application2.hpp"
+
+// Scene
 #include "scene/scene2.hpp"
+#include "scene/sceneManager.hpp"
 
 #endif // __JACKBENGINE_H__

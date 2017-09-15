@@ -16,40 +16,38 @@ namespace Jackbengine {
 
 class TmxObject
 {
+    DISALLOW_COPY_AND_MOVE(TmxObject)
+
     friend class TmxObjectGroup;
 
 public:
-    ~TmxObject();
-
-    const char* getName() const;
-    int getGid() const;
+    const char* name() const;
+    int gid() const;
     bool hasGid() const;
-    int getX() const;
-    int getY() const;
-    int getWidth() const;
-    int getHeight() const;
+    int x() const;
+    int y() const;
+    int width() const;
+    int height() const;
 
-    const char* getType() const;
+    const char* type() const;
 
     bool hasProperty(const char *name) const;
-    const TmxPropertyGroup* getProperties() const;
-
-    void dump() const;
+    const TmxPropertyGroup* properties() const;
 
 private:
-    TmxObject();
+    TmxObject() = default;
 
-    const char* m_name = nullptr;
-    const char *m_type = nullptr;
-    int m_gid = 0;
-    int m_x = 0;
-    int m_y = 0;
-    int m_width = 0;
-    int m_height = 0;
+    void load(const TiXmlElement *element);
 
-    TmxPropertyGroup *m_properties = nullptr;
+    const char* m_name {nullptr};
+    const char *m_type {nullptr};
+    int m_gid {0};
+    int m_x {0};
+    int m_y {0};
+    int m_width {0};
+    int m_height {0};
 
-    bool load(const TiXmlElement *element);
+    std::unique_ptr<TmxPropertyGroup> m_properties;
 };
 
 } // namespace Jackbengine

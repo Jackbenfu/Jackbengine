@@ -11,22 +11,22 @@
 using namespace Jackbengine;
 
 BoxShapeComponent2::BoxShapeComponent2(float width, float height)
-    : m_vector(width, height)
+    : m_vector {width, height}
 {
     // Nothing
 }
 
-float BoxShapeComponent2::getWidth() const
+float BoxShapeComponent2::width() const
 {
     return m_vector.x;
 }
 
-float BoxShapeComponent2::getHeight() const
+float BoxShapeComponent2::height() const
 {
     return m_vector.y;
 }
 
-const Vec2f& BoxShapeComponent2::getSize() const
+const Vec2f& BoxShapeComponent2::size() const
 {
     return m_vector;
 }

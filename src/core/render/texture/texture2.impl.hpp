@@ -20,19 +20,19 @@ class Texture2::Impl
 public:
     Impl(const Renderer2& renderer, const std::string& file);
     Impl(const Renderer2& renderer, const void *data, size_t dataSize);
-    Impl(const Renderer2& renderer, int width, int height, Color color);
+    Impl(const Renderer2& renderer, int width, int height, Color32 color);
     Impl(const Renderer2& renderer, const TmxMap& map, const TmxLayer& layer,
          const void *tilesetImageData, size_t tilesetImageDataSize);
     Impl(const Renderer2& renderer, const TmxMap& map, const TmxObjectGroup& objectGroup,
          const void *tilesetImageData, size_t tilesetImageDataSize);
-    Impl(const Renderer2& renderer, const Font2& font, const std::string& text, Color foreground);
+    Impl(const Renderer2& renderer, const Font2& font, const std::string& text, Color32 foreground);
 
     ~Impl();
 
-    int getWidth() const;
-    int getHeight() const;
+    int width() const;
+    int height() const;
 
-    SDL_Texture* getInternalObject() const;
+    SDL_Texture* internalObject() const;
 
 private:
     void loadTextureFromSurface(const Renderer2& renderer, const SdlSurface& surface);

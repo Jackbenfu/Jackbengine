@@ -10,19 +10,12 @@
 
 using namespace Jackbengine;
 
-TmxObject::TmxObject() = default;
-
-TmxObject::~TmxObject()
-{
-    DELETE_SAFE(m_properties);
-}
-
-const char* TmxObject::getName() const
+const char* TmxObject::name() const
 {
     return m_name;
 }
 
-int TmxObject::getGid() const
+int TmxObject::gid() const
 {
     return m_gid;
 }
@@ -32,27 +25,27 @@ bool TmxObject::hasGid() const
     return m_gid > 0;
 }
 
-int TmxObject::getX() const
+int TmxObject::x() const
 {
     return m_x;
 }
 
-int TmxObject::getY() const
+int TmxObject::y() const
 {
     return m_y;
 }
 
-int TmxObject::getWidth() const
+int TmxObject::width() const
 {
     return m_width;
 }
 
-int TmxObject::getHeight() const
+int TmxObject::height() const
 {
     return m_height;
 }
 
-const char* TmxObject::getType() const
+const char* TmxObject::type() const
 {
     return m_type;
 }
@@ -67,27 +60,12 @@ bool TmxObject::hasProperty(const char *name) const
     return m_properties->hasProperty(name);
 }
 
-const TmxPropertyGroup* TmxObject::getProperties() const
+const TmxPropertyGroup* TmxObject::properties() const
 {
-    return m_properties;
+    return m_properties.get();
 }
 
-void TmxObject::dump() const
-{
-    printf("[tmxObject][name] %s\n", getName());
-    printf("[tmxObject][type] %s\n", getType());
-    printf("[tmxObject][gid] %i\n", getGid());
-    printf("[tmxObject][x] %i\n", getX());
-    printf("[tmxObject][y] %i\n", getY());
-    printf("[tmxObject][width] %i\n", getWidth());
-    printf("[tmxObject][height] %i\n", getHeight());
-    if (m_properties)
-    {
-        m_properties->dump();
-    }
-}
-
-bool TmxObject::load(const TiXmlElement *element)
+void TmxObject::load(const TiXmlElement *element)
 {
     m_name = element->Attribute("name");
     m_type = element->Attribute("type");
@@ -97,17 +75,15 @@ bool TmxObject::load(const TiXmlElement *element)
     element->Attribute("width", &m_width);
     element->Attribute("height", &m_height);
 
-    const TiXmlNode *node = element->FirstChild();
-    while (node)
+    auto node = element->FirstChild();
+    while (nullptr != node)
     {
-        if (!strcmp("properties", node->Value()))
+        if (0 == strcmp("properties", node->Value()))
         {
-            m_properties = new TmxPropertyGroup();
+            m_properties = std::unique_ptr<TmxPropertyGroup>(new TmxPropertyGroup());
             m_properties->load(node->ToElement());
         }
 
         node = node->NextSibling();
     }
-
-    return true;
 }

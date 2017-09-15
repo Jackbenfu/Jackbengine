@@ -25,11 +25,11 @@ public:
     Window2(const std::string& title, int width, int height, bool fullscreen);
     ~Window2();
 
-    int getWidth() const;
-    int getHeight() const;
+    int width() const;
+    int height() const;
 
 private:
-    void* getInternalObject() const;
+    void* internalObject() const;
 
     class Impl;
     std::unique_ptr<Impl> m_impl;

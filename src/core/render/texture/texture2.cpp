@@ -25,7 +25,7 @@ Texture2::Texture2(const Renderer2& renderer, const void *data, size_t dataSize)
     // Nothing
 }
 
-Texture2::Texture2(const Renderer2& renderer, int width, int height, Color color)
+Texture2::Texture2(const Renderer2& renderer, int width, int height, Color32 color)
     : m_impl {std::make_unique<Impl>(renderer, width, height, color)}
 {
     // Nothing
@@ -46,7 +46,7 @@ Texture2::Texture2(const Renderer2& renderer, const TmxMap& map, const TmxObject
 }
 
 Texture2::Texture2(const Renderer2& renderer, const Font2& font,
-                   const std::string& text, Color foreground)
+                   const std::string& text, Color32 foreground)
     : m_impl {std::make_unique<Impl>(renderer, font, text, foreground)}
 {
     // Nothing
@@ -54,17 +54,17 @@ Texture2::Texture2(const Renderer2& renderer, const Font2& font,
 
 Texture2::~Texture2() = default;
 
-int Texture2::getWidth() const
+int Texture2::width() const
 {
-    return m_impl->getWidth();
+    return m_impl->width();
 }
 
-int Texture2::getHeight() const
+int Texture2::height() const
 {
-    return m_impl->getHeight();
+    return m_impl->height();
 }
 
-void* Texture2::getInternalObject() const
+void* Texture2::internalObject() const
 {
-    return m_impl->getInternalObject();
+    return m_impl->internalObject();
 }

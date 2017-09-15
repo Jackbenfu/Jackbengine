@@ -19,11 +19,11 @@ namespace Jackbengine {
 class TmxSceneLoader : public SceneLoader
 {
 public:
-    explicit TmxSceneLoader(Scene *scene);
-    ~TmxSceneLoader() override;
+    explicit TmxSceneLoader(Scene& scene);
+    ~TmxSceneLoader() override = default;
 
-    bool loadFromFile(const char *file);
-    bool loadFromMemory(const unsigned char *data);
+    void loadFromFile(const char *file);
+    void loadFromMemory(const unsigned char *data);
 
 protected:
     TmxMap* map() const;
@@ -37,9 +37,9 @@ protected:
     void setTextFont(TextComponent *component, const TmxPropertyGroup *properties);
 
 private:
-    TmxMap *m_map = nullptr;
+    std::unique_ptr<TmxMap> m_map;
 
-    const Color DEFAULT_TEXT_COLOR = Color_White;
+    const Color32 DEFAULT_TEXT_COLOR = Color_White;
     const TextLayout DEFAULT_TEXT_LAYOUT = TextLayout::LeftTop;
     const int DEFAULT_TEXT_SIZE = 18;
 

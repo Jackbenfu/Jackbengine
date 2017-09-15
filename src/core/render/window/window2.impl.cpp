@@ -45,17 +45,17 @@ Window2::Impl::~Impl()
     SDL_DestroyWindow(m_window);
 }
 
-int Window2::Impl::getWidth() const
+int Window2::Impl::width() const
 {
     return m_width;
 }
 
-int Window2::Impl::getHeight() const
+int Window2::Impl::height() const
 {
     return m_height;
 }
 
-SDL_Window* Window2::Impl::getInternalObject() const
+SDL_Window* Window2::Impl::internalObject() const
 {
     return m_window;
 }

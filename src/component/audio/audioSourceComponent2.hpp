@@ -22,7 +22,7 @@ public:
     explicit AudioSourceComponent2(const std::string& file);
     AudioSourceComponent2(const void *data, size_t dataSize);
 
-    ~AudioSourceComponent2() = default;
+    ~AudioSourceComponent2() override = default;
 
     void play() const;
     void play(bool loop) const;
@@ -30,6 +30,8 @@ public:
 private:
     Sound2 m_sound2;
 };
+
+using AudioSource = AudioSourceComponent2;
 
 } // namespace Jackbengine
 

@@ -33,7 +33,7 @@ public:
         const Renderer *renderer, const TmxMap *map, const char *objectGroupName,
         const void *tilesetImageData = nullptr, size_t tilesetImageDataSize = 0);
 
-    bool loadFromColor(const Renderer *renderer, uint width, uint height, Color color);
+    bool loadFromColor(const Renderer *renderer, uint width, uint height, Color32 color);
 
     bool loadFromTexture(const Renderer *renderer, Texture *texture);
 

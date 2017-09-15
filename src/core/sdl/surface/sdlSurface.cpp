@@ -21,7 +21,7 @@ SdlSurface::SdlSurface(const std::string& file)
 
 SdlSurface::SdlSurface(const SdlRwops& rwops)
 {
-    m_surface = IMG_Load_RW(rwops.getInternalObject(), 0);
+    m_surface = IMG_Load_RW(rwops.internalObject(), 0);
     if (nullptr == m_surface)
     {
         throw std::runtime_error(IMG_GetError());
@@ -37,9 +37,9 @@ SdlSurface::SdlSurface(int width, int height, int depth)
     }
 }
 
-SdlSurface::SdlSurface(const Font2& font, const std::string& text, Color foreground)
+SdlSurface::SdlSurface(const Font2& font, const std::string& text, Color32 foreground)
 {
-    auto sdlFont = static_cast<TTF_Font*>(font.getInternalObject());
+    const auto sdlFont = static_cast<TTF_Font*>(font.internalObject());
 
     SDL_Color sdlForeground {foreground.r, foreground.g, foreground.b, foreground.a};
 
@@ -55,7 +55,7 @@ SdlSurface::~SdlSurface()
     SDL_FreeSurface(m_surface);
 }
 
-SDL_Surface* SdlSurface::getInternalObject() const
+SDL_Surface* SdlSurface::internalObject() const
 {
     return m_surface;
 }

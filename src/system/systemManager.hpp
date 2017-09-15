@@ -22,8 +22,8 @@ public:
     explicit SystemManager(const EntityManager& entityManager);
     ~SystemManager() = default;
 
-    template<typename TSystem, typename... Args>
-    void addSystem(Args&&... args);
+    template<typename TSystem, typename ...Args>
+    void addSystem(Args&& ...args);
 
     template<typename TSystem>
     void removeSystem();

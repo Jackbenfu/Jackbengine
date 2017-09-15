@@ -12,30 +12,24 @@ using namespace Jackbengine;
 
 TmxLayer::TmxLayer() = default;
 
-TmxLayer::~TmxLayer()
-{
-    DELETE_SAFE(m_properties);
-    DELETE_SAFE_ARRAY(m_data);
-}
-
-const char* TmxLayer::getName() const
+const char* TmxLayer::name() const
 {
     return m_name;
 }
 
-int TmxLayer::getWidth() const
+int TmxLayer::width() const
 {
     return m_width;
 }
 
-int TmxLayer::getHeight() const
+int TmxLayer::height() const
 {
     return m_height;
 }
 
-int TmxLayer::getTileId(int x, int y) const
+int TmxLayer::tileId(int x, int y) const
 {
-    int pos = y * m_width + x;
+    auto pos = y * m_width + x;
     if (m_width * m_height > pos)
     {
         return m_data[pos];
@@ -44,49 +38,41 @@ int TmxLayer::getTileId(int x, int y) const
     return -1;
 }
 
-const int* TmxLayer::getData() const
+const TmxPropertyGroup* TmxLayer::properties() const
 {
-    return m_data;
+    return m_properties.get();
 }
 
-int TmxLayer::getDataLength() const
-{
-    return m_width * m_height;
-}
-
-const TmxPropertyGroup* TmxLayer::getProperties() const
-{
-    return m_properties;
-}
-
-bool TmxLayer::load(const TiXmlElement *element)
+void TmxLayer::load(const TiXmlElement *element)
 {
     m_name = element->Attribute("name");
     element->Attribute("width", &m_width);
     element->Attribute("height", &m_height);
 
-    const TiXmlNode *node = element->FirstChild();
-    while (node)
+    auto node = element->FirstChild();
+    while (nullptr != node)
     {
-        if (!strcmp("data", node->Value()))
+        if (0 == strcmp("data", node->Value()))
         {
-            const TiXmlElement *data = element->FirstChildElement("data");
-            const char *encoding = data->Attribute("encoding");
+            auto data = element->FirstChildElement("data");
+            auto encoding = data->Attribute("encoding");
 
-            if (!strcmp("csv", encoding))
+            if (0 == strcmp("csv", encoding))
             {
-                const char *delimiters = ",";
+                auto delimiters = ",";
 
-                char *csv = strdup(data->GetText());
-                char *token = strtok(csv, delimiters);
+                auto csv = strdup(data->GetText());
+                auto token = strtok(csv, delimiters);
 
-                m_data = new int[m_width * m_height];
-                int i = 0;
+                m_data.reserve((size_t)m_width * (size_t)m_height);
+                auto i = 0;
 
-                while (token)
+                while (nullptr != token)
                 {
                     int tileId;
-                    sscanf(token, "%i", &tileId);
+                    char *end;
+                    tileId = (int)strtol(token, &end, 10);
+
                     m_data[i++] = tileId;
                     
                     token = strtok(nullptr, delimiters);
@@ -95,41 +81,12 @@ bool TmxLayer::load(const TiXmlElement *element)
                 free(csv);
             }
         }
-        else if (!strcmp("properties", node->Value()))
+        else if (0 == strcmp("properties", node->Value()))
         {
-            m_properties = new TmxPropertyGroup();
+            m_properties = std::unique_ptr<TmxPropertyGroup>(new TmxPropertyGroup());
             m_properties->load(node->ToElement());
         }
 
         node = node->NextSibling();
-    }
-
-    return true;
-}
-
-void TmxLayer::dump() const
-{
-    printf("[tmxLayer][name] %s\n", getName());
-    printf("[tmxLayer][width] %i\n", getWidth());
-    printf("[tmxLayer][height] %i\n", getHeight());
-    printf("[tmxLayer][data]\n");
-    for (int y = 0; y < getHeight(); ++y)
-    {
-        for (int x = 0; x < getWidth(); ++x)
-        {
-            if (getWidth() - 1 == x && getHeight() - 1 == y)
-            {
-                printf("%i", getTileId(x, y));
-            }
-            else
-            {
-                printf("%i,", getTileId(x, y));
-            }
-        }
-        printf("\n");
-    }
-    if (m_properties)
-    {
-        m_properties->dump();
     }
 }

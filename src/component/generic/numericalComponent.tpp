@@ -10,6 +10,13 @@
 #define __NUMERICAL_COMPONENT_TPP__
 
 template <typename T>
+NumericalComponent<T>::NumericalComponent(T value)
+    : m_value {value}
+{
+    // Nothing
+}
+
+template <typename T>
 T NumericalComponent<T>::get() const
 {
     return m_value;

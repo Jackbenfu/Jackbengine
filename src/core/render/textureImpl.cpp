@@ -69,19 +69,19 @@ bool TextureImpl::loadFromLayer(
         return errorAlreadyLoaded();
     }
 
-    const TmxLayer *layer = map->getLayer(layerName);
+    const TmxLayer *layer = map->layer(layerName);
     if (!layer)
     {
         LOG_ERROR("Layer [%s] not found in map", layerName)
         return false;
     }
 
-    const TmxTileset *tileset = map->getTileset();
+    const TmxTileset *tileset = map->tileset();
 
     SDL_Surface *tilesetSurface;
     if (nullptr == tilesetImageData)
     {
-        tilesetSurface = IMG_Load(tileset->getImage()->getSource());
+        tilesetSurface = IMG_Load(tileset->image()->source());
     }
     else
     {
@@ -101,14 +101,14 @@ bool TextureImpl::loadFromLayer(
         return false;
     }
 
-    int layerWidth = layer->getWidth();
-    int layerHeight = layer->getHeight();
+    int layerWidth = layer->width();
+    int layerHeight = layer->height();
 
-    int tileWidth = tileset->getTileWidth();
-    int tileHeight = tileset->getTileHeight();
+    int tileWidth = tileset->tileWidth();
+    int tileHeight = tileset->tileHeight();
 
-    int surfaceWidth = layerWidth * tileset->getTileWidth();
-    int surfaceHeight = layerHeight * tileset->getTileHeight();
+    int surfaceWidth = layerWidth * tileset->tileWidth();
+    int surfaceHeight = layerHeight * tileset->tileHeight();
 
     SDL_Surface *surface = SDL_CreateRGBSurface(
         SDL_SWSURFACE, surfaceWidth, surfaceHeight, 32, 0, 0, 0, 0
@@ -126,7 +126,7 @@ bool TextureImpl::loadFromLayer(
     {
         for (int col = 0; col < layerWidth; ++col)
         {
-            int tileId = layer->getTileId(col, row);
+            int tileId = layer->tileId(col, row);
 
             if (0 >= tileId)
             {
@@ -171,27 +171,27 @@ bool TextureImpl::loadFromObjectGroup(
         return errorAlreadyLoaded();
     }
 
-    const TmxObjectGroup *objectGroup = map->getObjectGroup(objectGroupName);
+    const TmxObjectGroup *objectGroup = map->objectGroup(objectGroupName);
     if (!objectGroup)
     {
         LOG_ERROR("Object group [%s] not found in map", objectGroupName)
         return false;
     }
 
-    int objectCount = objectGroup->getObjectCount();
+    int objectCount = objectGroup->objectCount();
     if (0 < objectCount)
     {
-        int minX = objectGroup->getObject(0)->getX();
-        int minY = objectGroup->getObject(0)->getY();
+        int minX = objectGroup->object(0)->x();
+        int minY = objectGroup->object(0)->y();
         int maxX = minX;
         int maxY = minY;
         for (int i = 0; i < objectCount; ++i)
         {
-            const TmxObject *object = objectGroup->getObject(i);
+            const TmxObject *object = objectGroup->object(i);
             if (object->hasGid())
             {
-                int x = object->getX();
-                int y = object->getY();
+                int x = object->x();
+                int y = object->y();
 
                 minX = x < minX ? x : minX;
                 minY = y < minY ? y : minY;
@@ -200,12 +200,12 @@ bool TextureImpl::loadFromObjectGroup(
             }
         }
 
-        const TmxTileset *tileset = map->getTileset();
+        const TmxTileset *tileset = map->tileset();
 
         SDL_Surface *tilesetSurface;
         if (nullptr == tilesetImageData)
         {
-            tilesetSurface = IMG_Load(tileset->getImage()->getSource());
+            tilesetSurface = IMG_Load(tileset->image()->source());
         }
         else
         {
@@ -224,8 +224,8 @@ bool TextureImpl::loadFromObjectGroup(
             return false;
         }
 
-        int tileWidth = tileset->getTileWidth();
-        int tileHeight = tileset->getTileHeight();
+        int tileWidth = tileset->tileWidth();
+        int tileHeight = tileset->tileHeight();
 
         int surfaceWidth = tileWidth + maxX - minX;
         int surfaceHeight = tileHeight + maxY - minY;
@@ -244,14 +244,14 @@ bool TextureImpl::loadFromObjectGroup(
 
         for (int i = 0; i < objectCount; ++i)
         {
-            const TmxObject *object = objectGroup->getObject(i);
-            int tileId = object->getGid();
+            const TmxObject *object = objectGroup->object(i);
+            int tileId = object->gid();
             if (0 < tileId)
             {
                 --tileId;
 
-                int x = object->getX() - minX;
-                int y = object->getY() - minY;
+                int x = object->x() - minX;
+                int y = object->y() - minY;
 
                 int tilesetCol = tileId % (tilesetSurface->w / tileWidth);
                 int tilesetRow = tileId / (tilesetSurface->h / tileHeight);
@@ -282,7 +282,7 @@ bool TextureImpl::loadFromObjectGroup(
     return false;
 }
 
-bool TextureImpl::loadFromColor(const Renderer *renderer, int width, int height, Color color)
+bool TextureImpl::loadFromColor(const Renderer *renderer, int width, int height, Color32 color)
 {
     if (m_isInitialized)
     {
@@ -310,7 +310,7 @@ bool TextureImpl::loadFromColor(const Renderer *renderer, int width, int height,
 }
 
 bool TextureImpl::loadFromFont(
-    const Renderer *renderer, const Font *font, Color foreground, const string& text)
+    const Renderer *renderer, const Font *font, Color32 foreground, const string& text)
 {
     if (m_isInitialized)
     {

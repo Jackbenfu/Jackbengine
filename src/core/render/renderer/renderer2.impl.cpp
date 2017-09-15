@@ -13,7 +13,7 @@ using namespace Jackbengine;
 
 Renderer2::Impl::Impl(const Window2& window)
 {
-    auto sdlWindow = static_cast<SDL_Window*>(window.getInternalObject());
+    const auto sdlWindow = static_cast<SDL_Window*>(window.internalObject());
 
     m_renderer = SDL_CreateRenderer(sdlWindow, -1, SDL_RENDERER_ACCELERATED);
     if (nullptr == m_renderer)
@@ -42,12 +42,12 @@ void Renderer2::Impl::present()
     SDL_RenderPresent(m_renderer);
 }
 
-void Renderer2::Impl::setClearColor(Color color)
+void Renderer2::Impl::setClearColor(Color32 color)
 {
     m_clearColor = color;
 }
 
-void Renderer2::Impl::setRenderColor(Color color)
+void Renderer2::Impl::setRenderColor(Color32 color)
 {
     if (SDL_SetRenderDrawColor(m_renderer, color.r, color.g, color.b, color.a) < 0)
     {
@@ -62,18 +62,18 @@ void Renderer2::Impl::renderTexture(int x, int y, const Texture2& texture)
 
 void Renderer2::Impl::renderTexture(int x, int y, const Texture2& texture, double angle)
 {
-    const auto sdlTexture = static_cast<SDL_Texture*>(texture.getInternalObject());
+    const auto sdlTexture = static_cast<SDL_Texture*>(texture.internalObject());
 
     SDL_Rect rect {};
     rect.x = x;
     rect.y = y;
-    rect.w = texture.getWidth();
-    rect.h = texture.getHeight();
+    rect.w = texture.width();
+    rect.h = texture.height();
 
     SDL_RenderCopyEx(m_renderer, sdlTexture, nullptr, &rect, angle, nullptr, SDL_FLIP_NONE);
 }
 
-void Renderer2::Impl::renderLine(float x1, float y1, float x2, float y2, Color color)
+void Renderer2::Impl::renderLine(float x1, float y1, float x2, float y2, Color32 color)
 {
     setRenderColor(color);
 
@@ -83,7 +83,7 @@ void Renderer2::Impl::renderLine(float x1, float y1, float x2, float y2, Color c
     }
 }
 
-void Renderer2::Impl::renderPoint(float x, float y, Color color)
+void Renderer2::Impl::renderPoint(float x, float y, Color32 color)
 {
     setRenderColor(color);
 
@@ -93,7 +93,7 @@ void Renderer2::Impl::renderPoint(float x, float y, Color color)
     }
 }
 
-SDL_Renderer* Renderer2::Impl::getInternalObject() const
+SDL_Renderer* Renderer2::Impl::internalObject() const
 {
     return m_renderer;
 }

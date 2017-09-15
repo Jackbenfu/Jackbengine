@@ -11,96 +11,73 @@
 using namespace std;
 using namespace Jackbengine;
 
-TmxPropertyGroup::TmxPropertyGroup() = default;
-
-TmxPropertyGroup::~TmxPropertyGroup()
-{
-    for (auto property : m_properties)
-    {
-        DELETE_SAFE(property);
-    }
-    m_properties.clear();
-}
-
 bool TmxPropertyGroup::hasProperty(const char *name) const
 {
-    return nullptr != getRawProperty(name);
+    return nullptr != rawProperty(name);
 }
 
-const char* TmxPropertyGroup::getProperty(const char *name) const
+const char* TmxPropertyGroup::property(const char *name) const
 {
-    const TmxProperty *property = getRawProperty(name);
-    if (property)
+    auto property = rawProperty(name);
+    if (nullptr != property)
     {
-        return property->getValue();
+        return property->value();
     }
 
     return nullptr;
 }
 
-bool TmxPropertyGroup::getIntProperty(const char *name, int *value) const
+bool TmxPropertyGroup::intProperty(const char *name, int *value) const
 {
-    const TmxProperty *property = getRawProperty(name);
-    if (property)
+    auto property = rawProperty(name);
+    if (nullptr != property)
     {
-        return property->getIntValue(value);
+        return property->intValue(value);
     }
 
     return false;
 }
 
-bool TmxPropertyGroup::getUnsignedIntProperty(const char *name, uint *value) const
+bool TmxPropertyGroup::unsignedIntProperty(const char *name, uint *value) const
 {
-    const TmxProperty *property = getRawProperty(name);
-    if (property)
+    auto property = rawProperty(name);
+    if (nullptr != property)
     {
-        return property->getUnsignedIntValue(value);
+        return property->unsignedIntValue(value);
     }
 
     return false;
 }
 
-bool TmxPropertyGroup::getBoolProperty(const char *name, bool *value) const
+bool TmxPropertyGroup::boolProperty(const char *name, bool *value) const
 {
-    const TmxProperty *property = getRawProperty(name);
-    if (property)
+    auto property = rawProperty(name);
+    if (nullptr != property)
     {
-        return property->getBoolValue(value);
+        return property->boolValue(value);
     }
 
     return false;
 }
 
-bool TmxPropertyGroup::getDoubleProperty(const char *name, double *value) const
+bool TmxPropertyGroup::doubleProperty(const char *name, double *value) const
 {
-    const TmxProperty *property = getRawProperty(name);
-    if (property)
+    auto property = rawProperty(name);
+    if (nullptr != property)
     {
-        return property->getDoubleValue(value);
+        return property->doubleValue(value);
     }
 
     return false;
 }
 
-void TmxPropertyGroup::dump() const
+const TmxProperty* TmxPropertyGroup::rawProperty(const char *name) const
 {
-    printf("[tmxPropertyGroup][properties]\n");
-    for (auto property : m_properties)
-    {
-        if (property)
-        {
-            property->dump();
-        }
-    }
-}
-
-const TmxProperty* TmxPropertyGroup::getRawProperty(const char *name) const
-{
-    vector<TmxProperty*>::const_iterator it = m_properties.begin();
+    auto it = m_properties.begin();
     while (m_properties.end() != it)
     {
-        TmxProperty *property = *it;
-        if (property && !strcmp(property->getName(), name))
+        auto property = (*it).get();
+        if (nullptr != property && 0 == strcmp(property->name(), name))
         {
             return property;
         }
@@ -111,20 +88,18 @@ const TmxProperty* TmxPropertyGroup::getRawProperty(const char *name) const
     return nullptr;
 }
 
-bool TmxPropertyGroup::load(const TiXmlElement *element)
+void TmxPropertyGroup::load(const TiXmlElement *element)
 {
-    const TiXmlNode *node = element->FirstChild();
-    while (node)
+    auto node = element->FirstChild();
+    while (nullptr != node)
     {
-        if (!strcmp("property", node->Value()))
+        if (0 == strcmp("property", node->Value()))
         {
-            TmxProperty *property = new TmxProperty();
+            auto property = std::unique_ptr<TmxProperty>(new TmxProperty());
             property->load(node->ToElement());
-            m_properties.push_back(property);
+            m_properties.push_back(std::move(property));
         }
 
         node = node->NextSibling();
     }
-
-    return true;
 }

@@ -14,20 +14,20 @@ using namespace Jackbengine;
 
 void MotionSystem2::frame(float delta)
 {
-    for (auto& entity : m_entities)
+    for (const auto& entity : m_entities)
     {
-        auto components = entity.second;
+        const auto components = entity.second;
 
         auto& transform = components->get<TransformComponent2>();
-        auto& velocity = components->get<VelocityComponent2>();
+        const auto& velocity = components->get<VelocityComponent2>();
 
-        auto velocityVec = velocity.get();
+        const auto velocityVec = velocity.get();
         if (velocityVec.isZero())
         {
             return;
         }
 
-        auto positionVec = transform.getPosition();
+        const auto positionVec = transform.position();
 
         transform.setPosition(
             positionVec.x + velocityVec.x * delta,

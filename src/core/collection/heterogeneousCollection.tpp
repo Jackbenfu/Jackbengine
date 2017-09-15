@@ -15,7 +15,7 @@ TItem& HeterogeneousCollection<TBase>::get() const
 {
     ASSERT_IS_BASE_OF(TBase, TItem);
 
-    auto& tuple = find<TItem>();
+    const auto& tuple = find<TItem>();
 
     return dynamic_cast<TItem&>(*std::get<1>(tuple));
 }
@@ -32,8 +32,8 @@ bool HeterogeneousCollection<TBase>::any() const
 }
 
 template<typename TBase>
-template<typename TItem, typename... Args>
-void HeterogeneousCollection<TBase>::add(Args&&... args)
+template<typename TItem, typename ...Args>
+void HeterogeneousCollection<TBase>::add(Args&& ...args)
 {
     ASSERT_IS_BASE_OF(TBase, TItem);
 
@@ -69,7 +69,7 @@ void HeterogeneousCollection<TBase>::enable()
 {
     ASSERT_IS_BASE_OF(TBase, TItem);
 
-    auto& tuple = find<TItem>();
+    const auto& tuple = find<TItem>();
 
     std::get<0>(tuple) = true;
 }
@@ -80,7 +80,7 @@ void HeterogeneousCollection<TBase>::disable()
 {
     ASSERT_IS_BASE_OF(TBase, TItem);
 
-    auto& tuple = find<TItem>();
+    const auto& tuple = find<TItem>();
 
     std::get<0>(tuple) = false;
 }
@@ -91,9 +91,9 @@ void HeterogeneousCollection<TBase>::apply(TFunction function)
 {
     for (auto& pair : m_collection)
     {
-        auto& tuple = pair.second;
+        const auto& tuple = pair.second;
 
-        auto isEnabled = std::get<0>(tuple);
+        const auto isEnabled = std::get<0>(tuple);
         if (!isEnabled)
         {
             continue;

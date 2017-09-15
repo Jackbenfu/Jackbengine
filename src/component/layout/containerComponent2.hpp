@@ -21,24 +21,25 @@ class ContainerComponent2 : public Component2
 
 public:
     ContainerComponent2(int x, int y, int w, int h);
-
     ~ContainerComponent2() override = default;
 
-    const Recti& getRect() const;
+    const Recti& rect() const;
     void setRect(int x, int y, int w, int h);
 
     bool contains(float x, float y) const;
     bool contains(const Vec2i& point) const;
     bool contains(const Vec2f& point) const;
 
-    int getX() const;
-    int getY() const;
-    int getWidth() const;
-    int getHeight() const;
+    int x() const;
+    int y() const;
+    int width() const;
+    int height() const;
 
 private:
     Recti m_rect;
 };
+
+using Container = ContainerComponent2;
 
 } // namespace Jackbengine
 

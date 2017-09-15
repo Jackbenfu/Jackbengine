@@ -30,6 +30,7 @@ public:
 
     bool running() const;
     void loop();
+
     virtual void frame(float delta) = 0;
 
     Timer2& timer() const;
@@ -37,6 +38,8 @@ public:
     Input2& input() const;
     Window2& window() const;
     Renderer2& renderer() const;
+
+    void exit();
 
 private:
     mutable Timer2 m_timer;

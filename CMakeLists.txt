@@ -75,7 +75,7 @@ set(SOURCE_FILES
     src/core/input/inputImpl.cpp
     src/core/input/input2.cpp
     src/core/input/input2.impl.cpp
-    src/core/render/color.cpp
+    src/core/render/color32.cpp
     src/core/render/cursor.cpp
     src/core/render/cursorImpl.cpp
     src/core/render/cursor/cursor2.cpp
@@ -125,6 +125,7 @@ set(SOURCE_FILES
     src/system/debug/debugTextSystem.cpp
     src/system/debug/debugTextSystem2.cpp
     src/system/input/mouseEventTriggerSystem.cpp
+    src/system/input/mouseEventTriggerSystem2.cpp
     src/system/physic/aabbCollisionSystem.cpp
     src/system/render/spriteRenderSystem.cpp
     src/system/render/spriteRenderSystem2.cpp

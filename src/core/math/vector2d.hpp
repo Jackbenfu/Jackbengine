@@ -18,8 +18,7 @@ template<typename T>
 struct Vector2d
 {
     Vector2d()
-        : x(0),
-          y(0)
+        : Vector2d(0, 0)
     {
         // Nothing
     }
@@ -31,10 +30,7 @@ struct Vector2d
         // Nothing
     }
 
-    ~Vector2d()
-    {
-        // Nothing
-    }
+    ~Vector2d() = default;
 
     void absolute()
     {

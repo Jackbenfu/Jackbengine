@@ -25,52 +25,52 @@ Font2::Font2(const void *data, size_t dataSize, int size)
 
 Font2::~Font2() = default;
 
-void Font2::getGlyphMetrics(ushort glyph, int *minX, int *maxX, int *minY, int *maxY, int *advance) const
+void Font2::glyphMetrics(ushort glyph, int *minX, int *maxX, int *minY, int *maxY, int *advance) const
 {
-    m_impl->getGlyphMetrics(glyph, minX, maxX, minY, maxY, advance);
+    m_impl->glyphMetrics(glyph, minX, maxX, minY, maxY, advance);
 }
 
-void Font2::getGlyphMinX(ushort glyph, int *minX) const
+void Font2::glyphMinX(ushort glyph, int *minX) const
 {
-    m_impl->getGlyphMinX(glyph, minX);
+    m_impl->glyphMinX(glyph, minX);
 }
 
-void Font2::getGlyphMaxX(ushort glyph, int *maxX) const
+void Font2::glyphMaxX(ushort glyph, int *maxX) const
 {
-    m_impl->getGlyphMaxX(glyph, maxX);
+    m_impl->glyphMaxX(glyph, maxX);
 }
 
-void Font2::getGlyphMinY(ushort glyph, int *minY) const
+void Font2::glyphMinY(ushort glyph, int *minY) const
 {
-    m_impl->getGlyphMinY(glyph, minY);
+    m_impl->glyphMinY(glyph, minY);
 }
 
-void Font2::getGlyphMaxY(ushort glyph, int *maxY) const
+void Font2::glyphMaxY(ushort glyph, int *maxY) const
 {
-    m_impl->getGlyphMaxY(glyph, maxY);
+    m_impl->glyphMaxY(glyph, maxY);
 }
 
-void Font2::getGlyphAdvance(ushort glyph, int *advance) const
+void Font2::glyphAdvance(ushort glyph, int *advance) const
 {
-    m_impl->getGlyphMinX(glyph, advance);
+    m_impl->glyphMinX(glyph, advance);
 }
 
-int Font2::getAscent() const
+int Font2::ascent() const
 {
-    return m_impl->getAscent();
+    return m_impl->ascent();
 }
 
-int Font2::getDescent() const
+int Font2::descent() const
 {
-    return m_impl->getDescent();
+    return m_impl->descent();
 }
 
-int Font2::getLineSkip() const
+int Font2::lineSkip() const
 {
-    return m_impl->getLineSkip();
+    return m_impl->lineSkip();
 }
 
-void* Font2::getInternalObject() const
+void* Font2::internalObject() const
 {
-    return m_impl->getInternalObject();
+    return m_impl->internalObject();
 }

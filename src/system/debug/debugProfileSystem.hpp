@@ -28,7 +28,7 @@ public:
 
     void setRenderer(Renderer *renderer);
     void setTimer(Timer *timer);
-    void setForeground(Color color);
+    void setForeground(Color32 color);
 
     void showFps(bool show);
 

@@ -10,7 +10,7 @@
 #define __COLOR_COMPONENT_H__
 
 #include "component/component.hpp"
-#include "core/render/color.hpp"
+#include "core/render/color32.hpp"
 
 namespace Jackbengine {
 
@@ -20,9 +20,9 @@ public:
     ColorComponent();
     ~ColorComponent();
 
-    Color getColor() const;
+    Color32 getColor() const;
 
-    void setColor(Color color);
+    void setColor(Color32 color);
     void setColor(byte red, byte green, byte blue, byte alpha);
     void setColor(byte red, byte green, byte blue);
 
@@ -39,7 +39,7 @@ public:
     void setAlpha(byte value);
 
 private:
-    Color m_color;
+    Color32 m_color;
 };
 
 } // namespace Jackbengine

@@ -142,7 +142,7 @@ bool Input2::Impl::mouseMove() const
     return m_mouseMove;
 }
 
-const Vec2i& Input2::Impl::getMousePosition() const
+const Vec2i& Input2::Impl::mousePosition() const
 {
     SDL_GetMouseState(&m_mousePos.x, &m_mousePos.y);
 

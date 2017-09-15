@@ -16,7 +16,7 @@ ContainerComponent2::ContainerComponent2(int x, int y, int w, int h)
     // Nothing
 }
 
-const Recti& ContainerComponent2::getRect() const
+const Recti& ContainerComponent2::rect() const
 {
     return m_rect;
 }
@@ -47,22 +47,22 @@ bool ContainerComponent2::contains(const Vec2f& point) const
     return contains(point.x, point.y);
 }
 
-int ContainerComponent2::getX() const
+int ContainerComponent2::x() const
 {
     return m_rect.x;
 }
 
-int ContainerComponent2::getY() const
+int ContainerComponent2::y() const
 {
     return m_rect.y;
 }
 
-int ContainerComponent2::getWidth() const
+int ContainerComponent2::width() const
 {
     return m_rect.w;
 }
 
-int ContainerComponent2::getHeight() const
+int ContainerComponent2::height() const
 {
     return m_rect.h;
 }

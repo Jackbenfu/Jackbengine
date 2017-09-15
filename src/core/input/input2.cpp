@@ -59,9 +59,9 @@ bool Input2::mouseMove() const
     return m_impl->mouseMove();
 }
 
-const Jackbengine::Vector2d<int>& Input2::getMousePosition() const
+const Jackbengine::Vector2d<int>& Input2::mousePosition() const
 {
-    return m_impl->getMousePosition();
+    return m_impl->mousePosition();
 }
 
 bool Input2::quit() const

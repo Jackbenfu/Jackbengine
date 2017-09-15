@@ -20,7 +20,7 @@ void SystemManager::addEntity(Entity2 entity)
 {
     auto& components = m_entityManager.getEntity(entity);
 
-    static const auto lambda = [&](System2& system)
+    const auto lambda = [&](System2& system)
     {
         system.addEntity(entity, components);
     };
@@ -30,7 +30,7 @@ void SystemManager::addEntity(Entity2 entity)
 
 void SystemManager::removeEntity(Entity2 entity)
 {
-    static const auto lambda = [&](System2& system)
+    const auto lambda = [&](System2& system)
     {
         system.removeEntity(entity);
     };
@@ -40,7 +40,7 @@ void SystemManager::removeEntity(Entity2 entity)
 
 void SystemManager::frame(float delta)
 {
-    static const auto lambda = [&delta](System2& system)
+    const auto lambda = [&delta](System2& system)
     {
         system.frame(delta);
     };

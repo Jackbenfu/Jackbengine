@@ -23,9 +23,8 @@ class DebugProfileSystem2 : public System2
 
 public:
     DebugProfileSystem2(Renderer2& renderer, Timer2& timer);
+    DebugProfileSystem2(Renderer2& renderer, Timer2& timer, Color32 foreground);
     ~DebugProfileSystem2() override = default;
-
-    void setForeground(Color color);
 
 private:
     void frame(float delta) override;

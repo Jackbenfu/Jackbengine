@@ -16,7 +16,7 @@ ZOrderComponent2::ZOrderComponent2(int index)
     // Nothing
 }
 
-int ZOrderComponent2::getIndex() const
+int ZOrderComponent2::index() const
 {
     return m_index;
 }

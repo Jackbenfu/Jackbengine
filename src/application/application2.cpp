@@ -30,10 +30,10 @@ bool Application2::running() const
 
 void Application2::loop()
 {
-    const auto deltaMultiplier = 0.001f;
-
     m_timer.start();
-    const auto delta = m_timer.getElapsedMilliseconds() * deltaMultiplier;
+
+    const auto deltaMultiplier = 0.001f;
+    const auto delta = m_timer.elapsedMilliseconds() * deltaMultiplier;
 
     m_renderer.clear();
     m_input.update();
@@ -44,7 +44,7 @@ void Application2::loop()
 
     if (m_input.quit())
     {
-        m_running = false;
+        exit();
     }
 
     m_timer.snapshot();
@@ -73,4 +73,9 @@ Window2& Application2::window() const
 Renderer2& Application2::renderer() const
 {
     return m_renderer;
+}
+
+void Application2::exit()
+{
+    m_running = false;
 }

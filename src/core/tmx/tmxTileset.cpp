@@ -10,83 +10,62 @@
 
 using namespace Jackbengine;
 
-TmxTileset::TmxTileset() = default;
-
-TmxTileset::~TmxTileset()
+TmxTileset::TmxTileset()
+    : m_image {std::unique_ptr<TmxImage>(new TmxImage())},
+      m_properties {std::unique_ptr<TmxPropertyGroup>(new TmxPropertyGroup())}
 {
-    DELETE_SAFE(m_properties);
-    DELETE_SAFE(m_image);
+    // Nothing
 }
 
-const char* TmxTileset::getName() const
+const char* TmxTileset::name() const
 {
     return m_name;
 }
 
-int TmxTileset::getFirstGid() const
+int TmxTileset::firstGid() const
 {
     return m_firstGid;
 }
 
-int TmxTileset::getTileWidth() const
+int TmxTileset::tileWidth() const
 {
     return m_tileWidth;
 }
 
-int TmxTileset::getTileHeight() const
+int TmxTileset::tileHeight() const
 {
     return m_tileHeight;
 }
 
-const TmxImage* TmxTileset::getImage() const
+const TmxImage* TmxTileset::image() const
 {
-    return m_image;
+    return m_image.get();
 }
 
-const TmxPropertyGroup* TmxTileset::getProperties() const
+const TmxPropertyGroup* TmxTileset::properties() const
 {
-    return m_properties;
+    return m_properties.get();
 }
 
-void TmxTileset::dump() const
-{
-    printf("[tmxTileset][name] %s\n", getName());
-    printf("[tmxTileset][firstGid] %i\n", getFirstGid());
-    printf("[tmxTileset][tileWidth] %i\n", getTileWidth());
-    printf("[tmxTileset][tileHeight] %i\n", getTileHeight());
-    if (m_image)
-    {
-        m_image->dump();
-    }
-    if (m_properties)
-    {
-        m_properties->dump();
-    }
-}
-
-bool TmxTileset::load(const TiXmlElement *element)
+void TmxTileset::load(const TiXmlElement *element)
 {
     m_name = element->Attribute("name");
     element->Attribute("firstgid", &m_firstGid);
     element->Attribute("tilewidth", &m_tileWidth);
     element->Attribute("tileheight", &m_tileHeight);
 
-    const TiXmlNode *node = element->FirstChild();
-    while (node)
+    auto node = element->FirstChild();
+    while (nullptr != node)
     {
-        if (!strcmp("image", node->Value()))
+        if (0 == strcmp("image", node->Value()))
         {
-            m_image = new TmxImage();
             m_image->load(node->ToElement());
         }
-        else if (!strcmp("properties", node->Value()))
+        else if (0 == strcmp("properties", node->Value()))
         {
-            m_properties = new TmxPropertyGroup();
             m_properties->load(node->ToElement());
         }
 
         node = node->NextSibling();
     }
-
-    return true;
 }

@@ -22,7 +22,7 @@ SpriteComponent2::SpriteComponent2(const Renderer2& renderer, const void *data, 
     // Nothing
 }
 
-SpriteComponent2::SpriteComponent2(const Renderer2& renderer, int width, int height, Color color)
+SpriteComponent2::SpriteComponent2(const Renderer2& renderer, int width, int height, Color32 color)
     : m_texture {renderer, width, height, color}
 {
     // Nothing
@@ -42,7 +42,7 @@ SpriteComponent2::SpriteComponent2(const Renderer2& renderer, const TmxMap& map,
     // Nothing
 }
 
-const Texture2& SpriteComponent2::getTexture() const
+const Texture2& SpriteComponent2::texture() const
 {
     return m_texture;
 }

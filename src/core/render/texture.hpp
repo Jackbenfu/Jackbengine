@@ -33,10 +33,10 @@ public:
         const Renderer *renderer, const TmxMap *map, const char *objectGroupName,
         const void *tilesetImageData = nullptr, size_t tilesetImageDataSize = 0) = 0;
 
-    virtual bool loadFromColor(const Renderer *renderer, int width, int height, Color color) = 0;
+    virtual bool loadFromColor(const Renderer *renderer, int width, int height, Color32 color) = 0;
 
     virtual bool loadFromFont(
-        const Renderer *renderer, const Font *font, Color foreground, const std::string& text) = 0;
+        const Renderer *renderer, const Font *font, Color32 foreground, const std::string& text) = 0;
 
     virtual int getWidth() const = 0;
     virtual int getHeight() const = 0;

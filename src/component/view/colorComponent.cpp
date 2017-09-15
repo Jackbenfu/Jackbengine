@@ -14,24 +14,24 @@ ColorComponent::ColorComponent() = default;
 
 ColorComponent::~ColorComponent() = default;
 
-Color ColorComponent::getColor() const
+Color32 ColorComponent::getColor() const
 {
     return m_color;
 }
 
-void ColorComponent::setColor(Color color)
+void ColorComponent::setColor(Color32 color)
 {
     m_color = color;
 }
 
 void ColorComponent::setColor(byte red, byte green, byte blue, byte alpha)
 {
-    m_color = Color(red, green, blue, alpha);
+    m_color = Color32(red, green, blue, alpha);
 }
 
 void ColorComponent::setColor(byte red, byte green, byte blue)
 {
-    m_color = Color(red, green, blue);
+    m_color = Color32(red, green, blue);
 }
 
 byte ColorComponent::getRed() const

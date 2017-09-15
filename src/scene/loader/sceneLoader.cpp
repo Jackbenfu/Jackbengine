@@ -11,7 +11,7 @@
 using namespace std;
 using namespace Jackbengine;
 
-SceneLoader::SceneLoader(Scene *scene)
+SceneLoader::SceneLoader(Scene& scene)
     : m_scene(scene)
 {
     // Nothing
@@ -48,7 +48,7 @@ bool SceneLoader::hasBinaryResource(const string& name) const
     return m_binaryResources.end() != m_binaryResources.find(name);
 }
 
-const pair<unsigned char*, size_t>* SceneLoader::getBinaryResource(const string& name)
+const pair<unsigned char*, size_t>* SceneLoader::binaryResource(const string& name)
 {
     if (!hasBinaryResource(name))
     {
@@ -59,7 +59,7 @@ const pair<unsigned char*, size_t>* SceneLoader::getBinaryResource(const string&
     return &m_binaryResources[name];
 }
 
-Scene* SceneLoader::scene() const
+Scene& SceneLoader::scene() const
 {
     return m_scene;
 }

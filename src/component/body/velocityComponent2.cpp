@@ -11,6 +11,7 @@
 using namespace Jackbengine;
 
 VelocityComponent2::VelocityComponent2(float x, float y)
+    : m_velocity {x, y}
 {
     // Nothing
 }
@@ -26,7 +27,7 @@ void VelocityComponent2::set(float x, float y)
     m_velocity.y = y;
 }
 
-float VelocityComponent2::getX() const
+float VelocityComponent2::x() const
 {
     return m_velocity.x;
 }
@@ -36,7 +37,7 @@ void VelocityComponent2::setX(float x)
     m_velocity.x = x;
 }
 
-float VelocityComponent2::getY() const
+float VelocityComponent2::y() const
 {
     return m_velocity.y;
 }

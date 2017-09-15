@@ -17,29 +17,27 @@ namespace Jackbengine {
 
 class TmxProperty
 {
+    DISALLOW_COPY_AND_MOVE(TmxProperty)
+
     friend class TmxPropertyGroup;
 
 public:
-    ~TmxProperty();
+    const char* name() const;
+    const char* value() const;
 
-    const char* getName() const;
-    const char* getValue() const;
-
-    bool getIntValue(int *value) const;
-    bool getUnsignedIntValue(uint *value) const;
-    bool getBoolValue(bool *value) const;
-    bool getDoubleValue(double *value) const;
-
-    void dump() const;
+    bool intValue(int *value) const;
+    bool unsignedIntValue(uint *value) const;
+    bool boolValue(bool *value) const;
+    bool doubleValue(double *value) const;
 
 private:
-    TmxProperty();
+    TmxProperty() = default;
 
-    const TiXmlElement *m_element = nullptr;
-    const char *m_name = nullptr;
-    const char *m_value = nullptr;
+    void load(const TiXmlElement *element);
 
-    bool load(const TiXmlElement *element);
+    const TiXmlElement *m_element {nullptr};
+    const char *m_name {nullptr};
+    const char *m_value {nullptr};
 };
 
 } // namespace Jackbengine

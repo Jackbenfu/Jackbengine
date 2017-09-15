@@ -21,6 +21,9 @@ class NumericalComponent : public Component2
     DISALLOW_COPY_AND_MOVE(NumericalComponent)
 
 public:
+    NumericalComponent(T value);
+    ~NumericalComponent() override = default;
+
     T get() const;
     void set(T value);
 
@@ -30,6 +33,9 @@ public:
 private:
     T m_value;
 };
+
+template<typename T>
+using Numerical = NumericalComponent<T>;
 
 #include "numericalComponent.tpp"
 

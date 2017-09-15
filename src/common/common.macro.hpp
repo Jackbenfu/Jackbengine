@@ -12,12 +12,11 @@
 namespace Jackbengine {
 
 #define DISALLOW_COPY_AND_MOVE(T)           \
-    ; /* Comma to restore indentation */    \
     public:                                 \
         T(const T&) = delete;               \
         void operator=(const T&) = delete;  \
-        T(const T&&) = delete;              \
-        void operator=(const T&&) = delete;
+        T(T&&) = delete;                    \
+        void operator=(T&&) = delete;
 
 #define GET_TYPE_ID(T)      typeid(T).hash_code()
 #define GET_TYPE_NAME(T)    typeid(T).name()

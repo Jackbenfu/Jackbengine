@@ -22,7 +22,7 @@ public:
     SdlRwops(const void *data, size_t dataSize);
     ~SdlRwops() = default;
 
-    SDL_RWops* getInternalObject() const;
+    SDL_RWops* internalObject() const;
 
 private:
     SDL_RWops *m_rwops {nullptr};

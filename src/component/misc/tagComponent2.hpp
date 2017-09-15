@@ -28,6 +28,8 @@ private:
     StringComponent m_value;
 };
 
+using Tag = TagComponent2;
+
 } // namespace Jackbengine
 
 #endif // __TAG_COMPONENT_2_H__

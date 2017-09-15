@@ -9,8 +9,8 @@
 #ifndef __SCENE_2_TPP__
 #define __SCENE_2_TPP__
 
-template<typename TComponent, typename... Args>
-void Scene2::addComponent(Entity2 entity, Args&&... args)
+template<typename TComponent, typename ...Args>
+void Scene2::addComponent(Entity2 entity, Args&& ...args)
 {
     m_entityManager.addComponent<TComponent>(entity, std::forward<Args>(args)...);
     m_systemManager.addEntity(entity);
@@ -43,8 +43,8 @@ void Scene2::disableComponent(Entity2 entity)
     m_systemManager.removeEntity(entity);
 }
 
-template<typename TSystem, typename... Args>
-void Scene2::addSystem(Args&&... args)
+template<typename TSystem, typename ...Args>
+void Scene2::addSystem(Args&& ...args)
 {
     m_systemManager.addSystem<TSystem>(std::forward<Args>(args)...);
 }
@@ -65,6 +65,14 @@ template<typename TSystem>
 void Scene2::disableSystem()
 {
     m_systemManager.disableSystem<TSystem>();
+}
+
+template<typename TScene>
+void Scene2::loadScene()
+{
+    ASSERT_IS_BASE_OF(Scene2, TScene);
+
+    m_sceneManager.loadScene<TScene>(m_application, m_sceneManager);
 }
 
 #endif // __SCENE_2_TPP__

@@ -31,8 +31,8 @@ void AABBCollisionSystem::update(float delta)
 {
     for (auto group : m_groups)
     {
-        auto ltag1 = group->getTag1();
-        auto ltag2 = group->getTag2();
+        auto ltag1 = group->tag1();
+        auto ltag2 = group->tag2();
 
         for (auto entity1 : m_entities)
         {
@@ -85,8 +85,8 @@ bool AABBCollisionSystem::addCollisionGroup(const char *tag1, const char *tag2)
 
     while (it != itEnd)
     {
-        auto existingTag1 = (*it)->getTag1();
-        auto existingTag2 = (*it)->getTag2();
+        auto existingTag1 = (*it)->tag1();
+        auto existingTag2 = (*it)->tag2();
 
         if (existingTag1 == tag1 && existingTag2 == tag2)
         {
@@ -108,8 +108,8 @@ bool AABBCollisionSystem::removeCollisionGroup(const char *tag1, const char *tag
 
     while (it != itEnd)
     {
-        auto existingTag1 = (*it)->getTag1();
-        auto existingTag2 = (*it)->getTag2();
+        auto existingTag1 = (*it)->tag1();
+        auto existingTag2 = (*it)->tag2();
 
         if (existingTag1 == tag1 && existingTag2 == tag2)
         {

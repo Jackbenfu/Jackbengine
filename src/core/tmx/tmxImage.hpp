@@ -16,25 +16,23 @@ namespace Jackbengine {
 
 class TmxImage
 {
+    DISALLOW_COPY_AND_MOVE(TmxImage)
+
     friend class TmxTileset;
 
 public:
-    ~TmxImage();
-
-    const char* getSource() const;
-    int getWidth() const;
-    int getHeight() const;
-
-    void dump() const;
+    const char* source() const;
+    int width() const;
+    int height() const;
 
 private:
-    TmxImage();
+    TmxImage() = default;
 
-    const char *m_source = nullptr;
-    int m_width = 0;
-    int m_height = 0;
+    void load(const TiXmlElement *element);
 
-    bool load(const TiXmlElement *element);
+    const char *m_source {nullptr};
+    int m_width {0};
+    int m_height {0};
 };
 
 } // namespace Jackbengine

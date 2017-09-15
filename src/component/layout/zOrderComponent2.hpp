@@ -23,12 +23,14 @@ public:
 
     ~ZOrderComponent2() override = default;
 
-    int getIndex() const;
+    int index() const;
     void setIndex(int index);
 
 private:
     int m_index {0};
 };
+
+using ZOrder = ZOrderComponent2;
 
 } // namespace Jackbengine
 

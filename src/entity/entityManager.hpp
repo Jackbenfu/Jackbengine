@@ -30,8 +30,8 @@ public:
     void disableEntity(Entity2 entity);
     ComponentCollection& getEntity(Entity2 entity) const;
 
-    template<typename TComponent, typename... Args>
-    void addComponent(Entity2 entity, Args&&... args);
+    template<typename TComponent, typename ...Args>
+    void addComponent(Entity2 entity, Args&& ...args);
 
     template<typename TComponent>
     void removeComponent(Entity2 entity);
@@ -53,6 +53,7 @@ private:
     static auto findEntity(T& t, Entity2 entity) -> decltype(t.findEntity(entity));
 
     std::unordered_map<size_t, std::tuple<bool, std::unique_ptr<ComponentCollection>>> m_entities;
+
 };
 
 #include "entityManager.tpp"

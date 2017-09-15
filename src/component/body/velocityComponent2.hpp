@@ -27,15 +27,17 @@ public:
     const Vec2f& get() const;
     void set(float x, float y);
 
-    float getX() const;
+    float x() const;
     void setX(float x);
 
-    float getY() const;
+    float y() const;
     void setY(float y);
 
 private:
     Vec2f m_velocity;
 };
+
+using Velocity = VelocityComponent2;
 
 } // namespace Jackbengine
 

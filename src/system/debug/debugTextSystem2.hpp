@@ -20,6 +20,7 @@ class DebugTextSystem2 : public  System2
 
 public:
     explicit DebugTextSystem2(Renderer2& renderer);
+    DebugTextSystem2(Renderer2& renderer, Color32 color);
     ~DebugTextSystem2() override = default;
 
 private:
@@ -27,6 +28,7 @@ private:
     bool hasRequiredComponents(ComponentCollection& components) const override;
 
     Renderer2& m_renderer;
+    Color32 m_color;
 };
 
 } // namespace Jackbengine

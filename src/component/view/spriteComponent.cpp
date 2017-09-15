@@ -86,7 +86,7 @@ bool SpriteComponent::loadFromObjectGroup(
     return result;
 }
 
-bool SpriteComponent::loadFromColor(const Renderer *renderer, uint width, uint height, Color color)
+bool SpriteComponent::loadFromColor(const Renderer *renderer, uint width, uint height, Color32 color)
 {
     if (!m_texture)
     {

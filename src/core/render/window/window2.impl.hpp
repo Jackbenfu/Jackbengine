@@ -20,10 +20,10 @@ public:
     Impl(const std::string& title, int width, int height, bool fullscreen);
     ~Impl();
 
-    int getWidth() const;
-    int getHeight() const;
+    int width() const;
+    int height() const;
 
-    SDL_Window* getInternalObject() const;
+    SDL_Window* internalObject() const;
 
 private:
     void setWindowIcon();

@@ -12,31 +12,14 @@
 using namespace Jackbengine;
 
 TmxMap::TmxMap()
+    : m_doc {std::make_unique<TiXmlDocument>()},
+      m_tileset {std::unique_ptr<TmxTileset>(new TmxTileset())},
+      m_properties {std::unique_ptr<TmxPropertyGroup>(new TmxPropertyGroup())}
 {
-    m_doc = new TiXmlDocument();
+    // Nothing
 }
 
-TmxMap::~TmxMap()
-{
-    DELETE_SAFE(m_properties);
-    DELETE_SAFE(m_tileset);
-
-    for (auto objectGroup : m_objectGroups)
-    {
-        DELETE_SAFE(objectGroup);
-    }
-    m_objectGroups.clear();
-
-    for (auto layer : m_layers)
-    {
-        DELETE_SAFE(layer);
-    }
-    m_layers.clear();
-
-    DELETE_SAFE(m_doc);
-}
-
-bool TmxMap::loadFromFile(const char *file)
+void TmxMap::loadFromFile(const char *file)
 {
     char filePath[255];
 
@@ -60,153 +43,109 @@ bool TmxMap::loadFromFile(const char *file)
 
     if (!m_doc->LoadFile(filePath))
     {
-        LOG_ERROR("%s: %s (%i)", filePath, m_doc->ErrorDesc(), m_doc->ErrorId())
-        return false;
+        throw std::runtime_error(m_doc->ErrorDesc());
     }
 
-    return loadContents();
+    loadContents();
 }
 
-bool TmxMap::loadFromMemory(const unsigned char *data)
+void TmxMap::loadFromMemory(const unsigned char *data)
 {
-    if (!m_doc->Parse((char*)data))
+    if (nullptr == m_doc->Parse((char*)data))
     {
-        LOG_ERROR("%s (%i)", m_doc->ErrorDesc(), m_doc->ErrorId())
-        return false;
+        throw std::runtime_error(m_doc->ErrorDesc());
     }
 
-    return loadContents();
+    loadContents();
 }
 
-int TmxMap::getWidth() const
+int TmxMap::width() const
 {
     return m_width;
 }
 
-int TmxMap::getHeight() const
+int TmxMap::height() const
 {
     return m_height;
 }
 
-int TmxMap::getTileWidth() const
+int TmxMap::tileWidth() const
 {
     return m_tileWidth;
 }
 
-int TmxMap::getTileHeight() const
+int TmxMap::tileHeight() const
 {
     return m_tileHeight;
 }
 
-const TmxTileset* TmxMap::getTileset() const
+const TmxTileset* TmxMap::tileset() const
 {
-    return m_tileset;
+    return m_tileset.get();
 }
 
-const TmxLayer* TmxMap::getLayer(int index) const
+const TmxLayer* TmxMap::layer(int index) const
 {
     if (m_layers.size() > index)
     {
-        return m_layers[index];
+        return m_layers[index].get();
     }
 
     return nullptr;
 }
 
-const TmxLayer* TmxMap::getLayer(const char *name) const
+const TmxLayer* TmxMap::layer(const char *name) const
 {
-    for (auto layer : m_layers)
+    for (auto& layer : m_layers)
     {
-        if (!strcmp(name, layer->getName()))
+        if (0 == strcmp(name, layer->name()))
         {
-            return layer;
+            return layer.get();
         }
     }
 
     return nullptr;
 }
 
-int TmxMap::getLayerCount() const
+int TmxMap::layerCount() const
 {
     return (int)m_layers.size();
 }
 
-const TmxObjectGroup* TmxMap::getObjectGroup(int index) const
+const TmxObjectGroup* TmxMap::objectGroup(int index) const
 {
     if (m_objectGroups.size() > index)
     {
-        return m_objectGroups[index];
+        return m_objectGroups[index].get();
     }
 
     return nullptr;
 }
 
-const TmxObjectGroup* TmxMap::getObjectGroup(const char *name) const
+const TmxObjectGroup* TmxMap::objectGroup(const char *name) const
 {
-    for (auto objectGroup : m_objectGroups)
+    for (auto& objectGroup : m_objectGroups)
     {
-        if (!strcmp(name, objectGroup->getName()))
+        if (0 == strcmp(name, objectGroup->name()))
         {
-            return objectGroup;
+            return objectGroup.get();
         }
     }
 
     return nullptr;
 }
 
-int TmxMap::getObjectGroupCount() const
+int TmxMap::objectGroupCount() const
 {
     return (int)m_objectGroups.size();
 }
 
-const TmxPropertyGroup* TmxMap::getProperties() const
+const TmxPropertyGroup* TmxMap::properties() const
 {
-    return m_properties;
+    return m_properties.get();
 }
 
-int TmxMap::getErrorCode() const
-{
-    return m_doc->ErrorId();
-}
-
-const char *TmxMap::getErrorDescription() const
-{
-    return m_doc->ErrorDesc();
-}
-
-void TmxMap::dump()
-{
-    printf("[tmxMap][width] %i\n", getWidth());
-    printf("[tmxMap][height] %i\n", getHeight());
-    printf("[tmxMap][tileWidth] %i\n", getTileWidth());
-    printf("[tmxMap][tileHeight] %i\n", getTileHeight());
-    if (m_properties)
-    {
-        m_properties->dump();
-    }
-    if (m_tileset)
-    {
-        m_tileset->dump();
-    }
-    for (auto layer : m_layers)
-    {
-        if (layer)
-        {
-            printf("----------------\n");
-            layer->dump();
-        }
-    }
-    for (auto objectGroup : m_objectGroups)
-    {
-        if (objectGroup)
-        {
-            printf("----------------\n");
-            objectGroup->dump();
-        }
-    }
-}
-
-bool TmxMap::loadContents()
+void TmxMap::loadContents()
 {
     const TiXmlNode *node = m_doc->FirstChild("map");
     const TiXmlElement *map = node->ToElement();
@@ -217,33 +156,29 @@ bool TmxMap::loadContents()
     map->Attribute("tileheight", &m_tileHeight);
 
     node = map->FirstChild();
-    while (node)
+    while (nullptr != node)
     {
-        if (!strcmp("tileset", node->Value()))
+        if (0 == strcmp("tileset", node->Value()))
         {
-            m_tileset = new TmxTileset();
             m_tileset->load(node->ToElement());
         }
-        else if (!strcmp("layer", node->Value()))
+        else if (0 == strcmp("layer", node->Value()))
         {
-            TmxLayer *layer = new TmxLayer();
+            auto layer = std::unique_ptr<TmxLayer>(new TmxLayer());
             layer->load(node->ToElement());
-            m_layers.push_back(layer);
+            m_layers.push_back(std::move(layer));
         }
-        else if (!strcmp("objectgroup", node->Value()))
+        else if (0 == strcmp("objectgroup", node->Value()))
         {
-            TmxObjectGroup *objectGroup = new TmxObjectGroup();
+            auto objectGroup = std::unique_ptr<TmxObjectGroup>(new TmxObjectGroup());
             objectGroup->load(node->ToElement());
-            m_objectGroups.push_back(objectGroup);
+            m_objectGroups.push_back(std::move(objectGroup));
         }
-        else if (!strcmp("properties", node->Value()))
+        else if (0 == strcmp("properties", node->Value()))
         {
-            m_properties = new TmxPropertyGroup();
             m_properties->load(node->ToElement());
         }
 
         node = node->NextSibling();
     }
-
-    return true;
 }

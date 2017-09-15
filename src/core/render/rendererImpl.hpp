@@ -10,7 +10,7 @@
 #define __RENDERER_IMPL_H__
 
 #include "renderer.hpp"
-#include "color.hpp"
+#include "color32.hpp"
 #include "platform.hpp"
 
 namespace Jackbengine {
@@ -24,15 +24,15 @@ public:
 
     bool init(const Window *window) override;
     void clear() override;
-    void setClearColor(Color color) override;
+    void setClearColor(Color32 color) override;
     void present() override;
 
-    void setRenderColor(Color color) override;
+    void setRenderColor(Color32 color) override;
 
     void renderTexture(int x, int y, const Texture *texture) override;
     void renderTexture(int x, int y, const Texture *texture, double angle) override;
-    void renderLine(float x1, float y1, float x2, float y2, Color color) override;
-    void renderPoint(float x, float y, Color color) override;
+    void renderLine(float x1, float y1, float x2, float y2, Color32 color) override;
+    void renderPoint(float x, float y, Color32 color) override;
 
     int getWidth() const override;
     int getHeight() const override;
@@ -44,7 +44,7 @@ private:
 
     SDL_Renderer *m_renderer = nullptr;
 
-    Color m_clearColor;
+    Color32 m_clearColor;
 
     int m_width = 0;
     int m_height = 0;

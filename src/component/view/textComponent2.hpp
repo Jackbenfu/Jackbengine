@@ -10,7 +10,7 @@
 #define __TEXT_COMPONENT_2_H__
 
 #include "component/component2.hpp"
-#include "core/render/color.hpp"
+#include "core/render/color32.hpp"
 #include "core/render/font/font2.hpp"
 #include "core/math/rect.hpp"
 #include "core/render/renderer/renderer2.hpp"
@@ -37,31 +37,32 @@ class TextComponent2 : public Component2
 
 public:
     TextComponent2(const Renderer2& renderer, const Font2& font, const std::string& text);
+    TextComponent2(const Renderer2& renderer, const Font2& font, const std::string& text, Color32 foreground);
     TextComponent2(const Renderer2& renderer, const Font2& font, const std::string& text, TextLayout2 layout);
     TextComponent2(const Renderer2& renderer, const Font2& font,
-                   const std::string& text, TextLayout2 layout, Color foreground);
+                   const std::string& text, TextLayout2 layout, Color32 foreground);
 
     ~TextComponent2() override = default;
 
-    const std::string& getText() const;
+    const std::string& text() const;
     void setText(const std::string& text);
 
-    Color getForeground() const;
-    void setForeground(Color color);
+    Color32 foreground() const;
+    void setForeground(Color32 color);
     void setForeground(byte r, byte g, byte b);
     void setForeground(byte r, byte g, byte b, byte a);
 
-    float getWidth() const;
-    float getHeight() const;
+    float width() const;
+    float height() const;
 
-    int getTopWhiteSpace() const;
-    int getBottomWhiteSpace() const;
-    int getRightWhiteSpace() const;
+    int topWhiteSpace() const;
+    int bottomWhiteSpace() const;
+    int rightWhiteSpace() const;
 
-    TextLayout2 getLayout() const;
+    TextLayout2 layout() const;
     void setLayout(TextLayout2 layout);
 
-    Texture2& getTexture() const;
+    Texture2& texture() const;
 
 private:
     void refreshTexture();
@@ -71,7 +72,7 @@ private:
 
     std::string m_text;
     TextLayout2 m_layout {TextLayout2::LeftTop};
-    Color m_foreground {Color_White};
+    Color32 m_foreground {Color_White};
 
     std::unique_ptr<Texture2> m_texture;
 
@@ -79,6 +80,8 @@ private:
     int m_bottomWhiteSpace {0};
     int m_rightWhiteSpace {0};
 };
+
+using Text = TextComponent2;
 
 } // namespace Jackbengine
 

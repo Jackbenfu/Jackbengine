@@ -20,7 +20,7 @@ SdlRwops::SdlRwops(const void *data, size_t dataSize)
     }
 }
 
-SDL_RWops* SdlRwops::getInternalObject() const
+SDL_RWops* SdlRwops::internalObject() const
 {
     return m_rwops;
 }

@@ -22,108 +22,84 @@ void TextRenderSystem2::frame(float delta)
 {
     UNUSED(delta);
 
-    for (auto entity : m_entities)
+    for (const auto entity : m_entities)
     {
-        auto components = entity.second;
+        const auto components = entity.second;
 
-        auto& text = components->get<TextComponent2>();
-        auto& container = components->get<ContainerComponent2>();
+        const auto& text = components->get<TextComponent2>();
+        const auto& container = components->get<ContainerComponent2>();
 
         Vec2f position;
-        auto angle = 0.0;
+        const auto angle = 0.0;
 
-        switch (text.getLayout())
+        switch (text.layout())
         {
             case TextLayout2::LeftTop:
             {
-                position.x = static_cast<float>(container.getX());
-                position.y = static_cast<float>(container.getY());
+                position.x = container.x();
+                position.y = container.y();
                 break;
             }
 
             case TextLayout2::LeftCenter:
             {
-                position.x = static_cast<float>(container.getX());
-                position.y = static_cast<float>(container.getY()) +
-                        container.getHeight() / 2 -
-                        text.getHeight() / 2 +
-                        text.getTopWhiteSpace() / 2;
+                position.x = container.x();
+                position.y = container.y() + container.height() / 2 - text.height() / 2 +
+                    text.topWhiteSpace() / 2;
                 break;
             }
 
             case TextLayout2::LeftBottom:
             {
-                position.x = static_cast<float>(container.getX());
-                position.y = static_cast<float>(container.getY()) +
-                        container.getHeight() -
-                        text.getHeight();
+                position.x = container.x();
+                position.y = container.y() + container.height() - text.height();
                 break;
             }
 
             case TextLayout2::CenterTop:
             {
-                position.x = static_cast<float>(container.getX()) +
-                        container.getWidth() / 2 -
-                        text.getWidth() / 2 +
-                        text.getRightWhiteSpace() / 2;
-                position.y = static_cast<float>(container.getY());
+                position.x = container.x() + container.width() / 2 - text.width() / 2 +
+                    text.rightWhiteSpace() / 2;
+                position.y = container.y();
                 break;
             }
 
             case TextLayout2::CenterCenter:
             {
-                position.x = static_cast<float>(container.getX()) +
-                        container.getWidth() / 2 -
-                        text.getWidth() / 2 +
-                        text.getRightWhiteSpace() / 2;
-                position.y = static_cast<float>(container.getY()) +
-                        container.getHeight() / 2 -
-                        text.getHeight() / 2 +
-                        text.getTopWhiteSpace() / 2;
+                position.x = container.x() + container.width() / 2 - text.width() / 2 +
+                    text.rightWhiteSpace() / 2;
+                position.y = container.y() + container.height() / 2 - text.height() / 2 +
+                    text.topWhiteSpace() / 2;
                 break;
             }
 
             case TextLayout2::CenterBottom:
             {
-                position.x = static_cast<float>(container.getX()) +
-                        container.getWidth() / 2 -
-                        text.getWidth() / 2 +
-                        text.getRightWhiteSpace() / 2;
-                position.y = static_cast<float>(container.getY()) +
-                        container.getHeight() -
-                        text.getHeight();
+                position.x = container.x() + container.width() / 2 - text.width() / 2 +
+                    text.rightWhiteSpace() / 2;
+                position.y = container.y() + container.height() - text.height();
                 break;
             }
 
             case TextLayout2::RightTop:
             {
-                position.x = static_cast<float>(container.getX()) +
-                        container.getWidth() -
-                        text.getWidth();
-                position.y = static_cast<float>(container.getY());
+                position.x = container.x() + container.width() - text.width();
+                position.y = container.y();
                 break;
             }
 
             case TextLayout2::RightCenter:
             {
-                position.x = static_cast<float>(container.getX()) +
-                        container.getWidth() -
-                        text.getWidth();
-                position.y = static_cast<float>(container.getY()) +
-                        container.getHeight() / 2 -
-                        text.getHeight() / 2 +
-                        text.getTopWhiteSpace() / 2;
+                position.x = container.x() + container.width() - text.width();
+                position.y = container.y() + container.height() / 2 - text.height() / 2 +
+                    text.topWhiteSpace() / 2;
                 break;
             }
 
             case TextLayout2::RightBottom:
             {
-                position.x = static_cast<float>(container.getX()) +
-                        container.getWidth() -
-                        text.getWidth();
-                position.y = static_cast<float>(container.getY()) +
-                        container.getHeight() -
-                        text.getHeight();
+                position.x = container.x() + container.width() - text.width();
+                position.y = container.y() + container.height() - text.height();
                 break;
             }
         }
@@ -131,7 +107,7 @@ void TextRenderSystem2::frame(float delta)
         m_renderer.renderTexture(
             (int)position.x,
             (int)position.y,
-            text.getTexture(),
+            text.texture(),
             angle
         );
     }
@@ -139,6 +115,10 @@ void TextRenderSystem2::frame(float delta)
 
 bool TextRenderSystem2::hasRequiredComponents(ComponentCollection& components) const
 {
-    return components.any<TextComponent2>()
-        && components.any<ContainerComponent2>();
+    auto hasText = components.any<TextComponent2>();
+    auto hasContainer = components.any<ContainerComponent2>();
+
+    return hasText && hasContainer;
+//   return components.any<TextComponent2>()
+//        && components.any<ContainerComponent2>();
 }

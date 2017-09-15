@@ -9,8 +9,8 @@
 #ifndef __SYSTEM_MANAGER_TPP__
 #define __SYSTEM_MANAGER_TPP__
 
-template<typename TSystem, typename... Args>
-void SystemManager::addSystem(Args&&... args)
+template<typename TSystem, typename ...Args>
+void SystemManager::addSystem(Args&& ...args)
 {
     m_systems.add<TSystem>(std::forward<Args>(args)...);
 }

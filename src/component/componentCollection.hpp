@@ -44,7 +44,41 @@ private:
     HeterogeneousCollection<Component2> m_components;
 };
 
-#include "componentCollection.tpp"
+template<typename TComponent, typename ...Args>
+void ComponentCollection::add(Args&& ...args)
+{
+    m_components.add<TComponent>(std::forward<Args>(args)...);
+}
+
+template<typename TComponent>
+TComponent& ComponentCollection::get() const
+{
+    return m_components.get<TComponent>();
+}
+
+template<typename TComponent>
+bool ComponentCollection::any() const
+{
+    return m_components.any<TComponent>();
+}
+
+template<typename TComponent>
+void ComponentCollection::remove()
+{
+    m_components.remove<TComponent>();
+}
+
+template<typename TComponent>
+void ComponentCollection::enable()
+{
+    m_components.enable<TComponent>();
+}
+
+template<typename TComponent>
+void ComponentCollection::disable()
+{
+    m_components.disable<TComponent>();
+}
 
 } // namespace Jackbengine
 

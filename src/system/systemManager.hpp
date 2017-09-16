@@ -45,7 +45,29 @@ private:
     HeterogeneousCollection<System2> m_systems;
 };
 
-#include "systemManager.tpp"
+template<typename TSystem, typename ...Args>
+void SystemManager::addSystem(Args&& ...args)
+{
+    m_systems.add<TSystem>(std::forward<Args>(args)...);
+}
+
+template<typename TSystem>
+void SystemManager::removeSystem()
+{
+    m_systems.remove<TSystem>();
+}
+
+template<typename TSystem>
+void SystemManager::enableSystem()
+{
+    m_systems.enable<TSystem>();
+}
+
+template<typename TSystem>
+void SystemManager::disableSystem()
+{
+    m_systems.disable<TSystem>();
+}
 
 } // namespace Jackbengine
 

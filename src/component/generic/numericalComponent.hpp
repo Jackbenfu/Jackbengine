@@ -37,7 +37,36 @@ private:
 template<typename T>
 using Numerical = NumericalComponent<T>;
 
-#include "numericalComponent.tpp"
+template <typename T>
+NumericalComponent<T>::NumericalComponent(T value)
+    : m_value {value}
+{
+    // Nothing
+}
+
+template <typename T>
+T NumericalComponent<T>::get() const
+{
+    return m_value;
+}
+
+template <typename T>
+void NumericalComponent<T>::set(T value)
+{
+    m_value = value;
+}
+
+template <typename T>
+void NumericalComponent<T>::increment(T by)
+{
+    m_value += by;
+}
+
+template <typename T>
+void NumericalComponent<T>::decrement(T by)
+{
+    m_value -= by;
+}
 
 } // namespace Jackbengine
 

@@ -36,7 +36,39 @@ private:
     std::function<void()> m_SceneInitializer;
 };
 
-#include "sceneManager.tpp"
+template<typename TBase>
+template<typename TDerived, typename ...Args>
+void SceneManager<TBase>::loadScene(Args&& ...args)
+{
+    static const auto initializer = [&]()
+    {
+        m_currentScene = std::make_unique<TDerived>(std::forward<Args>(args)...);
+    };
+
+    if (nullptr == m_currentScene)
+    {
+        initializer();
+        return;
+    }
+
+    m_SceneInitializer = initializer;
+}
+
+template<typename TBase>
+TBase& SceneManager<TBase>::current() const
+{
+    return *m_currentScene;
+}
+
+template<typename TBase>
+void SceneManager<TBase>::trySetNextScene()
+{
+    if (nullptr != m_SceneInitializer)
+    {
+        m_SceneInitializer();
+        m_SceneInitializer = nullptr;
+    }
+}
 
 } // namespace Jackbengine
 

@@ -11,6 +11,7 @@
 
 // Core
 #include "core/audio/sound.hpp"
+#include "core/debug/profile.hpp"
 #include "core/input/input.hpp"
 #include "core/math/rect.hpp"
 #include "core/math/vector2d.hpp"

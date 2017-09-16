@@ -41,9 +41,10 @@ void Scene2::disableEntity(Entity2 entity)
     m_systemManager.removeEntity(entity);
 }
 
-void Scene2::frame(float delta)
+void Scene2::update(float delta)
 {
     m_systemManager.frame(delta);
+    frame(delta);
     m_sceneManager.trySetNextScene();
 }
 
@@ -75,4 +76,9 @@ Renderer2& Scene2::renderer() const
 void Scene2::exitApplication()
 {
     m_application.exit();
+}
+
+void Scene2::frame(float)
+{
+    // Nothing
 }

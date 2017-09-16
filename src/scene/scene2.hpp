@@ -65,7 +65,7 @@ public:
     template<typename TSystem>
     void disableSystem();
 
-    void frame(float delta);
+    void update(float delta);
 
     Timer2& timer() const;
     Cursor2& cursor() const;
@@ -79,6 +79,8 @@ public:
     void loadScene();
 
 private:
+    virtual void frame(float delta);
+
     Application2& m_application;
     SceneManager<Scene2>& m_sceneManager;
     EntityManager m_entityManager;

@@ -8,13 +8,11 @@
 
 #include "mouseListenerComponent2.hpp"
 
-#include <utility>
-
 using namespace Jackbengine;
 
 void MouseListenerComponent2::onLeftClick(MouseCallback2 callback)
 {
-    m_onLeftClick = callback;
+    m_onLeftClick = std::move(callback);
 }
 
 void MouseListenerComponent2::callLeftClick()
@@ -28,7 +26,7 @@ void MouseListenerComponent2::callLeftClick()
 
 void MouseListenerComponent2::onLeftDown(MouseCallback2 callback)
 {
-    m_onLeftDown = callback;
+    m_onLeftDown = std::move(callback);
 }
 
 void MouseListenerComponent2::callLeftDown() const
@@ -41,7 +39,7 @@ void MouseListenerComponent2::callLeftDown() const
 
 void MouseListenerComponent2::onMiddleClick(MouseCallback2 callback)
 {
-    m_onMiddleClick = callback;
+    m_onMiddleClick = std::move(callback);
 }
 
 void MouseListenerComponent2::callMiddleClick()
@@ -55,7 +53,7 @@ void MouseListenerComponent2::callMiddleClick()
 
 void MouseListenerComponent2::onMiddleDown(MouseCallback2 callback)
 {
-    m_onMiddleDown = callback;
+    m_onMiddleDown = std::move(callback);
 }
 
 void MouseListenerComponent2::callMiddleDown() const
@@ -68,7 +66,7 @@ void MouseListenerComponent2::callMiddleDown() const
 
 void MouseListenerComponent2::onRightClick(MouseCallback2 callback)
 {
-    m_onRightClick = callback;
+    m_onRightClick = std::move(callback);
 }
 
 void MouseListenerComponent2::callRightClick()
@@ -82,7 +80,7 @@ void MouseListenerComponent2::callRightClick()
 
 void MouseListenerComponent2::onRightDown(MouseCallback2 callback)
 {
-    m_onRightDown = callback;
+    m_onRightDown = std::move(callback);
 }
 
 void MouseListenerComponent2::callRightDown() const
@@ -95,7 +93,7 @@ void MouseListenerComponent2::callRightDown() const
 
 void MouseListenerComponent2::onHover(MouseCallback2 callback)
 {
-    m_onHover = callback;
+    m_onHover = std::move(callback);
 }
 
 void MouseListenerComponent2::callOnHover()
@@ -109,7 +107,7 @@ void MouseListenerComponent2::callOnHover()
 
 void MouseListenerComponent2::onEnter(MouseCallback2 callback)
 {
-    m_onEnter = callback;
+    m_onEnter = std::move(callback);
 }
 
 void MouseListenerComponent2::callOnEnter()
@@ -123,7 +121,7 @@ void MouseListenerComponent2::callOnEnter()
 
 void MouseListenerComponent2::onExit(MouseCallback2 callback)
 {
-    m_onExit = callback;
+    m_onExit = std::move(callback);
 }
 
 void MouseListenerComponent2::callOnExit()

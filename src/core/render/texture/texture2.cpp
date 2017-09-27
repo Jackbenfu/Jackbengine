@@ -15,42 +15,30 @@ using namespace Jackbengine;
 
 Texture2::Texture2(const Renderer2& renderer, const std::string& file)
     : m_impl {std::make_unique<Impl>(renderer, file)}
-{
-    // Nothing
-}
+{ }
 
 Texture2::Texture2(const Renderer2& renderer, const void *data, size_t dataSize)
     : m_impl {std::make_unique<Impl>(renderer, data, dataSize)}
-{
-    // Nothing
-}
+{ }
 
 Texture2::Texture2(const Renderer2& renderer, int width, int height, Color32 color)
     : m_impl {std::make_unique<Impl>(renderer, width, height, color)}
-{
-    // Nothing
-}
+{ }
 
 Texture2::Texture2(const Renderer2& renderer, const TmxMap& map, const TmxLayer& layer,
                    const void *tilesetImageData, size_t tilesetImageDataSize)
     : m_impl {std::make_unique<Impl>(renderer, map, layer, tilesetImageData, tilesetImageDataSize)}
-{
-    // Nothing
-}
+{ }
 
 Texture2::Texture2(const Renderer2& renderer, const TmxMap& map, const TmxObjectGroup& objectGroup,
                    const void *tilesetImageData, size_t tilesetImageDataSize)
     : m_impl {std::make_unique<Impl>(renderer, map, objectGroup, tilesetImageData, tilesetImageDataSize)}
-{
-    // Nothing
-}
+{ }
 
 Texture2::Texture2(const Renderer2& renderer, const Font2& font,
                    const std::string& text, Color32 foreground)
     : m_impl {std::make_unique<Impl>(renderer, font, text, foreground)}
-{
-    // Nothing
-}
+{ }
 
 Texture2::~Texture2() = default;
 

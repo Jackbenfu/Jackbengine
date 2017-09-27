@@ -169,7 +169,7 @@ void AABBCollisionSystem::testCollision(float delta, Entity *entity1, Entity *en
             -numeric_limits<float>::infinity() : yToCollision / vY1;
 
         // Collision time is the latest among the two axes
-        auto collisionTime = MAX(xOffsetToCollision, yOffsetToCollision);
+        auto collisionTime = std::max(xOffsetToCollision, yOffsetToCollision);
 
         // Collision normals to find on which AABB side the collision occured
         float normalX;

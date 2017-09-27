@@ -17,10 +17,8 @@ DebugTextSystem::DebugTextSystem() = default;
 
 DebugTextSystem::~DebugTextSystem() = default;
 
-void DebugTextSystem::update(float delta)
+void DebugTextSystem::update(float)
 {
-    UNUSED(delta);
-
     for (auto entity : m_entities)
     {
         if (entity->isEnabled())

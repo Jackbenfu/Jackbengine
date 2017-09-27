@@ -14,10 +14,8 @@ using namespace Jackbengine;
 TmxMap::TmxMap()
     : m_doc {std::make_unique<TiXmlDocument>()},
       m_tileset {std::unique_ptr<TmxTileset>(new TmxTileset())},
-      m_properties {std::unique_ptr<TmxPropertyGroup>(new TmxPropertyGroup())}
-{
-    // Nothing
-}
+      tmxProperties {std::unique_ptr<TmxPropertyGroup>(new TmxPropertyGroup())}
+{ }
 
 void TmxMap::loadFromFile(const char *file)
 {
@@ -86,7 +84,7 @@ const TmxTileset* TmxMap::tileset() const
 
 const TmxLayer* TmxMap::layer(int index) const
 {
-    if (m_layers.size() > index)
+    if (m_layers.size() > (size_t)index)
     {
         return m_layers[index].get();
     }
@@ -114,7 +112,7 @@ int TmxMap::layerCount() const
 
 const TmxObjectGroup* TmxMap::objectGroup(int index) const
 {
-    if (m_objectGroups.size() > index)
+    if (m_objectGroups.size() > (size_t)index)
     {
         return m_objectGroups[index].get();
     }
@@ -142,7 +140,7 @@ int TmxMap::objectGroupCount() const
 
 const TmxPropertyGroup* TmxMap::properties() const
 {
-    return m_properties.get();
+    return tmxProperties.get();
 }
 
 void TmxMap::loadContents()
@@ -176,7 +174,7 @@ void TmxMap::loadContents()
         }
         else if (0 == strcmp("properties", node->Value()))
         {
-            m_properties->load(node->ToElement());
+            tmxProperties->load(node->ToElement());
         }
 
         node = node->NextSibling();

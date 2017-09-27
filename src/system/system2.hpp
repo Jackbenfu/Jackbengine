@@ -9,6 +9,7 @@
 #ifndef __SYSTEM_2_H__
 #define __SYSTEM_2_H__
 
+#include <map>
 #include "entity/entityManager.hpp"
 
 namespace Jackbengine {
@@ -24,7 +25,7 @@ public:
     virtual ~System2() = default;
 
 protected:
-    std::unordered_map<Entity2, ComponentCollection*> m_entities;
+    std::map<Entity2, ComponentCollection*> m_entities;
 
 private:
     virtual void frame(float delta) = 0;

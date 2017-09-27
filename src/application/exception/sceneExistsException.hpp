@@ -17,9 +17,7 @@ class SceneExistsException : public std::exception
 public:
     SceneExistsException<TScene>()
         : typeInfo(typeid(TScene))
-    {
-        // Nothing
-    }
+    { }
 
     virtual ~SceneExistsException() throw() = default;
 

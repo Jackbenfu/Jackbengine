@@ -14,14 +14,10 @@ using namespace Jackbengine;
 
 TextRenderSystem2::TextRenderSystem2(Renderer2& renderer)
     : m_renderer {renderer}
-{
-    // Nothing
-}
+{ }
 
-void TextRenderSystem2::frame(float delta)
+void TextRenderSystem2::frame(float)
 {
-    UNUSED(delta);
-
     for (const auto entity : m_entities)
     {
         const auto components = entity.second;
@@ -115,10 +111,6 @@ void TextRenderSystem2::frame(float delta)
 
 bool TextRenderSystem2::hasRequiredComponents(ComponentCollection& components) const
 {
-    auto hasText = components.any<TextComponent2>();
-    auto hasContainer = components.any<ContainerComponent2>();
-
-    return hasText && hasContainer;
-//   return components.any<TextComponent2>()
-//        && components.any<ContainerComponent2>();
+   return components.any<TextComponent2>()
+       && components.any<ContainerComponent2>();
 }

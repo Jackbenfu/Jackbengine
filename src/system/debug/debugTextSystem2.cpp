@@ -15,21 +15,15 @@ using namespace Jackbengine;
 
 DebugTextSystem2::DebugTextSystem2(Renderer2& renderer)
     : DebugTextSystem2 {renderer, Color_Red}
-{
-    // Nothing
-}
+{ }
 
 DebugTextSystem2::DebugTextSystem2(Renderer2& renderer, Color32 color)
     : m_renderer {renderer},
       m_color {color}
-{
-    // Nothing
-}
+{ }
 
-void DebugTextSystem2::frame(float delta)
+void DebugTextSystem2::frame(float)
 {
-    UNUSED(delta);
-
     for (const auto& entity : m_entities)
     {
         const auto components = entity.second;

@@ -16,7 +16,7 @@ using namespace std;
 template<typename TScene>
 void Application::addScene()
 {
-    ASSERT_IS_BASE_OF(Scene, TScene);
+    static_assert(std::is_base_of<Scene, TScene>::value);
 
     const auto typeId = GET_TYPE_ID(TScene);
 

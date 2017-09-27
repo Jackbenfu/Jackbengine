@@ -13,9 +13,7 @@ using namespace Jackbengine;
 
 Window2::Window2(const std::string& title, int width, int height, bool fullscreen)
     : m_impl {std::make_unique<Impl>(title, width, height, fullscreen)}
-{
-    // Nothing
-}
+{ }
 
 Window2::~Window2() = default;
 

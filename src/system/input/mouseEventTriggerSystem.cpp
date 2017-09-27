@@ -17,10 +17,8 @@ MouseEventTriggerSystem::MouseEventTriggerSystem() = default;
 
 MouseEventTriggerSystem::~MouseEventTriggerSystem() = default;
 
-void MouseEventTriggerSystem::update(float delta)
+void MouseEventTriggerSystem::update(float)
 {
-    UNUSED(delta);
-
     MouseListenerComponent *clickedMouseListener = nullptr;
     auto maxZOrder = 0;
 

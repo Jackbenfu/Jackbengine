@@ -12,9 +12,7 @@ using namespace Jackbengine;
 
 NameComponent2::NameComponent2(const std::string& name)
     : m_value {name}
-{
-    // Nothing
-}
+{ }
 
 const std::string& NameComponent2::get() const
 {

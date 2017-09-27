@@ -135,7 +135,7 @@ void TextComponent2::refreshTexture()
     auto glyphMaxY = 0;
     auto lastGlyphAdvance = 0;
     auto lastGlyphMaxX = 0;
-    for (auto i = 0; i < m_text.length(); ++i)
+    for (size_t i = 0; i < m_text.length(); ++i)
     {
         int glyphY;
         if (m_text.length() - 1 > i)

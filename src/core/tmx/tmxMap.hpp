@@ -58,7 +58,7 @@ private:
     std::unique_ptr<TmxTileset> m_tileset;
     std::vector<std::unique_ptr<TmxLayer>> m_layers;
     std::vector<std::unique_ptr<TmxObjectGroup>> m_objectGroups;
-    std::unique_ptr<TmxPropertyGroup> m_properties;
+    std::unique_ptr<TmxPropertyGroup> tmxProperties;
 };
 
 } // namespace Jackbengine

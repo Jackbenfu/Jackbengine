@@ -13,9 +13,7 @@ using namespace Jackbengine;
 TmxTileset::TmxTileset()
     : m_image {std::unique_ptr<TmxImage>(new TmxImage())},
       m_properties {std::unique_ptr<TmxPropertyGroup>(new TmxPropertyGroup())}
-{
-    // Nothing
-}
+{ }
 
 const char* TmxTileset::name() const
 {

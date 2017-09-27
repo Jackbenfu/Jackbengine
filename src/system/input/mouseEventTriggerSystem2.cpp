@@ -15,19 +15,15 @@ using namespace Jackbengine;
 
 MouseEventTriggerSystem2::MouseEventTriggerSystem2(const Input2& input)
     : m_input {input}
-{
-    // Nothing
-}
+{ }
 
 void MouseEventTriggerSystem2::setBubbling(bool active)
 {
     m_bubbling = active;
 }
 
-void MouseEventTriggerSystem2::frame(float delta)
+void MouseEventTriggerSystem2::frame(float)
 {
-    UNUSED(delta);
-
     MouseListenerComponent2 *clickedMouseListener {nullptr};
     auto maxZOrder = 0;
 

@@ -52,7 +52,7 @@ private:
     template<typename T>
     static auto findEntity(T& t, Entity2 entity) -> decltype(t.findEntity(entity));
 
-    std::unordered_map<size_t, std::tuple<bool, std::unique_ptr<ComponentCollection>>> m_entities;
+    std::map<size_t, std::tuple<bool, std::unique_ptr<ComponentCollection>>> m_entities;
 
 };
 
@@ -78,7 +78,7 @@ TComponent& EntityManager::getComponent(Entity2 entity) const
     auto& tuple = findEntity(entity);
     auto& componentCollection = std::get<1>(tuple);
 
-    return (TComponent&)componentCollection->get<TComponent>();
+    return componentCollection->get<TComponent>();
 }
 
 template<typename TComponent>

@@ -39,15 +39,13 @@ InputImpl::~InputImpl()
     DELETE_SAFE_ARRAY(m_keyboardKeysDown);
 }
 
-void InputImpl::update(float delta)
+void InputImpl::update(float)
 {
-    UNUSED(delta);
-
     memset(m_keyboardKeysPress, 0, sizeof(bool) * SDL_NUM_SCANCODES);
     memset(m_mouseButtonsClick, 0, sizeof(bool) * m_maxMouseButtons);
     m_mouseMove = false;
 
-    SDL_Event event;
+    SDL_Event event; // NOLINT
     while (SDL_PollEvent(&event))
     {
         switch (event.type)
@@ -116,7 +114,7 @@ void InputImpl::update(float delta)
                 {
                     m_mouseButtonsDown[SDL_BUTTON_RIGHT] = false;
                 }
-                
+
                 break;
             }
 
@@ -131,6 +129,9 @@ void InputImpl::update(float delta)
                 m_quit = true;
                 break;
             }
+
+            default:
+                break;
         }
     }
 }
@@ -239,8 +240,6 @@ int InputImpl::getKey(KeyboardKey key) const
         case KeyboardKey::Left:     return SDL_SCANCODE_LEFT;
         case KeyboardKey::Up:       return SDL_SCANCODE_UP;
     }
-
-    return -1;
 }
 
 bool InputImpl::mouseDown(MouseButton button)
@@ -289,8 +288,6 @@ int InputImpl::getButton(MouseButton button) const
         case MouseButton::Middle:  return SDL_BUTTON_MIDDLE;
         case MouseButton::Right:   return SDL_BUTTON_RIGHT;
     }
-
-    return -1;
 }
 
 const Vec2i& InputImpl::getMousePosition()

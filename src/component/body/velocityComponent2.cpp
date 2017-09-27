@@ -12,9 +12,7 @@ using namespace Jackbengine;
 
 VelocityComponent2::VelocityComponent2(float x, float y)
     : m_velocity {x, y}
-{
-    // Nothing
-}
+{ }
 
 const Vec2f& VelocityComponent2::get() const
 {

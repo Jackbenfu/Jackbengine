@@ -9,8 +9,7 @@
 #ifndef __HETEROGENEOUS_COLLECTION_H__
 #define __HETEROGENEOUS_COLLECTION_H__
 
-#include <unordered_map>
-
+#include <map>
 #include "common.hpp"
 
 namespace Jackbengine {
@@ -49,14 +48,14 @@ private:
     template<typename TItem>
     auto& find() const;
 
-    std::unordered_map<size_t, std::tuple<bool, std::unique_ptr<TBase>>> m_collection;
+    std::map<size_t, std::tuple<bool, std::unique_ptr<TBase>>> m_collection;
 };
 
 template<typename TBase>
 template<typename TItem>
 TItem& HeterogeneousCollection<TBase>::get() const
 {
-    ASSERT_IS_BASE_OF(TBase, TItem);
+    static_assert(std::is_base_of<TBase, TItem>::value);
 
     const auto& tuple = find<TItem>();
 
@@ -67,7 +66,7 @@ template<typename TBase>
 template<typename TItem>
 bool HeterogeneousCollection<TBase>::any() const
 {
-    ASSERT_IS_BASE_OF(TBase, TItem);
+    static_assert(std::is_base_of<TBase, TItem>::value);
 
     const auto typeId = GET_TYPE_ID(TItem);
 
@@ -78,7 +77,7 @@ template<typename TBase>
 template<typename TItem, typename ...Args>
 void HeterogeneousCollection<TBase>::add(Args&& ...args)
 {
-    ASSERT_IS_BASE_OF(TBase, TItem);
+    static_assert(std::is_base_of<TBase, TItem>::value);
 
     if (any<TItem>())
     {
@@ -99,7 +98,7 @@ template<typename TBase>
 template<typename TItem>
 void HeterogeneousCollection<TBase>::remove()
 {
-    ASSERT_IS_BASE_OF(TBase, TItem);
+    static_assert(std::is_base_of<TBase, TItem>::value);
 
     const auto typeId = GET_TYPE_ID(TItem);
 
@@ -110,7 +109,7 @@ template<typename TBase>
 template<typename TItem>
 void HeterogeneousCollection<TBase>::enable()
 {
-    ASSERT_IS_BASE_OF(TBase, TItem);
+    static_assert(std::is_base_of<TBase, TItem>::value);
 
     const auto& tuple = find<TItem>();
 
@@ -121,7 +120,7 @@ template<typename TBase>
 template<typename TItem>
 void HeterogeneousCollection<TBase>::disable()
 {
-    ASSERT_IS_BASE_OF(TBase, TItem);
+    static_assert(std::is_base_of<TBase, TItem>::value);
 
     const auto& tuple = find<TItem>();
 

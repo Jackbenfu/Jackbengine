@@ -14,14 +14,10 @@ using namespace Jackbengine;
 
 DebugSpriteSystem2::DebugSpriteSystem2(Renderer2& renderer)
     : m_renderer {renderer}
-{
-    // Nothing
-}
+{ }
 
-void DebugSpriteSystem2::frame(float delta)
+void DebugSpriteSystem2::frame(float)
 {
-    UNUSED(delta);
-
     for (const auto& entity : m_entities)
     {
         const auto components = entity.second;

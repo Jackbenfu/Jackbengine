@@ -12,9 +12,7 @@ using namespace Jackbengine;
 
 TagComponent2::TagComponent2(const std::string& tag)
     : m_value(tag)
-{
-    // Nothing
-}
+{ }
 
 const std::string& TagComponent2::get() const
 {

@@ -12,7 +12,7 @@
 template<typename TComponent>
 TComponent* Entity::getComponent(bool returnIfDisabled)
 {
-    ASSERT_IS_BASE_OF(Component, TComponent);
+    static_assert(std::is_base_of<Component, TComponent>::value);
 
     auto typeId = GET_TYPE_ID(TComponent);
     auto it = m_components.find(typeId);
@@ -33,7 +33,7 @@ TComponent* Entity::getComponent(bool returnIfDisabled)
 template<typename TComponent>
 TComponent* Entity::getComponentIfEnabled()
 {
-    ASSERT_IS_BASE_OF(Component, TComponent);
+    static_assert(std::is_base_of<Component, TComponent>::value);
 
     return getComponent<TComponent>(false);
 }
@@ -41,7 +41,7 @@ TComponent* Entity::getComponentIfEnabled()
 template<typename TComponent>
 TComponent* Entity::addComponent()
 {
-    ASSERT_IS_BASE_OF(Component, TComponent);
+    static_assert(std::is_base_of<Component, TComponent>::value);
 
     auto typeId = GET_TYPE_ID(TComponent);
     auto it = m_components.find(typeId);
@@ -59,7 +59,7 @@ TComponent* Entity::addComponent()
 template<typename TComponent, typename TParam>
 TComponent* Entity::addComponent(TParam param)
 {
-    ASSERT_IS_BASE_OF(Component, TComponent);
+    static_assert(std::is_base_of<Component, TComponent>::value);
 
     auto typeId = GET_TYPE_ID(TComponent);
     auto it = m_components.find(typeId);
@@ -77,7 +77,7 @@ TComponent* Entity::addComponent(TParam param)
 template<typename TComponent>
 bool Entity::setComponent(TComponent *component)
 {
-    ASSERT_IS_BASE_OF(Component, TComponent);
+    static_assert(std::is_base_of<Component, TComponent>::value);
 
     auto typeId = GET_TYPE_ID(TComponent);
     auto it = m_components.find(typeId);
@@ -97,7 +97,7 @@ bool Entity::setComponent(TComponent *component)
 template<typename TComponent>
 bool Entity::removeComponent()
 {
-    ASSERT_IS_BASE_OF(Component, TComponent);
+    static_assert(std::is_base_of<Component, TComponent>::value);
 
     auto typeId = GET_TYPE_ID(TComponent);
     auto it = m_components.find(typeId);
@@ -115,7 +115,7 @@ bool Entity::removeComponent()
 template<typename TComponent>
 bool Entity::enableComponent()
 {
-    ASSERT_IS_BASE_OF(Component, TComponent);
+    static_assert(std::is_base_of<Component, TComponent>::value);
 
     auto component = getComponent<TComponent>();
     if (!component)
@@ -131,7 +131,7 @@ bool Entity::enableComponent()
 template<typename TComponent>
 bool Entity::disableComponent()
 {
-    ASSERT_IS_BASE_OF(Component, TComponent);
+    static_assert(std::is_base_of<Component, TComponent>::value);
 
     auto component = getComponent<TComponent>();
     if (!component)

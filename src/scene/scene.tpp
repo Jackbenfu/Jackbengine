@@ -12,7 +12,7 @@
 template<typename TComponent>
 TComponent* Scene::getComponent(Entity *entity)
 {
-    ASSERT_IS_BASE_OF(Component, TComponent);
+    static_assert(std::is_base_of<Component, TComponent>::value);
 
     return m_ecsManager->getComponent<TComponent>(entity);
 }
@@ -20,7 +20,7 @@ TComponent* Scene::getComponent(Entity *entity)
 template<typename TComponent>
 TComponent* Scene::addComponent(Entity *entity)
 {
-    ASSERT_IS_BASE_OF(Component, TComponent);
+    static_assert(std::is_base_of<Component, TComponent>::value);
 
     return m_ecsManager->addComponent<TComponent>(entity);
 }
@@ -28,7 +28,7 @@ TComponent* Scene::addComponent(Entity *entity)
 template<typename TComponent>
 bool Scene::setComponent(Entity *entity, TComponent *component)
 {
-    ASSERT_IS_BASE_OF(Component, TComponent);
+    static_assert(std::is_base_of<Component, TComponent>::value);
 
     return m_ecsManager->setComponent(entity, component);
 }
@@ -36,7 +36,7 @@ bool Scene::setComponent(Entity *entity, TComponent *component)
 template<typename TComponent, typename TParam>
 TComponent* Scene::addComponent(Entity *entity, TParam param)
 {
-    ASSERT_IS_BASE_OF(Component, TComponent);
+    static_assert(std::is_base_of<Component, TComponent>::value);
 
     return m_ecsManager->addComponent<TComponent>(entity, param);
 };
@@ -44,7 +44,7 @@ TComponent* Scene::addComponent(Entity *entity, TParam param)
 template<typename TComponent>
 void Scene::removeComponent(Entity *entity)
 {
-    ASSERT_IS_BASE_OF(Component, TComponent);
+    static_assert(std::is_base_of<Component, TComponent>::value);
 
     m_ecsManager->removeComponent<TComponent>(entity);
     m_ecsManager->removeEntity(entity);
@@ -53,7 +53,7 @@ void Scene::removeComponent(Entity *entity)
 template<typename TComponent>
 void Scene::enableComponent(Entity *entity)
 {
-    ASSERT_IS_BASE_OF(Component, TComponent);
+    static_assert(std::is_base_of<Component, TComponent>::value);
 
     m_ecsManager->enableComponent<TComponent>(entity);
 }
@@ -61,7 +61,7 @@ void Scene::enableComponent(Entity *entity)
 template<typename TComponent>
 void Scene::disableComponent(Entity *entity)
 {
-    ASSERT_IS_BASE_OF(Component, TComponent);
+    static_assert(std::is_base_of<Component, TComponent>::value);
 
     m_ecsManager->disableComponent<TComponent>(entity);
 }
@@ -69,7 +69,7 @@ void Scene::disableComponent(Entity *entity)
 template<typename TSystem>
 TSystem* Scene::getSystem()
 {
-    ASSERT_IS_BASE_OF(System, TSystem);
+    static_assert(std::is_base_of<System, TSystem>::value);
 
     return m_ecsManager->getSystem<TSystem>();
 }
@@ -77,7 +77,7 @@ TSystem* Scene::getSystem()
 template<typename TSystem>
 TSystem* Scene::addSystem()
 {
-    ASSERT_IS_BASE_OF(System, TSystem);
+    static_assert(std::is_base_of<System, TSystem>::value);
 
     return m_ecsManager->addSystem<TSystem>();
 }
@@ -85,7 +85,7 @@ TSystem* Scene::addSystem()
 template<typename TSystem>
 void Scene::enableSystem()
 {
-    ASSERT_IS_BASE_OF(System, TSystem);
+    static_assert(std::is_base_of<System, TSystem>::value);
 
     m_ecsManager->enableSystem<TSystem>();
 }
@@ -93,7 +93,7 @@ void Scene::enableSystem()
 template<typename TSystem>
 void Scene::disableSystem()
 {
-    ASSERT_IS_BASE_OF(System, TSystem);
+    static_assert(std::is_base_of<System, TSystem>::value);
 
     m_ecsManager->disableSystem<TSystem>();
 }

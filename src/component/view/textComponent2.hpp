@@ -39,8 +39,7 @@ public:
     TextComponent2(const Renderer2& renderer, const Font2& font, const std::string& text);
     TextComponent2(const Renderer2& renderer, const Font2& font, const std::string& text, Color32 foreground);
     TextComponent2(const Renderer2& renderer, const Font2& font, const std::string& text, TextLayout2 layout);
-    TextComponent2(const Renderer2& renderer, const Font2& font,
-                   const std::string& text, TextLayout2 layout, Color32 foreground);
+    TextComponent2(const Renderer2& renderer, const Font2& font, const std::string& text, TextLayout2 layout, Color32 foreground);
 
     ~TextComponent2() override = default;
 

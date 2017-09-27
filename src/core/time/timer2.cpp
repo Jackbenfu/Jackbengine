@@ -13,9 +13,7 @@ using namespace Jackbengine;
 
 Timer2::Timer2(uint fps)
     : m_impl {std::make_unique<Impl>(fps)}
-{
-    // Nothing
-}
+{ }
 
 Timer2::~Timer2() = default;
 

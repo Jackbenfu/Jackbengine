@@ -12,15 +12,11 @@ using namespace Jackbengine;
 
 AudioSourceComponent2::AudioSourceComponent2(const std::string& file)
     : m_sound2 {file}
-{
-    // Nothing
-}
+{ }
 
 AudioSourceComponent2::AudioSourceComponent2(const void *data, size_t dataSize)
     : m_sound2 {data, dataSize}
-{
-    // Nothing
-}
+{ }
 
 void AudioSourceComponent2::play() const
 {

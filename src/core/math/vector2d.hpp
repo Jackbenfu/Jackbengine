@@ -19,16 +19,12 @@ struct Vector2d
 {
     Vector2d()
         : Vector2d(0, 0)
-    {
-        // Nothing
-    }
+    { }
 
     Vector2d(T x, T y)
         : x(x),
           y(y)
-    {
-        // Nothing
-    }
+    { }
 
     ~Vector2d() = default;
 
@@ -100,7 +96,7 @@ struct Vector2d
 
         n = sqrt(n);
         n = 1.0f / n;
-        
+
         x *= n;
         y *= n;
     }

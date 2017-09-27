@@ -100,10 +100,8 @@ bool SpriteComponent::loadFromColor(const Renderer *renderer, uint width, uint h
     return false;
 }
 
-bool SpriteComponent::loadFromTexture(const Renderer *renderer, Texture *texture)
+bool SpriteComponent::loadFromTexture(const Renderer*, Texture *texture)
 {
-    UNUSED(renderer);
-
     m_texture = texture;
 
     return true;

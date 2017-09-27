@@ -24,7 +24,7 @@ void MotionSystem2::frame(float delta)
         const auto velocityVec = velocity.get();
         if (velocityVec.isZero())
         {
-            return;
+            continue;
         }
 
         const auto positionVec = transform.position();

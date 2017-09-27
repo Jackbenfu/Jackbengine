@@ -23,10 +23,8 @@ DebugProfileSystem::~DebugProfileSystem()
     DELETE_SAFE(m_fps);
 }
 
-void DebugProfileSystem::update(float delta)
+void DebugProfileSystem::update(float)
 {
-    UNUSED(delta);
-
     if (m_showFps)
     {
         int fps = m_timer->getFps();
@@ -54,10 +52,8 @@ void DebugProfileSystem::setRenderer(Renderer *renderer)
     m_fps->setFontFromMemory(m_renderer, default_font, default_font_size, 9);
 }
 
-bool DebugProfileSystem::hasRequiredComponents(Entity *entity)
+bool DebugProfileSystem::hasRequiredComponents(Entity *)
 {
-    UNUSED(entity);
-
     return false;
 }
 

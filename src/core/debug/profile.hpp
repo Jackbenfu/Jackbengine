@@ -28,9 +28,7 @@ public:
     explicit Profile(const char *name)
         : m_name {name},
           m_start {clock::now()}
-    {
-        // Nothing
-    }
+    { }
 
     ~Profile()
     {

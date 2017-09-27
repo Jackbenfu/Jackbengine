@@ -12,7 +12,7 @@
 template<typename TComponent>
 TComponent* EcsManager::getComponent(Entity *entity, bool returnIfDisabled) const
 {
-    ASSERT_IS_BASE_OF(Component, TComponent);
+    static_assert(std::is_base_of<Component, TComponent>::value);
 
     if (!entity)
     {
@@ -25,7 +25,7 @@ TComponent* EcsManager::getComponent(Entity *entity, bool returnIfDisabled) cons
 template<typename TComponent>
 TComponent* EcsManager::getComponentIfEnabled(Entity *entity) const
 {
-    ASSERT_IS_BASE_OF(Component, TComponent);
+    static_assert(std::is_base_of<Component, TComponent>::value);
 
     return getComponent<TComponent>(entity, false);
 }
@@ -33,7 +33,7 @@ TComponent* EcsManager::getComponentIfEnabled(Entity *entity) const
 template<typename TComponent>
 TComponent* EcsManager::addComponent(Entity *entity)
 {
-    ASSERT_IS_BASE_OF(Component, TComponent);
+    static_assert(std::is_base_of<Component, TComponent>::value);
 
     if (!entity)
     {
@@ -57,7 +57,7 @@ TComponent* EcsManager::addComponent(Entity *entity)
 template<typename TComponent, typename TParam>
 TComponent* EcsManager::addComponent(Entity *entity, TParam param)
 {
-    ASSERT_IS_BASE_OF(Component, TComponent);
+    static_assert(std::is_base_of<Component, TComponent>::value);
 
     if (!entity)
     {
@@ -81,7 +81,7 @@ TComponent* EcsManager::addComponent(Entity *entity, TParam param)
 template<typename TComponent>
 bool EcsManager::setComponent(Entity *entity, TComponent *component)
 {
-    ASSERT_IS_BASE_OF(Component, TComponent);
+    static_assert(std::is_base_of<Component, TComponent>::value);
 
     if (!entity)
     {
@@ -101,7 +101,7 @@ bool EcsManager::setComponent(Entity *entity, TComponent *component)
 template<typename TComponent>
 bool EcsManager::removeComponent(Entity *entity) const
 {
-    ASSERT_IS_BASE_OF(Component, TComponent);
+    static_assert(std::is_base_of<Component, TComponent>::value);
 
     if (!entity)
     {
@@ -124,7 +124,7 @@ bool EcsManager::removeComponent(Entity *entity) const
 template<typename TComponent>
 bool EcsManager::enableComponent(Entity *entity) const
 {
-    ASSERT_IS_BASE_OF(Component, TComponent);
+    static_assert(std::is_base_of<Component, TComponent>::value);
 
     if (!entity)
     {
@@ -144,7 +144,7 @@ bool EcsManager::enableComponent(Entity *entity) const
 template<typename TComponent>
 bool EcsManager::disableComponent(Entity *entity) const
 {
-    ASSERT_IS_BASE_OF(Component, TComponent);
+    static_assert(std::is_base_of<Component, TComponent>::value);
 
     if (!entity)
     {
@@ -164,10 +164,10 @@ bool EcsManager::disableComponent(Entity *entity) const
 template<typename TSystem>
 TSystem* EcsManager::getSystem()
 {
-    ASSERT_IS_BASE_OF(System, TSystem);
+    static_assert(std::is_base_of<System, TSystem>::value);
 
     auto typeId = GET_TYPE_ID(TSystem);
-    for (auto i = 0; i < m_systemTypes.size(); ++i)
+    for (size_t i = 0; i < m_systemTypes.size(); ++i)
     {
         if (m_systemTypes[i] == typeId)
         {
@@ -181,7 +181,7 @@ TSystem* EcsManager::getSystem()
 template<typename TSystem>
 TSystem* EcsManager::addSystem()
 {
-    ASSERT_IS_BASE_OF(System, TSystem);
+    static_assert(std::is_base_of<System, TSystem>::value);
 
     auto freshlyAdded = false;
 
@@ -207,7 +207,7 @@ TSystem* EcsManager::addSystem()
 template<typename TSystem>
 void EcsManager::removeSystem()
 {
-    ASSERT_IS_BASE_OF(System, TSystem);
+    static_assert(std::is_base_of<System, TSystem>::value);
 
     disableSystem<TSystem>();
 }
@@ -215,7 +215,7 @@ void EcsManager::removeSystem()
 template<typename TSystem>
 void EcsManager::enableSystem()
 {
-    ASSERT_IS_BASE_OF(System, TSystem);
+    static_assert(std::is_base_of<System, TSystem>::value);
 
     auto system = getSystem<TSystem>();
     if (system)
@@ -227,7 +227,7 @@ void EcsManager::enableSystem()
 template<typename TSystem>
 void EcsManager::disableSystem()
 {
-    ASSERT_IS_BASE_OF(System, TSystem);
+    static_assert(std::is_base_of<System, TSystem>::value);
 
     auto typeId = GET_TYPE_ID(TSystem);
 

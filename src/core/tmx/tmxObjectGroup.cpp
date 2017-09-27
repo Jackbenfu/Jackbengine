@@ -12,9 +12,7 @@ using namespace Jackbengine;
 
 TmxObjectGroup::TmxObjectGroup()
     : m_properties {std::unique_ptr<TmxPropertyGroup>(new TmxPropertyGroup())}
-{
-    // Nothing
-}
+{ }
 
 const char* TmxObjectGroup::name() const
 {

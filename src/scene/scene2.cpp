@@ -14,9 +14,7 @@ Scene2::Scene2(Application2& application, SceneManager<Scene2>& sceneManager)
     : m_application {application},
       m_sceneManager {sceneManager},
       m_systemManager {m_entityManager}
-{
-    // Nothing
-}
+{ }
 
 Entity2 Scene2::addEntity()
 {
@@ -79,6 +77,4 @@ void Scene2::exitApplication()
 }
 
 void Scene2::frame(float)
-{
-    // Nothing
-}
+{ }

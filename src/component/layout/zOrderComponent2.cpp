@@ -12,9 +12,7 @@ using namespace Jackbengine;
 
 ZOrderComponent2::ZOrderComponent2(int index)
     : m_index {index}
-{
-    // Nothing
-}
+{ }
 
 int ZOrderComponent2::index() const
 {

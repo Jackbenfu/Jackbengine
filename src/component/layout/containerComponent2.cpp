@@ -12,9 +12,7 @@ using namespace Jackbengine;
 
 ContainerComponent2::ContainerComponent2(int x, int y, int w, int h)
     : m_rect {x, y, w, h}
-{
-    // Nothing
-}
+{ }
 
 const Recti& ContainerComponent2::rect() const
 {

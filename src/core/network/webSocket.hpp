@@ -73,9 +73,7 @@ union MessageIdUnion
 template<typename TListener>
 WebSocket<TListener>::WebSocket(const TListener& listener)
     : m_listener(listener)
-{
-    // Nothing
-}
+{ }
 
 template<typename TListener>
 WebSocket<TListener>::~WebSocket()

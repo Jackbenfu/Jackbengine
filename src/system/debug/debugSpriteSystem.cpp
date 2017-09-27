@@ -16,10 +16,8 @@ DebugSpriteSystem::DebugSpriteSystem() = default;
 
 DebugSpriteSystem::~DebugSpriteSystem() = default;
 
-void DebugSpriteSystem::update(float delta)
+void DebugSpriteSystem::update(float)
 {
-    UNUSED(delta);
-
     for (auto entity : m_entities)
     {
         if (entity->isEnabled())

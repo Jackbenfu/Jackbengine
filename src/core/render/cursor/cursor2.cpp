@@ -13,9 +13,7 @@ using namespace Jackbengine;
 
 Cursor2::Cursor2()
     : m_impl {std::make_unique<Impl>()}
-{
-    // Nothing
-}
+{ }
 
 Cursor2::~Cursor2() = default;
 

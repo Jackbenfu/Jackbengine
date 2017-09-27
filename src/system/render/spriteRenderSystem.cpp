@@ -16,10 +16,8 @@ SpriteRenderSystem::SpriteRenderSystem() = default;
 
 SpriteRenderSystem::~SpriteRenderSystem() = default;
 
-void SpriteRenderSystem::update(float delta)
+void SpriteRenderSystem::update(float)
 {
-    UNUSED(delta);
-
     for (auto entity : m_entities)
     {
         if (entity->isEnabled())

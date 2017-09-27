@@ -12,30 +12,22 @@ using namespace Jackbengine;
 
 TransformComponent2::TransformComponent2(float positionX, float positionY)
     : TransformComponent2 {positionX, positionY, 1.0f, 1.0f, 0.0}
-{
-    // Nothing
-}
+{ }
 
 TransformComponent2::TransformComponent2(float positionX, float positionY, double angle)
     : TransformComponent2 {positionX, positionY, 1.0f, 1.0f, angle}
-{
-    // Nothing
-}
+{ }
 
 TransformComponent2::TransformComponent2(float positionX, float positionY, float scaleX, float scaleY)
     : TransformComponent2 {positionX, positionY, scaleX, scaleY, 0.0}
-{
-    // Nothing
-}
+{ }
 
 TransformComponent2::TransformComponent2(
     float positionX, float positionY, float scaleX, float scaleY, double angle)
     : m_position {positionX, positionY},
       m_scale {scaleX, scaleY},
       m_angle {angle}
-{
-    // Nothing
-}
+{ }
 
 const Vec2f& TransformComponent2::position() const
 {

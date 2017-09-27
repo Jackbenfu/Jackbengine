@@ -13,15 +13,11 @@ using namespace Jackbengine;
 
 Font2::Font2(const std::string& file, int size)
     : m_impl {std::make_unique<Impl>(file, size)}
-{
-    // Nothing
-}
+{ }
 
 Font2::Font2(const void *data, size_t dataSize, int size)
     : m_impl {std::make_unique<Impl>(data, dataSize, size)}
-{
-    // Nothing
-}
+{ }
 
 Font2::~Font2() = default;
 

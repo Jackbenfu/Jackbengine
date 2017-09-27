@@ -74,6 +74,7 @@
 #include "core/render/renderer/renderer2.hpp"
 #include "core/render/texture/texture2.hpp"
 #include "core/render/window/window2.hpp"
+#include "core/state/stateMachine.hpp"
 #include "core/time/timer2.hpp"
 
 // Component
@@ -108,6 +109,5 @@
 
 // Scene
 #include "scene/scene2.hpp"
-#include "scene/sceneManager.hpp"
 
 #endif // __JACKBENGINE_H__

@@ -12,9 +12,7 @@ using namespace Jackbengine;
 
 AudioSourceComponent::AudioSourceComponent()
     : m_sound(Sound::create())
-{
-    // Nothing
-}
+{ }
 
 AudioSourceComponent::~AudioSourceComponent()
 {

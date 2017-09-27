@@ -13,15 +13,11 @@ using namespace Jackbengine;
 
 Sound2::Sound2(const std::string& file)
     : m_impl {std::make_unique<Impl>(file)}
-{
-    // Nothing
-}
+{ }
 
 Sound2::Sound2(const void *data, size_t dataSize)
     : m_impl {std::make_unique<Impl>(data, dataSize)}
-{
-    // Nothing
-}
+{ }
 
 Sound2::~Sound2() = default;
 

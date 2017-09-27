@@ -10,19 +10,11 @@
 #define __COMMON_H__
 
 #include "common/common.macro.hpp"
-#include "common/common.assert.hpp"
 
 // Types shortcuts
 using uint = unsigned int;
 using ushort = unsigned short;
 using byte = unsigned char;
-
-// Compiler macros
-#define UNUSED(a)       (void)a
-
-// Mathematic macros
-#define MAX(a, b)       ((a > b) ? a : b)
-#define MIN(a, b)       ((a < b) ? a : b)
 
 // Memory allocation/deallocation macros
 #define DELETE_SAFE(p)          if (p) { delete p; p = nullptr; }

@@ -18,15 +18,11 @@ class AABBCollisionGroup
 public:
     AABBCollisionGroup()
         : AABBCollisionGroup {nullptr, nullptr}
-    {
-        // Nothing
-    }
+    { }
 
     AABBCollisionGroup(const char *tag1, const char *tag2)
         : m_tag1(tag1), m_tag2(tag2)
-    {
-        // Nothing
-    }
+    { }
 
     ~AABBCollisionGroup() = default;
 

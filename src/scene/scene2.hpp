@@ -148,7 +148,7 @@ void Scene2::disableSystem()
 template<typename TScene>
 void Scene2::loadScene()
 {
-    ASSERT_IS_BASE_OF(Scene2, TScene);
+    static_assert(std::is_base_of<Scene2, TScene>::value);
 
     m_sceneManager.loadScene<TScene>(m_application, m_sceneManager);
 }

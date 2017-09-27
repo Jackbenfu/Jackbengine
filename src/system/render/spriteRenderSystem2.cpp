@@ -14,14 +14,10 @@ using namespace Jackbengine;
 
 SpriteRenderSystem2::SpriteRenderSystem2(Renderer2& renderer)
     : m_renderer {renderer}
-{
-    // Nothing
-}
+{ }
 
-void SpriteRenderSystem2::frame(float delta)
+void SpriteRenderSystem2::frame(float)
 {
-    UNUSED(delta);
-
     for (const auto entity : m_entities)
     {
         const auto components = entity.second;

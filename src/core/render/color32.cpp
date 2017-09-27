@@ -15,26 +15,20 @@ Color32::Color32()
       g(0),
       b(0),
       a(0)
-{
-    // Nothing
-}
+{ }
 
 Color32::Color32(byte r, byte g, byte b)
     : r(r),
       g(g),
       b(b),
       a(255)
-{
-    // Nothing
-}
+{ }
 
 Color32::Color32(byte r, byte g, byte b, byte a)
     : r(r),
       g(g),
       b(b),
       a(a)
-{
-    // Nothing
-}
+{ }
 
 Color32::~Color32() = default;

@@ -12,9 +12,7 @@ using namespace Jackbengine;
 
 SystemManager::SystemManager(const EntityManager& entityManager)
     : m_entityManager {entityManager}
-{
-    // Nothing
-}
+{ }
 
 void SystemManager::addEntity(Entity2 entity)
 {

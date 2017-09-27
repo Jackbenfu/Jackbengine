@@ -13,9 +13,7 @@ using namespace Jackbengine;
 
 SceneLoader::SceneLoader(Scene& scene)
     : m_scene(scene)
-{
-    // Nothing
-}
+{ }
 
 SceneLoader::~SceneLoader() = default;
 

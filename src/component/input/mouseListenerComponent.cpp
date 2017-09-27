@@ -12,9 +12,7 @@ using namespace Jackbengine;
 
 MouseListenerComponent::MouseListenerComponent(Scene *scene)
     : m_scene(scene)
-{
-    // Nothing
-}
+{ }
 
 MouseListenerComponent::~MouseListenerComponent() = default;
 

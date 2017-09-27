@@ -13,9 +13,7 @@ using namespace Jackbengine;
 
 Renderer2::Renderer2(const Window2& window)
     : m_impl {std::make_unique<Impl>(window)}
-{
-    // Nothing
-}
+{ }
 
 Renderer2::~Renderer2() = default;
 

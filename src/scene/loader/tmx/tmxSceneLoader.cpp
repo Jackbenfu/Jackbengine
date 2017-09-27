@@ -19,9 +19,7 @@ IMPORT_BINARY_RESOURCE(default_font);
 
 TmxSceneLoader::TmxSceneLoader(Scene& scene)
     : SceneLoader(scene)
-{
-    // Nothing
-}
+{ }
 
 void TmxSceneLoader::loadFromFile(const char *file)
 {

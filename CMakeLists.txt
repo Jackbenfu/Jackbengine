@@ -3,7 +3,7 @@ project(jackbengine)
 
 # CMake configuration
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
 # SDL2 include directories
@@ -97,6 +97,7 @@ set(SOURCE_FILES
     src/core/render/windowImpl.cpp
     src/core/render/window/window2.cpp
     src/core/render/window/window2.impl.cpp
+    src/core/state/stateMachine.cpp
     src/core/time/timer.cpp
     src/core/time/timerImpl.cpp
     src/core/time/timer2.cpp
@@ -127,6 +128,7 @@ set(SOURCE_FILES
     src/system/input/mouseEventTriggerSystem.cpp
     src/system/input/mouseEventTriggerSystem2.cpp
     src/system/physic/aabbCollisionSystem.cpp
+    src/system/physic/aabbCollisionSystem2.cpp
     src/system/render/spriteRenderSystem.cpp
     src/system/render/spriteRenderSystem2.cpp
     src/system/render/textRenderSystem.cpp

@@ -40,9 +40,7 @@ using Numerical = NumericalComponent<T>;
 template <typename T>
 NumericalComponent<T>::NumericalComponent(T value)
     : m_value {value}
-{
-    // Nothing
-}
+{ }
 
 template <typename T>
 T NumericalComponent<T>::get() const

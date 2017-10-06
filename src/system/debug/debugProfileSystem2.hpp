@@ -38,7 +38,6 @@ private:
     Renderer2& m_renderer;
     Timer2& m_timer;
 
-    Font2 m_font;
     TextComponent2 m_fps;
 };
 

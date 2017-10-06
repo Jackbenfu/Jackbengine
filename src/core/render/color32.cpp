@@ -30,5 +30,3 @@ Color32::Color32(byte r, byte g, byte b, byte a)
       b(b),
       a(a)
 { }
-
-Color32::~Color32() = default;

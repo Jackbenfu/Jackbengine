@@ -36,17 +36,17 @@ public:
     void remove();
 
     template<typename TItem>
-    void enable();
-
-    template<typename TItem>
-    void disable();
+    void enable(bool enable);
 
     template<typename TFunction>
     void apply(TFunction function);
 
 private:
+    // TODO manage this code duplication with decltype (could not make it work...)
     template<typename TItem>
-    auto& find() const;
+    std::tuple<bool, std::unique_ptr<TBase>>& find();
+    template<typename TItem>
+    const std::tuple<bool, std::unique_ptr<TBase>>& find() const;
 
     std::map<size_t, std::tuple<bool, std::unique_ptr<TBase>>> m_collection;
 };
@@ -59,6 +59,13 @@ TItem& HeterogeneousCollection<TBase>::get() const
 
     const auto& tuple = find<TItem>();
 
+    if (!std::get<0>(tuple))
+    {
+        throw std::runtime_error(
+            std::string("Item is disabled: ") + std::string(GET_TYPE_NAME(TItem))
+        );
+    }
+
     return dynamic_cast<TItem&>(*std::get<1>(tuple));
 }
 
@@ -69,8 +76,9 @@ bool HeterogeneousCollection<TBase>::any() const
     static_assert(std::is_base_of<TBase, TItem>::value);
 
     const auto typeId = GET_TYPE_ID(TItem);
+    const auto it = m_collection.find(typeId);
 
-    return m_collection.find(typeId) != m_collection.end();
+    return it != m_collection.end() && std::get<0>(it->second);
 }
 
 template<typename TBase>
@@ -107,24 +115,13 @@ void HeterogeneousCollection<TBase>::remove()
 
 template<typename TBase>
 template<typename TItem>
-void HeterogeneousCollection<TBase>::enable()
+void HeterogeneousCollection<TBase>::enable(bool enable)
 {
     static_assert(std::is_base_of<TBase, TItem>::value);
 
-    const auto& tuple = find<TItem>();
+    auto& tuple = find<TItem>();
 
-    std::get<0>(tuple) = true;
-}
-
-template<typename TBase>
-template<typename TItem>
-void HeterogeneousCollection<TBase>::disable()
-{
-    static_assert(std::is_base_of<TBase, TItem>::value);
-
-    const auto& tuple = find<TItem>();
-
-    std::get<0>(tuple) = false;
+    std::get<0>(tuple) = enable;
 }
 
 template<typename TBase>
@@ -148,11 +145,11 @@ void HeterogeneousCollection<TBase>::apply(TFunction function)
 
 template<typename TBase>
 template<typename TItem>
-auto& HeterogeneousCollection<TBase>::find() const
+std::tuple<bool, std::unique_ptr<TBase>>& HeterogeneousCollection<TBase>::find()
 {
     const auto typeId = GET_TYPE_ID(TItem);
 
-    const auto it = m_collection.find(typeId);
+    auto it = m_collection.find(typeId);
     if (it == m_collection.end())
     {
         throw std::runtime_error(
@@ -160,10 +157,20 @@ auto& HeterogeneousCollection<TBase>::find() const
         );
     }
 
-    if (!std::get<0>(it->second))
+    return it->second;
+}
+
+template<typename TBase>
+template<typename TItem>
+const std::tuple<bool, std::unique_ptr<TBase>>& HeterogeneousCollection<TBase>::find() const
+{
+    const auto typeId = GET_TYPE_ID(TItem);
+
+    auto it = m_collection.find(typeId);
+    if (it == m_collection.end())
     {
         throw std::runtime_error(
-            std::string("Item is disabled: ") + std::string(GET_TYPE_NAME(TItem))
+            std::string("Item does not exist: ") + std::string(GET_TYPE_NAME(TItem))
         );
     }
 

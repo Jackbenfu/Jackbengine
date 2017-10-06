@@ -11,41 +11,15 @@
 
 using namespace Jackbengine;
 
-TextComponent2::TextComponent2(const Renderer2& renderer, const Font2& font,
-                               const std::string& text)
+TextComponent2::TextComponent2(const Renderer2& renderer, const std::string& text, TextLayout2 layout, Color32 foreground,
+                               int size, const void *fontData, size_t fontDataSize)
     : m_renderer {renderer},
-      m_font {font},
-      m_text {text}
-{
-    refreshTexture();
-}
-
-TextComponent2::TextComponent2(const Renderer2& renderer, const Font2& font, const std::string& text, Color32 foreground)
-    : m_renderer {renderer},
-      m_font {font},
-      m_text {text},
-      m_foreground {foreground}
-{
-    refreshTexture();
-}
-
-TextComponent2::TextComponent2(const Renderer2& renderer, const Font2& font,
-                               const std::string& text, TextLayout2 layout)
-    : m_renderer {renderer},
-      m_font {font},
-      m_text {text},
-      m_layout {layout}
-{
-    refreshTexture();
-}
-
-TextComponent2::TextComponent2(const Renderer2& renderer, const Font2& font,
-                               const std::string& text, TextLayout2 layout, Color32 foreground)
-    : m_renderer {renderer},
-      m_font {font},
       m_text {text},
       m_layout {layout},
-      m_foreground {foreground}
+      m_foreground {foreground},
+      m_size {size},
+      m_fontData {fontData},
+      m_fontDataSize {fontDataSize}
 {
     refreshTexture();
 }
@@ -130,7 +104,8 @@ Texture2& TextComponent2::texture() const
 
 void TextComponent2::refreshTexture()
 {
-    m_texture = std::make_unique<Texture2>(m_renderer, m_font, m_text, m_foreground);
+    m_font = std::make_unique<Font2>(m_fontData, m_fontDataSize, m_size);
+    m_texture = std::make_unique<Texture2>(m_renderer, *m_font, m_text, m_foreground);
 
     auto glyphMaxY = 0;
     auto lastGlyphAdvance = 0;
@@ -140,13 +115,13 @@ void TextComponent2::refreshTexture()
         int glyphY;
         if (m_text.length() - 1 > i)
         {
-            m_font.glyphMaxY((ushort) m_text[i], &glyphY);
+            m_font->glyphMaxY((ushort) m_text[i], &glyphY);
         }
         else
         {
             int minX;
             int minY;
-            m_font.glyphMetrics((ushort) m_text[i], &minX, &lastGlyphMaxX, &minY, &glyphY, &lastGlyphAdvance);
+            m_font->glyphMetrics((ushort) m_text[i], &minX, &lastGlyphMaxX, &minY, &glyphY, &lastGlyphAdvance);
         }
 
         if (glyphY > glyphMaxY)
@@ -155,7 +130,7 @@ void TextComponent2::refreshTexture()
         }
     }
 
-    m_bottomWhiteSpace = abs(m_font.descent());
-    m_topWhiteSpace = m_font.lineSkip() - glyphMaxY - m_bottomWhiteSpace;
+    m_bottomWhiteSpace = abs(m_font->descent());
+    m_topWhiteSpace = m_font->lineSkip() - glyphMaxY - m_bottomWhiteSpace;
     m_rightWhiteSpace = lastGlyphAdvance - lastGlyphMaxX;
 }

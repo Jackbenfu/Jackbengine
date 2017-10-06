@@ -20,6 +20,8 @@ Renderer2::Impl::Impl(const Window2& window)
     {
         throw std::runtime_error(SDL_GetError());
     }
+
+    SDL_GetWindowSize(sdlWindow, &m_width, &m_height);
 }
 
 Renderer2::Impl::~Impl()
@@ -91,6 +93,16 @@ void Renderer2::Impl::renderPoint(float x, float y, Color32 color)
     {
         throw std::runtime_error(SDL_GetError());
     }
+}
+
+int Renderer2::Impl::width() const
+{
+    return m_width;
+}
+
+int Renderer2::Impl::height() const
+{
+    return m_height;
 }
 
 SDL_Renderer* Renderer2::Impl::internalObject() const

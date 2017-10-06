@@ -11,6 +11,7 @@
 
 #include "tinyxml/tinyxml.h"
 #include "tmxPropertyGroup.hpp"
+#include "tmxText.hpp"
 
 namespace Jackbengine {
 
@@ -34,6 +35,9 @@ public:
     bool hasProperty(const char *name) const;
     const TmxPropertyGroup* properties() const;
 
+    bool hasText() const;
+    const TmxText* text() const;
+
 private:
     TmxObject() = default;
 
@@ -48,6 +52,7 @@ private:
     int m_height {0};
 
     std::unique_ptr<TmxPropertyGroup> m_properties;
+    std::unique_ptr<TmxText> m_text;
 };
 
 } // namespace Jackbengine

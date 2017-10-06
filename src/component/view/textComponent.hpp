@@ -72,7 +72,7 @@ private:
     const Renderer *m_renderer = nullptr;
     Font *m_font = nullptr;
     Texture *m_texture = nullptr;
-    Color32 m_foreground = Color32(Color_White);
+    Color32 m_foreground = Color32(255, 255, 255);
     std::string m_text;
 
     int m_topWhiteSpace = 0;

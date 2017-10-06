@@ -36,10 +36,8 @@ class TextComponent2 : public Component2
     DISALLOW_COPY_AND_MOVE(TextComponent2)
 
 public:
-    TextComponent2(const Renderer2& renderer, const Font2& font, const std::string& text);
-    TextComponent2(const Renderer2& renderer, const Font2& font, const std::string& text, Color32 foreground);
-    TextComponent2(const Renderer2& renderer, const Font2& font, const std::string& text, TextLayout2 layout);
-    TextComponent2(const Renderer2& renderer, const Font2& font, const std::string& text, TextLayout2 layout, Color32 foreground);
+    TextComponent2(const Renderer2& renderer, const std::string& text, TextLayout2 layout, Color32 foreground,
+                   int size, const void *fontData, size_t fontDataSize);
 
     ~TextComponent2() override = default;
 
@@ -67,11 +65,15 @@ private:
     void refreshTexture();
 
     const Renderer2& m_renderer;
-    const Font2& m_font;
+
+    std::unique_ptr<Font2> m_font;
 
     std::string m_text;
-    TextLayout2 m_layout {TextLayout2::LeftTop};
-    Color32 m_foreground {Color_White};
+    TextLayout2 m_layout;
+    Color32 m_foreground;
+    int m_size;
+    const void *m_fontData;
+    const size_t m_fontDataSize;
 
     std::unique_ptr<Texture2> m_texture;
 

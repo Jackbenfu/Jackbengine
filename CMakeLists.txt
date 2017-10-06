@@ -109,6 +109,7 @@ set(SOURCE_FILES
     src/core/tmx/tmxObjectGroup.cpp
     src/core/tmx/tmxProperty.cpp
     src/core/tmx/tmxPropertyGroup.cpp
+    src/core/tmx/tmxText.cpp
     src/core/tmx/tmxTileset.cpp
     src/entity/entity.cpp
     src/entity/entityManager.cpp
@@ -116,6 +117,7 @@ set(SOURCE_FILES
     src/scene/scene2.cpp
     src/scene/loader/sceneLoader.cpp
     src/scene/loader/tmx/tmxSceneLoader.cpp
+    src/scene/loader/tmxSceneLoader2.cpp
     src/ecs/ecsManager.cpp
     src/system/animation/motionSystem.cpp
     src/system/animation/motionSystem2.cpp

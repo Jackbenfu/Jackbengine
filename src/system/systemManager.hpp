@@ -29,13 +29,13 @@ public:
     void removeSystem();
 
     template<typename TSystem>
-    void enableSystem();
+    TSystem& getSystem();
 
     template<typename TSystem>
-    void disableSystem();
+    void enableSystem(bool enable);
 
     void addEntity(Entity2 entity);
-    void removeEntity(Entity2 entity);
+    void removeEntity(Entity2 entity, bool checkComponents);
 
     void frame(float delta);
 
@@ -52,21 +52,21 @@ void SystemManager::addSystem(Args&& ...args)
 }
 
 template<typename TSystem>
+TSystem& SystemManager::getSystem()
+{
+    return m_systems.get<TSystem>();
+}
+
+template<typename TSystem>
 void SystemManager::removeSystem()
 {
     m_systems.remove<TSystem>();
 }
 
 template<typename TSystem>
-void SystemManager::enableSystem()
+void SystemManager::enableSystem(bool enable)
 {
-    m_systems.enable<TSystem>();
-}
-
-template<typename TSystem>
-void SystemManager::disableSystem()
-{
-    m_systems.disable<TSystem>();
+    m_systems.enable<TSystem>(enable);
 }
 
 } // namespace Jackbengine

@@ -65,6 +65,16 @@ const TmxPropertyGroup* TmxObject::properties() const
     return m_properties.get();
 }
 
+bool TmxObject::hasText() const
+{
+    return m_text != nullptr;
+}
+
+const TmxText* TmxObject::text() const
+{
+    return m_text.get();
+}
+
 void TmxObject::load(const TiXmlElement *element)
 {
     m_name = element->Attribute("name");
@@ -82,6 +92,12 @@ void TmxObject::load(const TiXmlElement *element)
         {
             m_properties = std::unique_ptr<TmxPropertyGroup>(new TmxPropertyGroup());
             m_properties->load(node->ToElement());
+        }
+
+        if (0 == strcmp("text", node->Value()))
+        {
+            m_text = std::unique_ptr<TmxText>(new TmxText());
+            m_text->load(node->ToElement());
         }
 
         node = node->NextSibling();

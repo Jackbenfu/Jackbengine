@@ -30,6 +30,7 @@ public:
     Entity2 addEntity();
     void removeEntity(Entity2 entity);
     void enableEntity(Entity2 entity);
+    void enableEntity(Entity2 entity, bool enable);
     void disableEntity(Entity2 entity);
 
     /*
@@ -48,6 +49,9 @@ public:
     void enableComponent(Entity2 entity);
 
     template<typename TComponent>
+    void enableComponent(Entity2 entity, bool enable);
+
+    template<typename TComponent>
     void disableComponent(Entity2 entity);
 
     /*
@@ -60,7 +64,13 @@ public:
     void removeSystem();
 
     template<typename TSystem>
+    TSystem& getSystem();
+
+    template<typename TSystem>
     void enableSystem();
+
+    template<typename TSystem>
+    void enableSystem(bool enable);
 
     template<typename TSystem>
     void disableSystem();
@@ -98,7 +108,7 @@ template<typename TComponent>
 void Scene2::removeComponent(Entity2 entity)
 {
     m_entityManager.removeComponent<TComponent>(entity);
-    m_systemManager.removeEntity(entity);
+    m_systemManager.removeEntity(entity, true);
 }
 
 template<typename TComponent>
@@ -110,15 +120,27 @@ TComponent& Scene2::getComponent(Entity2 entity) const
 template<typename TComponent>
 void Scene2::enableComponent(Entity2 entity)
 {
-    m_entityManager.enableComponent<TComponent>(entity);
-    m_systemManager.addEntity(entity);
+    enableComponent<TComponent>(entity, true);
+}
+
+template<typename TComponent>
+void Scene2::enableComponent(Entity2 entity, bool enable)
+{
+    m_entityManager.enableComponent<TComponent>(entity, enable);
+    if (enable)
+    {
+        m_systemManager.addEntity(entity);
+    }
+    else
+    {
+        m_systemManager.removeEntity(entity, true);
+    }
 }
 
 template<typename TComponent>
 void Scene2::disableComponent(Entity2 entity)
 {
-    m_entityManager.removeComponent<TComponent>(entity);
-    m_systemManager.removeEntity(entity);
+    enableComponent<TComponent>(entity, false);
 }
 
 template<typename TSystem, typename ...Args>
@@ -134,15 +156,27 @@ void Scene2::removeSystem()
 }
 
 template<typename TSystem>
+TSystem& Scene2::getSystem()
+{
+    return m_systemManager.getSystem<TSystem>();
+}
+
+template<typename TSystem>
 void Scene2::enableSystem()
 {
-    m_systemManager.enableSystem<TSystem>();
+    enableSystem<TSystem>(true);
+}
+
+template<typename TSystem>
+void Scene2::enableSystem(bool enable)
+{
+    m_systemManager.enableSystem<TSystem>(enable);
 }
 
 template<typename TSystem>
 void Scene2::disableSystem()
 {
-    m_systemManager.disableSystem<TSystem>();
+    enableSystem<TSystem>(false);
 }
 
 template<typename TScene>

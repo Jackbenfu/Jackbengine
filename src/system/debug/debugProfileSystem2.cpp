@@ -17,15 +17,13 @@ IMPORT_BINARY_RESOURCE(default_font)
 DebugProfileSystem2::DebugProfileSystem2(Renderer2& renderer, Timer2& timer)
     : m_renderer {renderer},
       m_timer {timer},
-      m_font {default_font, default_font_size, FontSize},
-      m_fps {m_renderer, m_font, InvalidFpsText}
+      m_fps {m_renderer, InvalidFpsText, TextLayout2::LeftTop, Color32(255, 255, 255), FontSize, default_font, default_font_size}
 { }
 
 DebugProfileSystem2::DebugProfileSystem2(Renderer2& renderer, Timer2& timer, Color32 foreground)
     : m_renderer {renderer},
       m_timer {timer},
-      m_font {default_font, default_font_size, FontSize},
-      m_fps {m_renderer, m_font, InvalidFpsText, foreground}
+      m_fps {m_renderer, InvalidFpsText, TextLayout2::LeftTop, foreground, FontSize, default_font, default_font_size}
 { }
 
 bool DebugProfileSystem2::hasRequiredComponents(ComponentCollection&) const

@@ -26,8 +26,7 @@ public:
     Entity2 addEntity();
     void removeEntity(Entity2 entity);
     bool isEntityEnabled(Entity2 entity) const;
-    void enableEntity(Entity2 entity);
-    void disableEntity(Entity2 entity);
+    void enableEntity(Entity2 entity, bool enable);
     ComponentCollection& getEntity(Entity2 entity) const;
 
     template<typename TComponent, typename ...Args>
@@ -40,10 +39,7 @@ public:
     TComponent& getComponent(Entity2 entity) const;
 
     template<typename TComponent>
-    void enableComponent(Entity2 entity);
-
-    template<typename TComponent>
-    void disableComponent(Entity2 entity);
+    void enableComponent(Entity2 entity, bool enable);
 
 private:
     std::tuple<bool, std::unique_ptr<ComponentCollection>>& findEntity(Entity2 entity);
@@ -52,7 +48,7 @@ private:
     template<typename T>
     static auto findEntity(T& t, Entity2 entity) -> decltype(t.findEntity(entity));
 
-    std::map<size_t, std::tuple<bool, std::unique_ptr<ComponentCollection>>> m_entities;
+    std::map<Entity2, std::tuple<bool, std::unique_ptr<ComponentCollection>>> m_entities;
 
 };
 
@@ -82,19 +78,11 @@ TComponent& EntityManager::getComponent(Entity2 entity) const
 }
 
 template<typename TComponent>
-void EntityManager::enableComponent(Entity2 entity)
+void EntityManager::enableComponent(Entity2 entity, bool enable)
 {
     auto& tuple = findEntity(entity);
 
-    std::get<1>(tuple)->enable<TComponent>();
-}
-
-template<typename TComponent>
-void EntityManager::disableComponent(Entity2 entity)
-{
-    auto& tuple = findEntity(entity);
-
-    std::get<1>(tuple)->disable<TComponent>();
+    std::get<1>(tuple)->enable<TComponent>(enable);
 }
 
 template<typename T>

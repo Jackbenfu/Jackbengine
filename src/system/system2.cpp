@@ -20,7 +20,23 @@ void System2::addEntity(Entity2 entity, ComponentCollection& components)
     m_entities[entity] = &components;
 }
 
-void System2::removeEntity(Entity2 entity)
+void System2::removeEntity(Entity2 entity, bool checkComponents)
 {
+    if (!checkComponents)
+    {
+        m_entities.erase(entity);
+    }
+
+    const auto it = m_entities.find(entity);
+    if (it == m_entities.end())
+    {
+        return;
+    }
+
+    if (hasRequiredComponents(*it->second))
+    {
+        return;
+    }
+
     m_entities.erase(entity);
 }

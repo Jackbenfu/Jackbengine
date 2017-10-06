@@ -32,12 +32,18 @@ public:
     void renderLine(float x1, float y1, float x2, float y2, Color32 color);
     void renderPoint(float x, float y, Color32 color);
 
+    int width() const;
+    int height() const;
+
     SDL_Renderer* internalObject() const;
 
 private:
     SDL_Renderer *m_renderer {nullptr};
 
-    Color32 m_clearColor {Color_Black};
+    Color32 m_clearColor {Color32(0, 0, 0)};
+
+    int m_width;
+    int m_height;
 };
 
 } // namespace Jackbengine

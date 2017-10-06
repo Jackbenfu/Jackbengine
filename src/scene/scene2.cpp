@@ -24,19 +24,31 @@ Entity2 Scene2::addEntity()
 void Scene2::removeEntity(Entity2 entity)
 {
     m_entityManager.removeEntity(entity);
-    m_systemManager.removeEntity(entity);
+    m_systemManager.removeEntity(entity, false);
 }
 
 void Scene2::enableEntity(Entity2 entity)
 {
-    m_entityManager.enableEntity(entity);
-    m_systemManager.addEntity(entity);
+    enableEntity(entity, true);
+}
+
+void Scene2::enableEntity(Entity2 entity, bool enable)
+{
+    m_entityManager.enableEntity(entity, enable);
+
+    if (enable)
+    {
+        m_systemManager.addEntity(entity);
+    }
+    else
+    {
+        m_systemManager.removeEntity(entity, false);
+    }
 }
 
 void Scene2::disableEntity(Entity2 entity)
 {
-    m_entityManager.disableEntity(entity);
-    m_systemManager.removeEntity(entity);
+    enableEntity(entity, false);
 }
 
 void Scene2::update(float delta)

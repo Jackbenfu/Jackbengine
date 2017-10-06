@@ -37,6 +37,9 @@ public:
     void renderLine(float x1, float y1, float x2, float y2, Color32 color);
     void renderPoint(float x, float y, Color32 color);
 
+    int width() const;
+    int height() const;
+
 private:
     void* internalObject() const;
 

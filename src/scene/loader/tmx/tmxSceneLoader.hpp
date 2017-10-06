@@ -39,7 +39,7 @@ protected:
 private:
     std::unique_ptr<TmxMap> m_map;
 
-    const Color32 DEFAULT_TEXT_COLOR = Color_White;
+    const Color32 DEFAULT_TEXT_COLOR = Color32(255, 255, 255);
     const TextLayout DEFAULT_TEXT_LAYOUT = TextLayout::LeftTop;
     const int DEFAULT_TEXT_SIZE = 18;
 

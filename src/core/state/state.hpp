@@ -26,9 +26,9 @@ public:
 
     virtual ~State() = default;
 
-    virtual void enter() = 0;
-    virtual void frame(float delta) = 0;
-    virtual void exit() = 0;
+    virtual void enter() { }
+    virtual void frame(float) { }
+    virtual void exit() { }
 
 protected:
     StateMachine& stateMachine() const { return m_stateMachine; }

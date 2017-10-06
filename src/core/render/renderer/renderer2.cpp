@@ -57,6 +57,16 @@ void Renderer2::renderPoint(float x, float y, Color32 color)
     m_impl->renderPoint(x, y, color);
 }
 
+int Renderer2::width() const
+{
+    return m_impl->width();
+}
+
+int Renderer2::height() const
+{
+    return m_impl->height();
+}
+
 void* Renderer2::internalObject() const
 {
     return m_impl->internalObject();

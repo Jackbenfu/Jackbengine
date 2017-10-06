@@ -9,12 +9,11 @@
 #include "debugTextSystem2.hpp"
 #include "component/layout/containerComponent2.hpp"
 #include "component/view/textComponent2.hpp"
-#include "component/body/transformComponent2.hpp"
 
 using namespace Jackbengine;
 
 DebugTextSystem2::DebugTextSystem2(Renderer2& renderer)
-    : DebugTextSystem2 {renderer, Color_Red}
+    : DebugTextSystem2 {renderer, Color32(255, 0, 0)}
 { }
 
 DebugTextSystem2::DebugTextSystem2(Renderer2& renderer, Color32 color)

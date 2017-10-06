@@ -12,7 +12,10 @@ using namespace Jackbengine;
 
 StateMachine::~StateMachine()
 {
-    m_currentState->exit();
+    if (nullptr != m_currentState)
+    {
+        m_currentState->exit();
+    }
 }
 
 void StateMachine::start()

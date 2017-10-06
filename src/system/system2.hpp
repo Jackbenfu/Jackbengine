@@ -32,7 +32,7 @@ private:
     virtual bool hasRequiredComponents(ComponentCollection& components) const = 0;
 
     void addEntity(Entity2 entity, ComponentCollection& components);
-    void removeEntity(Entity2 entity);
+    void removeEntity(Entity2 entity, bool checkComponents);
 };
 
 } // namespace Jackbengine

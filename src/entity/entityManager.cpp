@@ -32,14 +32,9 @@ bool EntityManager::isEntityEnabled(Entity2 entity) const
     return std::get<0>(findEntity(entity));
 }
 
-void EntityManager::enableEntity(Entity2 entity)
+void EntityManager::enableEntity(Entity2 entity, bool enable)
 {
-    std::get<0>(findEntity(entity)) = true;
-}
-
-void EntityManager::disableEntity(Entity2 entity)
-{
-    std::get<0>(findEntity(entity)) = false;
+    std::get<0>(findEntity(entity)) = enable;
 }
 
 ComponentCollection& EntityManager::getEntity(Entity2 entity) const

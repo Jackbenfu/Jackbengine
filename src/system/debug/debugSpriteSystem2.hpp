@@ -27,6 +27,7 @@ private:
     bool hasRequiredComponents(ComponentCollection& components) const override;
 
     Renderer2& m_renderer;
+    const Color32 m_color;
 };
 
 } // namespace Jackbengine

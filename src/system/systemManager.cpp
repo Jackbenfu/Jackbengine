@@ -26,11 +26,11 @@ void SystemManager::addEntity(Entity2 entity)
     m_systems.apply(lambda);
 }
 
-void SystemManager::removeEntity(Entity2 entity)
+void SystemManager::removeEntity(Entity2 entity, bool checkComponents)
 {
     const auto lambda = [&](System2& system)
     {
-        system.removeEntity(entity);
+        system.removeEntity(entity, checkComponents);
     };
 
     m_systems.apply(lambda);

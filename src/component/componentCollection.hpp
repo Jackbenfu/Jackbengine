@@ -35,10 +35,7 @@ public:
     void remove();
 
     template<typename TComponent>
-    void enable();
-
-    template<typename TComponent>
-    void disable();
+    void enable(bool enable);
 
 private:
     HeterogeneousCollection<Component2> m_components;
@@ -69,15 +66,9 @@ void ComponentCollection::remove()
 }
 
 template<typename TComponent>
-void ComponentCollection::enable()
+void ComponentCollection::enable(bool enable)
 {
-    m_components.enable<TComponent>();
-}
-
-template<typename TComponent>
-void ComponentCollection::disable()
-{
-    m_components.disable<TComponent>();
+    m_components.enable<TComponent>(enable);
 }
 
 } // namespace Jackbengine

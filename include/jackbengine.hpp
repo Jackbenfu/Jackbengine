@@ -101,6 +101,7 @@
 #include "system/debug/debugSpriteSystem2.hpp"
 #include "system/debug/debugTextSystem2.hpp"
 #include "system/input/mouseEventTriggerSystem2.hpp"
+#include "system/physic/aabbCollisionSystem2.hpp"
 #include "system/render/spriteRenderSystem2.hpp"
 #include "system/render/textRenderSystem2.hpp"
 
@@ -109,5 +110,6 @@
 
 // Scene
 #include "scene/scene2.hpp"
+#include "scene/loader/tmxSceneLoader2.hpp"
 
 #endif // __JACKBENGINE_H__

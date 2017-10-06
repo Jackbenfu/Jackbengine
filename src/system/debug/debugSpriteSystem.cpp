@@ -38,10 +38,10 @@ void DebugSpriteSystem::update(float)
             auto y1 = position.y;
             auto y2 = position.y + size.y;
 
-            m_renderer->renderLine(x1, y1, x2, y1, Color_Red);
-            m_renderer->renderLine(x2, y1, x2, y2, Color_Red);
-            m_renderer->renderLine(x2, y2, x1, y2, Color_Red);
-            m_renderer->renderLine(x1, y2, x1, y1, Color_Red);
+            m_renderer->renderLine(x1, y1, x2, y1, Color32(255, 0, 0));
+            m_renderer->renderLine(x2, y1, x2, y2, Color32(255, 0, 0));
+            m_renderer->renderLine(x2, y2, x1, y2, Color32(255, 0, 0));
+            m_renderer->renderLine(x1, y2, x1, y1, Color32(255, 0, 0));
         }
     }
 }

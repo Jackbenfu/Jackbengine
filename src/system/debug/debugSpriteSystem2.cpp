@@ -13,7 +13,8 @@
 using namespace Jackbengine;
 
 DebugSpriteSystem2::DebugSpriteSystem2(Renderer2& renderer)
-    : m_renderer {renderer}
+    : m_renderer {renderer},
+      m_color {Color32(255, 0, 0)}
 { }
 
 void DebugSpriteSystem2::frame(float)
@@ -33,10 +34,10 @@ void DebugSpriteSystem2::frame(float)
         const auto y1 = position.y;
         const auto y2 = position.y + size.y;
 
-        m_renderer.renderLine(x1, y1, x2, y1, Color_Red);
-        m_renderer.renderLine(x2, y1, x2, y2, Color_Red);
-        m_renderer.renderLine(x2, y2, x1, y2, Color_Red);
-        m_renderer.renderLine(x1, y2, x1, y1, Color_Red);
+        m_renderer.renderLine(x1, y1, x2, y1, m_color);
+        m_renderer.renderLine(x2, y1, x2, y2, m_color);
+        m_renderer.renderLine(x2, y2, x1, y2, m_color);
+        m_renderer.renderLine(x1, y2, x1, y1, m_color);
     }
 }
 

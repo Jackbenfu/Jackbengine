@@ -13,9 +13,9 @@
 #if defined(__APPLE__)
     #include "core/platform/osx.hpp"
 #elif defined(_WIN32)
-    #include "core/platform/win32.h"
+    #include "core/platform/win32.hpp"
 #elif defined(EMSCRIPTEN)
-    #include "core/platform/emscripten.h"
+    #include "core/platform/emscripten.hpp"
 #endif
 
 #endif // __PLATFORM_H__

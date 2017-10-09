@@ -6,6 +6,7 @@
 // Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
+#include <ctime>
 #include "application.hpp"
 
 using namespace Jackbengine;

@@ -103,6 +103,8 @@ void Timer::Impl::delay(uint ms) const
 {
 #ifndef EMSCRIPTEN
     SDL_Delay(ms);
+#else
+    (void)ms;
 #endif
 }
 

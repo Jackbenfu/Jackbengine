@@ -12,6 +12,7 @@
 #include <map>
 #include <string>
 #include <vector>
+#include <arpa/inet.h>
 
 #include "easywsclient/easywsclient.hpp"
 

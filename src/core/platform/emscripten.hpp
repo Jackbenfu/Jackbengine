@@ -18,6 +18,6 @@
 #include <SDL/SDL_mixer.h>
 
 // Emscripten
-#include <core/platform/emscripten.hpp>
+#include "core/platform/emscripten.hpp"
 
 #endif // __EMSCRIPTEN_H__

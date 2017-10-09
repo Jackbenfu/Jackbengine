@@ -10,7 +10,7 @@
 #define __SDL_SURFACE_H__
 
 #include <string>
-#include "core/render/font/font2.hpp"
+#include "core/render/font/font.hpp"
 #include "core/render/color32.hpp"
 #include "core/sdl/io/sdlRwops.hpp"
 
@@ -24,7 +24,7 @@ public:
     explicit SdlSurface(const std::string& file);
     explicit SdlSurface(const SdlRwops& rwops);
     SdlSurface(int width, int height, int depth);
-    SdlSurface(const Font2& font, const std::string& text, Color32 foreground);
+    SdlSurface(const Font& font, const std::string& text, Color32 foreground);
     ~SdlSurface();
 
     SDL_Surface* internalObject() const;

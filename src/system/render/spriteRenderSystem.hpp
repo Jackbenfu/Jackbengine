@@ -2,33 +2,31 @@
 // spriteRenderSystem.hpp
 // jackbengine
 //
-// Created by Damien Bendejacq on 02/05/14.
-// Copyright © 2014 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 21/08/2017.
+// Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __SPRITE_RENDER_SYSTEM_H__
 #define __SPRITE_RENDER_SYSTEM_H__
 
 #include "system/system.hpp"
-#include "core/render/renderer.hpp"
+#include "core/render/renderer/renderer.hpp"
 
 namespace Jackbengine {
 
-class SpriteRenderSystem : public System
+class SpriteRenderSystem final : public System
 {
+    DISALLOW_COPY_AND_MOVE(SpriteRenderSystem)
+
 public:
-    SpriteRenderSystem();
-    ~SpriteRenderSystem() override;
-
-    void update(float delta) override;
-
-    void setRenderer(Renderer *renderer);
-
-protected:
-    bool hasRequiredComponents(Entity *entity) override;
+    explicit SpriteRenderSystem(Renderer& renderer);
+    ~SpriteRenderSystem() override = default;
 
 private:
-    Renderer *m_renderer = nullptr;
+    void frame(float delta) override;
+    bool hasRequiredComponents(ComponentCollection& components) const override;
+
+    Renderer& m_renderer;
 };
 
 } // namespace Jackbengine

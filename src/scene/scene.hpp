@@ -2,100 +2,190 @@
 // scene.hpp
 // jackbengine
 //
-// Created by Damien Bendejacq on 18/07/2015.
-// Copyright © 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 09/08/2017.
+// Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __SCENE_H__
 #define __SCENE_H__
 
-#include "common.hpp"
-#include "ecs/ecsManager.hpp"
-
-#include "core/render/cursor.hpp"
-#include "core/input/input.hpp"
-#include "core/render/renderer.hpp"
-#include "core/render/window.hpp"
-#include "core/time/timer.hpp"
+#include "sceneManager.hpp"
+#include "application/application.hpp"
+#include "entity/entityManager.hpp"
+#include "system/systemManager.hpp"
 
 namespace Jackbengine {
 
 class Scene
 {
-    friend class Application;
-    friend class SceneLoader;
+    DISALLOW_COPY_AND_MOVE(Scene)
 
 public:
-    bool isEntityEnabled(Entity *entity) const;
-    Entity* getEntity(const char *name) const;
-    Entity* addEntity(const char *name);
-    void removeEntity(Entity *entity);
-    bool removeEntity(const char *name);
-    void enableEntity(Entity *entity);
-    void enableEntity(const char *name);
-    void disableEntity(Entity *entity);
-    void disableEntity(const char *name);
+    Scene(Application& application, SceneManager<Scene>& sceneManager);
+    virtual ~Scene() = default;
 
-    template<typename TComponent> TComponent* getComponent(Entity *entity);
-    template<typename TComponent> TComponent* addComponent(Entity *entity);
-    template<typename TComponent> bool setComponent(Entity *entity, TComponent *component);
-    template<typename TComponent, typename TParam> TComponent* addComponent(Entity *entity, TParam param);
-    template<typename TComponent> void removeComponent(Entity *entity);
-    template<typename TComponent> void enableComponent(Entity *entity);
-    template<typename TComponent> void disableComponent(Entity *entity);
+    /*
+     * Entity
+     */
+    Entity addEntity();
+    void removeEntity(Entity entity);
+    void enableEntity(Entity entity);
+    void enableEntity(Entity entity, bool enable);
+    void disableEntity(Entity entity);
 
-    template<typename TSystem> TSystem* getSystem();
-    template<typename TSystem> TSystem* addSystem();
-    template<typename TSystem> void enableSystem();
-    template<typename TSystem> void disableSystem();
+    /*
+     * Component
+     */
+    template<typename TComponent, typename ...Args>
+    void addComponent(Entity entity, Args&& ...args);
 
-    Cursor* cursor() const;
-    void setCursor(Cursor *cursor);
+    template<typename TComponent>
+    void removeComponent(Entity entity);
 
-    Input* input() const;
-    void setInput(Input *input);
+    template<typename TComponent>
+    TComponent& getComponent(Entity entity) const;
 
-    Renderer* renderer() const;
-    void setRenderer(Renderer *renderer);
+    template<typename TComponent>
+    void enableComponent(Entity entity);
 
-    Timer* timer() const;
-    void setTimer(Timer *timer);
+    template<typename TComponent>
+    void enableComponent(Entity entity, bool enable);
 
-    Window* window() const;
-    void setWindow(Window *window);
+    template<typename TComponent>
+    void disableComponent(Entity entity);
 
-    bool loadScene(const char *name);
-    void exit();
+    /*
+     * System
+     */
+    template<typename TSystem, typename ...Args>
+    void addSystem(Args&& ...args);
 
-    virtual const char* name() = 0;
+    template<typename TSystem>
+    void removeSystem();
 
-protected:
-    Scene();
-    virtual ~Scene();
+    template<typename TSystem>
+    TSystem& getSystem();
 
-    virtual void frame(float delta) = 0;
-    virtual bool initContents() = 0;
+    template<typename TSystem>
+    void enableSystem();
+
+    template<typename TSystem>
+    void enableSystem(bool enable);
+
+    template<typename TSystem>
+    void disableSystem();
+
+    void update(float delta);
+
+    Timer& timer() const;
+    Cursor& cursor() const;
+    Input& input() const;
+    Window& window() const;
+    Renderer& renderer() const;
+
+    void exitApplication();
+
+    template<typename TScene>
+    void loadScene();
 
 private:
-    bool init();
-    void loop();
-    bool running() const;
+    virtual void frame(float delta);
 
-    void clear();
-
-    EcsManager *m_ecsManager = nullptr;
-
-    Cursor *m_cursor = nullptr;
-    Input *m_input = nullptr;
-    Renderer *m_renderer = nullptr;
-    Timer *m_timer = nullptr;
-    Window *m_window = nullptr;
-
-    bool m_running {false};
-    const char *m_nextScene = nullptr;
+    Application& m_application;
+    SceneManager<Scene>& m_sceneManager;
+    EntityManager m_entityManager;
+    SystemManager m_systemManager;
 };
 
-#include "scene.tpp"
+template<typename TComponent, typename ...Args>
+void Scene::addComponent(Entity entity, Args&& ...args)
+{
+    m_entityManager.addComponent<TComponent>(entity, std::forward<Args>(args)...);
+    m_systemManager.addEntity(entity);
+}
+
+template<typename TComponent>
+void Scene::removeComponent(Entity entity)
+{
+    m_entityManager.removeComponent<TComponent>(entity);
+    m_systemManager.removeEntity(entity, true);
+}
+
+template<typename TComponent>
+TComponent& Scene::getComponent(Entity entity) const
+{
+    return m_entityManager.getComponent<TComponent>(entity);
+}
+
+template<typename TComponent>
+void Scene::enableComponent(Entity entity)
+{
+    enableComponent<TComponent>(entity, true);
+}
+
+template<typename TComponent>
+void Scene::enableComponent(Entity entity, bool enable)
+{
+    m_entityManager.enableComponent<TComponent>(entity, enable);
+    if (enable)
+    {
+        m_systemManager.addEntity(entity);
+    }
+    else
+    {
+        m_systemManager.removeEntity(entity, true);
+    }
+}
+
+template<typename TComponent>
+void Scene::disableComponent(Entity entity)
+{
+    enableComponent<TComponent>(entity, false);
+}
+
+template<typename TSystem, typename ...Args>
+void Scene::addSystem(Args&& ...args)
+{
+    m_systemManager.addSystem<TSystem>(std::forward<Args>(args)...);
+}
+
+template<typename TSystem>
+void Scene::removeSystem()
+{
+    m_systemManager.removeSystem<TSystem>();
+}
+
+template<typename TSystem>
+TSystem& Scene::getSystem()
+{
+    return m_systemManager.getSystem<TSystem>();
+}
+
+template<typename TSystem>
+void Scene::enableSystem()
+{
+    enableSystem<TSystem>(true);
+}
+
+template<typename TSystem>
+void Scene::enableSystem(bool enable)
+{
+    m_systemManager.enableSystem<TSystem>(enable);
+}
+
+template<typename TSystem>
+void Scene::disableSystem()
+{
+    enableSystem<TSystem>(false);
+}
+
+template<typename TScene>
+void Scene::loadScene()
+{
+    static_assert(std::is_base_of<Scene, TScene>::value);
+
+    m_sceneManager.loadScene<TScene>(m_application, m_sceneManager);
+}
 
 } // namespace Jackbengine
 

@@ -2,47 +2,52 @@
 // boxShapeComponent.cpp
 // jackbengine
 //
-// Created by Damien Bendejacq on 05/02/15.
-// Copyright © 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 28/07/2017.
+// Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
+#include <stdexcept>
 #include "boxShapeComponent.hpp"
 
 using namespace Jackbengine;
 
-BoxShapeComponent::BoxShapeComponent() = default;
+BoxShapeComponent::BoxShapeComponent(float width, float height)
+    : m_vector {width, height}
+{ }
 
-BoxShapeComponent::~BoxShapeComponent() = default;
-
-float BoxShapeComponent::getWidth() const
+float BoxShapeComponent::width() const
 {
     return m_vector.x;
 }
 
-float BoxShapeComponent::getHeight() const
+float BoxShapeComponent::height() const
 {
     return m_vector.y;
 }
 
-const Vec2f& BoxShapeComponent::getSize() const
+const Vec2f& BoxShapeComponent::size() const
 {
     return m_vector;
 }
 
 void BoxShapeComponent::setWidth(float width)
 {
-    if (0.0f <= width)
+    if (width < 0.0f)
     {
-        m_vector.x = width;
+        throw std::invalid_argument("width");
     }
+
+    m_vector.x = width;
 }
 
 void BoxShapeComponent::setHeight(float height)
 {
-    if (0.0f <= height)
+    if (height < 0.0f)
     {
-        m_vector.y = height;
+        throw std::invalid_argument("height");
     }
+
+    m_vector.y = height;
 }
 
 void BoxShapeComponent::setSize(float width, float height)

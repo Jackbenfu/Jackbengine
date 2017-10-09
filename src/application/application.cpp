@@ -2,174 +2,80 @@
 // application.cpp
 // jackbengine
 //
-// Created by Damien Bendejacq on 10/08/2015.
-// Copyright © 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 10/07/2017.
+// Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
 #include "application.hpp"
-#include "platform.hpp"
 
 using namespace Jackbengine;
 
-Application::Application()
-{
-    m_cursor = Cursor::create();
-    m_input = Input::create();
-    m_renderer = Renderer::create();
-    m_timer = Timer::create();
-    m_window = Window::create();
-}
-
-Application::~Application()
-{
-    for (auto pair : m_scenes)
-    {
-        DELETE_SAFE(pair.second);
-    }
-    m_scenes.clear();
-
-    m_currentScene = nullptr;
-
-    DELETE_SAFE(m_window);
-    DELETE_SAFE(m_timer);
-    DELETE_SAFE(m_renderer);
-    DELETE_SAFE(m_input);
-    DELETE_SAFE(m_cursor);
-
-    Mix_Quit();
-    TTF_Quit();
-#ifndef EMSCRIPTEN
-    SDL_Quit();
-#endif
-}
-
-bool Application::init()
+Application::Application(ApplicationConfig& config)
+    : m_timer(config.core_fps),
+      m_window(
+        config.general_title,
+        config.render_width,
+        config.render_height,
+        config.render_fullscreen
+      ),
+      m_renderer(m_window)
 {
     srand(static_cast<uint>(time(nullptr)));
-
-    if (configure(m_config))
-    {
-#ifdef EMSCRIPTEN
-        if (SDL_Init(SDL_INIT_EVERYTHING & ~(SDL_INIT_TIMER | SDL_INIT_HAPTIC)) < 0)
-#else
-        if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
-#endif
-        {
-            LOG_ERROR("%s", SDL_GetError())
-            return false;
-        }
-
-        if (TTF_Init() < 0)
-        {
-            LOG_ERROR("%s", TTF_GetError())
-            return false;
-        }
-
-        if (!Mix_Init(MIX_INIT_FLAC | MIX_INIT_MOD | MIX_INIT_MP3 | MIX_INIT_OGG))
-        {
-            LOG_ERROR("%s", Mix_GetError())
-            return false;
-        }
-
-        if (-1 == Mix_OpenAudio(
-            MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024))
-        {
-            LOG_ERROR("%s", Mix_GetError())
-            return false;
-        }
-
-        m_timer->enableFixedFps(m_config.core_fps);
-
-        if (!m_input->init())
-        {
-            return false;
-        }
-
-        if (!m_window->init(
-            m_config.general_title.c_str(),
-            m_config.render_width,
-            m_config.render_height,
-            m_config.render_fullscreen))
-        {
-            return false;
-        }
-
-        if (!m_renderer->init(m_window))
-        {
-            return false;
-        }
-
-        if (!m_currentScene)
-        {
-            return false;
-        }
-
-        m_currentScene->init();
-
-        return true;
-    }
-
-    return false;
 }
 
 bool Application::running() const
 {
-    return m_currentScene->running();
+    return m_running;
 }
 
 void Application::loop()
 {
-    m_currentScene->loop();
+    m_timer.start();
 
-    if (m_currentScene->m_nextScene)
+    const auto deltaMultiplier = 0.001f;
+    const auto delta = m_timer.elapsedMilliseconds() * deltaMultiplier;
+
+    m_renderer.clear();
+    m_input.update();
+
+    frame(delta);
+
+    m_renderer.present();
+
+    if (m_input.quit())
     {
-        if (0 == strcmp(m_currentScene->name(), m_currentScene->m_nextScene))
-        {
-            m_currentScene->m_nextScene = nullptr;
-        }
-        else
-        {
-            auto it = m_scenes.begin();
-            while (m_scenes.end() != it)
-            {
-                if (0 == strcmp(it->second->name(), m_currentScene->m_nextScene))
-                {
-                    m_currentScene->clear();
-                    m_currentScene = it->second;
-                    m_currentScene->init();
-
-                    break;
-                }
-
-                ++it;
-            }
-
-            m_currentScene->m_nextScene = nullptr;
-        }
-    }
-}
-
-Scene* Application::getScene(const char *name)
-{
-    auto it = m_scenes.begin();
-    while (m_scenes.end() != it)
-    {
-        if (0 == strcmp(it->second->name(), name))
-        {
-            return it->second;
-        }
-
-        ++it;
+        exit();
     }
 
-    return nullptr;
+    m_timer.snapshot();
 }
 
-void Application::setSceneFeatures(Scene &scene)
+Timer& Application::timer() const
 {
-    scene.setCursor(m_cursor);
-    scene.setInput(m_input);
-    scene.setRenderer(m_renderer);
-    scene.setTimer(m_timer);
-    scene.setWindow(m_window);
+    return m_timer;
+}
+
+Cursor& Application::cursor() const
+{
+    return m_cursor;
+}
+
+Input& Application::input() const
+{
+    return m_input;
+}
+
+Window& Application::window() const
+{
+    return m_window;
+}
+
+Renderer& Application::renderer() const
+{
+    return m_renderer;
+}
+
+void Application::exit()
+{
+    m_running = false;
 }

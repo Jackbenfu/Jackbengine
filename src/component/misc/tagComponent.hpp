@@ -2,29 +2,33 @@
 // tagComponent.hpp
 // jackbengine
 //
-// Created by Damien Bendejacq on 12/05/15.
-// Copyright © 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 29/07/2017.
+// Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __TAG_COMPONENT_H__
 #define __TAG_COMPONENT_H__
 
-#include "component/component.hpp"
+#include "component/generic/stringComponent.hpp"
 
 namespace Jackbengine {
 
 class TagComponent : public Component
 {
-public:
-    TagComponent();
-    ~TagComponent();
+    DISALLOW_COPY_AND_MOVE(TagComponent)
 
-    const char* getTag() const;
-    void setTag(const char *tag);
+public:
+    explicit TagComponent(const std::string& tag);
+    ~TagComponent() override = default;
+
+    const std::string& get() const;
+    void set(const std::string& tag);
 
 private:
-    char *m_tag = nullptr;
+    StringComponent m_value;
 };
+
+using Tag = TagComponent;
 
 } // namespace Jackbengine
 

@@ -2,37 +2,31 @@
 // textRenderSystem.hpp
 // jackbengine
 //
-// Created by Damien Bendejacq on 14/06/15.
-// Copyright © 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 21/08/2017.
+// Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __TEXT_RENDER_SYSTEM_H__
 #define __TEXT_RENDER_SYSTEM_H__
 
 #include "system/system.hpp"
-#include "core/render/renderer.hpp"
-
-#include "component/layout/containerComponent.hpp"
-#include "component/view/textComponent.hpp"
-#include "component/body/transformComponent.hpp"
+#include "core/render/renderer/renderer.hpp"
 
 namespace Jackbengine {
 
-class TextRenderSystem : public System
+class TextRenderSystem final : public System
 {
+    DISALLOW_COPY_AND_MOVE(TextRenderSystem)
+
 public:
-    TextRenderSystem();
-    ~TextRenderSystem() override;
-
-    void update(float delta) override;
-
-    void setRenderer(Renderer *renderer);
-
-protected:
-    bool hasRequiredComponents(Entity *entity) override;
+    explicit TextRenderSystem(Renderer& renderer);
+    ~TextRenderSystem() override = default;
 
 private:
-    Renderer *m_renderer = nullptr;
+    void frame(float delta) override;
+    bool hasRequiredComponents(ComponentCollection& components) const override;
+
+    Renderer& m_renderer;
 };
 
 } // namespace Jackbengine

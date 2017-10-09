@@ -17,7 +17,7 @@ namespace Jackbengine {
 template<typename TBase>
 class SceneManager
 {
-    friend class Scene2;
+    friend class Scene;
 
     DISALLOW_COPY_AND_MOVE(SceneManager)
 

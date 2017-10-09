@@ -2,28 +2,24 @@
 // tagComponent.cpp
 // jackbengine
 //
-// Created by Damien Bendejacq on 12/05/15.
-// Copyright © 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 29/07/2017.
+// Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
 #include "tagComponent.hpp"
-#include "platform.hpp"
 
 using namespace Jackbengine;
 
-TagComponent::TagComponent() = default;
+TagComponent::TagComponent(const std::string& tag)
+    : m_value(tag)
+{ }
 
-TagComponent::~TagComponent()
+const std::string& TagComponent::get() const
 {
-    free(m_tag);
+    return m_value.get();
 }
 
-const char* TagComponent::getTag() const
+void TagComponent::set(const std::string& tag)
 {
-    return m_tag;
-}
-
-void TagComponent::setTag(const char *tag)
-{
-    m_tag = strdup(tag);
+    m_value.set(tag);
 }

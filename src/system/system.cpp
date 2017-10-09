@@ -2,69 +2,41 @@
 // system.cpp
 // jackbengine
 //
-// Created by Damien Bendejacq on 18/07/2015.
-// Copyright © 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 25/07/2017.
+// Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
 #include "system.hpp"
 
-using namespace std;
 using namespace Jackbengine;
 
-System::System() = default;
-
-System::~System()
+void System::addEntity(Entity entity, ComponentCollection& components)
 {
-    m_entities.clear();
-}
-
-bool System::isEnabled() const
-{
-    return m_enabled;
-}
-
-void System::enable()
-{
-    m_enabled = true;
-}
-
-void System::disable()
-{
-    m_enabled = false;
-}
-
-bool System::addEntity(Entity *entity)
-{
-    for (auto theEntity : m_entities)
+    if (!hasRequiredComponents(components))
     {
-        if (theEntity == entity)
-        {
-            return false;
-        }
+        return;
     }
 
-    if (hasRequiredComponents(entity))
-    {
-        m_entities.push_back(entity);
-
-        return true;
-    }
-
-    return false;
+    m_entities[entity] = &components;
 }
 
-bool System::removeEntity(Entity *entity)
+void System::removeEntity(Entity entity, bool checkComponents)
 {
-    for (vector<Entity*>::const_iterator it = m_entities.begin(); m_entities.end() != it; ++it)
+    if (!checkComponents)
     {
-        if (*it == entity &&
-            !hasRequiredComponents(entity))
-        {
-            m_entities.erase(it);
-
-            return true;
-        }
+        m_entities.erase(entity);
     }
 
-    return false;
+    const auto it = m_entities.find(entity);
+    if (it == m_entities.end())
+    {
+        return;
+    }
+
+    if (hasRequiredComponents(*it->second))
+    {
+        return;
+    }
+
+    m_entities.erase(entity);
 }

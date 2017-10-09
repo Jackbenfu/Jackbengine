@@ -2,19 +2,19 @@
 // zOrderComponent.cpp
 // jackbengine
 //
-// Created by Damien Bendejacq on 26/09/2016.
-// Copyright © 2016 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 29/07/2017.
+// Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
 #include "zOrderComponent.hpp"
 
 using namespace Jackbengine;
 
-ZOrderComponent::ZOrderComponent() = default;
+ZOrderComponent::ZOrderComponent(int index)
+    : m_index {index}
+{ }
 
-ZOrderComponent::~ZOrderComponent() = default;
-
-int ZOrderComponent::getIndex() const
+int ZOrderComponent::index() const
 {
     return m_index;
 }

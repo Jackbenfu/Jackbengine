@@ -2,51 +2,52 @@
 // mouseListenerComponent.hpp
 // jackbengine
 //
-// Created by Damien Bendejacq on 28/06/15.
-// Copyright © 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 07/08/2017.
+// Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __MOUSE_LISTENER_COMPONENT_H__
 #define __MOUSE_LISTENER_COMPONENT_H__
 
+#include <functional>
 #include "component/component.hpp"
-#include "scene/scene.hpp"
-#include "common.hpp"
 
 namespace Jackbengine {
 
-using MouseCallback = void(*)(Scene *scene, void *data);
+using MouseCallback = std::function<void()>;
 
 enum MouseEvent
 {
-    MouseEvent_LeftClick = 1,
-    MouseEvent_MiddleClick = 2,
-    MouseEvent_RightClick = 4,
-    MouseEvent_Hover = 8,
-    MouseEvent_Enter = 16,
-    MouseEvent_Exit = 32
+    MouseEvent_LeftClick2 = 1,
+    MouseEvent_MiddleClick2 = 2,
+    MouseEvent_RightClick2 = 4,
+    MouseEvent_Hover2 = 8,
+    MouseEvent_Enter2 = 16,
+    MouseEvent_Exit2 = 32,
 };
 
 class MouseListenerComponent : public Component
 {
     friend class MouseEventTriggerSystem;
 
+    DISALLOW_COPY_AND_MOVE(MouseListenerComponent)
+
 public:
-    explicit MouseListenerComponent(Scene *scene);
-    ~MouseListenerComponent();
+    MouseListenerComponent() = default;
+    ~MouseListenerComponent() override = default;
 
-    void onLeftClick(MouseCallback callback, void *data = nullptr);
-    void onLeftDown(MouseCallback callback, void *data = nullptr);
+    void onLeftClick(MouseCallback callback);
+    void onLeftDown(MouseCallback callback);
 
-    void onMiddleClick(MouseCallback callback, void *data = nullptr);
-    void onMiddleDown(MouseCallback callback, void *data = nullptr);
+    void onMiddleClick(MouseCallback callback);
+    void onMiddleDown(MouseCallback callback);
 
-    void onRightClick(MouseCallback callback, void *data = nullptr);
-    void onRightDown(MouseCallback callback, void *data = nullptr);
+    void onRightClick(MouseCallback callback);
+    void onRightDown(MouseCallback callback);
 
-    void onHover(MouseCallback callback, void *data = nullptr);
-    void onEnter(MouseCallback callback, void *data = nullptr);
-    void onExit(MouseCallback callback, void *data = nullptr);
+    void onHover(MouseCallback callback);
+    void onEnter(MouseCallback callback);
+    void onExit(MouseCallback callback);
 
     bool leftClick();
     bool middleClick();
@@ -56,50 +57,42 @@ public:
     bool exit() const;
 
 private:
-    Scene *m_scene = nullptr;
-
-    MouseCallback m_onLeftClick = nullptr;
-    void *m_onLeftClickData = nullptr;
+    MouseCallback m_onLeftClick {nullptr};
     void callLeftClick();
 
-    MouseCallback m_onLeftDown = nullptr;
-    void *m_onLeftDownData = nullptr;
+    MouseCallback m_onLeftDown {nullptr};
     void callLeftDown() const;
 
-    MouseCallback m_onMiddleClick = nullptr;
-    void *m_onMiddleClickData = nullptr;
+    MouseCallback m_onMiddleClick {nullptr};
     void callMiddleClick();
 
-    MouseCallback m_onMiddleDown = nullptr;
-    void *m_onMiddleDownData = nullptr;
+    MouseCallback m_onMiddleDown {nullptr};
     void callMiddleDown() const;
 
-    MouseCallback m_onRightClick = nullptr;
-    void *m_onRightClickData = nullptr;
+    MouseCallback m_onRightClick {nullptr};
     void callRightClick();
 
-    MouseCallback m_onRightDown = nullptr;
-    void *m_onRightDownData = nullptr;
+    MouseCallback m_onRightDown {nullptr};
     void callRightDown() const;
 
-    MouseCallback m_onHover = nullptr;
-    void *m_onHoverData = nullptr;
+    MouseCallback m_onHover {nullptr};
     void callOnHover();
 
-    MouseCallback m_onEnter = nullptr;
-    void *m_onEnterData = nullptr;
+    MouseCallback m_onEnter {nullptr};
     void callOnEnter();
 
-    MouseCallback m_onExit = nullptr;
-    void *m_onExitData = nullptr;
+    MouseCallback m_onExit {nullptr};
     void callOnExit();
 
-    uint m_events = 0;
+    uint m_events {0};
+
     void addEvent(MouseEvent event);
     void removeEvent(MouseEvent event);
     bool hasEvent(MouseEvent event) const;
     bool hasAndRemoveEvent(MouseEvent event);
 };
+
+using MouseListener = MouseListenerComponent;
 
 } // namespace Jackbengine
 

@@ -2,8 +2,8 @@
 // boxShapeComponent.hpp
 // jackbengine
 //
-// Created by Damien Bendejacq on 05/02/15.
-// Copyright © 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 28/07/2017.
+// Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __BOX_SHAPE_COMPONENT_H__
@@ -16,13 +16,17 @@ namespace Jackbengine {
 
 class BoxShapeComponent : public Component
 {
-public:
-    BoxShapeComponent();
-    ~BoxShapeComponent();
+    DISALLOW_COPY_AND_MOVE(BoxShapeComponent)
 
-    float getWidth() const;
-    float getHeight() const;
-    const Vec2f& getSize() const;
+public:
+    BoxShapeComponent() = default;
+    BoxShapeComponent(float width, float height);
+
+    ~BoxShapeComponent() override = default;
+
+    float width() const;
+    float height() const;
+    const Vec2f& size() const;
 
     void setWidth(float width);
     void setHeight(float height);
@@ -32,6 +36,8 @@ private:
     Vec2f m_vector;
 };
 
+using BoxShape = BoxShapeComponent;
+
 } // namespace Jackbengine
 
-#endif //__BOX_SHAPE_COMPONENT_H__
+#endif // __BOX_SHAPE_COMPONENT_H__

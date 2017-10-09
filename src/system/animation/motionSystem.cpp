@@ -2,8 +2,8 @@
 // motionSystem.cpp
 // jackbengine
 //
-// Created by Damien Bendejacq on 17/05/15.
-// Copyright © 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 09/08/2017.
+// Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
 #include "motionSystem.hpp"
@@ -12,40 +12,32 @@
 
 using namespace Jackbengine;
 
-MotionSystem::MotionSystem() = default;
-
-MotionSystem::~MotionSystem() = default;
-
-void MotionSystem::update(float delta)
+void MotionSystem::frame(float delta)
 {
-    for (auto entity : m_entities)
+    for (const auto& entity : m_entities)
     {
-        if (entity->isEnabled())
+        const auto components = entity.second;
+
+        auto& transform = components->get<TransformComponent>();
+        const auto& velocity = components->get<VelocityComponent>();
+
+        const auto velocityVec = velocity.get();
+        if (velocityVec.isZero())
         {
-            auto transform = entity->getComponentIfEnabled<TransformComponent>();
-            auto velocity = entity->getComponentIfEnabled<VelocityComponent>();
-
-            if (!velocity || !transform)
-            {
-                continue;
-            }
-
-            Vec2f velocityVec = velocity->getVelocity();
-            if (!velocityVec.isZero())
-            {
-                Vec2f positionVec = transform->getPosition();
-
-                transform->setPosition(
-                    positionVec.x + velocityVec.x * delta,
-                    positionVec.y + velocityVec.y * delta
-                );
-            }
+            continue;
         }
+
+        const auto positionVec = transform.position();
+
+        transform.setPosition(
+            positionVec.x + velocityVec.x * delta,
+            positionVec.y + velocityVec.y * delta
+        );
     }
 }
 
-bool MotionSystem::hasRequiredComponents(Entity *entity)
+bool MotionSystem::hasRequiredComponents(ComponentCollection& components) const
 {
-    return entity->getComponentIfEnabled<TransformComponent>() &&
-        entity->getComponentIfEnabled<VelocityComponent>();
+    return components.any<TransformComponent>()
+        && components.any<VelocityComponent>();
 }

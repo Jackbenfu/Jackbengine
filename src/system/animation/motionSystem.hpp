@@ -2,8 +2,8 @@
 // motionSystem.hpp
 // jackbengine
 //
-// Created by Damien Bendejacq on 17/05/15.
-// Copyright © 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 09/08/2017.
+// Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __MOTION_SYSTEM_H__
@@ -13,16 +13,16 @@
 
 namespace Jackbengine {
 
-class MotionSystem : public System
+class MotionSystem final : public System
 {
+    DISALLOW_COPY_AND_MOVE(MotionSystem)
+
 public:
-    MotionSystem();
-    ~MotionSystem() override;
+    MotionSystem() = default;
 
-    void update(float delta) override;
-
-protected:
-    bool hasRequiredComponents(Entity *entity) override;
+private:
+    void frame(float delta) override;
+    bool hasRequiredComponents(ComponentCollection& components) const override;
 };
 
 } // namespace Jackbengine

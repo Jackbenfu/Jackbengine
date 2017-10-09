@@ -9,11 +9,12 @@
 #ifndef __STRING_COMPONENT_H__
 #define __STRING_COMPONENT_H__
 
-#include "component/component2.hpp"
+#include <string>
+#include "component/component.hpp"
 
 namespace Jackbengine {
 
-class StringComponent : public Component2
+class StringComponent : public Component
 {
     DISALLOW_COPY_AND_MOVE(StringComponent)
 

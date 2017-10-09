@@ -2,30 +2,33 @@
 // nameComponent.hpp
 // jackbengine
 //
-// Created by Damien Bendejacq on 20/07/2015.
-// Copyright © 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 29/07/2017.
+// Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __NAME_COMPONENT_H__
 #define __NAME_COMPONENT_H__
 
-#include "component/component.hpp"
-#include "common.hpp"
+#include "component/generic/stringComponent.hpp"
 
 namespace Jackbengine {
 
 class NameComponent : public Component
 {
-public:
-    NameComponent();
-    ~NameComponent();
+    DISALLOW_COPY_AND_MOVE(NameComponent)
 
-    const char* getName() const;
-    void setName(const char *name);
+public:
+    explicit NameComponent(const std::string& name);
+    ~NameComponent() override = default;
+
+    const std::string& get() const;
+    void set(const std::string& name);
 
 private:
-    char *m_name = nullptr;
+    StringComponent m_value;
 };
+
+using Name = NameComponent;
 
 } // namespace Jackbengine
 

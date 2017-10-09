@@ -10,6 +10,7 @@
 #define __HETEROGENEOUS_COLLECTION_H__
 
 #include <map>
+#include <string>
 #include "common.hpp"
 
 namespace Jackbengine {

@@ -2,165 +2,115 @@
 // textRenderSystem.cpp
 // jackbengine
 //
-// Created by Damien Bendejacq on 14/06/15.
-// Copyright © 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 21/08/2017.
+// Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
 #include "textRenderSystem.hpp"
 #include "component/layout/containerComponent.hpp"
 #include "component/view/textComponent.hpp"
-#include "component/body/transformComponent.hpp"
 
 using namespace Jackbengine;
 
-TextRenderSystem::TextRenderSystem() = default;
+TextRenderSystem::TextRenderSystem(Renderer& renderer)
+    : m_renderer {renderer}
+{ }
 
-TextRenderSystem::~TextRenderSystem() = default;
-
-void TextRenderSystem::update(float)
+void TextRenderSystem::frame(float)
 {
-    for (auto entity : m_entities)
+    for (const auto entity : m_entities)
     {
-        if (entity->isEnabled())
+        const auto components = entity.second;
+
+        const auto& text = components->get<TextComponent>();
+        const auto& container = components->get<ContainerComponent>();
+
+        Vec2f position;
+        const auto angle = 0.0;
+
+        switch (text.layout())
         {
-            auto text = entity->getComponentIfEnabled<TextComponent>();
-            if (!text)
+            case TextLayout::LeftTop:
             {
-                continue;
+                position.x = container.x();
+                position.y = container.y();
+                break;
             }
 
-            Vec2f pos;
-            auto rotation = 0.0;
-
-            auto transform = entity->getComponentIfEnabled<TransformComponent>();
-            auto container = entity->getComponentIfEnabled<ContainerComponent>();
-            if (container)
+            case TextLayout::LeftCenter:
             {
-                switch (text->getLayout())
-                {
-                    case TextLayout::LeftTop:
-                    {
-                        pos.x = static_cast<float>(container->getX());
-                        pos.y = static_cast<float>(container->getY());
-                        break;
-                    }
-
-                    case TextLayout::LeftCenter:
-                    {
-                        pos.x = static_cast<float>(container->getX());
-                        pos.y = static_cast<float>(container->getY()) +
-                                container->getHeight() / 2 -
-                                text->getHeight() / 2 +
-                                text->getTopWhiteSpace() / 2;
-                        break;
-                    }
-
-                    case TextLayout::LeftBottom:
-                    {
-                        pos.x = static_cast<float>(container->getX());
-                        pos.y = static_cast<float>(container->getY()) +
-                                container->getHeight() -
-                                text->getHeight();
-                        break;
-                    }
-
-                    case TextLayout::CenterTop:
-                    {
-                        pos.x = static_cast<float>(container->getX()) +
-                                container->getWidth() / 2 -
-                                text->getWidth() / 2 +
-                                text->getRightWhiteSpace() / 2;
-                        pos.y = static_cast<float>(container->getY());
-                        break;
-                    }
-
-                    case TextLayout::CenterCenter:
-                    {
-                        pos.x = static_cast<float>(container->getX()) +
-                                container->getWidth() / 2 -
-                                text->getWidth() / 2 +
-                                text->getRightWhiteSpace() / 2;
-                        pos.y = static_cast<float>(container->getY()) +
-                                container->getHeight() / 2 -
-                                text->getHeight() / 2 +
-                                text->getTopWhiteSpace() / 2;
-                        break;
-                    }
-
-                    case TextLayout::CenterBottom:
-                    {
-                        pos.x = static_cast<float>(container->getX()) +
-                                container->getWidth() / 2 -
-                                text->getWidth() / 2 +
-                                text->getRightWhiteSpace() / 2;
-                        pos.y = static_cast<float>(container->getY()) +
-                                container->getHeight() -
-                                text->getHeight();
-                        break;
-                    }
-
-                    case TextLayout::RightTop:
-                    {
-                        pos.x = static_cast<float>(container->getX()) +
-                                container->getWidth() -
-                                text->getWidth();
-                        pos.y = static_cast<float>(container->getY());
-                        break;
-                    }
-
-                    case TextLayout::RightCenter:
-                    {
-                        pos.x = static_cast<float>(container->getX()) +
-                                container->getWidth() -
-                                text->getWidth();
-                        pos.y = static_cast<float>(container->getY()) +
-                                container->getHeight() / 2 -
-                                text->getHeight() / 2 +
-                                text->getTopWhiteSpace() / 2;
-                        break;
-                    }
-
-                    case TextLayout::RightBottom:
-                    {
-                        pos.x = static_cast<float>(container->getX()) +
-                                container->getWidth() -
-                                text->getWidth();
-                        pos.y = static_cast<float>(container->getY()) +
-                                container->getHeight() -
-                                text->getHeight();
-                        break;
-                    }
-                }
-
-                if (transform)
-                {
-                    rotation = transform->getRotation();
-                }
-            }
-            else if (transform)
-            {
-                pos = transform->getPosition();
-                rotation = transform->getRotation();
+                position.x = container.x();
+                position.y = container.y() + container.height() / 2 - text.height() / 2 +
+                    text.topWhiteSpace() / 2;
+                break;
             }
 
-            m_renderer->renderTexture(
-                static_cast<int>(pos.x),
-                static_cast<int>(pos.y),
-                text->getTexture(),
-                rotation
-            );
+            case TextLayout::LeftBottom:
+            {
+                position.x = container.x();
+                position.y = container.y() + container.height() - text.height();
+                break;
+            }
+
+            case TextLayout::CenterTop:
+            {
+                position.x = container.x() + container.width() / 2 - text.width() / 2 +
+                    text.rightWhiteSpace() / 2;
+                position.y = container.y();
+                break;
+            }
+
+            case TextLayout::CenterCenter:
+            {
+                position.x = container.x() + container.width() / 2 - text.width() / 2 +
+                    text.rightWhiteSpace() / 2;
+                position.y = container.y() + container.height() / 2 - text.height() / 2 +
+                    text.topWhiteSpace() / 2;
+                break;
+            }
+
+            case TextLayout::CenterBottom:
+            {
+                position.x = container.x() + container.width() / 2 - text.width() / 2 +
+                    text.rightWhiteSpace() / 2;
+                position.y = container.y() + container.height() - text.height();
+                break;
+            }
+
+            case TextLayout::RightTop:
+            {
+                position.x = container.x() + container.width() - text.width();
+                position.y = container.y();
+                break;
+            }
+
+            case TextLayout::RightCenter:
+            {
+                position.x = container.x() + container.width() - text.width();
+                position.y = container.y() + container.height() / 2 - text.height() / 2 +
+                    text.topWhiteSpace() / 2;
+                break;
+            }
+
+            case TextLayout::RightBottom:
+            {
+                position.x = container.x() + container.width() - text.width();
+                position.y = container.y() + container.height() - text.height();
+                break;
+            }
         }
+
+        m_renderer.renderTexture(
+            (int)position.x,
+            (int)position.y,
+            text.texture(),
+            angle
+        );
     }
 }
 
-bool TextRenderSystem::hasRequiredComponents(Entity *entity)
+bool TextRenderSystem::hasRequiredComponents(ComponentCollection& components) const
 {
-    return entity->getComponentIfEnabled<TextComponent>() &&
-        (entity->getComponentIfEnabled<ContainerComponent>() ||
-         entity->getComponentIfEnabled<TransformComponent>());
-}
-
-void TextRenderSystem::setRenderer(Renderer *renderer)
-{
-    m_renderer = renderer;
+   return components.any<TextComponent>()
+       && components.any<ContainerComponent>();
 }

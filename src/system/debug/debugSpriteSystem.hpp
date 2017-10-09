@@ -2,33 +2,32 @@
 // debugSpriteSystem.hpp
 // jackbengine
 //
-// Created by Damien Bendejacq on 24/06/15.
-// Copyright © 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 19/08/2017.
+// Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __DEBUG_SPRITE_SYSTEM_H__
 #define __DEBUG_SPRITE_SYSTEM_H__
 
 #include "system/system.hpp"
-#include "core/render/renderer.hpp"
+#include "core/render/renderer/renderer.hpp"
 
 namespace Jackbengine {
 
-class DebugSpriteSystem : public System
+class DebugSpriteSystem final : public System
 {
+    DISALLOW_COPY_AND_MOVE(DebugSpriteSystem)
+
 public:
-    DebugSpriteSystem();
-    ~DebugSpriteSystem() override;
-
-    void update(float delta) override;
-
-    void setRenderer(Renderer *renderer);
-
-protected:
-    bool hasRequiredComponents(Entity *entity) override;
+    explicit DebugSpriteSystem(Renderer& renderer);
+    ~DebugSpriteSystem() override = default;
 
 private:
-    Renderer *m_renderer = nullptr;
+    void frame(float delta) override;
+    bool hasRequiredComponents(ComponentCollection& components) const override;
+
+    Renderer& m_renderer;
+    const Color32 m_color;
 };
 
 } // namespace Jackbengine

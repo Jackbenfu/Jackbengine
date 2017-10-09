@@ -2,8 +2,8 @@
 // mouseEventTriggerSystem.cpp
 // jackbengine
 //
-// Created by Damien Bendejacq on 28/06/15.
-// Copyright © 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 09/09/2017.
+// Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
 #include "mouseEventTriggerSystem.hpp"
@@ -13,55 +13,53 @@
 
 using namespace Jackbengine;
 
-MouseEventTriggerSystem::MouseEventTriggerSystem() = default;
+MouseEventTriggerSystem::MouseEventTriggerSystem(const Input& input)
+    : m_input {input}
+{ }
 
-MouseEventTriggerSystem::~MouseEventTriggerSystem() = default;
-
-void MouseEventTriggerSystem::update(float)
+void MouseEventTriggerSystem::setBubbling(bool active)
 {
-    MouseListenerComponent *clickedMouseListener = nullptr;
+    m_bubbling = active;
+}
+
+void MouseEventTriggerSystem::frame(float)
+{
+    MouseListenerComponent *clickedMouseListener {nullptr};
     auto maxZOrder = 0;
 
-    for (auto entity : m_entities)
+    for (const auto& entity : m_entities)
     {
-        if (!entity->isEnabled())
-        {
-            continue;
-        }
+        const auto components = entity.second;
 
-        auto container = entity->getComponentIfEnabled<ContainerComponent>();
-        auto mouseListener = entity->getComponentIfEnabled<MouseListenerComponent>();
-        if (!container || !mouseListener)
-        {
-            continue;
-        }
+        const auto& container = components->get<ContainerComponent>();
+        auto& mouseListener = components->get<MouseListenerComponent>();
 
-        auto hadEnter = mouseListener->hasEvent(MouseEvent_Enter);
-        auto mousePos = m_input->getMousePosition();
-        auto move = m_input->mouseMove();
+        auto hadEnter = mouseListener.hasEvent(MouseEvent_Enter2);
+        auto mousePos = m_input.mousePosition();
+        auto move = m_input.mouseMove();
 
-        if (container->contains(mousePos))
+        if (container.contains(mousePos))
         {
-            if (m_input->mouseClick(MouseButton::Left))
+            if (m_input.mouseClick(MouseButton::Left))
             {
-                if (m_bubblingActive)
+                if (m_bubbling)
                 {
-                    mouseListener->callLeftClick();
+                    mouseListener.callLeftClick();
                     continue;
                 }
 
-                auto zOrder = entity->getComponentIfEnabled<ZOrderComponent>();
-                if (!zOrder)
+                if (!components->any<ZOrderComponent>())
                 {
-                    mouseListener->callLeftClick();
+                    mouseListener.callLeftClick();
                     continue;
                 }
 
-                auto currentZOrder = zOrder->getIndex();
-                if (currentZOrder >= maxZOrder)
+                auto& zOrder = components->get<ZOrderComponent>();
+                auto currentZOrderIndex = zOrder.index();
+                if (currentZOrderIndex >= maxZOrder)
                 {
-                    maxZOrder = currentZOrder;
-                    clickedMouseListener = mouseListener;
+                    maxZOrder = currentZOrderIndex;
+                    clickedMouseListener = &mouseListener;
                 }
             }
 
@@ -69,39 +67,29 @@ void MouseEventTriggerSystem::update(float)
             {
                 if (!hadEnter)
                 {
-                    mouseListener->callOnEnter();
-                    mouseListener->removeEvent(MouseEvent_Exit);
+                    mouseListener.callOnEnter();
+                    mouseListener.removeEvent(MouseEvent_Exit2);
                 }
 
-                mouseListener->callOnHover();
+                mouseListener.callOnHover();
             }
         }
         else if (move && hadEnter)
         {
-            mouseListener->callOnExit();
-            mouseListener->removeEvent(MouseEvent_Enter);
-            mouseListener->removeEvent(MouseEvent_Hover);
+            mouseListener.callOnExit();
+            mouseListener.removeEvent(MouseEvent_Enter2);
+            mouseListener.removeEvent(MouseEvent_Hover2);
         }
     }
 
-    if (clickedMouseListener)
+    if (nullptr != clickedMouseListener)
     {
         clickedMouseListener->callLeftClick();
     }
 }
 
-bool MouseEventTriggerSystem::hasRequiredComponents(Entity *entity)
+bool MouseEventTriggerSystem::hasRequiredComponents(ComponentCollection& components) const
 {
-    return entity->getComponentIfEnabled<ContainerComponent>() &&
-        entity->getComponentIfEnabled<MouseListenerComponent>();
-}
-
-void MouseEventTriggerSystem::setBubblingActive(bool active)
-{
-    m_bubblingActive = active;
-}
-
-void MouseEventTriggerSystem::setInput(Input *input)
-{
-    m_input = input;
+    return components.any<ContainerComponent>()
+        && components.any<MouseListenerComponent>();
 }

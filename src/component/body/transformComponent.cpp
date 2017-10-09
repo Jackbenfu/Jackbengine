@@ -2,29 +2,44 @@
 // transformComponent.cpp
 // jackbengine
 //
-// Created by Damien Bendejacq on 30/10/14.
-// Copyright © 2014 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 29/07/2017.
+// Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
 #include "transformComponent.hpp"
 
 using namespace Jackbengine;
 
-TransformComponent::TransformComponent() = default;
+TransformComponent::TransformComponent(float positionX, float positionY)
+    : TransformComponent {positionX, positionY, 1.0f, 1.0f, 0.0}
+{ }
 
-TransformComponent::~TransformComponent() = default;
+TransformComponent::TransformComponent(float positionX, float positionY, double angle)
+    : TransformComponent {positionX, positionY, 1.0f, 1.0f, angle}
+{ }
 
-const Vec2f& TransformComponent::getPosition() const
+TransformComponent::TransformComponent(float positionX, float positionY, float scaleX, float scaleY)
+    : TransformComponent {positionX, positionY, scaleX, scaleY, 0.0}
+{ }
+
+TransformComponent::TransformComponent(
+    float positionX, float positionY, float scaleX, float scaleY, double angle)
+    : m_position {positionX, positionY},
+      m_scale {scaleX, scaleY},
+      m_angle {angle}
+{ }
+
+const Vec2f& TransformComponent::position() const
 {
     return m_position;
 }
 
-float TransformComponent::getPositionX() const
+float TransformComponent::positionX() const
 {
     return m_position.x;
 }
 
-float TransformComponent::getPositionY() const
+float TransformComponent::positionY() const
 {
     return m_position.y;
 }
@@ -45,27 +60,27 @@ void TransformComponent::setPositionY(float y)
     m_position.y = y;
 }
 
-double TransformComponent::getRotation() const
+double TransformComponent::angle() const
 {
     return m_angle;
 }
 
-void TransformComponent::setRotation(double angle)
+void TransformComponent::setAngle(double angle)
 {
     m_angle = angle;
 }
 
-const Vec2f& TransformComponent::getScale() const
+const Vec2f& TransformComponent::scale() const
 {
     return m_scale;
 }
 
-float TransformComponent::getScaleX() const
+float TransformComponent::scaleX() const
 {
     return m_scale.x;
 }
 
-float TransformComponent::getScaleY() const
+float TransformComponent::scaleY() const
 {
     return m_scale.y;
 }

@@ -9,12 +9,12 @@
 #ifndef __NUMERICAL_COMPONENT_H__
 #define __NUMERICAL_COMPONENT_H__
 
-#include "component/component2.hpp"
+#include "component/component.hpp"
 
 namespace Jackbengine {
 
 template<typename T>
-class NumericalComponent : public Component2
+class NumericalComponent : public Component
 {
     static_assert(std::is_arithmetic<T>::value);
 

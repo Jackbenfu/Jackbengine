@@ -2,10 +2,11 @@
 // debugProfileSystem.cpp
 // jackbengine
 //
-// Created by Damien Bendejacq on 23/06/15.
-// Copyright © 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 19/08/2017.
+// Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
+#include <sstream>
 #include "debugProfileSystem.hpp"
 #include "core/resource/importResource.hpp"
 
@@ -13,61 +14,37 @@ using namespace Jackbengine;
 
 IMPORT_BINARY_RESOURCE(default_font)
 
-DebugProfileSystem::DebugProfileSystem()
-{
-    memset(m_fpsBuf, 0, FPS_BUF_SIZE);
-}
+DebugProfileSystem::DebugProfileSystem(Renderer& renderer, Timer& timer)
+    : m_renderer {renderer},
+      m_timer {timer},
+      m_fps {m_renderer, InvalidFpsText, TextLayout::LeftTop, Color32(255, 255, 255), FontSize, default_font, default_font_size}
+{ }
 
-DebugProfileSystem::~DebugProfileSystem()
-{
-    DELETE_SAFE(m_fps);
-}
+DebugProfileSystem::DebugProfileSystem(Renderer& renderer, Timer& timer, Color32 foreground)
+    : m_renderer {renderer},
+      m_timer {timer},
+      m_fps {m_renderer, InvalidFpsText, TextLayout::LeftTop, foreground, FontSize, default_font, default_font_size}
+{ }
 
-void DebugProfileSystem::update(float)
-{
-    if (m_showFps)
-    {
-        int fps = m_timer->getFps();
-        if (0 == fps)
-        {
-            snprintf(m_fpsBuf, FPS_BUF_SIZE, "--");
-        }
-        else
-        {
-            snprintf(
-                m_fpsBuf, FPS_BUF_SIZE, "%ifps",
-                m_timer->getFps()
-            );
-        }
-        m_fps->setText(m_fpsBuf);
-        m_renderer->renderTexture(4, 3, m_fps->getTexture());
-    }
-}
-
-void DebugProfileSystem::setRenderer(Renderer *renderer)
-{
-    m_renderer = renderer;
-
-    m_fps = new TextComponent();
-    m_fps->setFontFromMemory(m_renderer, default_font, default_font_size, 9);
-}
-
-bool DebugProfileSystem::hasRequiredComponents(Entity *)
+bool DebugProfileSystem::hasRequiredComponents(ComponentCollection&) const
 {
     return false;
 }
 
-void DebugProfileSystem::setTimer(Timer *timer)
+void DebugProfileSystem::frame(float)
 {
-    m_timer = timer;
-}
+    const auto fps = m_timer.fps();
 
-void DebugProfileSystem::setForeground(Color32 color)
-{
-    m_fps->setForeground(color);
-}
+    std::stringstream sstream;
+    if (fps <= 0)
+    {
+        sstream << InvalidFpsText;
+    }
+    else
+    {
+        sstream << fps << FpsSuffix;
+    }
 
-void DebugProfileSystem::showFps(bool show)
-{
-    m_showFps = show;
+    m_fps.setText(sstream.str());
+    m_renderer.renderTexture(FpsPosition.x, FpsPosition.y, m_fps.texture());
 }

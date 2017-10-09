@@ -2,8 +2,8 @@
 // audioSourceComponent.hpp
 // jackbengine
 //
-// Created by Damien Bendejacq on 04/06/15.
-// Copyright © 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 21/07/2017.
+// Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __AUDIO_SOURCE_COMPONENT_H__
@@ -16,19 +16,22 @@ namespace Jackbengine {
 
 class AudioSourceComponent : public Component
 {
-public:
-    AudioSourceComponent();
-    ~AudioSourceComponent();
+    DISALLOW_COPY_AND_MOVE(AudioSourceComponent)
 
-    bool loadFromFile(const char *file) const;
-    bool loadFromMemory(const void *data, size_t dataSize) const;
+public:
+    explicit AudioSourceComponent(const std::string& file);
+    AudioSourceComponent(const void *data, size_t dataSize);
+
+    ~AudioSourceComponent() override = default;
 
     void play() const;
     void play(bool loop) const;
 
 private:
-    Sound *m_sound = nullptr;
+    Sound m_sound;
 };
+
+using AudioSource = AudioSourceComponent;
 
 } // namespace Jackbengine
 

@@ -9,6 +9,7 @@
 #ifndef __STATE_MACHINE_H__
 #define __STATE_MACHINE_H__
 
+#include <string>
 #include <unordered_map>
 #include "state.hpp"
 

@@ -10,7 +10,7 @@
 
 using namespace Jackbengine;
 
-Entity2 EntityManager::addEntity()
+Entity EntityManager::addEntity()
 {
     static size_t entityCounter = 0;
 
@@ -22,32 +22,32 @@ Entity2 EntityManager::addEntity()
     return entityCounter;
 }
 
-void EntityManager::removeEntity(Entity2 entity)
+void EntityManager::removeEntity(Entity entity)
 {
     m_entities.erase(entity);
 }
 
-bool EntityManager::isEntityEnabled(Entity2 entity) const
+bool EntityManager::isEntityEnabled(Entity entity) const
 {
     return std::get<0>(findEntity(entity));
 }
 
-void EntityManager::enableEntity(Entity2 entity, bool enable)
+void EntityManager::enableEntity(Entity entity, bool enable)
 {
     std::get<0>(findEntity(entity)) = enable;
 }
 
-ComponentCollection& EntityManager::getEntity(Entity2 entity) const
+ComponentCollection& EntityManager::getEntity(Entity entity) const
 {
     return *std::get<1>(findEntity(entity));
 }
 
-std::tuple<bool, std::unique_ptr<ComponentCollection>>& EntityManager::findEntity(Entity2 entity)
+std::tuple<bool, std::unique_ptr<ComponentCollection>>& EntityManager::findEntity(Entity entity)
 {
     return findEntity(*this, entity);
 }
 
-const std::tuple<bool, std::unique_ptr<ComponentCollection>>& EntityManager::findEntity(Entity2 entity) const
+const std::tuple<bool, std::unique_ptr<ComponentCollection>>& EntityManager::findEntity(Entity entity) const
 {
     return findEntity(*this, entity);
 }

@@ -2,49 +2,41 @@
 // spriteComponent.hpp
 // jackbengine
 //
-// Created by Damien Bendejacq on 25/04/14.
-// Copyright © 2014 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 02/08/2017.
+// Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __SPRITE_COMPONENT_H__
 #define __SPRITE_COMPONENT_H__
 
 #include "component/component.hpp"
-#include "core/render/renderer.hpp"
-#include "core/render/texture.hpp"
+#include "core/render/renderer/renderer.hpp"
+#include "core/render/texture/texture.hpp"
 
 namespace Jackbengine {
 
 class SpriteComponent : public Component
 {
+    DISALLOW_COPY_AND_MOVE(SpriteComponent)
+
 public:
-    SpriteComponent();
-    ~SpriteComponent();
+    SpriteComponent(const Renderer& renderer, const std::string& file);
+    SpriteComponent(const Renderer& renderer, const void *data, size_t dataSize);
+    SpriteComponent(const Renderer& renderer, int width, int height, Color32 color);
+    SpriteComponent(const Renderer& renderer, const TmxMap& map, const TmxLayer& layer,
+                     const void *tilesetImageData, size_t tilesetImageDataSize);
+    SpriteComponent(const Renderer& renderer, const TmxMap& map, const TmxObjectGroup& objectGroup,
+                     const void *tilesetImageData, size_t tilesetImageDataSize);
 
-    bool loadFromFile(const Renderer *renderer, const char *file);
+    ~SpriteComponent() override = default;
 
-    bool loadFromMemory(const Renderer *renderer, const void *data, size_t dataSize);
-
-    bool loadFromLayer(
-        const Renderer *renderer, const TmxMap *map, const char *layerName,
-        const void *tilesetImageData = nullptr, size_t tilesetImageDataSize = 0);
-
-    bool loadFromObjectGroup(
-        const Renderer *renderer, const TmxMap *map, const char *objectGroupName,
-        const void *tilesetImageData = nullptr, size_t tilesetImageDataSize = 0);
-
-    bool loadFromColor(const Renderer *renderer, uint width, uint height, Color32 color);
-
-    bool loadFromTexture(const Renderer *renderer, Texture *texture);
-
-    float getWidth() const;
-    float getHeight() const;
-
-    const Texture* getTexture() const;
+    const Texture& texture() const;
 
 private:
-    Texture *m_texture = nullptr;
+    Texture m_texture;
 };
+
+using Sprite = SpriteComponent;
 
 } // namespace Jackbengine
 

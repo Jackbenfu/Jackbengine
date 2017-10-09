@@ -2,8 +2,8 @@
 // component.hpp
 // jackbengine
 //
-// Created by Damien Bendejacq on 25/08/2015.
-// Copyright © 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 21/07/2017.
+// Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __COMPONENT_H__
@@ -15,19 +15,11 @@ namespace Jackbengine {
 
 class Component
 {
-    friend class Entity;
+    DISALLOW_COPY_AND_MOVE(Component)
 
 public:
-    bool isEnabled() const;
-
-protected:
-    Component();
-
-private:
-    void enable();
-    void disable();
-
-    bool m_enabled = true;
+    Component() = default;
+    virtual ~Component() = default;
 };
 
 } // namespace Jackbengine

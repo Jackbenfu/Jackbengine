@@ -2,51 +2,54 @@
 // application.hpp
 // jackbengine
 //
-// Created by Damien Bendejacq on 10/08/2015.
-// Copyright © 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 10/07/2017.
+// Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __APPLICATION_H__
 #define __APPLICATION_H__
 
-#include <map>
 #include "applicationConfig.hpp"
-#include "scene/scene.hpp"
+#include "abstract/abstractApplication.hpp"
+
+#include "core/input/input.hpp"
+#include "core/render/cursor/cursor.hpp"
+#include "core/render/renderer/renderer.hpp"
+#include "core/render/window/window.hpp"
+#include "core/time/timer.hpp"
 
 namespace Jackbengine {
 
-class Application
+class Application : public AbstractApplication
 {
+    DISALLOW_COPY_AND_MOVE(Application)
+
 public:
-    bool init();
+    explicit Application(ApplicationConfig& config);
+    virtual ~Application() = default;
+
     bool running() const;
     void loop();
 
-protected:
-    Application();
-    virtual ~Application();
+    virtual void frame(float delta) = 0;
 
-    virtual bool configure(ApplicationConfig &config) = 0;
+    Timer& timer() const;
+    Cursor& cursor() const;
+    Input& input() const;
+    Window& window() const;
+    Renderer& renderer() const;
 
-    template<typename TScene> void addScene();
+    void exit();
 
 private:
-    void setSceneFeatures(Scene &scene);
-    Scene *getScene(const char *name);
+    mutable Timer m_timer;
+    mutable Cursor m_cursor;
+    mutable Input m_input;
+    mutable Window m_window;
+    mutable Renderer m_renderer;
 
-    ApplicationConfig m_config;
-
-    Scene *m_currentScene = nullptr;
-    std::map<size_t, Scene *> m_scenes;
-
-    Cursor *m_cursor = nullptr;
-    Input *m_input = nullptr;
-    Renderer *m_renderer = nullptr;
-    Timer *m_timer = nullptr;
-    Window *m_window = nullptr;
+    bool m_running {true};
 };
-
-#include "application.tpp"
 
 } // namespace Jackbengine
 

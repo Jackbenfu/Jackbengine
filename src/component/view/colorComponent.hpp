@@ -2,8 +2,8 @@
 // colorComponent.hpp
 // jackbengine
 //
-// Created by Damien Bendejacq on 10/05/14.
-// Copyright © 2014 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 01/08/2017.
+// Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __COLOR_COMPONENT_H__
@@ -16,31 +16,34 @@ namespace Jackbengine {
 
 class ColorComponent : public Component
 {
+    DISALLOW_COPY_AND_MOVE(ColorComponent)
+
 public:
-    ColorComponent();
-    ~ColorComponent();
+    explicit ColorComponent(Color32 color);
+    ColorComponent(byte red, byte green, byte blue, byte alpha);
+    ColorComponent(byte red, byte green, byte blue);
+
+    ~ColorComponent() override = default;
 
     Color32 getColor() const;
 
-    void setColor(Color32 color);
-    void setColor(byte red, byte green, byte blue, byte alpha);
-    void setColor(byte red, byte green, byte blue);
-
-    byte getRed() const;
+    byte red() const;
     void setRed(byte value);
 
-    byte getGreen() const;
+    byte green() const;
     void setGreen(byte value);
 
-    byte getBlue() const;
+    byte blue() const;
     void setBlue(byte value);
 
-    byte getAlpha() const;
+    byte alpha() const;
     void setAlpha(byte value);
 
 private:
     Color32 m_color;
 };
+
+using Color = ColorComponent;
 
 } // namespace Jackbengine
 

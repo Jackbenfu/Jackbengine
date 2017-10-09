@@ -124,15 +124,13 @@ void WebSocket<TListener>::poll()
 
             if (!parseMessage(message, &messageType, &messageId))
             {
-                LOG_ERROR("Invalid network message, does not contain type or id");
-                return;
+                throw std::runtime_error("Invalid network message, does not contain type or id");
             }
 
             auto itd = m_deserializers.find(messageType);
             if (m_deserializers.end() == itd)
             {
-                LOG_ERROR("No deserializer found for network message [%u]", messageType);
-                return;
+                throw std::runtime_error("No deserializer found for network message [" + std::to_string(messageType) + "]");
             }
 
             auto messageData = message.data() + MESSAGE_HEADER_SIZE;
@@ -143,8 +141,7 @@ void WebSocket<TListener>::poll()
             auto itc = m_callbacks.find(messageType);
             if (m_callbacks.end() == itc)
             {
-                LOG_ERROR("No callback found for message [%u]", messageType);
-                return;
+                throw std::runtime_error("No callback found for message [" + std::to_string(messageType) + "]");
             }
 
             (const_cast<TListener&>(m_listener).*itc->second)(event);

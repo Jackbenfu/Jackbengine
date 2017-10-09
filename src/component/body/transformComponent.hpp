@@ -2,8 +2,8 @@
 // transformComponent.hpp
 // jackbengine
 //
-// Created by Damien Bendejacq on 30/10/14.
-// Copyright © 2014 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 29/07/2017.
+// Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __TRANSFORM_COMPONENT_H__
@@ -16,32 +16,41 @@ namespace Jackbengine {
 
 class TransformComponent : public Component
 {
-public:
-    TransformComponent();
-    ~TransformComponent();
+    DISALLOW_COPY_AND_MOVE(TransformComponent)
 
-    const Vec2f& getPosition() const;
-    float getPositionX() const;
-    float getPositionY() const;
+public:
+    TransformComponent() = default;
+    TransformComponent(float positionX, float positionY);
+    TransformComponent(float positionX, float positionY, double angle);
+    TransformComponent(float positionX, float positionY, float scaleX, float scaleY);
+    TransformComponent(float positionX, float positionY, float scaleX, float scaleY, double angle);
+
+    ~TransformComponent() override = default;
+
+    const Vec2f& position() const;
+    float positionX() const;
+    float positionY() const;
     void setPosition(float x, float y);
     void setPositionX(float x);
     void setPositionY(float y);
 
-    double getRotation() const;
-    void setRotation(double angle);
+    double angle() const;
+    void setAngle(double angle);
 
-    const Vec2f& getScale() const;
-    float getScaleX() const;
-    float getScaleY() const;
+    const Vec2f& scale() const;
+    float scaleX() const;
+    float scaleY() const;
     void setScale(float x, float y);
     void setScaleX(float x);
     void setScaleY(float y);
 
 private:
-    Vec2f m_position = Vec2f(0.0f, 0.0f);
-    double m_angle = 0.0;
-    Vec2f m_scale = Vec2f(1.0f, 1.0f);
+    Vec2f m_position;
+    Vec2f m_scale;
+    double m_angle {0.0};
 };
+
+using Transform = TransformComponent;
 
 } // namespace Jackbengine
 

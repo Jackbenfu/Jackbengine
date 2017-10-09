@@ -2,8 +2,8 @@
 // velocityComponent.hpp
 // jackbengine
 //
-// Created by Damien Bendejacq on 13/05/15.
-// Copyright © 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 29/07/2017.
+// Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __VELOCITY_COMPONENT_H__
@@ -16,22 +16,28 @@ namespace Jackbengine {
 
 class VelocityComponent : public Component
 {
-public:
-    VelocityComponent();
-    ~VelocityComponent();
+    DISALLOW_COPY_AND_MOVE(VelocityComponent)
 
-    const Vec2f& getVelocity() const;
+public:
+    VelocityComponent() = default;
+    VelocityComponent(float x, float y);
+
+    ~VelocityComponent() override = default;
+
+    const Vec2f& get() const;
     void set(float x, float y);
 
-    float getX() const;
+    float x() const;
     void setX(float x);
 
-    float getY() const;
+    float y() const;
     void setY(float y);
 
 private:
-    Vec2f m_velocity = Vec2f(0.0f, 0.0f);
+    Vec2f m_velocity;
 };
+
+using Velocity = VelocityComponent;
 
 } // namespace Jackbengine
 

@@ -1,9 +1,9 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.9)
 project(jackbengine)
 
 # CMake configuration
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wpedantic")
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
 # SDL2 include directories
@@ -38,70 +38,40 @@ set(SOURCE_FILES
     external/tinyxml/tinyxmlparser.cpp
     src/application/abstract/abstractApplication.cpp
     src/application/application.cpp
-    src/application/application2.cpp
     src/component/audio/audioSourceComponent.cpp
-    src/component/audio/audioSourceComponent2.cpp
     src/component/body/shape/boxShapeComponent.cpp
-    src/component/body/shape/boxShapeComponent2.cpp
     src/component/body/transformComponent.cpp
-    src/component/body/transformComponent2.cpp
     src/component/body/velocityComponent.cpp
-    src/component/body/velocityComponent2.cpp
-    src/component/component.cpp
     src/component/input/mouseListenerComponent.cpp
-    src/component/input/mouseListenerComponent2.cpp
     src/component/layout/containerComponent.cpp
-    src/component/layout/containerComponent2.cpp
     src/component/layout/zOrderComponent.cpp
-    src/component/layout/zOrderComponent2.cpp
     src/component/misc/nameComponent.cpp
-    src/component/misc/nameComponent2.cpp
     src/component/misc/tagComponent.cpp
-    src/component/misc/tagComponent2.cpp
     src/component/view/colorComponent.cpp
-    src/component/view/colorComponent2.cpp
     src/component/view/spriteComponent.cpp
-    src/component/view/spriteComponent2.cpp
     src/component/view/textComponent.cpp
-    src/component/view/textComponent2.cpp
     src/component/generic/stringComponent.cpp
     src/core/sdl/io/sdlRwops.cpp
     src/core/sdl/surface/sdlSurface.cpp
     src/core/audio/sound.cpp
-    src/core/audio/soundImpl.cpp
-    src/core/audio/sound2.cpp
-    src/core/audio/sound2.impl.cpp
+    src/core/audio/sound.impl.cpp
     src/core/input/input.cpp
-    src/core/input/inputImpl.cpp
-    src/core/input/input2.cpp
-    src/core/input/input2.impl.cpp
+    src/core/input/input.impl.cpp
     src/core/render/color32.cpp
-    src/core/render/cursor.cpp
-    src/core/render/cursorImpl.cpp
-    src/core/render/cursor/cursor2.cpp
-    src/core/render/cursor/cursor2.impl.cpp
-    src/core/render/defaultFont.cpp
-    src/core/render/font.cpp
-    src/core/render/fontImpl.cpp
-    src/core/render/font/font2.cpp
-    src/core/render/font/font2.impl.cpp
-    src/core/render/renderer.cpp
-    src/core/render/rendererImpl.cpp
-    src/core/render/renderer/renderer2.cpp
-    src/core/render/renderer/renderer2.impl.cpp
-    src/core/render/texture.cpp
-    src/core/render/textureImpl.cpp
-    src/core/render/texture/texture2.cpp
-    src/core/render/texture/texture2.impl.cpp
-    src/core/render/window.cpp
-    src/core/render/windowImpl.cpp
-    src/core/render/window/window2.cpp
-    src/core/render/window/window2.impl.cpp
+    src/core/render/cursor/cursor.cpp
+    src/core/render/cursor/cursor.impl.cpp
+    src/core/render/font/defaultFont.cpp
+    src/core/render/font/font.cpp
+    src/core/render/font/font.impl.cpp
+    src/core/render/renderer/renderer.cpp
+    src/core/render/renderer/renderer.impl.cpp
+    src/core/render/texture/texture.cpp
+    src/core/render/texture/texture.impl.cpp
+    src/core/render/window/window.cpp
+    src/core/render/window/window.impl.cpp
     src/core/state/stateMachine.cpp
     src/core/time/timer.cpp
-    src/core/time/timerImpl.cpp
-    src/core/time/timer2.cpp
-    src/core/time/timer2.impl.cpp
+    src/core/time/timer.impl.cpp
     src/core/tmx/tmxImage.cpp
     src/core/tmx/tmxLayer.cpp
     src/core/tmx/tmxMap.cpp
@@ -111,32 +81,18 @@ set(SOURCE_FILES
     src/core/tmx/tmxPropertyGroup.cpp
     src/core/tmx/tmxText.cpp
     src/core/tmx/tmxTileset.cpp
-    src/entity/entity.cpp
     src/entity/entityManager.cpp
     src/scene/scene.cpp
-    src/scene/scene2.cpp
-    src/scene/loader/sceneLoader.cpp
-    src/scene/loader/tmx/tmxSceneLoader.cpp
-    src/scene/loader/tmxSceneLoader2.cpp
-    src/ecs/ecsManager.cpp
+    src/scene/loader/tmxSceneLoader.cpp
     src/system/animation/motionSystem.cpp
-    src/system/animation/motionSystem2.cpp
     src/system/debug/debugProfileSystem.cpp
-    src/system/debug/debugProfileSystem2.cpp
     src/system/debug/debugSpriteSystem.cpp
-    src/system/debug/debugSpriteSystem2.cpp
     src/system/debug/debugTextSystem.cpp
-    src/system/debug/debugTextSystem2.cpp
     src/system/input/mouseEventTriggerSystem.cpp
-    src/system/input/mouseEventTriggerSystem2.cpp
     src/system/physic/aabbCollisionSystem.cpp
-    src/system/physic/aabbCollisionSystem2.cpp
     src/system/render/spriteRenderSystem.cpp
-    src/system/render/spriteRenderSystem2.cpp
     src/system/render/textRenderSystem.cpp
-    src/system/render/textRenderSystem2.cpp
     src/system/system.cpp
-    src/system/system2.cpp
     src/system/systemManager.cpp
     ${PLATFORM_SOURCE_FILES}
 )

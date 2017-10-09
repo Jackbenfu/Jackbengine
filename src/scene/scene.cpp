@@ -2,173 +2,91 @@
 // scene.cpp
 // jackbengine
 //
-// Created by Damien Bendejacq on 18/07/2015.
-// Copyright © 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 09/08/2017.
+// Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
 #include "scene.hpp"
 
-using namespace std;
 using namespace Jackbengine;
 
-Scene::Scene() = default;
+Scene::Scene(Application& application, SceneManager<Scene>& sceneManager)
+    : m_application {application},
+      m_sceneManager {sceneManager},
+      m_systemManager {m_entityManager}
+{ }
 
-Scene::~Scene()
+Entity Scene::addEntity()
 {
-    clear();
+    return m_entityManager.addEntity();
 }
 
-bool Scene::isEntityEnabled(Entity *entity) const
+void Scene::removeEntity(Entity entity)
 {
-    return m_ecsManager->isEntityEnabled(entity);
+    m_entityManager.removeEntity(entity);
+    m_systemManager.removeEntity(entity, false);
 }
 
-Entity* Scene::getEntity(const char *name) const
+void Scene::enableEntity(Entity entity)
 {
-    return m_ecsManager->getEntity(name);
+    enableEntity(entity, true);
 }
 
-Entity* Scene::addEntity(const char *name)
+void Scene::enableEntity(Entity entity, bool enable)
 {
-    return m_ecsManager->addEntity(name);
-}
+    m_entityManager.enableEntity(entity, enable);
 
-void Scene::removeEntity(Entity *entity)
-{
-    m_ecsManager->removeEntity(entity);
-}
-
-bool Scene::removeEntity(const char *name)
-{
-    return m_ecsManager->removeEntity(name);
-}
-
-void Scene::enableEntity(Entity *entity)
-{
-    m_ecsManager->enableEntity(entity);
-}
-
-void Scene::enableEntity(const char *name)
-{
-    m_ecsManager->enableEntity(name);
-}
-
-void Scene::disableEntity(Entity *entity)
-{
-    m_ecsManager->disableEntity(entity);
-}
-
-void Scene::disableEntity(const char *name)
-{
-    m_ecsManager->disableEntity(name);
-}
-
-bool Scene::loadScene(const char *name)
-{
-    if (nullptr == name)
+    if (enable)
     {
-        throw invalid_argument(name);
+        m_systemManager.addEntity(entity);
     }
-
-    m_nextScene = name;
-    return true;
+    else
+    {
+        m_systemManager.removeEntity(entity, false);
+    }
 }
 
-void Scene::exit()
+void Scene::disableEntity(Entity entity)
 {
-    m_running = false;
+    enableEntity(entity, false);
 }
 
-bool Scene::init()
+void Scene::update(float delta)
 {
-    m_ecsManager = new EcsManager();
-    m_running = initContents();
-
-    return m_running;
-}
-
-void Scene::loop()
-{
-    timer()->start();
-    float delta = timer()->getElapsedMilliseconds() * 0.001f;
-
-    renderer()->clear();
-    input()->update(delta);
-    m_ecsManager->update(delta);
-
+    m_systemManager.frame(delta);
     frame(delta);
-
-    renderer()->present();
-
-    if (input()->quit())
-    {
-        exit();
-    }
-
-    timer()->snapshot();
+    m_sceneManager.trySetNextScene();
 }
 
-bool Scene::running() const
+Timer& Scene::timer() const
 {
-    return m_running;
+    return m_application.timer();
 }
 
-Cursor* Scene::cursor() const
+Cursor& Scene::cursor() const
 {
-    return m_cursor;
+    return m_application.cursor();
 }
 
-void Scene::setCursor(Cursor *cursor)
+Input& Scene::input() const
 {
-    m_cursor = cursor;
+    return m_application.input();
 }
 
-Input* Scene::input() const
+Window& Scene::window() const
 {
-    return m_input;
+    return m_application.window();
 }
 
-void Scene::setInput(Input *input)
+Renderer& Scene::renderer() const
 {
-    m_input = input;
+    return m_application.renderer();
 }
 
-Renderer* Scene::renderer() const
+void Scene::exitApplication()
 {
-    return m_renderer;
+    m_application.exit();
 }
 
-void Scene::setRenderer(Renderer *renderer)
-{
-    m_renderer = renderer;
-}
-
-Timer* Scene::timer() const
-{
-    return m_timer;
-}
-
-void Scene::setTimer(Timer *timer)
-{
-    m_timer = timer;
-}
-
-Window* Scene::window() const
-{
-    return m_window;
-}
-
-void Scene::setWindow(Window *window)
-{
-    m_window = window;
-}
-
-void Scene::clear()
-{
-    if (nullptr != m_ecsManager)
-    {
-        m_ecsManager->clear();
-    }
-
-    DELETE_SAFE(m_ecsManager);
-}
+void Scene::frame(float)
+{ }

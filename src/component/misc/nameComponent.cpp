@@ -2,28 +2,24 @@
 // nameComponent.cpp
 // jackbengine
 //
-// Created by Damien Bendejacq on 20/07/2015.
-// Copyright © 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 29/07/2017.
+// Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
 #include "nameComponent.hpp"
-#include "platform.hpp"
 
 using namespace Jackbengine;
 
-NameComponent::NameComponent() = default;
+NameComponent::NameComponent(const std::string& name)
+    : m_value {name}
+{ }
 
-NameComponent::~NameComponent()
+const std::string& NameComponent::get() const
 {
-    free(m_name);
+    return m_value.get();
 }
 
-const char* NameComponent::getName() const
+void NameComponent::set(const std::string& name)
 {
-    return m_name;
-}
-
-void NameComponent::setName(const char *name)
-{
-    m_name = strdup(name);
+    m_value.set(name);
 }

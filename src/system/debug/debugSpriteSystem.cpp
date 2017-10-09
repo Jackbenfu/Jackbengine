@@ -2,8 +2,8 @@
 // debugSpriteSystem.cpp
 // jackbengine
 //
-// Created by Damien Bendejacq on 24/06/15.
-// Copyright © 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 19/08/2017.
+// Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
 #include "debugSpriteSystem.hpp"
@@ -12,47 +12,37 @@
 
 using namespace Jackbengine;
 
-DebugSpriteSystem::DebugSpriteSystem() = default;
+DebugSpriteSystem::DebugSpriteSystem(Renderer& renderer)
+    : m_renderer {renderer},
+      m_color {Color32(255, 0, 0)}
+{ }
 
-DebugSpriteSystem::~DebugSpriteSystem() = default;
-
-void DebugSpriteSystem::update(float)
+void DebugSpriteSystem::frame(float)
 {
-    for (auto entity : m_entities)
+    for (const auto& entity : m_entities)
     {
-        if (entity->isEnabled())
-        {
-            auto boxShape = entity->getComponentIfEnabled<BoxShapeComponent>();
-            auto transform = entity->getComponentIfEnabled<TransformComponent>();
+        const auto components = entity.second;
 
-            if (!boxShape || !transform)
-            {
-                continue;
-            }
+        const auto& boxShape = components->get<BoxShapeComponent>();
+        const auto& transform = components->get<TransformComponent>();
 
-            auto position = transform->getPosition();
-            auto size = boxShape->getSize();
+        const auto position = transform.position();
+        const auto size = boxShape.size();
 
-            auto x1 = position.x;
-            auto x2 = position.x + size.x;
-            auto y1 = position.y;
-            auto y2 = position.y + size.y;
+        const auto x1 = position.x;
+        const auto x2 = position.x + size.x;
+        const auto y1 = position.y;
+        const auto y2 = position.y + size.y;
 
-            m_renderer->renderLine(x1, y1, x2, y1, Color32(255, 0, 0));
-            m_renderer->renderLine(x2, y1, x2, y2, Color32(255, 0, 0));
-            m_renderer->renderLine(x2, y2, x1, y2, Color32(255, 0, 0));
-            m_renderer->renderLine(x1, y2, x1, y1, Color32(255, 0, 0));
-        }
+        m_renderer.renderLine(x1, y1, x2, y1, m_color);
+        m_renderer.renderLine(x2, y1, x2, y2, m_color);
+        m_renderer.renderLine(x2, y2, x1, y2, m_color);
+        m_renderer.renderLine(x1, y2, x1, y1, m_color);
     }
 }
 
-bool DebugSpriteSystem::hasRequiredComponents(Entity *entity)
+bool DebugSpriteSystem::hasRequiredComponents(ComponentCollection& components) const
 {
-    return entity->getComponentIfEnabled<BoxShapeComponent>() &&
-        entity->getComponentIfEnabled<TransformComponent>();
-}
-
-void DebugSpriteSystem::setRenderer(Renderer *renderer)
-{
-    m_renderer = renderer;
+    return components.any<BoxShapeComponent>()
+        && components.any<TransformComponent>();
 }

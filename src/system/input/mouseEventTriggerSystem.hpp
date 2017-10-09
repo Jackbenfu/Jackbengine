@@ -2,8 +2,8 @@
 // mouseEventTriggerSystem.hpp
 // jackbengine
 //
-// Created by Damien Bendejacq on 28/06/15.
-// Copyright © 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 09/09/2017.
+// Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __MOUSE_EVENT_TRIGGER_SYSTEM_H__
@@ -14,23 +14,22 @@
 
 namespace Jackbengine {
 
-class MouseEventTriggerSystem : public System
+class MouseEventTriggerSystem final : public System
 {
+    DISALLOW_COPY_AND_MOVE(MouseEventTriggerSystem)
+
 public:
-    MouseEventTriggerSystem();
-    ~MouseEventTriggerSystem() override;
+    explicit MouseEventTriggerSystem(const Input& input);
+    ~MouseEventTriggerSystem() override = default;
 
-    void update(float delta) override;
-
-    void setBubblingActive(bool active);
-    void setInput(Input *input);
-
-protected:
-    bool hasRequiredComponents(Entity *entity) override;
+    void setBubbling(bool active);
 
 private:
-    Input *m_input = nullptr;
-    bool m_bubblingActive = false;
+    void frame(float delta) override;
+    bool hasRequiredComponents(ComponentCollection& components) const override;
+
+    const Input& m_input;
+    bool m_bubbling {false};
 };
 
 } // namespace Jackbengine

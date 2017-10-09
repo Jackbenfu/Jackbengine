@@ -2,17 +2,16 @@
 // aabbCollisionSystem.hpp
 // jackbengine
 //
-// Created by Damien Bendejacq on 24/01/15.
-// Copyright © 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 20/09/2017.
+// Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __AABB_COLLISION_SYSTEM_H__
 #define __AABB_COLLISION_SYSTEM_H__
 
-#include <string>
 #include <vector>
+#include <string>
 #include "system/system.hpp"
-#include "aabbCollisionGroup.hpp"
 
 namespace Jackbengine {
 
@@ -21,37 +20,37 @@ enum class AABBCollisionSide
     Top,
     Right,
     Bottom,
-    Left
+    Left,
 };
 
 using AABBCollisionCallback = bool(*)(
     float delta,
-    Entity *e1,
-    Entity *e2,
+    ComponentCollection& components1,
+    ComponentCollection& components2,
     AABBCollisionSide collisionSide
 );
 
-class AABBCollisionSystem : public System
+class AABBCollisionSystem final : public System
 {
+    DISALLOW_COPY_AND_MOVE(AABBCollisionSystem)
+
 public:
-    AABBCollisionSystem();
-    ~AABBCollisionSystem() override;
+    AABBCollisionSystem() = default;
+    ~AABBCollisionSystem() override = default;
 
-    void update(float delta) override;
+    void addGroup(const std::string& tag1, const std::string& tag2);
+    void removeGroup(const std::string& tag1, const std::string& tag2);
 
-    bool addCollisionGroup(const char *tag1, const char *tag2);
-    bool removeCollisionGroup(const char *tag1, const char *tag2);
-
-    bool setCallback(AABBCollisionCallback callback);
-
-protected:
-    bool hasRequiredComponents(Entity *entity) override;
+    void setCallback(AABBCollisionCallback callback);
 
 private:
-    std::vector<AABBCollisionGroup*> m_groups;
-    AABBCollisionCallback m_callback = nullptr;
+    void frame(float delta) override;
+    bool hasRequiredComponents(ComponentCollection& components) const override;
 
-    void testCollision(float delta, Entity *entity1, Entity *entity2) const;
+    void testCollision(float delta, ComponentCollection& components1, ComponentCollection& components2) const;
+
+    std::vector<std::pair<std::string, std::string>> m_groups;
+    AABBCollisionCallback m_callback {nullptr};
 };
 
 } // namespace Jackbengine

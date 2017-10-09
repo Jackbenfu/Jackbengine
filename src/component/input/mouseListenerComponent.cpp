@@ -2,180 +2,165 @@
 // mouseListenerComponent.cpp
 // jackbengine
 //
-// Created by Damien Bendejacq on 28/06/15.
-// Copyright © 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 07/08/2017.
+// Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
 #include "mouseListenerComponent.hpp"
 
 using namespace Jackbengine;
 
-MouseListenerComponent::MouseListenerComponent(Scene *scene)
-    : m_scene(scene)
-{ }
-
-MouseListenerComponent::~MouseListenerComponent() = default;
-
-void MouseListenerComponent::onLeftClick(MouseCallback callback, void *data)
+void MouseListenerComponent::onLeftClick(MouseCallback callback)
 {
-    m_onLeftClick = callback;
-    m_onLeftClickData = data;
+    m_onLeftClick = std::move(callback);
 }
 
 void MouseListenerComponent::callLeftClick()
 {
-    addEvent(MouseEvent_LeftClick);
-    if (m_onLeftClick)
+    addEvent(MouseEvent::MouseEvent_LeftClick2);
+    if (nullptr != m_onLeftClick)
     {
-        m_onLeftClick(m_scene, m_onLeftClickData);
+        m_onLeftClick();
     }
 }
 
-void MouseListenerComponent::onLeftDown(MouseCallback callback, void *data)
+void MouseListenerComponent::onLeftDown(MouseCallback callback)
 {
-    m_onLeftDown = callback;
-    m_onLeftDownData = data;
+    m_onLeftDown = std::move(callback);
 }
 
 void MouseListenerComponent::callLeftDown() const
 {
-    if (m_onLeftDown)
+    if (nullptr != m_onLeftDown)
     {
-        m_onLeftDown(m_scene, m_onLeftDownData);
+        m_onLeftDown();
     }
 }
 
-void MouseListenerComponent::onMiddleClick(MouseCallback callback, void *data)
+void MouseListenerComponent::onMiddleClick(MouseCallback callback)
 {
-    m_onMiddleClick = callback;
-    m_onMiddleClickData = data;
+    m_onMiddleClick = std::move(callback);
 }
 
 void MouseListenerComponent::callMiddleClick()
 {
-    addEvent(MouseEvent_MiddleClick);
-    if (m_onMiddleClick)
+    addEvent(MouseEvent::MouseEvent_MiddleClick2);
+    if (nullptr != m_onMiddleClick)
     {
-        m_onMiddleClick(m_scene, m_onMiddleClickData);
+        m_onMiddleClick();
     }
 }
 
-void MouseListenerComponent::onMiddleDown(MouseCallback callback, void *data)
+void MouseListenerComponent::onMiddleDown(MouseCallback callback)
 {
-    m_onMiddleDown = callback;
-    m_onMiddleDownData = data;
+    m_onMiddleDown = std::move(callback);
 }
 
 void MouseListenerComponent::callMiddleDown() const
 {
-    if (m_onMiddleDown)
+    if (nullptr != m_onMiddleDown)
     {
-        m_onMiddleDown(m_scene, m_onMiddleDownData);
+        m_onMiddleDown();
     }
 }
 
-void MouseListenerComponent::onRightClick(MouseCallback callback, void *data)
+void MouseListenerComponent::onRightClick(MouseCallback callback)
 {
-    m_onRightClick = callback;
-    m_onRightClickData = data;
+    m_onRightClick = std::move(callback);
 }
 
 void MouseListenerComponent::callRightClick()
 {
-    addEvent(MouseEvent_RightClick);
-    if (m_onRightClick)
+    addEvent(MouseEvent::MouseEvent_RightClick2);
+    if (nullptr != m_onRightClick)
     {
-        m_onRightClick(m_scene, m_onRightClickData);
+        m_onRightClick();
     }
 }
 
-void MouseListenerComponent::onRightDown(MouseCallback callback, void *data)
+void MouseListenerComponent::onRightDown(MouseCallback callback)
 {
-    m_onRightDown = callback;
-    m_onRightDownData = data;
+    m_onRightDown = std::move(callback);
 }
 
 void MouseListenerComponent::callRightDown() const
 {
-    if (m_onRightDown)
+    if (nullptr != m_onRightDown)
     {
-        m_onRightDown(m_scene, m_onRightDownData);
+        m_onRightDown();
     }
 }
 
-void MouseListenerComponent::onHover(MouseCallback callback, void *data)
+void MouseListenerComponent::onHover(MouseCallback callback)
 {
-    m_onHover = callback;
-    m_onHoverData = data;
+    m_onHover = std::move(callback);
 }
 
 void MouseListenerComponent::callOnHover()
 {
-    addEvent(MouseEvent_Hover);
-    if (m_onHover)
+    addEvent(MouseEvent::MouseEvent_Hover2);
+    if (nullptr != m_onHover)
     {
-        m_onHover(m_scene, m_onHoverData);
+        m_onHover();
     }
 }
 
-void MouseListenerComponent::onEnter(MouseCallback callback, void *data)
+void MouseListenerComponent::onEnter(MouseCallback callback)
 {
-    m_onEnter = callback;
-    m_onEnterData = data;
+    m_onEnter = std::move(callback);
 }
 
 void MouseListenerComponent::callOnEnter()
 {
-    addEvent(MouseEvent_Enter);
-    if (m_onEnter)
+    addEvent(MouseEvent::MouseEvent_Enter2);
+    if (nullptr != m_onEnter)
     {
-        m_onEnter(m_scene, m_onEnterData);
+        m_onEnter();
     }
 }
 
-void MouseListenerComponent::onExit(MouseCallback callback, void *data)
+void MouseListenerComponent::onExit(MouseCallback callback)
 {
-    m_onExit = callback;
-    m_onExitData = data;
+    m_onExit = std::move(callback);
 }
 
 void MouseListenerComponent::callOnExit()
 {
-    addEvent(MouseEvent_Exit);
-    if (m_onExit)
+    addEvent(MouseEvent::MouseEvent_Exit2);
+    if (nullptr != m_onExit)
     {
-        m_onExit(m_scene, m_onExitData);
+        m_onExit();
     }
 }
 
 bool MouseListenerComponent::leftClick()
 {
-    return hasAndRemoveEvent(MouseEvent_LeftClick);
+    return hasAndRemoveEvent(MouseEvent::MouseEvent_LeftClick2);
 }
 
 bool MouseListenerComponent::middleClick()
 {
-    return hasAndRemoveEvent(MouseEvent_MiddleClick);
+    return hasAndRemoveEvent(MouseEvent::MouseEvent_MiddleClick2);
 }
 
 bool MouseListenerComponent::rightClick()
 {
-    return hasAndRemoveEvent(MouseEvent_RightClick);
+    return hasAndRemoveEvent(MouseEvent::MouseEvent_RightClick2);
 }
 
 bool MouseListenerComponent::hover() const
 {
-    return hasEvent(MouseEvent_Hover);
+    return hasEvent(MouseEvent::MouseEvent_Hover2);
 }
 
 bool MouseListenerComponent::enter() const
 {
-    return hasEvent(MouseEvent_Enter);
+    return hasEvent(MouseEvent::MouseEvent_Enter2);
 }
 
 bool MouseListenerComponent::exit() const
 {
-    return hasEvent(MouseEvent_Exit);
+    return hasEvent(MouseEvent::MouseEvent_Exit2);
 }
 
 void MouseListenerComponent::addEvent(MouseEvent event)

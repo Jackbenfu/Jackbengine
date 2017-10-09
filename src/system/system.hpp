@@ -2,40 +2,37 @@
 // system.hpp
 // jackbengine
 //
-// Created by Damien Bendejacq on 18/07/2015.
-// Copyright © 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 25/07/2017.
+// Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __SYSTEM_H__
 #define __SYSTEM_H__
 
-#include <vector>
-#include "entity/entity.hpp"
+#include <map>
+#include "entity/entityManager.hpp"
 
 namespace Jackbengine {
 
 class System
 {
-    friend class EcsManager;
+    friend class SystemManager;
+
+    DISALLOW_COPY_AND_MOVE(System)
+
+public:
+    System() = default;
+    virtual ~System() = default;
 
 protected:
-    System();
-    virtual ~System();
-
-    std::vector<Entity*> m_entities;
+    std::map<Entity, ComponentCollection*> m_entities;
 
 private:
-    virtual void update(float delta) = 0;
-    virtual bool hasRequiredComponents(Entity *entity) = 0;
+    virtual void frame(float delta) = 0;
+    virtual bool hasRequiredComponents(ComponentCollection& components) const = 0;
 
-    bool isEnabled() const;
-    void enable();
-    void disable();
-
-    bool addEntity(Entity *entity);
-    bool removeEntity(Entity *entity);
-
-    bool m_enabled = true;
+    void addEntity(Entity entity, ComponentCollection& components);
+    void removeEntity(Entity entity, bool checkComponents);
 };
 
 } // namespace Jackbengine

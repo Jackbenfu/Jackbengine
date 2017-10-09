@@ -9,11 +9,10 @@
 #ifndef __ENTITY_MANAGER_H__
 #define __ENTITY_MANAGER_H__
 
+#include "entity.hpp"
 #include "component/componentCollection.hpp"
 
 namespace Jackbengine {
-
-using Entity2 = size_t;
 
 class EntityManager
 {
@@ -23,37 +22,37 @@ public:
     EntityManager() = default;
     ~EntityManager() = default;
 
-    Entity2 addEntity();
-    void removeEntity(Entity2 entity);
-    bool isEntityEnabled(Entity2 entity) const;
-    void enableEntity(Entity2 entity, bool enable);
-    ComponentCollection& getEntity(Entity2 entity) const;
+    Entity addEntity();
+    void removeEntity(Entity entity);
+    bool isEntityEnabled(Entity entity) const;
+    void enableEntity(Entity entity, bool enable);
+    ComponentCollection& getEntity(Entity entity) const;
 
     template<typename TComponent, typename ...Args>
-    void addComponent(Entity2 entity, Args&& ...args);
+    void addComponent(Entity entity, Args&& ...args);
 
     template<typename TComponent>
-    void removeComponent(Entity2 entity);
+    void removeComponent(Entity entity);
 
     template<typename TComponent>
-    TComponent& getComponent(Entity2 entity) const;
+    TComponent& getComponent(Entity entity) const;
 
     template<typename TComponent>
-    void enableComponent(Entity2 entity, bool enable);
+    void enableComponent(Entity entity, bool enable);
 
 private:
-    std::tuple<bool, std::unique_ptr<ComponentCollection>>& findEntity(Entity2 entity);
-    const std::tuple<bool, std::unique_ptr<ComponentCollection>>& findEntity(Entity2 entity) const;
+    std::tuple<bool, std::unique_ptr<ComponentCollection>>& findEntity(Entity entity);
+    const std::tuple<bool, std::unique_ptr<ComponentCollection>>& findEntity(Entity entity) const;
 
     template<typename T>
-    static auto findEntity(T& t, Entity2 entity) -> decltype(t.findEntity(entity));
+    static auto findEntity(T& t, Entity entity) -> decltype(t.findEntity(entity));
 
-    std::map<Entity2, std::tuple<bool, std::unique_ptr<ComponentCollection>>> m_entities;
+    std::map<Entity, std::tuple<bool, std::unique_ptr<ComponentCollection>>> m_entities;
 
 };
 
 template<typename TComponent, typename ...Args>
-void EntityManager::addComponent(Entity2 entity, Args&& ...args)
+void EntityManager::addComponent(Entity entity, Args&& ...args)
 {
     auto& tuple = findEntity(entity);
 
@@ -61,7 +60,7 @@ void EntityManager::addComponent(Entity2 entity, Args&& ...args)
 }
 
 template<typename TComponent>
-void EntityManager::removeComponent(Entity2 entity)
+void EntityManager::removeComponent(Entity entity)
 {
     auto& tuple = findEntity(entity);
 
@@ -69,7 +68,7 @@ void EntityManager::removeComponent(Entity2 entity)
 }
 
 template<typename TComponent>
-TComponent& EntityManager::getComponent(Entity2 entity) const
+TComponent& EntityManager::getComponent(Entity entity) const
 {
     auto& tuple = findEntity(entity);
     auto& componentCollection = std::get<1>(tuple);
@@ -78,7 +77,7 @@ TComponent& EntityManager::getComponent(Entity2 entity) const
 }
 
 template<typename TComponent>
-void EntityManager::enableComponent(Entity2 entity, bool enable)
+void EntityManager::enableComponent(Entity entity, bool enable)
 {
     auto& tuple = findEntity(entity);
 
@@ -86,7 +85,7 @@ void EntityManager::enableComponent(Entity2 entity, bool enable)
 }
 
 template<typename T>
-auto EntityManager::findEntity(T& t, Entity2 entity) -> decltype(t.findEntity(entity))
+auto EntityManager::findEntity(T& t, Entity entity) -> decltype(t.findEntity(entity))
 {
     auto it = t.m_entities.find(entity);
     if (it == t.m_entities.end())

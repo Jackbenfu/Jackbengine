@@ -2,82 +2,40 @@
 // textComponent.cpp
 // jackbengine
 //
-// Created by Damien Bendejacq on 14/06/15.
-// Copyright © 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 05/08/2017.
+// Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
 #include "textComponent.hpp"
 
-using namespace std;
 using namespace Jackbengine;
 
-TextComponent::TextComponent() = default;
-
-TextComponent::~TextComponent()
+TextComponent::TextComponent(const Renderer& renderer, const std::string& text, TextLayout layout, Color32 foreground,
+                               int size, const void *fontData, size_t fontDataSize)
+    : m_renderer {renderer},
+      m_text {text},
+      m_layout {layout},
+      m_foreground {foreground},
+      m_size {size},
+      m_fontData {fontData},
+      m_fontDataSize {fontDataSize}
 {
-    DELETE_SAFE(m_font);
-    DELETE_SAFE(m_texture);
+    refreshTexture();
 }
 
-bool TextComponent::setFontFromFile(const Renderer *renderer, const char *file, int size)
-{
-    bool result = false;
-
-    if (renderer && !m_font)
-    {
-        m_renderer = renderer;
-
-        m_font = Font::create();
-        if (m_font)
-        {
-            result = m_font->loadFromFile(file, size);
-
-            m_isLoaded = result;
-            refreshTexture();
-        }
-    }
-
-    return result;
-}
-
-bool TextComponent::setFontFromMemory(
-    const Renderer *renderer, const void *data, size_t dataSize, int size)
-{
-    bool result = false;
-
-    if (renderer && !m_font)
-    {
-        m_renderer = renderer;
-
-        m_font = Font::create();
-        if (m_font)
-        {
-            result = m_font->loadFromMemory(data, dataSize, size);
-
-            m_isLoaded = result;
-            refreshTexture();
-        }
-    }
-
-    return result;
-}
-
-const string& TextComponent::getText() const
+const std::string& TextComponent::text() const
 {
     return m_text;
 }
 
-void TextComponent::setText(const string& text)
+void TextComponent::setText(const std::string& text)
 {
-    if (0 != m_text.compare(text))
-    {
-        m_text = text;
+    m_text = text;
 
-        refreshTexture();
-    }
+    refreshTexture();
 }
 
-Color32 TextComponent::getForeground() const
+Color32 TextComponent::foreground() const
 {
     return m_foreground;
 }
@@ -103,32 +61,32 @@ void TextComponent::setForeground(byte r, byte g, byte b, byte a)
     refreshTexture();
 }
 
-float TextComponent::getWidth() const
+float TextComponent::width() const
 {
-    return m_texture ? static_cast<float>(m_texture->getWidth()) : -1.0f;
+    return m_texture->width();
 }
 
-float TextComponent::getHeight() const
+float TextComponent::height() const
 {
-    return static_cast<float>(m_height);
+    return m_texture->height();
 }
 
-int TextComponent::getTopWhiteSpace() const
+int TextComponent::topWhiteSpace() const
 {
     return m_topWhiteSpace;
 }
 
-int TextComponent::getBottomWhiteSpace() const
+int TextComponent::bottomWhiteSpace() const
 {
     return m_bottomWhiteSpace;
 }
 
-int TextComponent::getRightWhiteSpace() const
+int TextComponent::rightWhiteSpace() const
 {
     return m_rightWhiteSpace;
 }
 
-TextLayout TextComponent::getLayout() const
+TextLayout TextComponent::layout() const
 {
     return m_layout;
 }
@@ -138,64 +96,40 @@ void TextComponent::setLayout(TextLayout layout)
     m_layout = layout;
 }
 
-const Recti& TextComponent::getBoundingRect() const
+Texture& TextComponent::texture() const
 {
-    return m_boundingRect;
-}
-
-void TextComponent::setBoundingRect(int x, int y, int w, int h)
-{
-    m_boundingRect.x = x;
-    m_boundingRect.y = y;
-    m_boundingRect.w = w;
-    m_boundingRect.h = h;
-}
-
-Texture* TextComponent::getTexture() const
-{
-    return m_texture;
+    return *m_texture;
 }
 
 void TextComponent::refreshTexture()
 {
-    if (m_isLoaded && !m_text.empty())
+    m_font = std::make_unique<Font>(m_fontData, m_fontDataSize, m_size);
+    m_texture = std::make_unique<Texture>(m_renderer, *m_font, m_text, m_foreground);
+
+    auto glyphMaxY = 0;
+    auto lastGlyphAdvance = 0;
+    auto lastGlyphMaxX = 0;
+    for (size_t i = 0; i < m_text.length(); ++i)
     {
-        DELETE_SAFE(m_texture);
-
-        m_texture = Texture::create();
-        if (m_texture->loadFromFont(m_renderer, m_font, m_foreground, m_text))
+        int glyphY;
+        if (m_text.length() - 1 > i)
         {
-            int glyphMaxY = 0;
-            int lastGlyphAdvance = 0;
-            int lastGlyphMaxX = 0;
-            for (int i = 0; i < static_cast<int>(m_text.length()); ++i)
-            {
-                int glyphY;
-                if (static_cast<int>(m_text.length()) - 1 > i)
-                {
-                    m_font->getGlyphMaxY((ushort)m_text[i], &glyphY);
-                }
-                else
-                {
-                    int minX;
-                    int minY;
-                    m_font->getGlyphMetrics(
-                        (ushort)m_text[i], &minX, &lastGlyphMaxX,
-                        &minY, &glyphY, &lastGlyphAdvance
-                    );
-                }
+            m_font->glyphMaxY((ushort) m_text[i], &glyphY);
+        }
+        else
+        {
+            int minX;
+            int minY;
+            m_font->glyphMetrics((ushort) m_text[i], &minX, &lastGlyphMaxX, &minY, &glyphY, &lastGlyphAdvance);
+        }
 
-                if (glyphY > glyphMaxY)
-                {
-                    glyphMaxY = glyphY;
-                }
-            }
-
-            m_bottomWhiteSpace = abs(m_font->getDescent());
-            m_topWhiteSpace = m_font->getLineSkip() - glyphMaxY - m_bottomWhiteSpace;
-            m_rightWhiteSpace = lastGlyphAdvance - lastGlyphMaxX;
-
-            m_height = m_font->getLineSkip();
+        if (glyphY > glyphMaxY)
+        {
+            glyphMaxY = glyphY;
         }
     }
+
+    m_bottomWhiteSpace = abs(m_font->descent());
+    m_topWhiteSpace = m_font->lineSkip() - glyphMaxY - m_bottomWhiteSpace;
+    m_rightWhiteSpace = lastGlyphAdvance - lastGlyphMaxX;
 }

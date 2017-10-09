@@ -9,7 +9,7 @@
 #ifndef __SYSTEM_MANAGER_H__
 #define __SYSTEM_MANAGER_H__
 
-#include "system2.hpp"
+#include "system.hpp"
 #include "core/collection/heterogeneousCollection.hpp"
 
 namespace Jackbengine {
@@ -34,15 +34,15 @@ public:
     template<typename TSystem>
     void enableSystem(bool enable);
 
-    void addEntity(Entity2 entity);
-    void removeEntity(Entity2 entity, bool checkComponents);
+    void addEntity(Entity entity);
+    void removeEntity(Entity entity, bool checkComponents);
 
     void frame(float delta);
 
 private:
     const EntityManager& m_entityManager;
 
-    HeterogeneousCollection<System2> m_systems;
+    HeterogeneousCollection<System> m_systems;
 };
 
 template<typename TSystem, typename ...Args>

@@ -2,19 +2,19 @@
 // velocityComponent.cpp
 // jackbengine
 //
-// Created by Damien Bendejacq on 13/05/15.
-// Copyright © 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 29/07/2017.
+// Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
 #include "velocityComponent.hpp"
 
 using namespace Jackbengine;
 
-VelocityComponent::VelocityComponent() = default;
+VelocityComponent::VelocityComponent(float x, float y)
+    : m_velocity {x, y}
+{ }
 
-VelocityComponent::~VelocityComponent() = default;
-
-const Vec2f& VelocityComponent::getVelocity() const
+const Vec2f& VelocityComponent::get() const
 {
     return m_velocity;
 }
@@ -25,7 +25,7 @@ void VelocityComponent::set(float x, float y)
     m_velocity.y = y;
 }
 
-float VelocityComponent::getX() const
+float VelocityComponent::x() const
 {
     return m_velocity.x;
 }
@@ -35,7 +35,7 @@ void VelocityComponent::setX(float x)
     m_velocity.x = x;
 }
 
-float VelocityComponent::getY() const
+float VelocityComponent::y() const
 {
     return m_velocity.y;
 }

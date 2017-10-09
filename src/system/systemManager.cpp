@@ -14,11 +14,11 @@ SystemManager::SystemManager(const EntityManager& entityManager)
     : m_entityManager {entityManager}
 { }
 
-void SystemManager::addEntity(Entity2 entity)
+void SystemManager::addEntity(Entity entity)
 {
     auto& components = m_entityManager.getEntity(entity);
 
-    const auto lambda = [&](System2& system)
+    const auto lambda = [&](System& system)
     {
         system.addEntity(entity, components);
     };
@@ -26,9 +26,9 @@ void SystemManager::addEntity(Entity2 entity)
     m_systems.apply(lambda);
 }
 
-void SystemManager::removeEntity(Entity2 entity, bool checkComponents)
+void SystemManager::removeEntity(Entity entity, bool checkComponents)
 {
-    const auto lambda = [&](System2& system)
+    const auto lambda = [&](System& system)
     {
         system.removeEntity(entity, checkComponents);
     };
@@ -38,7 +38,7 @@ void SystemManager::removeEntity(Entity2 entity, bool checkComponents)
 
 void SystemManager::frame(float delta)
 {
-    const auto lambda = [&delta](System2& system)
+    const auto lambda = [&delta](System& system)
     {
         system.frame(delta);
     };

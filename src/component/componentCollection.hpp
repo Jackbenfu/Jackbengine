@@ -9,7 +9,7 @@
 #ifndef __COMPONENT_COLLECTION_H__
 #define __COMPONENT_COLLECTION_H__
 
-#include "component/component2.hpp"
+#include "component/component.hpp"
 #include "core/collection/heterogeneousCollection.hpp"
 
 namespace Jackbengine {
@@ -38,7 +38,7 @@ public:
     void enable(bool enable);
 
 private:
-    HeterogeneousCollection<Component2> m_components;
+    HeterogeneousCollection<Component> m_components;
 };
 
 template<typename TComponent, typename ...Args>

@@ -2,8 +2,8 @@
 // containerComponent.hpp
 // jackbengine
 //
-// Created by Damien Bendejacq on 26/06/15.
-// Copyright © 2015 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 29/07/2017.
+// Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __CONTAINER_COMPONENT_H__
@@ -17,25 +17,29 @@ namespace Jackbengine {
 
 class ContainerComponent : public Component
 {
-public:
-    ContainerComponent();
-    ~ContainerComponent();
+    DISALLOW_COPY_AND_MOVE(ContainerComponent)
 
-    const Recti& getRect() const;
+public:
+    ContainerComponent(int x, int y, int w, int h);
+    ~ContainerComponent() override = default;
+
+    const Recti& rect() const;
     void setRect(int x, int y, int w, int h);
 
     bool contains(float x, float y) const;
     bool contains(const Vec2i& point) const;
     bool contains(const Vec2f& point) const;
 
-    int getX() const;
-    int getY() const;
-    int getWidth() const;
-    int getHeight() const;
+    int x() const;
+    int y() const;
+    int width() const;
+    int height() const;
 
 private:
     Recti m_rect;
 };
+
+using Container = ContainerComponent;
 
 } // namespace Jackbengine
 

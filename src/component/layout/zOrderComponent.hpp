@@ -2,8 +2,8 @@
 // zOrderComponent.hpp
 // jackbengine
 //
-// Created by Damien Bendejacq on 26/09/2016.
-// Copyright © 2016 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 29/07/2017.
+// Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __Z_ORDER_COMPONENT_H__
@@ -15,16 +15,22 @@ namespace Jackbengine {
 
 class ZOrderComponent : public Component
 {
-public:
-    ZOrderComponent();
-    ~ZOrderComponent();
+    DISALLOW_COPY_AND_MOVE(ZOrderComponent)
 
-    int getIndex() const;
+public:
+    ZOrderComponent() = default;
+    ZOrderComponent(int index);
+
+    ~ZOrderComponent() override = default;
+
+    int index() const;
     void setIndex(int index);
 
 private:
-    int m_index = 0;
+    int m_index {0};
 };
+
+using ZOrder = ZOrderComponent;
 
 } // namespace Jackbengine
 

@@ -2,104 +2,67 @@
 // timer.cpp
 // jackbengine
 //
-// Created by Damien Bendejacq on 17/04/14.
-// Copyright © 2014 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 10/07/2017.
+// Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
 #include "timer.hpp"
-#include "timerImpl.hpp"
+#include "timer.impl.hpp"
 
 using namespace Jackbengine;
 
-Timer::Timer() = default;
+Timer::Timer(uint fps)
+    : m_impl {std::make_unique<Impl>(fps)}
+{ }
 
 Timer::~Timer() = default;
 
 void Timer::start()
 {
-    m_start = getTicks();
+    m_impl->start();
 }
 
 void Timer::snapshot()
 {
-    ++m_totalFrames;
-
-    m_elapsedMilliseconds = getTicks() - m_start;
-    m_effectiveElapsedMilliseconds = m_elapsedMilliseconds;
-    uint delayTime = 0;
-
-    if (0 < m_fixedFps &&
-        m_elapsedMilliseconds < m_fixedFpsDelayTime)
-    {
-        delayTime = m_fixedFpsDelayTime - m_elapsedMilliseconds;
-        m_elapsedMilliseconds += delayTime;
-    }
-
-    if (1000 < m_fpsElapsedMilliseconds)
-    {
-        m_fps = m_fpsTemp;
-        m_fpsElapsedMilliseconds = 0;
-        m_fpsTemp = 0;
-    }
-    else
-    {
-        m_fpsElapsedMilliseconds += m_elapsedMilliseconds;
-        ++m_fpsTemp;
-    }
-
-    if (0 < delayTime)
-    {
-        delay(delayTime);
-    }
+    m_impl->snapshot();
 }
 
-uint Timer::getElapsedMilliseconds() const
+uint Timer::elapsedMilliseconds() const
 {
-    return m_elapsedMilliseconds;
+    return m_impl->elapsedMilliseconds();
 }
 
-uint Timer::getEffectiveElapsedMilliseconds() const
+uint Timer::effectiveElapsedMilliseconds() const
 {
-    return m_effectiveElapsedMilliseconds;
+    return m_impl->effectiveElapsedMilliseconds();
 }
 
-int Timer::getFps() const
+int Timer::fps() const
 {
-    return m_fps;
+    return m_impl->fps();
 }
 
 bool Timer::isFixedFps() const
 {
-    return 0 < m_fixedFps;
+    return m_impl->isFixedFps();
 }
 
-int Timer::getFixedFps() const
+int Timer::fixedFps() const
 {
-    return m_fixedFps;
+    return m_impl->fixedFps();
 }
 
-void Timer::enableFixedFps(uint value)
+void Timer::enableFixedFps(uint fps)
 {
-    if (0 >= value)
-    {
-        value = 60; // Defaulting to 60 fps
-    }
-
-    m_fixedFps = value;
-    m_fixedFpsDelayTime = 1000 / value;
+    m_impl->enableFixedFps(fps);
 }
 
 void Timer::disableFixedFps()
 {
-    m_fixedFps = 0;
+    m_impl->disableFixedFps();
 }
 
-uint Timer::getTotalFrames() const
+uint Timer::totalFrames() const
 {
-    return m_totalFrames;
-}
-
-Timer* Timer::create()
-{
-    return new TimerImpl();
+    return m_impl->totalFrames();
 }

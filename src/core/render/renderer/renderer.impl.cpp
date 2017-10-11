@@ -15,7 +15,7 @@ Renderer::Impl::Impl(const Window& window)
 {
     const auto sdlWindow = static_cast<SDL_Window*>(window.internalObject());
 
-    m_renderer = SDL_CreateRenderer(sdlWindow, -1, SDL_RENDERER_ACCELERATED);
+    m_renderer = SDL_CreateRenderer(sdlWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     if (nullptr == m_renderer)
     {
         throw std::runtime_error(SDL_GetError());

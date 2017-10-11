@@ -12,6 +12,7 @@
 #include "component/layout/containerComponent.hpp"
 #include "component/view/spriteComponent.hpp"
 #include "system/animation/motionSystem.hpp"
+#include "system/input/mouseEventTriggerSystem.hpp"
 #include "system/physic/aabbCollisionSystem.hpp"
 #include "system/render/textRenderSystem.hpp"
 #include "system/render/spriteRenderSystem.hpp"
@@ -64,6 +65,7 @@ void TmxSceneLoader::loadSystems()
     m_scene.addSystem<MotionSystem>();
     m_scene.addSystem<TextRenderSystem>(m_scene.renderer());
     m_scene.addSystem<SpriteRenderSystem>(m_scene.renderer());
+    m_scene.addSystem<MouseEventTriggerSystem>(m_scene.input());
     m_scene.addSystem<AABBCollisionSystem>();
 }
 

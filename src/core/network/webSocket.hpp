@@ -9,7 +9,7 @@
 #ifndef __WEB_SOCKET_H__
 #define __WEB_SOCKET_H__
 
-#include <map>
+#include <unordered_map>
 #include <string>
 #include <vector>
 #include <arpa/inet.h>
@@ -46,9 +46,9 @@ protected:
 
     const TListener& m_listener;
 
-    std::map<short, Deserializer> m_deserializers;
-    std::map<short, bool> m_acknowledges;
-    std::map<short, Callback> m_callbacks;
+    std::unordered_map<short, Deserializer> m_deserializers;
+    std::unordered_map<short, bool> m_acknowledges;
+    std::unordered_map<short, Callback> m_callbacks;
 
 private:
     easywsclient::WebSocket::pointer m_socket = nullptr;

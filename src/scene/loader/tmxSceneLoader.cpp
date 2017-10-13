@@ -140,7 +140,8 @@ void TmxSceneLoader::loadEntityFromObjectGroup(const TmxObjectGroup *objectGroup
 void TmxSceneLoader::loadEntityFromObject(const TmxObject *object)
 {
     auto entity = m_scene.addEntity();
-    m_scene.addComponent<Container>(entity, object->x(), object->y(), object->width(), object->height());
+    m_scene.addComponent<Transform>(entity, object->x(), object->y());
+    m_scene.addComponent<BoxShape>(entity, object->width(), object->height());
 
     if (object->hasText())
     {
@@ -156,6 +157,8 @@ void TmxSceneLoader::loadTextFromObject(const TmxObject *object, Entity entity)
     auto pixelSize = text->pixelsize();
     auto layout = getTextLayout(text);
     auto color = getTextColor(text);
+
+    m_scene.addComponent<Container>(entity, object->x(), object->y(), object->width(), object->height());
 
     m_scene.addComponent<Text>(
         entity, m_scene.renderer(), text->text(), layout, color, pixelSize, m_fontData, m_fontDataSize

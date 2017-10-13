@@ -23,12 +23,13 @@ enum class AABBCollisionSide
     Left,
 };
 
-using AABBCollisionCallback = bool(*)(
-    float delta,
-    ComponentCollection& components1,
-    ComponentCollection& components2,
-    AABBCollisionSide collisionSide
-);
+using AABBCollisionCallback =
+    std::function<bool(
+        float,
+        ComponentCollection&,
+        ComponentCollection&,
+        AABBCollisionSide
+    )>;
 
 class AABBCollisionSystem final : public System
 {

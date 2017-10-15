@@ -61,5 +61,6 @@
 // Scene
 #include "scene/scene.hpp"
 #include "scene/loader/tmxSceneLoader.hpp"
+#include "scene/state/sceneState.hpp"
 
 #endif // __JACKBENGINE_H__

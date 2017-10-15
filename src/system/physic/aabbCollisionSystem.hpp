@@ -43,6 +43,7 @@ public:
     void removeGroup(const std::string& tag1, const std::string& tag2);
 
     void setCallback(AABBCollisionCallback callback);
+    void unsetCallback();
 
 private:
     void frame(float delta) override;

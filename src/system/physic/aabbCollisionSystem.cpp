@@ -94,6 +94,11 @@ void AABBCollisionSystem::setCallback(AABBCollisionCallback callback)
     m_callback = callback;
 }
 
+void AABBCollisionSystem::unsetCallback()
+{
+    m_callback = nullptr;
+}
+
 void AABBCollisionSystem::testCollision(float delta, ComponentCollection& components1, ComponentCollection& components2) const
 {
     auto& transform1 = components1.get<Transform>();

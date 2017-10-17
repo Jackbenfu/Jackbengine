@@ -10,6 +10,7 @@
 #define __TMX_PROPERTYGROUP_H__
 
 #include <vector>
+#include <memory>
 #include "common.hpp"
 #include "tinyxml/tinyxml.h"
 #include "tmxProperty.hpp"

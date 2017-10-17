@@ -7,6 +7,7 @@
 //
 
 #include <limits>
+#include <algorithm>
 #include "aabbCollisionSystem.hpp"
 #include "component/body/shape/boxShapeComponent.hpp"
 #include "component/body/transformComponent.hpp"

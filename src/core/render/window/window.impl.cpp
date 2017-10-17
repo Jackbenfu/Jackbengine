@@ -69,7 +69,7 @@ void Window::Impl::setWindowIcon()
     auto handle = GetModuleHandle(nullptr);
     if (!handle)
     {
-        throw std::runtime_error(GetLastError());
+        throw std::runtime_error(std::to_string(GetLastError()));
     }
 
     const uint maskR = 0x00ff0000;
@@ -82,19 +82,19 @@ void Window::Impl::setWindowIcon()
     auto icon = (HICON)LoadImage(handle, "icon", IMAGE_ICON, size, size, LR_SHARED);
     if (nullptr == icon)
     {
-        throw std::runtime_error(GetLastError());
+        throw std::runtime_error(std::to_string(GetLastError()));
     }
 
-    ICONINFO iconInfo;
-    if (nullptr == GetIconInfo(icon, &iconInfo))
+    ICONINFO iconInfo; // NOLINT
+    if (FALSE == GetIconInfo(icon, &iconInfo))
     {
-        throw std::runtime_error(GetLastError());
+        throw std::runtime_error(std::to_string(GetLastError()));
     }
 
     auto deviceContext = CreateCompatibleDC(nullptr);
     if (nullptr == deviceContext)
     {
-        throw std::runtime_error(GetLastError());
+        throw std::runtime_error(std::to_string(GetLastError()));
     }
 
     auto surface = SDL_CreateRGBSurface(0, size, size, bpp, maskR, maskG, maskB, maskA);
@@ -103,7 +103,7 @@ void Window::Impl::setWindowIcon()
         throw std::runtime_error(IMG_GetError());
     }
 
-    BITMAPINFO bmi;
+    BITMAPINFO bmi; // NOLINT
     bmi.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
     bmi.bmiHeader.biWidth = size;
     bmi.bmiHeader.biHeight = -size;

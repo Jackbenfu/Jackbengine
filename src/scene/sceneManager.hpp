@@ -9,8 +9,9 @@
 #ifndef __SCENE_MANAGER_H__
 #define __SCENE_MANAGER_H__
 
-#include "common.hpp"
 #include <functional>
+#include <memory>
+#include "common.hpp"
 
 namespace Jackbengine {
 

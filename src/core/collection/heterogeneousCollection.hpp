@@ -11,6 +11,7 @@
 
 #include <map>
 #include <string>
+#include <memory>
 #include "common.hpp"
 
 namespace Jackbengine {

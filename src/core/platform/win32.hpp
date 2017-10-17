@@ -17,12 +17,7 @@
 
 #include <cstdlib>
 #include <cstdio>
+#include <ctime>
 #include <windows.h>
-#include <time.h>
-#include <shlwapi.h>
-
-extern "C" char* strdup(const char *str);
-
-#define snprintf _snprintf
 
 #endif // __WIN32_H__

@@ -22,13 +22,6 @@ find_package(SDL2_mixer REQUIRED)
 include_directories(${PROJECT_SOURCE_DIR}/external)
 include_directories(${PROJECT_SOURCE_DIR}/src)
 
-# Win32 source files
-if(MINGW)
-    set(PLATFORM_SOURCE_FILES
-        src/core/platform/win32.cpp
-    )
-endif(MINGW)
-
 # Jackbengine source files
 set(SOURCE_FILES
     external/easywsclient/easywsclient.cpp

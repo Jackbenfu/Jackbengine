@@ -15,7 +15,6 @@
 #include "core/input/input.hpp"
 #include "core/math/rect.hpp"
 #include "core/math/vector2d.hpp"
-#include "core/network/webSocket.hpp"
 #include "core/render/color32.hpp"
 #include "core/render/cursor/cursor.hpp"
 #include "core/render/font/font.hpp"

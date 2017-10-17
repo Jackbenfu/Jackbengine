@@ -28,6 +28,9 @@ void Cursor::Impl::setCursor(CursorType cursor)
         case CursorType::Default:
             id = SDL_SYSTEM_CURSOR_ARROW;
             break;
+
+        default:
+            throw std::runtime_error("Invalid cursor");
     }
 
     if (nullptr != m_cursor)

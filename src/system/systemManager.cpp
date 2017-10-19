@@ -43,7 +43,5 @@ void SystemManager::frame(float delta)
         system.frame(delta);
     };
 
-    // TODO handle system execution order
-
     m_systems.apply(lambda);
 }

@@ -16,6 +16,11 @@ TextRenderSystem::TextRenderSystem(Renderer& renderer)
     : m_renderer {renderer}
 { }
 
+int TextRenderSystem::order() const
+{
+    return (int)SystemOrder::TextRender;
+}
+
 void TextRenderSystem::frame(float)
 {
     for (const auto entity : m_entities)

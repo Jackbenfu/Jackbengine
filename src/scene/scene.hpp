@@ -60,6 +60,9 @@ public:
     template<typename TSystem, typename ...Args>
     void addSystem(Args&& ...args);
 
+    template<typename TSystem, typename ...Args>
+    void addSystem2(Args&& ...args);
+
     template<typename TSystem>
     void removeSystem();
 
@@ -147,6 +150,12 @@ template<typename TSystem, typename ...Args>
 void Scene::addSystem(Args&& ...args)
 {
     m_systemManager.addSystem<TSystem>(std::forward<Args>(args)...);
+}
+
+template<typename TSystem, typename ...Args>
+void Scene::addSystem2(Args&& ...args)
+{
+    m_systemManager.addSystem2<TSystem>(std::forward<Args>(args)...);
 }
 
 template<typename TSystem>

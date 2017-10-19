@@ -16,6 +16,11 @@ SpriteRenderSystem::SpriteRenderSystem(Renderer& renderer)
     : m_renderer {renderer}
 { }
 
+int SpriteRenderSystem::order() const
+{
+    return (int)SystemOrder::SpriteRender;
+}
+
 void SpriteRenderSystem::frame(float)
 {
     for (const auto entity : m_entities)

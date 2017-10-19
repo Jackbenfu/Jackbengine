@@ -9,7 +9,7 @@
 #ifndef __HETEROGENEOUS_COLLECTION_H__
 #define __HETEROGENEOUS_COLLECTION_H__
 
-#include <map>
+#include <unordered_map>
 #include <string>
 #include <memory>
 #include "common.hpp"
@@ -44,13 +44,12 @@ public:
     void apply(TFunction function);
 
 private:
-    // TODO manage this code duplication with decltype (could not make it work...)
     template<typename TItem>
     std::tuple<bool, std::unique_ptr<TBase>>& find();
     template<typename TItem>
     const std::tuple<bool, std::unique_ptr<TBase>>& find() const;
 
-    std::map<size_t, std::tuple<bool, std::unique_ptr<TBase>>> m_collection;
+    std::unordered_map<size_t, std::tuple<bool, std::unique_ptr<TBase>>> m_collection;
 };
 
 template<typename TBase>
@@ -133,9 +132,7 @@ void HeterogeneousCollection<TBase>::apply(TFunction function)
     for (auto& pair : m_collection)
     {
         const auto& tuple = pair.second;
-
-        const auto isEnabled = std::get<0>(tuple);
-        if (!isEnabled)
+        if (!std::get<0>(tuple))
         {
             continue;
         }
@@ -150,8 +147,8 @@ template<typename TItem>
 std::tuple<bool, std::unique_ptr<TBase>>& HeterogeneousCollection<TBase>::find()
 {
     const auto typeId = GET_TYPE_ID(TItem);
+    const auto it = m_collection.find(typeId);
 
-    auto it = m_collection.find(typeId);
     if (it == m_collection.end())
     {
         throw std::runtime_error(
@@ -167,8 +164,8 @@ template<typename TItem>
 const std::tuple<bool, std::unique_ptr<TBase>>& HeterogeneousCollection<TBase>::find() const
 {
     const auto typeId = GET_TYPE_ID(TItem);
+    const auto it = m_collection.find(typeId);
 
-    auto it = m_collection.find(typeId);
     if (it == m_collection.end())
     {
         throw std::runtime_error(

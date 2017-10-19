@@ -17,6 +17,11 @@ MouseEventTriggerSystem::MouseEventTriggerSystem(const Input& input)
     : m_input {input}
 { }
 
+int MouseEventTriggerSystem::order() const
+{
+    return (int)SystemOrder::MouseEventTrigger;
+}
+
 void MouseEventTriggerSystem::setBubbling(bool active)
 {
     m_bubbling = active;

@@ -16,6 +16,11 @@
 
 using namespace Jackbengine;
 
+int AABBCollisionSystem::order() const
+{
+    return (int)SystemOrder::AABBCollision;
+}
+
 void AABBCollisionSystem::frame(float delta)
 {
     for (auto group : m_groups)

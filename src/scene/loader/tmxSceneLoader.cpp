@@ -62,11 +62,11 @@ void TmxSceneLoader::loadContents()
 
 void TmxSceneLoader::loadSystems()
 {
-    m_scene.addSystem<MotionSystem>();
-    m_scene.addSystem<TextRenderSystem>(m_scene.renderer());
-    m_scene.addSystem<SpriteRenderSystem>(m_scene.renderer());
-    m_scene.addSystem<MouseEventTriggerSystem>(m_scene.input());
-    m_scene.addSystem<AABBCollisionSystem>();
+    m_scene.addSystem2<MotionSystem>();
+    m_scene.addSystem2<MouseEventTriggerSystem>(m_scene.input());
+    m_scene.addSystem2<AABBCollisionSystem>();
+    m_scene.addSystem2<SpriteRenderSystem>(m_scene.renderer());
+    m_scene.addSystem2<TextRenderSystem>(m_scene.renderer());
 }
 
 void TmxSceneLoader::loadLayer(int index)
@@ -182,7 +182,7 @@ TextLayout TmxSceneLoader::getTextLayout(const TmxText *text) const
 {
     const auto isLeft = [](const char *halign) { return nullptr == halign || 0 == strcmp("left", halign); };
     const auto isRight = [](const char *halign) { return 0 == strcmp("right", halign); };
-    const auto isCenter = [](const char *attr) { return 0 == strcmp("center", attr); };
+    const auto isCenter = [](const char *align) { return 0 == strcmp("center", align); };
     const auto isTop = [](const char *valign) { return nullptr == valign || 0 == strcmp("top", valign); };
     const auto isBottom = [](const char *valign) { return 0 == strcmp("bottom", valign); };
 

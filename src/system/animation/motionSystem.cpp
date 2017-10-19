@@ -12,6 +12,11 @@
 
 using namespace Jackbengine;
 
+int MotionSystem::order() const
+{
+    return (int)SystemOrder::Motion;
+}
+
 void MotionSystem::frame(float delta)
 {
     for (const auto& entity : m_entities)

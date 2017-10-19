@@ -11,6 +11,7 @@
 
 #include <vector>
 #include <string>
+#include "system/systemOrder.hpp"
 #include "system/system.hpp"
 
 namespace Jackbengine {
@@ -38,6 +39,8 @@ class AABBCollisionSystem final : public System
 public:
     AABBCollisionSystem() = default;
     ~AABBCollisionSystem() override = default;
+
+    int order() const final;
 
     void addGroup(const std::string& tag1, const std::string& tag2);
     void removeGroup(const std::string& tag1, const std::string& tag2);

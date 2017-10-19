@@ -11,6 +11,7 @@
 
 #include "system.hpp"
 #include "core/collection/heterogeneousCollection.hpp"
+#include "core/collection/orderedHeterogeneousCollection.hpp"
 
 namespace Jackbengine {
 
@@ -24,6 +25,9 @@ public:
 
     template<typename TSystem, typename ...Args>
     void addSystem(Args&& ...args);
+
+    template<typename TSystem, typename ...Args>
+    void addSystem2(Args&& ...args);
 
     template<typename TSystem>
     void removeSystem();
@@ -42,11 +46,17 @@ public:
 private:
     const EntityManager& m_entityManager;
 
-    HeterogeneousCollection<System> m_systems;
+    OrderedHeterogeneousCollection<System> m_systems;
 };
 
 template<typename TSystem, typename ...Args>
 void SystemManager::addSystem(Args&& ...args)
+{
+    m_systems.add<TSystem>(std::forward<Args>(args)...);
+}
+
+template<typename TSystem, typename ...Args>
+void SystemManager::addSystem2(Args&& ...args)
 {
     m_systems.add<TSystem>(std::forward<Args>(args)...);
 }

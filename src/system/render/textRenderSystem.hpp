@@ -10,6 +10,7 @@
 #define __TEXT_RENDER_SYSTEM_H__
 
 #include "system/system.hpp"
+#include "system/systemOrder.hpp"
 #include "core/render/renderer/renderer.hpp"
 
 namespace Jackbengine {
@@ -21,6 +22,8 @@ class TextRenderSystem final : public System
 public:
     explicit TextRenderSystem(Renderer& renderer);
     ~TextRenderSystem() override = default;
+
+    int order() const final;
 
 private:
     void frame(float delta) override;

@@ -10,6 +10,7 @@
 #define __MOUSE_EVENT_TRIGGER_SYSTEM_H__
 
 #include "system/system.hpp"
+#include "system/systemOrder.hpp"
 #include "core/input/input.hpp"
 
 namespace Jackbengine {
@@ -21,6 +22,8 @@ class MouseEventTriggerSystem final : public System
 public:
     explicit MouseEventTriggerSystem(const Input& input);
     ~MouseEventTriggerSystem() override = default;
+
+    int order() const final;
 
     void setBubbling(bool active);
 

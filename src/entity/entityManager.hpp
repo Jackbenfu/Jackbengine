@@ -9,6 +9,7 @@
 #ifndef __ENTITY_MANAGER_H__
 #define __ENTITY_MANAGER_H__
 
+#include <map>
 #include "entity.hpp"
 #include "component/componentCollection.hpp"
 

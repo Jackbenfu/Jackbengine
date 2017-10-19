@@ -10,6 +10,7 @@
 #define __SPRITE_RENDER_SYSTEM_H__
 
 #include "system/system.hpp"
+#include "system/systemOrder.hpp"
 #include "core/render/renderer/renderer.hpp"
 
 namespace Jackbengine {
@@ -21,6 +22,8 @@ class SpriteRenderSystem final : public System
 public:
     explicit SpriteRenderSystem(Renderer& renderer);
     ~SpriteRenderSystem() override = default;
+
+    int order() const final;
 
 private:
     void frame(float delta) override;

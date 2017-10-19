@@ -10,11 +10,12 @@
 #define __SYSTEM_H__
 
 #include <map>
+#include "core/collection/orderableItem.hpp"
 #include "entity/entityManager.hpp"
 
 namespace Jackbengine {
 
-class System
+class System : public OrderableItem
 {
     friend class SystemManager;
 

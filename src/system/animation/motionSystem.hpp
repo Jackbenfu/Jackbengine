@@ -10,6 +10,7 @@
 #define __MOTION_SYSTEM_H__
 
 #include "system/system.hpp"
+#include "system/systemOrder.hpp"
 
 namespace Jackbengine {
 
@@ -19,6 +20,8 @@ class MotionSystem final : public System
 
 public:
     MotionSystem() = default;
+
+    int order() const final;
 
 private:
     void frame(float delta) override;

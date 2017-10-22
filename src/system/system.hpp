@@ -12,6 +12,7 @@
 #include <map>
 #include "core/collection/orderableItem.hpp"
 #include "entity/entityManager.hpp"
+#include "systemOrder.hpp"
 
 namespace Jackbengine {
 

@@ -21,6 +21,11 @@ DebugTextSystem::DebugTextSystem(Renderer& renderer, Color32 color)
       m_color {color}
 { }
 
+int DebugTextSystem::order() const
+{
+    return (int)SystemOrder::DebugText;
+}
+
 void DebugTextSystem::frame(float)
 {
     for (const auto& entity : m_entities)

@@ -10,7 +10,6 @@
 #define __SPRITE_RENDER_SYSTEM_H__
 
 #include "system/system.hpp"
-#include "system/systemOrder.hpp"
 #include "core/render/renderer/renderer.hpp"
 
 namespace Jackbengine {

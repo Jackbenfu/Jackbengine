@@ -26,9 +26,9 @@ DebugProfileSystem::DebugProfileSystem(Renderer& renderer, Timer& timer, Color32
       m_fps {m_renderer, InvalidFpsText, TextLayout::LeftTop, foreground, FontSize, default_font, default_font_size}
 { }
 
-bool DebugProfileSystem::hasRequiredComponents(ComponentCollection&) const
+int DebugProfileSystem::order() const
 {
-    return false;
+    return (int)SystemOrder::DebugProfile;
 }
 
 void DebugProfileSystem::frame(float)
@@ -47,4 +47,9 @@ void DebugProfileSystem::frame(float)
 
     m_fps.setText(sstream.str());
     m_renderer.renderTexture(FpsPosition.x, FpsPosition.y, m_fps.texture());
+}
+
+bool DebugProfileSystem::hasRequiredComponents(ComponentCollection&) const
+{
+    return false;
 }

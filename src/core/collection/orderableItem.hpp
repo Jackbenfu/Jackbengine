@@ -12,7 +12,7 @@
 class OrderableItem
 {
 public:
-    virtual int order() const { return 0; }
+    virtual int order() const = 0;
 };
 
 #endif // __ORDERABLE_ITEM_H__

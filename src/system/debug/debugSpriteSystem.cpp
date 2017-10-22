@@ -9,6 +9,7 @@
 #include "debugSpriteSystem.hpp"
 #include "component/body/shape/boxShapeComponent.hpp"
 #include "component/body/transformComponent.hpp"
+#include "debugProfileSystem.hpp"
 
 using namespace Jackbengine;
 
@@ -16,6 +17,11 @@ DebugSpriteSystem::DebugSpriteSystem(Renderer& renderer)
     : m_renderer {renderer},
       m_color {Color32(255, 0, 0)}
 { }
+
+int DebugSpriteSystem::order() const
+{
+    return (int)SystemOrder::DebugSprite;
+}
 
 void DebugSpriteSystem::frame(float)
 {

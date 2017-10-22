@@ -23,6 +23,8 @@ public:
     DebugTextSystem(Renderer& renderer, Color32 color);
     ~DebugTextSystem() override = default;
 
+    int order() const final;
+
 private:
     void frame(float delta) override;
     bool hasRequiredComponents(ComponentCollection& components) const override;

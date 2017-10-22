@@ -26,6 +26,8 @@ public:
     DebugProfileSystem(Renderer& renderer, Timer& timer, Color32 foreground);
     ~DebugProfileSystem() override = default;
 
+    int order() const final;
+
 private:
     void frame(float delta) override;
     bool hasRequiredComponents(ComponentCollection& components) const override;

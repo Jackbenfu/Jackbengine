@@ -22,6 +22,8 @@ public:
     explicit DebugSpriteSystem(Renderer& renderer);
     ~DebugSpriteSystem() override = default;
 
+    int order() const final;
+
 private:
     void frame(float delta) override;
     bool hasRequiredComponents(ComponentCollection& components) const override;

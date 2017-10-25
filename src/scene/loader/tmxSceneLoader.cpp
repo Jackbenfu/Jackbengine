@@ -62,11 +62,11 @@ void TmxSceneLoader::loadContents()
 
 void TmxSceneLoader::loadSystems()
 {
-    m_scene.addSystem2<MotionSystem>();
-    m_scene.addSystem2<MouseEventTriggerSystem>(m_scene.input());
-    m_scene.addSystem2<AABBCollisionSystem>();
-    m_scene.addSystem2<SpriteRenderSystem>(m_scene.renderer());
-    m_scene.addSystem2<TextRenderSystem>(m_scene.renderer());
+    m_scene.addSystem<MotionSystem>();
+    m_scene.addSystem<MouseEventTriggerSystem>(m_scene.input());
+    m_scene.addSystem<AABBCollisionSystem>();
+    m_scene.addSystem<SpriteRenderSystem>(m_scene.renderer());
+    m_scene.addSystem<TextRenderSystem>(m_scene.renderer());
 }
 
 void TmxSceneLoader::loadLayer(int index)

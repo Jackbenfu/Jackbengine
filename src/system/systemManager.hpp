@@ -26,9 +26,6 @@ public:
     template<typename TSystem, typename ...Args>
     void addSystem(Args&& ...args);
 
-    template<typename TSystem, typename ...Args>
-    void addSystem2(Args&& ...args);
-
     template<typename TSystem>
     void removeSystem();
 
@@ -51,12 +48,6 @@ private:
 
 template<typename TSystem, typename ...Args>
 void SystemManager::addSystem(Args&& ...args)
-{
-    m_systems.add<TSystem>(std::forward<Args>(args)...);
-}
-
-template<typename TSystem, typename ...Args>
-void SystemManager::addSystem2(Args&& ...args)
 {
     m_systems.add<TSystem>(std::forward<Args>(args)...);
 }

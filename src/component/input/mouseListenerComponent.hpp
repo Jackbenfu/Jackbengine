@@ -18,12 +18,12 @@ using MouseCallback = std::function<void()>;
 
 enum MouseEvent
 {
-    MouseEvent_LeftClick2 = 1,
-    MouseEvent_MiddleClick2 = 2,
-    MouseEvent_RightClick2 = 4,
-    MouseEvent_Hover2 = 8,
-    MouseEvent_Enter2 = 16,
-    MouseEvent_Exit2 = 32,
+    MouseEvent_LeftClick = 1,
+    MouseEvent_MiddleClick = 2,
+    MouseEvent_RightClick = 4,
+    MouseEvent_Hover = 8,
+    MouseEvent_Enter = 16,
+    MouseEvent_Exit = 32,
 };
 
 class MouseListenerComponent : public Component

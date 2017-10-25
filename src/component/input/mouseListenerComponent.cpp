@@ -17,7 +17,7 @@ void MouseListenerComponent::onLeftClick(MouseCallback callback)
 
 void MouseListenerComponent::callLeftClick()
 {
-    addEvent(MouseEvent::MouseEvent_LeftClick2);
+    addEvent(MouseEvent::MouseEvent_LeftClick);
     if (nullptr != m_onLeftClick)
     {
         m_onLeftClick();
@@ -44,7 +44,7 @@ void MouseListenerComponent::onMiddleClick(MouseCallback callback)
 
 void MouseListenerComponent::callMiddleClick()
 {
-    addEvent(MouseEvent::MouseEvent_MiddleClick2);
+    addEvent(MouseEvent::MouseEvent_MiddleClick);
     if (nullptr != m_onMiddleClick)
     {
         m_onMiddleClick();
@@ -71,7 +71,7 @@ void MouseListenerComponent::onRightClick(MouseCallback callback)
 
 void MouseListenerComponent::callRightClick()
 {
-    addEvent(MouseEvent::MouseEvent_RightClick2);
+    addEvent(MouseEvent::MouseEvent_RightClick);
     if (nullptr != m_onRightClick)
     {
         m_onRightClick();
@@ -98,7 +98,7 @@ void MouseListenerComponent::onHover(MouseCallback callback)
 
 void MouseListenerComponent::callOnHover()
 {
-    addEvent(MouseEvent::MouseEvent_Hover2);
+    addEvent(MouseEvent::MouseEvent_Hover);
     if (nullptr != m_onHover)
     {
         m_onHover();
@@ -112,7 +112,7 @@ void MouseListenerComponent::onEnter(MouseCallback callback)
 
 void MouseListenerComponent::callOnEnter()
 {
-    addEvent(MouseEvent::MouseEvent_Enter2);
+    addEvent(MouseEvent::MouseEvent_Enter);
     if (nullptr != m_onEnter)
     {
         m_onEnter();
@@ -126,7 +126,7 @@ void MouseListenerComponent::onExit(MouseCallback callback)
 
 void MouseListenerComponent::callOnExit()
 {
-    addEvent(MouseEvent::MouseEvent_Exit2);
+    addEvent(MouseEvent::MouseEvent_Exit);
     if (nullptr != m_onExit)
     {
         m_onExit();
@@ -135,32 +135,32 @@ void MouseListenerComponent::callOnExit()
 
 bool MouseListenerComponent::leftClick()
 {
-    return hasAndRemoveEvent(MouseEvent::MouseEvent_LeftClick2);
+    return hasAndRemoveEvent(MouseEvent::MouseEvent_LeftClick);
 }
 
 bool MouseListenerComponent::middleClick()
 {
-    return hasAndRemoveEvent(MouseEvent::MouseEvent_MiddleClick2);
+    return hasAndRemoveEvent(MouseEvent::MouseEvent_MiddleClick);
 }
 
 bool MouseListenerComponent::rightClick()
 {
-    return hasAndRemoveEvent(MouseEvent::MouseEvent_RightClick2);
+    return hasAndRemoveEvent(MouseEvent::MouseEvent_RightClick);
 }
 
 bool MouseListenerComponent::hover() const
 {
-    return hasEvent(MouseEvent::MouseEvent_Hover2);
+    return hasEvent(MouseEvent::MouseEvent_Hover);
 }
 
 bool MouseListenerComponent::enter() const
 {
-    return hasEvent(MouseEvent::MouseEvent_Enter2);
+    return hasEvent(MouseEvent::MouseEvent_Enter);
 }
 
 bool MouseListenerComponent::exit() const
 {
-    return hasEvent(MouseEvent::MouseEvent_Exit2);
+    return hasEvent(MouseEvent::MouseEvent_Exit);
 }
 
 void MouseListenerComponent::addEvent(MouseEvent event)

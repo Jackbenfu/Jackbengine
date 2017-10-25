@@ -39,7 +39,7 @@ void MouseEventTriggerSystem::frame(float)
         const auto& container = components->get<ContainerComponent>();
         auto& mouseListener = components->get<MouseListenerComponent>();
 
-        auto hadEnter = mouseListener.hasEvent(MouseEvent_Enter2);
+        auto hadEnter = mouseListener.hasEvent(MouseEvent_Enter);
         auto mousePos = m_input.mousePosition();
         auto move = m_input.mouseMove();
 
@@ -73,7 +73,7 @@ void MouseEventTriggerSystem::frame(float)
                 if (!hadEnter)
                 {
                     mouseListener.callOnEnter();
-                    mouseListener.removeEvent(MouseEvent_Exit2);
+                    mouseListener.removeEvent(MouseEvent_Exit);
                 }
 
                 mouseListener.callOnHover();
@@ -82,8 +82,8 @@ void MouseEventTriggerSystem::frame(float)
         else if (move && hadEnter)
         {
             mouseListener.callOnExit();
-            mouseListener.removeEvent(MouseEvent_Enter2);
-            mouseListener.removeEvent(MouseEvent_Hover2);
+            mouseListener.removeEvent(MouseEvent_Enter);
+            mouseListener.removeEvent(MouseEvent_Hover);
         }
     }
 

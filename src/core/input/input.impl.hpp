@@ -18,6 +18,8 @@ namespace Jackbengine {
 class Input::Impl
 {
 public:
+    Impl() = default;
+
     void update();
 
     bool keyDown(KeyboardKey key) const;

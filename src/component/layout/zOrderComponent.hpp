@@ -19,7 +19,7 @@ class ZOrderComponent : public Component
 
 public:
     ZOrderComponent() = default;
-    ZOrderComponent(int index);
+    explicit ZOrderComponent(int index);
 
     ~ZOrderComponent() override = default;
 

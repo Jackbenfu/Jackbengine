@@ -20,6 +20,7 @@ class SystemManager
     DISALLOW_COPY_AND_MOVE(SystemManager)
 
 public:
+    SystemManager() = delete;
     explicit SystemManager(const EntityManager& entityManager);
     ~SystemManager() = default;
 

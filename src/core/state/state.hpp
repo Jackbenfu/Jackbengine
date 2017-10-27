@@ -20,7 +20,8 @@ class State
     DISALLOW_COPY_AND_MOVE(State)
 
 public:
-    State(StateMachine& stateMachine)
+    State() = delete;
+    explicit State(StateMachine& stateMachine)
         : m_stateMachine {stateMachine}
     { }
 

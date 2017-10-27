@@ -17,7 +17,7 @@ namespace Jackbengine {
 class Sound::Impl
 {
 public:
-    Impl(const std::string& file);
+    explicit Impl(const std::string& file);
     Impl(const void *data, size_t dataSize);
 
     ~Impl();

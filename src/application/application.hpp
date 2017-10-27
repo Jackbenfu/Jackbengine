@@ -25,6 +25,7 @@ class Application : public AbstractApplication
     DISALLOW_COPY_AND_MOVE(Application)
 
 public:
+    Application() = delete;
     explicit Application(ApplicationConfig& config);
     virtual ~Application() = default;
 

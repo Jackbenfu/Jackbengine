@@ -16,7 +16,7 @@ namespace Jackbengine {
 class Timer::Impl
 {
 public:
-    Impl(uint fps);
+    explicit Impl(uint fps);
 
     void start();
     void snapshot();

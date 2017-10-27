@@ -18,7 +18,7 @@ namespace Jackbengine {
 class Renderer::Impl
 {
 public:
-    Impl(const Window& window);
+    explicit Impl(const Window& window);
     ~Impl();
 
     void clear();

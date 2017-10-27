@@ -19,6 +19,7 @@ class TextRenderSystem final : public System
     DISALLOW_COPY_AND_MOVE(TextRenderSystem)
 
 public:
+    TextRenderSystem() = delete;
     explicit TextRenderSystem(Renderer& renderer);
     ~TextRenderSystem() override = default;
 

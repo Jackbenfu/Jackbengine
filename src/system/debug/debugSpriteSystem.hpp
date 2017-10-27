@@ -19,6 +19,7 @@ class DebugSpriteSystem final : public System
     DISALLOW_COPY_AND_MOVE(DebugSpriteSystem)
 
 public:
+    DebugSpriteSystem() = delete;
     explicit DebugSpriteSystem(Renderer& renderer);
     ~DebugSpriteSystem() override = default;
 

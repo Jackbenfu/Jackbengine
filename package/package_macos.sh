@@ -90,8 +90,8 @@ printTitle "Checking relocation results"
 otool -L ${bundle_dir}/${bundle_executable}
 
 printTitle "Creating final archive"
-archiveName="${bundle_name}.tar.gz"
+archiveName="${bundle_name}-macOS.zip"
 cd ${bundle_dir}
-tar -czf ${archiveName} ${bundle_name}.app/*
+zip ${archiveName} ${bundle_name}.app/*
 
 printTitle "Archive ${archiveName} is available in folder: ${bundle_dir}"

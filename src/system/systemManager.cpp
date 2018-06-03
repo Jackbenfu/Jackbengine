@@ -41,6 +41,7 @@ void SystemManager::frame(float delta)
     const auto lambda = [&delta](System& system)
     {
         system.frame(delta);
+        system.clean();
     };
 
     m_systems.apply(lambda);

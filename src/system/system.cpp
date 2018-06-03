@@ -22,14 +22,13 @@ void System::sort(
 
 void System::addEntity(Entity entity, ComponentCollection& components)
 {
-    if (!hasRequiredComponents(components))
+    if (!hasRequiredComponents(components) || doesEntityExists(entity))
     {
         return;
     }
 
-    m_entities.emplace_front(
-        std::make_pair(entity, &components)
-    );
+    m_entityStatuses.insert_or_assign(entity, EntityStatus::Enabled);
+    m_entities.emplace_front(std::make_pair(entity, &components));
 }
 
 void System::removeEntity(Entity entity, bool checkComponents)
@@ -39,21 +38,38 @@ void System::removeEntity(Entity entity, bool checkComponents)
     {
         if (it->first == entity)
         {
-            break;
+            if (checkComponents && hasRequiredComponents(*it->second))
+            {
+                return;
+            }
+
+            m_entityStatuses.insert_or_assign(entity, EntityStatus::ToRemove);
+            return;
         }
 
         ++it;
     }
+}
 
-    if (it == m_entities.end())
+bool System::doesEntityExists(Jackbengine::Entity entity) const
+{
+    return m_entityStatuses.find(entity) != m_entityStatuses.end();
+}
+
+void System::clean()
+{
+    auto it = m_entities.begin();
+    while (it != m_entities.end())
     {
-        return;
-    }
+        auto entity = it->first;
+        auto status = m_entityStatuses[entity];
 
-    if (checkComponents && hasRequiredComponents(*it->second))
-    {
-        return;
-    }
+        if (status == EntityStatus::ToRemove)
+        {
+            m_entityStatuses.erase(entity);
+            m_entities.erase(it);
+        }
 
-    m_entities.erase(it);
+        ++it;
+    }
 }

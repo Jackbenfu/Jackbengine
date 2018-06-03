@@ -37,13 +37,23 @@ protected:
     );
 
 private:
+    enum class EntityStatus
+    {
+        Enabled = 1,
+        ToRemove = 2,
+    };
+
     virtual void frame(float delta) = 0;
     virtual bool hasRequiredComponents(ComponentCollection& components) const = 0;
 
     void addEntity(Entity entity, ComponentCollection& components);
     void removeEntity(Entity entity, bool checkComponents);
+    bool doesEntityExists(Entity entity) const;
+
+    void clean();
 
     std::list<std::pair<Entity, ComponentCollection*>> m_entities {};
+    std::unordered_map<Entity, EntityStatus> m_entityStatuses {};
 };
 
 } // namespace Jackbengine

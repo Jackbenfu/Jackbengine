@@ -36,8 +36,10 @@ class TextComponent : public Component
     DISALLOW_COPY_AND_MOVE(TextComponent)
 
 public:
-    TextComponent(const Renderer& renderer, const std::string& text, TextLayout layout, Color32 foreground,
-                   int size, const void *fontData, size_t fontDataSize);
+    TextComponent(
+        const Renderer& renderer, const std::string& text, TextLayout layout, Color32 foreground,
+        int size, const void *fontData, size_t fontDataSize
+    );
 
     ~TextComponent() override = default;
 

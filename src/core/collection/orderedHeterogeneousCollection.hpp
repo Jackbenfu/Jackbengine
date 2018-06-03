@@ -28,7 +28,7 @@ public:
     ~OrderedHeterogeneousCollection() = default;
 
     template<typename TItem>
-    TItem& get() const;
+    TItem* get() const;
 
     template<typename TItem>
     bool any() const;
@@ -56,7 +56,7 @@ private:
 
 template<typename TBase>
 template<typename TItem>
-TItem& OrderedHeterogeneousCollection<TBase>::get() const
+TItem* OrderedHeterogeneousCollection<TBase>::get() const
 {
     static_assert(std::is_base_of<TBase, TItem>::value);
 
@@ -69,7 +69,7 @@ TItem& OrderedHeterogeneousCollection<TBase>::get() const
         );
     }
 
-    return dynamic_cast<TItem&>(*std::get<2>(tuple));
+    return dynamic_cast<TItem*>(*std::get<2>(tuple).get());
 }
 
 template<typename TBase>
@@ -85,7 +85,7 @@ bool OrderedHeterogeneousCollection<TBase>::any() const
         [&typeId](const auto& pair) { return std::get<0>(pair.second) == typeId; }
     );
 
-    return it != m_collection.end() && std::get<0>(it->second);
+    return it != m_collection.end() && std::get<1>(it->second);
 }
 
 template<typename TBase>

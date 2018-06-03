@@ -31,7 +31,7 @@ public:
     void removeSystem();
 
     template<typename TSystem>
-    TSystem& getSystem();
+    TSystem* getSystem();
 
     template<typename TSystem>
     void enableSystem(bool enable);
@@ -54,7 +54,7 @@ void SystemManager::addSystem(Args&& ...args)
 }
 
 template<typename TSystem>
-TSystem& SystemManager::getSystem()
+TSystem* SystemManager::getSystem()
 {
     return m_systems.get<TSystem>();
 }

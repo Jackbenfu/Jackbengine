@@ -24,13 +24,13 @@ public:
     void clear();
     void present();
 
-    void setClearColor(Color32 color);
-    void setRenderColor(Color32 color);
+    void setClearColor(Color32 color) const;
+    void setRenderColor(Color32 color) const;
 
-    void renderTexture(int x, int y, const Texture& texture);
-    void renderTexture(int x, int y, const Texture& texture, double angle);
-    void renderLine(float x1, float y1, float x2, float y2, Color32 color);
-    void renderPoint(float x, float y, Color32 color);
+    void renderTexture(int x, int y, const Texture& texture) const;
+    void renderTexture(int x, int y, const Texture& texture, double angle) const;
+    void renderLine(float x1, float y1, float x2, float y2, Color32 color) const;
+    void renderPoint(float x, float y, Color32 color) const;
 
     int width() const;
     int height() const;
@@ -40,7 +40,7 @@ public:
 private:
     SDL_Renderer *m_renderer {nullptr};
 
-    Color32 m_clearColor {Color32(0, 0, 0)};
+    mutable Color32 m_clearColor {Color32(0, 0, 0)};
 
     int m_width;
     int m_height;

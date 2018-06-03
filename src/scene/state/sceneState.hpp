@@ -43,7 +43,7 @@ protected:
     inline void removeComponent(Entity entity) { m_scene.removeComponent<TComponent>(entity); }
 
     template<typename TComponent>
-    inline TComponent& getComponent(Entity entity) const { return m_scene.getComponent<TComponent>(entity); }
+    inline TComponent* getComponent(Entity entity) const { return m_scene.getComponent<TComponent>(entity); }
 
     template<typename TComponent>
     inline void enableComponent(Entity entity) { m_scene.enableComponent<TComponent>(entity); }
@@ -61,7 +61,7 @@ protected:
     inline void removeSystem() { m_scene.removeSystem<TSystem>(); }
 
     template<typename TSystem>
-    inline TSystem& getSystem() { return m_scene.getSystem<TSystem>(); }
+    inline TSystem* getSystem() { return m_scene.getSystem<TSystem>(); }
 
     template<typename TSystem>
     inline void enableSystem() { m_scene.enableSystem<TSystem>(); }
@@ -72,11 +72,11 @@ protected:
     template<typename TSystem>
     inline void disableSystem() { m_scene.disableSystem<TSystem>(); }
 
-    inline Timer& timer() const { return m_scene.timer(); }
-    inline Cursor& cursor() const { return m_scene.cursor(); }
-    inline Input& input() const { return m_scene.input(); }
-    inline Window& window() const { return m_scene.window(); }
-    inline Renderer& renderer() const { return m_scene.renderer(); }
+    inline const Timer& timer() const { return m_scene.timer(); }
+    inline const Cursor& cursor() const { return m_scene.cursor(); }
+    inline const Input& input() const { return m_scene.input(); }
+    inline const Window& window() const { return m_scene.window(); }
+    inline const Renderer& renderer() const { return m_scene.renderer(); }
 
     inline void exitApplication() { m_scene.exitApplication(); }
 

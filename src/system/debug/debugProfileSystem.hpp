@@ -22,8 +22,8 @@ class DebugProfileSystem final : public System
     DISALLOW_COPY_AND_MOVE(DebugProfileSystem)
 
 public:
-    DebugProfileSystem(Renderer& renderer, Timer& timer);
-    DebugProfileSystem(Renderer& renderer, Timer& timer, Color32 foreground);
+    DebugProfileSystem(const Renderer& renderer, const Timer& timer);
+    DebugProfileSystem(const Renderer& renderer, const Timer& timer, Color32 foreground);
     ~DebugProfileSystem() override = default;
 
     int order() const final;
@@ -37,8 +37,8 @@ private:
     const std::string FpsSuffix = "fps";
     const Vec2i FpsPosition {4, 3};
 
-    Renderer& m_renderer;
-    Timer& m_timer;
+    const Renderer& m_renderer;
+    const Timer& m_timer;
 
     TextComponent m_fps;
 };

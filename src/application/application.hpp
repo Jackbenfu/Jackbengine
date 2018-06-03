@@ -27,27 +27,27 @@ class Application : public AbstractApplication
 public:
     Application() = delete;
     explicit Application(ApplicationConfig& config);
-    virtual ~Application() = default;
+    ~Application() override = default;
 
     bool running() const;
     void loop();
 
     virtual void frame(float delta) = 0;
 
-    Timer& timer() const;
-    Cursor& cursor() const;
-    Input& input() const;
-    Window& window() const;
-    Renderer& renderer() const;
+    inline const Timer& timer() const { return *m_timer; }
+    inline const Cursor& cursor() const { return *m_cursor; }
+    inline const Input& input() const { return *m_input; }
+    inline const Window& window() const { return *m_window; }
+    inline const Renderer& renderer() const { return *m_renderer; }
 
     void exit();
 
 private:
-    mutable Timer m_timer;
-    mutable Cursor m_cursor;
-    mutable Input m_input;
-    mutable Window m_window;
-    mutable Renderer m_renderer;
+    std::unique_ptr<Timer> m_timer;
+    std::unique_ptr<Cursor> m_cursor;
+    std::unique_ptr<Input> m_input;
+    std::unique_ptr<Window> m_window;
+    std::unique_ptr<Renderer> m_renderer;
 
     bool m_running {true};
 };

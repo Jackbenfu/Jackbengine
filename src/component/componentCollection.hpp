@@ -23,10 +23,10 @@ public:
     ~ComponentCollection() = default;
 
     template<typename TComponent, typename ...Args>
-    void add(Args&& ...args);
+    TComponent* add(Args&& ...args);
 
     template<typename TComponent>
-    TComponent& get() const;
+    TComponent* get() const;
 
     template<typename TComponent>
     bool any() const;
@@ -42,13 +42,13 @@ private:
 };
 
 template<typename TComponent, typename ...Args>
-void ComponentCollection::add(Args&& ...args)
+TComponent* ComponentCollection::add(Args&& ...args)
 {
-    m_components.add<TComponent>(std::forward<Args>(args)...);
+    return m_components.add<TComponent>(std::forward<Args>(args)...);
 }
 
 template<typename TComponent>
-TComponent& ComponentCollection::get() const
+TComponent* ComponentCollection::get() const
 {
     return m_components.get<TComponent>();
 }

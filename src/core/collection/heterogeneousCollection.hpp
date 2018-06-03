@@ -26,13 +26,13 @@ public:
     ~HeterogeneousCollection() = default;
 
     template<typename TItem>
-    TItem& get() const;
+    TItem* get() const;
 
     template<typename TItem>
     bool any() const;
 
     template<typename TItem, typename ...Args>
-    void add(Args&& ...args);
+    TItem* add(Args&& ...args);
 
     template<typename TItem>
     void remove();
@@ -54,7 +54,7 @@ private:
 
 template<typename TBase>
 template<typename TItem>
-TItem& HeterogeneousCollection<TBase>::get() const
+TItem* HeterogeneousCollection<TBase>::get() const
 {
     static_assert(std::is_base_of<TBase, TItem>::value);
 
@@ -67,7 +67,7 @@ TItem& HeterogeneousCollection<TBase>::get() const
         );
     }
 
-    return dynamic_cast<TItem&>(*std::get<1>(tuple));
+    return dynamic_cast<TItem*>(std::get<1>(tuple).get());
 }
 
 template<typename TBase>
@@ -84,7 +84,7 @@ bool HeterogeneousCollection<TBase>::any() const
 
 template<typename TBase>
 template<typename TItem, typename ...Args>
-void HeterogeneousCollection<TBase>::add(Args&& ...args)
+TItem* HeterogeneousCollection<TBase>::add(Args&& ...args)
 {
     static_assert(std::is_base_of<TBase, TItem>::value);
 
@@ -101,6 +101,8 @@ void HeterogeneousCollection<TBase>::add(Args&& ...args)
         true,
         std::make_unique<TItem>(std::forward<Args>(args)...)
     );
+
+    return get<TItem>();
 }
 
 template<typename TBase>

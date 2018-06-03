@@ -13,7 +13,7 @@
 
 using namespace Jackbengine;
 
-DebugSpriteSystem::DebugSpriteSystem(Renderer& renderer)
+DebugSpriteSystem::DebugSpriteSystem(const Renderer& renderer)
     : m_renderer {renderer},
       m_color {Color32(255, 0, 0)}
 { }
@@ -25,15 +25,15 @@ int DebugSpriteSystem::order() const
 
 void DebugSpriteSystem::frame(float)
 {
-    for (const auto& entity : m_entities)
+    for (const auto entity : entities())
     {
         const auto components = entity.second;
 
-        const auto& boxShape = components->get<BoxShapeComponent>();
-        const auto& transform = components->get<TransformComponent>();
+        const auto boxShape = components->get<BoxShapeComponent>();
+        const auto transform = components->get<TransformComponent>();
 
-        const auto position = transform.position();
-        const auto size = boxShape.size();
+        const auto position = transform->position();
+        const auto size = boxShape->size();
 
         const auto x1 = position.x;
         const auto x2 = position.x + size.x;

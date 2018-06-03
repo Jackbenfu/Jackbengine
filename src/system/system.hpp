@@ -9,7 +9,7 @@
 #ifndef __SYSTEM_H__
 #define __SYSTEM_H__
 
-#include <map>
+#include <list>
 #include "core/collection/orderableItem.hpp"
 #include "entity/entityManager.hpp"
 #include "systemOrder.hpp"
@@ -27,7 +27,14 @@ public:
     virtual ~System() = default;
 
 protected:
-    std::map<Entity, ComponentCollection*> m_entities;
+    inline const auto& entities() { return m_entities; }
+
+    void sort(
+        std::function<bool(
+            std::pair<Entity, ComponentCollection*>,
+            std::pair<Entity, ComponentCollection*>
+        )> comparison
+    );
 
 private:
     virtual void frame(float delta) = 0;
@@ -35,6 +42,8 @@ private:
 
     void addEntity(Entity entity, ComponentCollection& components);
     void removeEntity(Entity entity, bool checkComponents);
+
+    std::list<std::pair<Entity, ComponentCollection*>> m_entities {};
 };
 
 } // namespace Jackbengine

@@ -28,14 +28,14 @@ void AABBCollisionSystem::frame(float delta)
         auto ltag1 = group.first;
         auto ltag2 = group.second;
 
-        for (auto entity1 : m_entities)
+        for (auto entity1 : entities())
         {
             auto components1 = entity1.second;
 
-            auto& tag1 = components1->get<Tag>();
-            if (tag1.get() == ltag1)
+            auto tag1 = components1->get<Tag>();
+            if (tag1->get() == ltag1)
             {
-                for (auto entity2 : m_entities)
+                for (auto entity2 : entities())
                 {
                     if (entity1.first == entity2.first)
                     {
@@ -44,8 +44,8 @@ void AABBCollisionSystem::frame(float delta)
 
                     auto components2 = entity2.second;
 
-                    auto& tag2 = components2->get<Tag>();
-                    if (tag2.get() == ltag2)
+                    auto tag2 = components2->get<Tag>();
+                    if (tag2->get() == ltag2)
                     {
                         testCollision(delta, *components1, *components2);
                     }
@@ -107,27 +107,27 @@ void AABBCollisionSystem::unsetCallback()
 
 void AABBCollisionSystem::testCollision(float delta, ComponentCollection& components1, ComponentCollection& components2) const
 {
-    auto& transform1 = components1.get<Transform>();
-    auto x1 = transform1.positionX();
-    auto y1 = transform1.positionY();
+    auto transform1 = components1.get<Transform>();
+    auto x1 = transform1->positionX();
+    auto y1 = transform1->positionY();
 
-    auto& boxShape1 = components1.get<BoxShape>();
-    auto w1 = boxShape1.width();
-    auto h1 = boxShape1.height();
+    auto boxShape1 = components1.get<BoxShape>();
+    auto w1 = boxShape1->width();
+    auto h1 = boxShape1->height();
 
-    auto& transform2 = components2.get<Transform>();
-    auto x2 = transform2.positionX();
-    auto y2 = transform2.positionY();
+    auto transform2 = components2.get<Transform>();
+    auto x2 = transform2->positionX();
+    auto y2 = transform2->positionY();
 
-    auto& boxShape2 = components2.get<BoxShape>();
-    auto w2 = boxShape2.width();
-    auto h2 = boxShape2.height();
+    auto boxShape2 = components2.get<BoxShape>();
+    auto w2 = boxShape2->width();
+    auto h2 = boxShape2->height();
 
     if (!(x1 >= x2 + w2 || x1 + w1 <= x2 || y1 >= y2 + h2 || y1 + h1 <= y2))
     {
-        auto& velocity1 = components1.get<Velocity>();
-        auto vX1 = velocity1.x();
-        auto vY1 = velocity1.y();
+        auto velocity1 = components1.get<Velocity>();
+        auto vX1 = velocity1->x();
+        auto vY1 = velocity1->y();
 
         // Required move to go back to the position just before the collision
         auto xToCollision = vX1 > 0.0f ? x2 - (x1 + w1) : (x2 + w2) - x1;
@@ -169,7 +169,7 @@ void AABBCollisionSystem::testCollision(float delta, ComponentCollection& compon
         auto yCollision = y1 + vY1 * collisionTime;
 
         // Setting new position
-        transform1.setPosition(xCollision, yCollision);
+        transform1->setPosition(xCollision, yCollision);
 
         auto collisionResolved = false;
         if (nullptr != m_callback)
@@ -185,12 +185,12 @@ void AABBCollisionSystem::testCollision(float delta, ComponentCollection& compon
             // Setting new velocity for "bounce" effect
             if (0.0f != normalX)
             {
-                velocity1.setX(-vX1);
+                velocity1->setX(-vX1);
             }
 
             if (0.0f != normalY)
             {
-                velocity1.setY(-vY1);
+                velocity1->setY(-vY1);
             }
         }
     }

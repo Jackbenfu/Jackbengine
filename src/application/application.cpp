@@ -12,14 +12,13 @@
 using namespace Jackbengine;
 
 Application::Application(ApplicationConfig& config)
-    : m_timer(config.core_fps),
-      m_window(
-        config.general_title,
-        config.render_width,
-        config.render_height,
-        config.render_fullscreen
-      ),
-      m_renderer(m_window)
+    : m_timer {std::make_unique<Timer>(config.core_fps)},
+      m_cursor {std::make_unique<Cursor>()},
+      m_input {std::make_unique<Input>()},
+      m_window {std::make_unique<Window>(
+          config.general_title, config.render_width, config.render_height, config.render_fullscreen)
+      },
+      m_renderer {std::make_unique<Renderer>(*m_window)}
 {
     srand(static_cast<uint>(time(nullptr)));
 }
@@ -31,49 +30,24 @@ bool Application::running() const
 
 void Application::loop()
 {
-    m_timer.start();
+    m_timer->start();
 
     const auto deltaMultiplier = 0.001f;
-    const auto delta = m_timer.elapsedMilliseconds() * deltaMultiplier;
+    const auto delta = m_timer->elapsedMilliseconds() * deltaMultiplier;
 
-    m_renderer.clear();
-    m_input.update();
+    m_renderer->clear();
+    m_input->update();
 
     frame(delta);
 
-    m_renderer.present();
+    m_renderer->present();
 
-    if (m_input.quit())
+    if (m_input->quit())
     {
         exit();
     }
 
-    m_timer.snapshot();
-}
-
-Timer& Application::timer() const
-{
-    return m_timer;
-}
-
-Cursor& Application::cursor() const
-{
-    return m_cursor;
-}
-
-Input& Application::input() const
-{
-    return m_input;
-}
-
-Window& Application::window() const
-{
-    return m_window;
-}
-
-Renderer& Application::renderer() const
-{
-    return m_renderer;
+    m_timer->snapshot();
 }
 
 void Application::exit()

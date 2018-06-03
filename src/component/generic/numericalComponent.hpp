@@ -21,7 +21,7 @@ class NumericalComponent : public Component
     DISALLOW_COPY_AND_MOVE(NumericalComponent)
 
 public:
-    NumericalComponent(T value);
+    explicit NumericalComponent(T value);
     ~NumericalComponent() override = default;
 
     T get() const;

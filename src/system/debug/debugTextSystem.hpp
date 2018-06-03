@@ -19,8 +19,8 @@ class DebugTextSystem final : public  System
     DISALLOW_COPY_AND_MOVE(DebugTextSystem)
 
 public:
-    explicit DebugTextSystem(Renderer& renderer);
-    DebugTextSystem(Renderer& renderer, Color32 color);
+    explicit DebugTextSystem(const Renderer& renderer);
+    DebugTextSystem(const Renderer& renderer, Color32 color);
     ~DebugTextSystem() override = default;
 
     int order() const final;
@@ -29,7 +29,7 @@ private:
     void frame(float delta) override;
     bool hasRequiredComponents(ComponentCollection& components) const override;
 
-    Renderer& m_renderer;
+    const Renderer& m_renderer;
     Color32 m_color;
 };
 

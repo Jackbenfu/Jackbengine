@@ -29,6 +29,7 @@ public:
     int y() const;
     int width() const;
     int height() const;
+    double rotation() const;
 
     const char* type() const;
 
@@ -50,6 +51,7 @@ private:
     int m_y {0};
     int m_width {0};
     int m_height {0};
+    double m_rotation {0.0f};
 
     std::unique_ptr<TmxPropertyGroup> m_properties;
     std::unique_ptr<TmxText> m_text;

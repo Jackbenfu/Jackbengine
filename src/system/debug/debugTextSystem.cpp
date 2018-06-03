@@ -12,11 +12,11 @@
 
 using namespace Jackbengine;
 
-DebugTextSystem::DebugTextSystem(Renderer& renderer)
+DebugTextSystem::DebugTextSystem(const Renderer& renderer)
     : DebugTextSystem {renderer, Color32(255, 0, 0)}
 { }
 
-DebugTextSystem::DebugTextSystem(Renderer& renderer, Color32 color)
+DebugTextSystem::DebugTextSystem(const Renderer& renderer, Color32 color)
     : m_renderer {renderer},
       m_color {color}
 { }
@@ -28,15 +28,15 @@ int DebugTextSystem::order() const
 
 void DebugTextSystem::frame(float)
 {
-    for (const auto& entity : m_entities)
+    for (const auto entity : entities())
     {
         const auto components = entity.second;
 
-        const auto& container = components->get<ContainerComponent>();
+        const auto container = components->get<ContainerComponent>();
 
-        const Vec2i position {container.x(), container.y()};
-        const float w = container.width();
-        const float h = container.height();
+        const Vec2f position {container->x(), container->y()};
+        const float w = container->width();
+        const float h = container->height();
 
         const auto x1 = position.x;
         const auto x2 = position.x + w;

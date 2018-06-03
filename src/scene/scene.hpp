@@ -37,13 +37,13 @@ public:
      * Component
      */
     template<typename TComponent, typename ...Args>
-    void addComponent(Entity entity, Args&& ...args);
+    TComponent* addComponent(Entity entity, Args&& ...args);
 
     template<typename TComponent>
     void removeComponent(Entity entity);
 
     template<typename TComponent>
-    TComponent& getComponent(Entity entity) const;
+    TComponent* getComponent(Entity entity) const;
 
     template<typename TComponent>
     void enableComponent(Entity entity);
@@ -64,7 +64,7 @@ public:
     void removeSystem();
 
     template<typename TSystem>
-    TSystem& getSystem();
+    TSystem* getSystem();
 
     template<typename TSystem>
     void enableSystem();
@@ -77,11 +77,11 @@ public:
 
     void update(float delta);
 
-    Timer& timer() const;
-    Cursor& cursor() const;
-    Input& input() const;
-    Window& window() const;
-    Renderer& renderer() const;
+    inline const Timer& timer() const { return m_application.timer(); }
+    inline const Cursor& cursor() const { return m_application.cursor(); }
+    inline const Input& input() const { return m_application.input(); }
+    inline const Window& window() const { return m_application.window(); }
+    inline const Renderer& renderer() const { return m_application.renderer(); }
 
     void exitApplication();
 
@@ -93,28 +93,34 @@ private:
 
     Application& m_application;
     SceneManager<Scene>& m_sceneManager;
-    EntityManager m_entityManager;
-    SystemManager m_systemManager;
+    std::unique_ptr<EntityManager> m_entityManager;
+    std::unique_ptr<SystemManager> m_systemManager;
 };
 
 template<typename TComponent, typename ...Args>
-void Scene::addComponent(Entity entity, Args&& ...args)
+TComponent* Scene::addComponent(Entity entity, Args&& ...args)
 {
-    m_entityManager.addComponent<TComponent>(entity, std::forward<Args>(args)...);
-    m_systemManager.addEntity(entity);
+    const auto component = m_entityManager->addComponent<TComponent>(entity, std::forward<Args>(args)...);
+
+    if (m_entityManager->isEntityEnabled(entity))
+    {
+        m_systemManager->addEntity(entity);
+    }
+
+    return component;
 }
 
 template<typename TComponent>
 void Scene::removeComponent(Entity entity)
 {
-    m_entityManager.removeComponent<TComponent>(entity);
-    m_systemManager.removeEntity(entity, true);
+    m_entityManager->removeComponent<TComponent>(entity);
+    m_systemManager->removeEntity(entity, true);
 }
 
 template<typename TComponent>
-TComponent& Scene::getComponent(Entity entity) const
+TComponent* Scene::getComponent(Entity entity) const
 {
-    return m_entityManager.getComponent<TComponent>(entity);
+    return m_entityManager->getComponent<TComponent>(entity);
 }
 
 template<typename TComponent>
@@ -126,14 +132,14 @@ void Scene::enableComponent(Entity entity)
 template<typename TComponent>
 void Scene::enableComponent(Entity entity, bool enable)
 {
-    m_entityManager.enableComponent<TComponent>(entity, enable);
+    m_entityManager->enableComponent<TComponent>(entity, enable);
     if (enable)
     {
-        m_systemManager.addEntity(entity);
+        m_systemManager->addEntity(entity);
     }
     else
     {
-        m_systemManager.removeEntity(entity, true);
+        m_systemManager->removeEntity(entity, true);
     }
 }
 
@@ -146,19 +152,19 @@ void Scene::disableComponent(Entity entity)
 template<typename TSystem, typename ...Args>
 void Scene::addSystem(Args&& ...args)
 {
-    m_systemManager.addSystem<TSystem>(std::forward<Args>(args)...);
+    m_systemManager->addSystem<TSystem>(std::forward<Args>(args)...);
 }
 
 template<typename TSystem>
 void Scene::removeSystem()
 {
-    m_systemManager.removeSystem<TSystem>();
+    m_systemManager->removeSystem<TSystem>();
 }
 
 template<typename TSystem>
-TSystem& Scene::getSystem()
+TSystem* Scene::getSystem()
 {
-    return m_systemManager.getSystem<TSystem>();
+    return m_systemManager->getSystem<TSystem>();
 }
 
 template<typename TSystem>
@@ -170,7 +176,7 @@ void Scene::enableSystem()
 template<typename TSystem>
 void Scene::enableSystem(bool enable)
 {
-    m_systemManager.enableSystem<TSystem>(enable);
+    m_systemManager->enableSystem<TSystem>(enable);
 }
 
 template<typename TSystem>

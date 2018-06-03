@@ -31,10 +31,10 @@ public:
     TBase& current() const;
 
 private:
-    void trySetNextScene();
+    void loadNextSceneIfRequired();
 
     std::unique_ptr<TBase> m_currentScene;
-    std::function<void()> m_SceneInitializer;
+    std::function<void()> m_sceneInitializer;
 };
 
 template<typename TBase>
@@ -52,7 +52,7 @@ void SceneManager<TBase>::loadScene(Args&& ...args)
         return;
     }
 
-    m_SceneInitializer = initializer;
+    m_sceneInitializer = initializer;
 }
 
 template<typename TBase>
@@ -62,12 +62,12 @@ TBase& SceneManager<TBase>::current() const
 }
 
 template<typename TBase>
-void SceneManager<TBase>::trySetNextScene()
+void SceneManager<TBase>::loadNextSceneIfRequired()
 {
-    if (nullptr != m_SceneInitializer)
+    if (nullptr != m_sceneInitializer)
     {
-        m_SceneInitializer();
-        m_SceneInitializer = nullptr;
+        m_sceneInitializer();
+        m_sceneInitializer = nullptr;
     }
 }
 

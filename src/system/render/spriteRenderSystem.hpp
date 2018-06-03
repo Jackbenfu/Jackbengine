@@ -20,7 +20,7 @@ class SpriteRenderSystem final : public System
 
 public:
     SpriteRenderSystem() = delete;
-    explicit SpriteRenderSystem(Renderer& renderer);
+    explicit SpriteRenderSystem(const Renderer& renderer);
     ~SpriteRenderSystem() override = default;
 
     int order() const final;
@@ -29,7 +29,9 @@ private:
     void frame(float delta) override;
     bool hasRequiredComponents(ComponentCollection& components) const override;
 
-    Renderer& m_renderer;
+    void sortByZOrder();
+
+    const Renderer& m_renderer;
 };
 
 } // namespace Jackbengine

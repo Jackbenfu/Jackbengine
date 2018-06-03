@@ -21,6 +21,13 @@ class TmxSceneLoader
     DISALLOW_COPY_AND_MOVE(TmxSceneLoader)
 
 public:
+    TmxSceneLoader(Scene& scene, const unsigned char *tmxData);
+
+    TmxSceneLoader(
+        Scene& scene, const unsigned char *tmxData,
+        const void *fontData, size_t fontDataSize
+    );
+
     TmxSceneLoader(
         Scene& scene, const unsigned char *tmxData,
         const void *tilesetData, size_t tilesetDataSize,
@@ -30,6 +37,7 @@ public:
     ~TmxSceneLoader() = default;
 
     Entity entity(const char *name) const;
+    Entity entity(const std::string& name) const;
 
 private:
     void loadContents();
@@ -45,7 +53,7 @@ private:
     Color32 getTextColor(const TmxText *text) const;
 
     Scene& m_scene;
-    TmxMap m_map;
+    std::unique_ptr<TmxMap> m_map;
 
     const void *m_tilesetData;
     const size_t m_tilesetDataSize;

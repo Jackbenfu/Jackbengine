@@ -12,7 +12,7 @@
 
 using namespace Jackbengine;
 
-TextRenderSystem::TextRenderSystem(Renderer& renderer)
+TextRenderSystem::TextRenderSystem(const Renderer& renderer)
     : m_renderer {renderer}
 { }
 
@@ -23,84 +23,84 @@ int TextRenderSystem::order() const
 
 void TextRenderSystem::frame(float)
 {
-    for (const auto entity : m_entities)
+    for (const auto entity : entities())
     {
         const auto components = entity.second;
 
-        const auto& text = components->get<TextComponent>();
-        const auto& container = components->get<ContainerComponent>();
+        const auto text = components->get<TextComponent>();
+        const auto container = components->get<ContainerComponent>();
 
         Vec2f position;
         const auto angle = 0.0;
 
-        switch (text.layout())
+        switch (text->layout())
         {
             case TextLayout::LeftTop:
             {
-                position.x = container.x();
-                position.y = container.y();
+                position.x = container->x();
+                position.y = container->y();
                 break;
             }
 
             case TextLayout::LeftCenter:
             {
-                position.x = container.x();
-                position.y = container.y() + container.height() / 2 - text.height() / 2 +
-                    text.topWhiteSpace() / 2;
+                position.x = container->x();
+                position.y = container->y() + container->height() / 2 - text->height() / 2 +
+                    text->topWhiteSpace() / 2.0f;
                 break;
             }
 
             case TextLayout::LeftBottom:
             {
-                position.x = container.x();
-                position.y = container.y() + container.height() - text.height();
+                position.x = container->x();
+                position.y = container->y() + container->height() - text->height();
                 break;
             }
 
             case TextLayout::CenterTop:
             {
-                position.x = container.x() + container.width() / 2 - text.width() / 2 +
-                    text.rightWhiteSpace() / 2;
-                position.y = container.y();
+                position.x = container->x() + container->width() / 2 - text->width() / 2 +
+                    text->rightWhiteSpace() / 2.0f;
+                position.y = container->y();
                 break;
             }
 
             case TextLayout::CenterCenter:
             {
-                position.x = container.x() + container.width() / 2 - text.width() / 2 +
-                    text.rightWhiteSpace() / 2;
-                position.y = container.y() + container.height() / 2 - text.height() / 2 +
-                    text.topWhiteSpace() / 2;
+                position.x = container->x() + container->width() / 2 - text->width() / 2 +
+                    text->rightWhiteSpace() / 2.0f;
+                position.y = container->y() + container->height() / 2 - text->height() / 2 +
+                    text->topWhiteSpace() / 2.0f;
                 break;
             }
 
             case TextLayout::CenterBottom:
             {
-                position.x = container.x() + container.width() / 2 - text.width() / 2 +
-                    text.rightWhiteSpace() / 2;
-                position.y = container.y() + container.height() - text.height();
+                position.x = container->x() + container->width() / 2 - text->width() / 2 +
+                    text->rightWhiteSpace() / 2.0f;
+                position.y = container->y() + container->height() - text->height();
                 break;
             }
 
             case TextLayout::RightTop:
             {
-                position.x = container.x() + container.width() - text.width();
-                position.y = container.y();
+                position.x = container->x() + container->width() - text->width();
+                position.y = container->y();
                 break;
             }
 
             case TextLayout::RightCenter:
             {
-                position.x = container.x() + container.width() - text.width();
-                position.y = container.y() + container.height() / 2 - text.height() / 2 +
-                    text.topWhiteSpace() / 2;
+                position.x = container->x() + container->width() - text->width();
+                position.y = container->y() + container->height() / 2 - text->height() / 2 +
+                    text->topWhiteSpace() / 2.0f;
                 break;
             }
 
             case TextLayout::RightBottom:
             {
-                position.x = container.x() + container.width() - text.width();
-                position.y = container.y() + container.height() - text.height();
+                position.x = container->x() + container->width() - text->width();
+                position.y = container->y() + container->height() - text->height();
                 break;
             }
         }
@@ -108,7 +108,7 @@ void TextRenderSystem::frame(float)
         m_renderer.renderTexture(
             (int)position.x,
             (int)position.y,
-            text.texture(),
+            text->texture(),
             angle
         );
     }

@@ -20,7 +20,7 @@ class TextRenderSystem final : public System
 
 public:
     TextRenderSystem() = delete;
-    explicit TextRenderSystem(Renderer& renderer);
+    explicit TextRenderSystem(const Renderer& renderer);
     ~TextRenderSystem() override = default;
 
     int order() const final;
@@ -29,7 +29,7 @@ private:
     void frame(float delta) override;
     bool hasRequiredComponents(ComponentCollection& components) const override;
 
-    Renderer& m_renderer;
+    const Renderer& m_renderer;
 };
 
 } // namespace Jackbengine

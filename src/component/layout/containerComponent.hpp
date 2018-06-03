@@ -20,23 +20,26 @@ class ContainerComponent : public Component
     DISALLOW_COPY_AND_MOVE(ContainerComponent)
 
 public:
-    ContainerComponent(int x, int y, int w, int h);
+    ContainerComponent(float x, float y, float w, float h);
     ~ContainerComponent() override = default;
 
-    const Recti& rect() const;
-    void setRect(int x, int y, int w, int h);
+    const Rectf& rect() const;
+    void setRect(float x, float y, float w, float h);
+
+    const Vec2f position() const;
+    void setPosition(float x, float y);
 
     bool contains(float x, float y) const;
     bool contains(const Vec2i& point) const;
     bool contains(const Vec2f& point) const;
 
-    int x() const;
-    int y() const;
-    int width() const;
-    int height() const;
+    float x() const;
+    float y() const;
+    float width() const;
+    float height() const;
 
 private:
-    Recti m_rect;
+    Rectf m_rect;
 };
 
 using Container = ContainerComponent;

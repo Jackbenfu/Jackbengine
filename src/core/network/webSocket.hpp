@@ -51,9 +51,9 @@ protected:
     std::unordered_map<short, Callback> m_callbacks;
 
 private:
-    easywsclient::WebSocket::pointer m_socket = nullptr;
+    easywsclient::WebSocket::pointer m_socket {nullptr};
 
-    const int MESSAGE_HEADER_SIZE = 6;
+    const size_t MESSAGE_HEADER_SIZE {6};
 
     bool parseMessage(const std::vector<byte>& message, short *type, int *id);
     void acknowledgeMessage(int id);
@@ -81,7 +81,7 @@ WebSocket<TListener>::~WebSocket()
 {
     close();
 
-    DELETE_SAFE(m_socket);
+    delete m_socket;
 }
 
 template<typename TListener>

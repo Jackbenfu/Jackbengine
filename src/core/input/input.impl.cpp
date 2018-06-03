@@ -219,8 +219,6 @@ int Input::Impl::getKey(KeyboardKey key) const
         case KeyboardKey::Right:        return SDL_SCANCODE_RIGHT;
         case KeyboardKey::Left:         return SDL_SCANCODE_LEFT;
         case KeyboardKey::Up:           return SDL_SCANCODE_UP;
-
-        default: throw std::runtime_error("Invalid keyboard key");
     }
 }
 
@@ -236,8 +234,5 @@ int Input::Impl::getButton(MouseButton button) const
 
         case MouseButton::Right:
             return SDL_BUTTON_RIGHT;
-
-        default:
-            throw std::runtime_error("Invalid mouse button");
     }
 }

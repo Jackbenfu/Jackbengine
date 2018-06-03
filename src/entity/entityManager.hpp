@@ -30,13 +30,13 @@ public:
     ComponentCollection& getEntity(Entity entity) const;
 
     template<typename TComponent, typename ...Args>
-    void addComponent(Entity entity, Args&& ...args);
+    TComponent* addComponent(Entity entity, Args&& ...args);
 
     template<typename TComponent>
     void removeComponent(Entity entity);
 
     template<typename TComponent>
-    TComponent& getComponent(Entity entity) const;
+    TComponent* getComponent(Entity entity) const;
 
     template<typename TComponent>
     void enableComponent(Entity entity, bool enable);
@@ -49,15 +49,14 @@ private:
     static auto findEntity(T& t, Entity entity) -> decltype(t.findEntity(entity));
 
     std::map<Entity, std::tuple<bool, std::unique_ptr<ComponentCollection>>> m_entities;
-
 };
 
 template<typename TComponent, typename ...Args>
-void EntityManager::addComponent(Entity entity, Args&& ...args)
+TComponent* EntityManager::addComponent(Entity entity, Args&& ...args)
 {
     auto& tuple = findEntity(entity);
 
-    std::get<1>(tuple)->add<TComponent>(std::forward<Args>(args)...);
+    return std::get<1>(tuple)->add<TComponent>(std::forward<Args>(args)...);
 }
 
 template<typename TComponent>
@@ -69,7 +68,7 @@ void EntityManager::removeComponent(Entity entity)
 }
 
 template<typename TComponent>
-TComponent& EntityManager::getComponent(Entity entity) const
+TComponent* EntityManager::getComponent(Entity entity) const
 {
     auto& tuple = findEntity(entity);
     auto& componentCollection = std::get<1>(tuple);

@@ -37,22 +37,22 @@ void Renderer::setRenderColor(Color32 color)
     m_impl->setRenderColor(color);
 }
 
-void Renderer::renderTexture(int x, int y, const Texture& texture)
+void Renderer::renderTexture(int x, int y, const Texture& texture) const
 {
     m_impl->renderTexture(x, y, texture);
 }
 
-void Renderer::renderTexture(int x, int y, const Texture& texture, double angle)
+void Renderer::renderTexture(int x, int y, const Texture& texture, double angle) const
 {
     m_impl->renderTexture(x, y, texture, angle);
 }
 
-void Renderer::renderLine(float x1, float y1, float x2, float y2, Color32 color)
+void Renderer::renderLine(float x1, float y1, float x2, float y2, Color32 color) const
 {
     m_impl->renderLine(x1, y1, x2, y2, color);
 }
 
-void Renderer::renderPoint(float x, float y, Color32 color)
+void Renderer::renderPoint(float x, float y, Color32 color) const
 {
     m_impl->renderPoint(x, y, color);
 }

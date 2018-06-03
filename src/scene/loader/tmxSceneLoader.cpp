@@ -19,18 +19,30 @@
 
 using namespace Jackbengine;
 
+TmxSceneLoader::TmxSceneLoader(Scene& scene, const unsigned char *tmxData)
+    : TmxSceneLoader {scene, tmxData, nullptr, (size_t)-1, nullptr, (size_t)-1}
+{ }
+
+TmxSceneLoader::TmxSceneLoader(
+    Scene& scene, const unsigned char *tmxData,
+    const void *fontData, size_t fontDataSize)
+    : TmxSceneLoader {scene, tmxData, nullptr, (size_t)-1, fontData, fontDataSize}
+{
+}
+
 TmxSceneLoader::TmxSceneLoader(
     Scene& scene, const unsigned char *tmxData,
     const void *tilesetData, size_t tilesetDataSize,
     const void *fontData, size_t fontDataSize
 )
     : m_scene {scene},
+      m_map {std::make_unique<TmxMap>()},
       m_tilesetData {tilesetData},
       m_tilesetDataSize {tilesetDataSize},
       m_fontData {fontData},
       m_fontDataSize {fontDataSize}
 {
-    m_map.loadFromMemory(tmxData);
+    m_map->loadFromMemory(tmxData);
     loadContents();
 }
 
@@ -45,16 +57,21 @@ Entity TmxSceneLoader::entity(const char *name) const
     return it->second;
 }
 
+Entity TmxSceneLoader::entity(const std::string& name) const
+{
+    return entity(name.c_str());
+}
+
 void TmxSceneLoader::loadContents()
 {
     loadSystems();
 
-    for (auto i = 0; i < m_map.layerCount(); ++i)
+    for (auto i = 0; i < m_map->layerCount(); ++i)
     {
         loadLayer(i);
     }
 
-    for (auto i = 0; i < m_map.objectGroupCount(); ++i)
+    for (auto i = 0; i < m_map->objectGroupCount(); ++i)
     {
         loadObjectGroup(i);
     }
@@ -71,12 +88,12 @@ void TmxSceneLoader::loadSystems()
 
 void TmxSceneLoader::loadLayer(int index)
 {
-    auto layer = m_map.layer(index);
+    auto layer = m_map->layer(index);
 
     auto entity = m_scene.addEntity();
     m_scene.addComponent<Transform>(entity);
     m_scene.addComponent<Sprite>(
-        entity, m_scene.renderer(), m_map, *layer, m_tilesetData, m_tilesetDataSize
+        entity, m_scene.renderer(), *m_map, *layer, m_tilesetData, m_tilesetDataSize
     );
 
     m_entities.emplace(layer->name(), entity);
@@ -84,7 +101,7 @@ void TmxSceneLoader::loadLayer(int index)
 
 void TmxSceneLoader::loadObjectGroup(int index)
 {
-    auto objectGroup = m_map.objectGroup(index);
+    auto objectGroup = m_map->objectGroup(index);
 
     bool isEntity {false};
     objectGroup->properties()->boolProperty("isEntity", &isEntity);
@@ -130,7 +147,7 @@ void TmxSceneLoader::loadEntityFromObjectGroup(const TmxObjectGroup *objectGroup
     if (hasObjectGroupChildGid(objectGroup))
     {
         m_scene.addComponent<Sprite>(
-            entity, m_scene.renderer(), m_map, *objectGroup, m_tilesetData, m_tilesetDataSize
+            entity, m_scene.renderer(), *m_map, *objectGroup, m_tilesetData, m_tilesetDataSize
         );
     }
 
@@ -140,7 +157,7 @@ void TmxSceneLoader::loadEntityFromObjectGroup(const TmxObjectGroup *objectGroup
 void TmxSceneLoader::loadEntityFromObject(const TmxObject *object)
 {
     auto entity = m_scene.addEntity();
-    m_scene.addComponent<Transform>(entity, object->x(), object->y());
+    m_scene.addComponent<Transform>(entity, object->x(), object->y(), object->rotation());
     m_scene.addComponent<BoxShape>(entity, object->width(), object->height());
 
     if (object->hasText())

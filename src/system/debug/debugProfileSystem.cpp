@@ -14,13 +14,13 @@ using namespace Jackbengine;
 
 IMPORT_BINARY_RESOURCE(default_font)
 
-DebugProfileSystem::DebugProfileSystem(Renderer& renderer, Timer& timer)
+DebugProfileSystem::DebugProfileSystem(const Renderer& renderer, const Timer& timer)
     : m_renderer {renderer},
       m_timer {timer},
       m_fps {m_renderer, InvalidFpsText, TextLayout::LeftTop, Color32(255, 255, 255), FontSize, default_font, default_font_size}
 { }
 
-DebugProfileSystem::DebugProfileSystem(Renderer& renderer, Timer& timer, Color32 foreground)
+DebugProfileSystem::DebugProfileSystem(const Renderer& renderer, const Timer& timer, Color32 foreground)
     : m_renderer {renderer},
       m_timer {timer},
       m_fps {m_renderer, InvalidFpsText, TextLayout::LeftTop, foreground, FontSize, default_font, default_font_size}

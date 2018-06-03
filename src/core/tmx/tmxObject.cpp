@@ -45,6 +45,11 @@ int TmxObject::height() const
     return m_height;
 }
 
+double TmxObject::rotation() const
+{
+    return m_rotation;
+}
+
 const char* TmxObject::type() const
 {
     return m_type;
@@ -84,6 +89,7 @@ void TmxObject::load(const TiXmlElement *element)
     element->Attribute("y", &m_y);
     element->Attribute("width", &m_width);
     element->Attribute("height", &m_height);
+    element->Attribute("rotation", &m_rotation);
 
     auto node = element->FirstChild();
     while (nullptr != node)

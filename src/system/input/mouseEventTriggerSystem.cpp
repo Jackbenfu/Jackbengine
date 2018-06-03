@@ -32,39 +32,39 @@ void MouseEventTriggerSystem::frame(float)
     MouseListenerComponent *clickedMouseListener {nullptr};
     auto maxZOrder = 0;
 
-    for (const auto& entity : m_entities)
+    for (const auto entity : entities())
     {
         const auto components = entity.second;
 
-        const auto& container = components->get<ContainerComponent>();
-        auto& mouseListener = components->get<MouseListenerComponent>();
+        const auto container = components->get<ContainerComponent>();
+        auto mouseListener = components->get<MouseListenerComponent>();
 
-        auto hadEnter = mouseListener.hasEvent(MouseEvent_Enter);
+        auto hadEnter = mouseListener->hasEvent(MouseEvent_Enter);
         auto mousePos = m_input.mousePosition();
         auto move = m_input.mouseMove();
 
-        if (container.contains(mousePos))
+        if (container->contains(mousePos))
         {
             if (m_input.mouseClick(MouseButton::Left))
             {
                 if (m_bubbling)
                 {
-                    mouseListener.callLeftClick();
+                    mouseListener->callLeftClick();
                     continue;
                 }
 
                 if (!components->any<ZOrderComponent>())
                 {
-                    mouseListener.callLeftClick();
+                    mouseListener->callLeftClick();
                     continue;
                 }
 
-                auto& zOrder = components->get<ZOrderComponent>();
-                auto currentZOrderIndex = zOrder.index();
+                auto zOrder = components->get<ZOrderComponent>();
+                auto currentZOrderIndex = zOrder->index();
                 if (currentZOrderIndex >= maxZOrder)
                 {
                     maxZOrder = currentZOrderIndex;
-                    clickedMouseListener = &mouseListener;
+                    clickedMouseListener = mouseListener;
                 }
             }
 
@@ -72,18 +72,18 @@ void MouseEventTriggerSystem::frame(float)
             {
                 if (!hadEnter)
                 {
-                    mouseListener.callOnEnter();
-                    mouseListener.removeEvent(MouseEvent_Exit);
+                    mouseListener->callOnEnter();
+                    mouseListener->removeEvent(MouseEvent_Exit);
                 }
 
-                mouseListener.callOnHover();
+                mouseListener->callOnHover();
             }
         }
         else if (move && hadEnter)
         {
-            mouseListener.callOnExit();
-            mouseListener.removeEvent(MouseEvent_Enter);
-            mouseListener.removeEvent(MouseEvent_Hover);
+            mouseListener->callOnExit();
+            mouseListener->removeEvent(MouseEvent_Enter);
+            mouseListener->removeEvent(MouseEvent_Hover);
         }
     }
 

@@ -44,12 +44,12 @@ void Renderer::Impl::present()
     SDL_RenderPresent(m_renderer);
 }
 
-void Renderer::Impl::setClearColor(Color32 color)
+void Renderer::Impl::setClearColor(Color32 color) const
 {
     m_clearColor = color;
 }
 
-void Renderer::Impl::setRenderColor(Color32 color)
+void Renderer::Impl::setRenderColor(Color32 color) const
 {
     if (SDL_SetRenderDrawColor(m_renderer, color.r, color.g, color.b, color.a) < 0)
     {
@@ -57,12 +57,12 @@ void Renderer::Impl::setRenderColor(Color32 color)
     }
 }
 
-void Renderer::Impl::renderTexture(int x, int y, const Texture& texture)
+void Renderer::Impl::renderTexture(int x, int y, const Texture& texture) const
 {
     renderTexture(x, y, texture, 0.0);
 }
 
-void Renderer::Impl::renderTexture(int x, int y, const Texture& texture, double angle)
+void Renderer::Impl::renderTexture(int x, int y, const Texture& texture, double angle) const
 {
     const auto sdlTexture = static_cast<SDL_Texture*>(texture.internalObject());
 
@@ -72,10 +72,12 @@ void Renderer::Impl::renderTexture(int x, int y, const Texture& texture, double 
     rect.w = texture.width();
     rect.h = texture.height();
 
-    SDL_RenderCopyEx(m_renderer, sdlTexture, nullptr, &rect, angle, nullptr, SDL_FLIP_NONE);
+    const SDL_Point pivot {0, 0};
+
+    SDL_RenderCopyEx(m_renderer, sdlTexture, nullptr, &rect, angle, &pivot, SDL_FLIP_NONE);
 }
 
-void Renderer::Impl::renderLine(float x1, float y1, float x2, float y2, Color32 color)
+void Renderer::Impl::renderLine(float x1, float y1, float x2, float y2, Color32 color) const
 {
     setRenderColor(color);
 
@@ -85,7 +87,7 @@ void Renderer::Impl::renderLine(float x1, float y1, float x2, float y2, Color32 
     }
 }
 
-void Renderer::Impl::renderPoint(float x, float y, Color32 color)
+void Renderer::Impl::renderPoint(float x, float y, Color32 color) const
 {
     setRenderColor(color);
 

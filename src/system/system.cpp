@@ -10,6 +10,16 @@
 
 using namespace Jackbengine;
 
+void System::sort(
+    std::function<bool(
+        std::pair<Entity, ComponentCollection*>,
+        std::pair<Entity, ComponentCollection*>
+    )> comparison
+)
+{
+    m_entities.sort(std::move(comparison));
+}
+
 void System::addEntity(Entity entity, ComponentCollection& components)
 {
     if (!hasRequiredComponents(components))
@@ -17,26 +27,33 @@ void System::addEntity(Entity entity, ComponentCollection& components)
         return;
     }
 
-    m_entities[entity] = &components;
+    m_entities.emplace_front(
+        std::make_pair(entity, &components)
+    );
 }
 
 void System::removeEntity(Entity entity, bool checkComponents)
 {
-    if (!checkComponents)
+    auto it = m_entities.begin();
+    while (it != m_entities.end())
     {
-        m_entities.erase(entity);
+        if (it->first == entity)
+        {
+            break;
+        }
+
+        ++it;
     }
 
-    const auto it = m_entities.find(entity);
     if (it == m_entities.end())
     {
         return;
     }
 
-    if (hasRequiredComponents(*it->second))
+    if (checkComponents && hasRequiredComponents(*it->second))
     {
         return;
     }
 
-    m_entities.erase(entity);
+    m_entities.erase(it);
 }

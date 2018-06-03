@@ -20,7 +20,7 @@ class DebugSpriteSystem final : public System
 
 public:
     DebugSpriteSystem() = delete;
-    explicit DebugSpriteSystem(Renderer& renderer);
+    explicit DebugSpriteSystem(const Renderer& renderer);
     ~DebugSpriteSystem() override = default;
 
     int order() const final;
@@ -29,7 +29,7 @@ private:
     void frame(float delta) override;
     bool hasRequiredComponents(ComponentCollection& components) const override;
 
-    Renderer& m_renderer;
+    const Renderer& m_renderer;
     const Color32 m_color;
 };
 

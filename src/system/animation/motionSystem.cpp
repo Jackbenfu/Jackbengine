@@ -9,6 +9,7 @@
 #include "motionSystem.hpp"
 #include "component/body/transformComponent.hpp"
 #include "component/body/velocityComponent.hpp"
+#include "component/layout/containerComponent.hpp"
 
 using namespace Jackbengine;
 
@@ -19,25 +20,27 @@ int MotionSystem::order() const
 
 void MotionSystem::frame(float delta)
 {
-    for (const auto& entity : m_entities)
+    for (const auto entity : entities())
     {
         const auto components = entity.second;
 
-        auto& transform = components->get<TransformComponent>();
-        const auto& velocity = components->get<VelocityComponent>();
-
-        const auto velocityVec = velocity.get();
+        const auto velocity = components->get<VelocityComponent>();
+        const auto velocityVec = velocity->get();
         if (velocityVec.isZero())
         {
             continue;
         }
 
-        const auto positionVec = transform.position();
-
-        transform.setPosition(
-            positionVec.x + velocityVec.x * delta,
-            positionVec.y + velocityVec.y * delta
+        auto transform = components->get<TransformComponent>();
+        const auto transformPos = transform->position();
+        transform->setPosition(
+            transformPos.x + velocityVec.x * delta,
+            transformPos.y + velocityVec.y * delta
         );
+
+        auto container = components->get<ContainerComponent>();
+        const auto containerPos = container->position();
+        container->setPosition(containerPos.x, containerPos.y);
     }
 }
 

@@ -12,7 +12,7 @@ using namespace Jackbengine;
 
 TmxLayer::TmxLayer() = default;
 
-const char* TmxLayer::name() const
+const char *TmxLayer::name() const
 {
     return m_name;
 }
@@ -38,7 +38,7 @@ int TmxLayer::tileId(int x, int y) const
     return -1;
 }
 
-const TmxPropertyGroup* TmxLayer::properties() const
+const TmxPropertyGroup *TmxLayer::properties() const
 {
     return m_properties.get();
 }
@@ -64,17 +64,17 @@ void TmxLayer::load(const TiXmlElement *element)
                 auto csv = strdup(data->GetText());
                 auto token = strtok(csv, delimiters);
 
-                m_data.reserve((size_t)m_width * (size_t)m_height);
+                m_data.reserve((size_t) m_width * (size_t) m_height);
                 auto i = 0;
 
                 while (nullptr != token)
                 {
                     int tileId;
                     char *end;
-                    tileId = (int)strtol(token, &end, 10);
+                    tileId = (int) strtol(token, &end, 10);
 
                     m_data[i++] = tileId;
-                    
+
                     token = strtok(nullptr, delimiters);
                 }
 

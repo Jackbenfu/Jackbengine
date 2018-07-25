@@ -19,18 +19,22 @@ namespace Jackbengine {
 
 class TmxPropertyGroup
 {
-    DISALLOW_COPY_AND_MOVE(TmxPropertyGroup)
+DISALLOW_COPY_AND_MOVE(TmxPropertyGroup)
 
     friend class TmxMap;
+
     friend class TmxTileset;
+
     friend class TmxObjectGroup;
+
     friend class TmxObject;
+
     friend class TmxLayer;
 
 public:
     bool hasProperty(const char *name) const;
 
-    const char* property(const char *name) const;
+    const char *property(const char *name) const;
     bool intProperty(const char *name, int *value) const;
     bool unsignedIntProperty(const char *name, uint *value) const;
     bool boolProperty(const char *name, bool *value) const;

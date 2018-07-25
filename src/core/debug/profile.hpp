@@ -28,7 +28,8 @@ public:
     explicit Profile(const char *name)
         : m_name {name},
           m_start {clock::now()}
-    { }
+    {
+    }
 
     ~Profile()
     {
@@ -41,32 +42,32 @@ public:
     }
 
 private:
-    inline const char* unit();
+    inline const char *unit();
 
     const char *m_name;
     clock::time_point m_start;
 };
 
 template<>
-inline const char* Profile<std::chrono::seconds>::unit()
+inline const char *Profile<std::chrono::seconds>::unit()
 {
     return "seconds";
 }
 
 template<>
-inline const char* Profile<std::chrono::milliseconds>::unit()
+inline const char *Profile<std::chrono::milliseconds>::unit()
 {
     return "milliseconds";
 }
 
 template<>
-inline const char* Profile<std::chrono::microseconds>::unit()
+inline const char *Profile<std::chrono::microseconds>::unit()
 {
     return "microseconds";
 }
 
 template<>
-inline const char* Profile<std::chrono::nanoseconds>::unit()
+inline const char *Profile<std::chrono::nanoseconds>::unit()
 {
     return "nanoseconds";
 }

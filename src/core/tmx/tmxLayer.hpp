@@ -17,20 +17,20 @@ namespace Jackbengine {
 
 class TmxLayer
 {
-    DISALLOW_COPY_AND_MOVE(TmxLayer)
+DISALLOW_COPY_AND_MOVE(TmxLayer)
 
     friend class TmxMap;
 
 public:
     ~TmxLayer() = default;
 
-    const char* name() const;
+    const char *name() const;
     int width() const;
     int height() const;
 
     int tileId(int x, int y) const;
 
-    const TmxPropertyGroup* properties() const;
+    const TmxPropertyGroup *properties() const;
 
 private:
     TmxLayer();

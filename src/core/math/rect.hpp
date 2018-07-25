@@ -16,14 +16,16 @@ struct Rect
 {
     Rect()
         : Rect(0, 0, 0, 0)
-    { }
+    {
+    }
 
     Rect(T x, T y, T w, T h)
         : x(x),
           y(y),
           w(w),
           h(h)
-    { }
+    {
+    }
 
     ~Rect() = default;
 

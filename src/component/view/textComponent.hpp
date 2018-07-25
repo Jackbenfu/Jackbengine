@@ -33,7 +33,7 @@ enum class TextLayout
 
 class TextComponent : public Component
 {
-    DISALLOW_COPY_AND_MOVE(TextComponent)
+DISALLOW_COPY_AND_MOVE(TextComponent)
 
 public:
     TextComponent(

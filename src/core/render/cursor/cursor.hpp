@@ -22,7 +22,7 @@ enum class CursorType
 
 class Cursor
 {
-    DISALLOW_COPY_AND_MOVE(Cursor)
+DISALLOW_COPY_AND_MOVE(Cursor)
 
 public:
     Cursor();
@@ -34,6 +34,7 @@ public:
 
 private:
     class Impl;
+
     std::unique_ptr<Impl> m_impl;
 };
 

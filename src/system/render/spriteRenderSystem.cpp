@@ -15,21 +15,20 @@ using namespace Jackbengine;
 
 SpriteRenderSystem::SpriteRenderSystem(const Renderer& renderer)
     : m_renderer {renderer}
-{ }
+{
+}
 
 int SpriteRenderSystem::order() const
 {
-    return (int)SystemOrder::SpriteRender;
+    return (int) SystemOrder::SpriteRender;
 }
 
 void SpriteRenderSystem::frame(float)
 {
     sortByZOrder();
 
-    for (const auto entity : entities())
+    for (const auto&[entity, components] : entities())
     {
-        const auto components = entity.second;
-
         const auto sprite = components->get<SpriteComponent>();
         const auto transform = components->get<TransformComponent>();
 
@@ -45,15 +44,16 @@ void SpriteRenderSystem::frame(float)
 bool SpriteRenderSystem::hasRequiredComponents(ComponentCollection& components) const
 {
     return components.any<SpriteComponent>()
-        && components.any<TransformComponent>()
-        && components.any<ZOrderComponent>();
+           && components.any<TransformComponent>()
+           && components.any<ZOrderComponent>();
 }
 
 void SpriteRenderSystem::sortByZOrder()
 {
     const auto lambda = [](
-        const std::pair<Entity, ComponentCollection*>& left,
-        const std::pair<Entity, ComponentCollection*>& right)
+        const std::pair<Entity, ComponentCollection *>& left,
+        const std::pair<Entity, ComponentCollection *>& right
+    )
     {
         const auto leftZOrder = left.second->get<ZOrderComponent>();
         const auto rightZOrder = right.second->get<ZOrderComponent>();

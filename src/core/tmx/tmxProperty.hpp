@@ -17,13 +17,13 @@ namespace Jackbengine {
 
 class TmxProperty
 {
-    DISALLOW_COPY_AND_MOVE(TmxProperty)
+DISALLOW_COPY_AND_MOVE(TmxProperty)
 
     friend class TmxPropertyGroup;
 
 public:
-    const char* name() const;
-    const char* value() const;
+    const char *name() const;
+    const char *value() const;
 
     bool intValue(int *value) const;
     bool unsignedIntValue(uint *value) const;

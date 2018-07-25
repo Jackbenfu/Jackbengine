@@ -16,7 +16,7 @@ namespace Jackbengine {
 
 class StringComponent : public Component
 {
-    DISALLOW_COPY_AND_MOVE(StringComponent)
+DISALLOW_COPY_AND_MOVE(StringComponent)
 
 public:
     explicit StringComponent(const std::string& value);

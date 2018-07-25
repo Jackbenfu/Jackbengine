@@ -16,7 +16,7 @@ namespace Jackbengine {
 
 class BoxShapeComponent : public Component
 {
-    DISALLOW_COPY_AND_MOVE(BoxShapeComponent)
+DISALLOW_COPY_AND_MOVE(BoxShapeComponent)
 
 public:
     BoxShapeComponent() = default;

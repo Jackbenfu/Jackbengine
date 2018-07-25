@@ -15,7 +15,7 @@ namespace Jackbengine {
 
 class Component
 {
-    DISALLOW_COPY_AND_MOVE(Component)
+DISALLOW_COPY_AND_MOVE(Component)
 
 public:
     Component() = default;

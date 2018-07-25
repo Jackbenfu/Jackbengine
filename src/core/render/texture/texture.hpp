@@ -22,16 +22,20 @@ class Texture
 {
     friend class Renderer;
 
-    DISALLOW_COPY_AND_MOVE(Texture)
+DISALLOW_COPY_AND_MOVE(Texture)
 
 public:
     Texture(const Renderer& renderer, const std::string& file);
     Texture(const Renderer& renderer, const void *data, size_t dataSize);
     Texture(const Renderer& renderer, int width, int height, Color32 color);
-    Texture(const Renderer& renderer, const TmxMap& map, const TmxLayer& layer,
-             const void *tilesetImageData, size_t tilesetImageDataSize);
-    Texture(const Renderer& renderer, const TmxMap& map, const TmxObjectGroup& objectGroup,
-             const void *tilesetImageData, size_t tilesetImageDataSize);
+    Texture(
+        const Renderer& renderer, const TmxMap& map, const TmxLayer& layer,
+        const void *tilesetImageData, size_t tilesetImageDataSize
+    );
+    Texture(
+        const Renderer& renderer, const TmxMap& map, const TmxObjectGroup& objectGroup,
+        const void *tilesetImageData, size_t tilesetImageDataSize
+    );
     Texture(const Renderer& renderer, const Font& font, const std::string& text, Color32 foreground);
 
     ~Texture();
@@ -40,9 +44,10 @@ public:
     int height() const;
 
 private:
-    void* internalObject() const;
+    void *internalObject() const;
 
     class Impl;
+
     std::unique_ptr<Impl> m_impl;
 };
 

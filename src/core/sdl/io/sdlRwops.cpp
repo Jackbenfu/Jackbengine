@@ -13,7 +13,7 @@ using namespace Jackbengine;
 
 SdlRwops::SdlRwops(const void *data, size_t dataSize)
 {
-    m_rwops = SDL_RWFromConstMem(data, (int)dataSize);
+    m_rwops = SDL_RWFromConstMem(data, (int) dataSize);
 
     if (nullptr == m_rwops)
     {
@@ -21,7 +21,7 @@ SdlRwops::SdlRwops(const void *data, size_t dataSize)
     }
 }
 
-SDL_RWops* SdlRwops::internalObject() const
+SDL_RWops *SdlRwops::internalObject() const
 {
     return m_rwops;
 }

@@ -18,7 +18,7 @@ namespace Jackbengine {
 
 class Input
 {
-    DISALLOW_COPY_AND_MOVE(Input)
+DISALLOW_COPY_AND_MOVE(Input)
 
 public:
     Input();
@@ -40,6 +40,7 @@ public:
 
 private:
     class Impl;
+
     std::unique_ptr<Impl> m_impl;
 };
 

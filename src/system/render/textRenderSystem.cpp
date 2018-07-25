@@ -14,19 +14,18 @@ using namespace Jackbengine;
 
 TextRenderSystem::TextRenderSystem(const Renderer& renderer)
     : m_renderer {renderer}
-{ }
+{
+}
 
 int TextRenderSystem::order() const
 {
-    return (int)SystemOrder::TextRender;
+    return (int) SystemOrder::TextRender;
 }
 
 void TextRenderSystem::frame(float)
 {
-    for (const auto entity : entities())
+    for (const auto&[entity, components] : entities())
     {
-        const auto components = entity.second;
-
         const auto text = components->get<TextComponent>();
         const auto container = components->get<ContainerComponent>();
 
@@ -46,7 +45,7 @@ void TextRenderSystem::frame(float)
             {
                 position.x = container->x();
                 position.y = container->y() + container->height() / 2 - text->height() / 2 +
-                    text->topWhiteSpace() / 2.0f;
+                             text->topWhiteSpace() / 2.0f;
                 break;
             }
 
@@ -60,7 +59,7 @@ void TextRenderSystem::frame(float)
             case TextLayout::CenterTop:
             {
                 position.x = container->x() + container->width() / 2 - text->width() / 2 +
-                    text->rightWhiteSpace() / 2.0f;
+                             text->rightWhiteSpace() / 2.0f;
                 position.y = container->y();
                 break;
             }
@@ -68,16 +67,16 @@ void TextRenderSystem::frame(float)
             case TextLayout::CenterCenter:
             {
                 position.x = container->x() + container->width() / 2 - text->width() / 2 +
-                    text->rightWhiteSpace() / 2.0f;
+                             text->rightWhiteSpace() / 2.0f;
                 position.y = container->y() + container->height() / 2 - text->height() / 2 +
-                    text->topWhiteSpace() / 2.0f;
+                             text->topWhiteSpace() / 2.0f;
                 break;
             }
 
             case TextLayout::CenterBottom:
             {
                 position.x = container->x() + container->width() / 2 - text->width() / 2 +
-                    text->rightWhiteSpace() / 2.0f;
+                             text->rightWhiteSpace() / 2.0f;
                 position.y = container->y() + container->height() - text->height();
                 break;
             }
@@ -93,7 +92,7 @@ void TextRenderSystem::frame(float)
             {
                 position.x = container->x() + container->width() - text->width();
                 position.y = container->y() + container->height() / 2 - text->height() / 2 +
-                    text->topWhiteSpace() / 2.0f;
+                             text->topWhiteSpace() / 2.0f;
                 break;
             }
 
@@ -106,8 +105,8 @@ void TextRenderSystem::frame(float)
         }
 
         m_renderer.renderTexture(
-            (int)position.x,
-            (int)position.y,
+            (int) position.x,
+            (int) position.y,
             text->texture(),
             angle
         );
@@ -116,6 +115,6 @@ void TextRenderSystem::frame(float)
 
 bool TextRenderSystem::hasRequiredComponents(ComponentCollection& components) const
 {
-   return components.any<TextComponent>()
-       && components.any<ContainerComponent>();
+    return components.any<TextComponent>()
+           && components.any<ContainerComponent>();
 }

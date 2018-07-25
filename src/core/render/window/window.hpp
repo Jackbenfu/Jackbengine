@@ -19,7 +19,7 @@ class Window
 {
     friend class Renderer;
 
-    DISALLOW_COPY_AND_MOVE(Window)
+DISALLOW_COPY_AND_MOVE(Window)
 
 public:
     Window(const std::string& title, int width, int height, bool fullscreen);
@@ -29,9 +29,10 @@ public:
     int height() const;
 
 private:
-    void* internalObject() const;
+    void *internalObject() const;
 
     class Impl;
+
     std::unique_ptr<Impl> m_impl;
 };
 

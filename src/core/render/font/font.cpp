@@ -13,11 +13,13 @@ using namespace Jackbengine;
 
 Font::Font(const std::string& file, int size)
     : m_impl {std::make_unique<Impl>(file, size)}
-{ }
+{
+}
 
 Font::Font(const void *data, size_t dataSize, int size)
     : m_impl {std::make_unique<Impl>(data, dataSize, size)}
-{ }
+{
+}
 
 Font::~Font() = default;
 
@@ -66,7 +68,7 @@ int Font::lineSkip() const
     return m_impl->lineSkip();
 }
 
-void* Font::internalObject() const
+void *Font::internalObject() const
 {
     return m_impl->internalObject();
 }

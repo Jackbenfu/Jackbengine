@@ -16,7 +16,7 @@ namespace Jackbengine {
 
 class TextRenderSystem final : public System
 {
-    DISALLOW_COPY_AND_MOVE(TextRenderSystem)
+DISALLOW_COPY_AND_MOVE(TextRenderSystem)
 
 public:
     TextRenderSystem() = delete;

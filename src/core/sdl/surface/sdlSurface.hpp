@@ -18,7 +18,7 @@ namespace Jackbengine {
 
 class SdlSurface
 {
-    DISALLOW_COPY_AND_MOVE(SdlSurface)
+DISALLOW_COPY_AND_MOVE(SdlSurface)
 
 public:
     explicit SdlSurface(const std::string& file);
@@ -27,7 +27,7 @@ public:
     SdlSurface(const Font& font, const std::string& text, Color32 foreground);
     ~SdlSurface();
 
-    SDL_Surface* internalObject() const;
+    SDL_Surface *internalObject() const;
 
 private:
     SDL_Surface *m_surface {nullptr};

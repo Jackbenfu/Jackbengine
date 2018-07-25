@@ -16,7 +16,7 @@ namespace Jackbengine {
 
 class Sound
 {
-    DISALLOW_COPY_AND_MOVE(Sound)
+DISALLOW_COPY_AND_MOVE(Sound)
 
 public:
     explicit Sound(const std::string& file);
@@ -28,6 +28,7 @@ public:
 
 private:
     class Impl;
+
     std::unique_ptr<Impl> m_impl;
 };
 

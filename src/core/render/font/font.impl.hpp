@@ -34,7 +34,7 @@ public:
     int descent() const;
     int lineSkip() const;
 
-    TTF_Font* internalObject() const;
+    TTF_Font *internalObject() const;
 
 private:
     TTF_Font *m_font {nullptr};

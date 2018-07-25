@@ -13,7 +13,8 @@ using namespace Jackbengine;
 
 BoxShapeComponent::BoxShapeComponent(float width, float height)
     : m_vector {width, height}
-{ }
+{
+}
 
 float BoxShapeComponent::width() const
 {

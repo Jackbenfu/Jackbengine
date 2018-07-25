@@ -15,15 +15,13 @@ using namespace Jackbengine;
 
 int MotionSystem::order() const
 {
-    return (int)SystemOrder::Motion;
+    return (int) SystemOrder::Motion;
 }
 
 void MotionSystem::frame(float delta)
 {
-    for (const auto entity : entities())
+    for (const auto&[entity, components] : entities())
     {
-        const auto components = entity.second;
-
         const auto velocity = components->get<VelocityComponent>();
         const auto velocityVec = velocity->get();
         if (velocityVec.isZero())
@@ -47,5 +45,5 @@ void MotionSystem::frame(float delta)
 bool MotionSystem::hasRequiredComponents(ComponentCollection& components) const
 {
     return components.any<TransformComponent>()
-        && components.any<VelocityComponent>();
+           && components.any<VelocityComponent>();
 }

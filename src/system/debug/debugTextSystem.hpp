@@ -14,9 +14,9 @@
 
 namespace Jackbengine {
 
-class DebugTextSystem final : public  System
+class DebugTextSystem final : public System
 {
-    DISALLOW_COPY_AND_MOVE(DebugTextSystem)
+DISALLOW_COPY_AND_MOVE(DebugTextSystem)
 
 public:
     explicit DebugTextSystem(const Renderer& renderer);

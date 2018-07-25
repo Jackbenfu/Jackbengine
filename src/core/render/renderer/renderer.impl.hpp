@@ -35,7 +35,7 @@ public:
     int width() const;
     int height() const;
 
-    SDL_Renderer* internalObject() const;
+    SDL_Renderer *internalObject() const;
 
 private:
     SDL_Renderer *m_renderer {nullptr};

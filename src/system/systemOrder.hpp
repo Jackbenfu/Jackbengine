@@ -13,14 +13,14 @@ namespace Jackbengine {
 
 enum class SystemOrder
 {
-    Motion              = 10000,
-    MouseEventTrigger   = 20000,
-    AABBCollision       = 30000,
-    SpriteRender        = 40000,
-    DebugSprite         = 40001,
-    TextRender          = 50000,
-    DebugText           = 50001,
-    DebugProfile        = 60000,
+    Motion = 10000,
+    MouseEventTrigger = 20000,
+    AABBCollision = 30000,
+    SpriteRender = 40000,
+    DebugSprite = 40001,
+    TextRender = 50000,
+    DebugText = 50001,
+    DebugProfile = 60000,
 };
 
 } // namespace Jackbengine

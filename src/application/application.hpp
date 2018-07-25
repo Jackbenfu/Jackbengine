@@ -22,7 +22,7 @@ namespace Jackbengine {
 
 class Application : public AbstractApplication
 {
-    DISALLOW_COPY_AND_MOVE(Application)
+DISALLOW_COPY_AND_MOVE(Application)
 
 public:
     Application() = delete;
@@ -34,11 +34,30 @@ public:
 
     virtual void frame(float delta) = 0;
 
-    inline const Timer& timer() const { return *m_timer; }
-    inline const Cursor& cursor() const { return *m_cursor; }
-    inline const Input& input() const { return *m_input; }
-    inline const Window& window() const { return *m_window; }
-    inline const Renderer& renderer() const { return *m_renderer; }
+    inline const Timer& timer() const
+    {
+        return *m_timer;
+    }
+
+    inline const Cursor& cursor() const
+    {
+        return *m_cursor;
+    }
+
+    inline const Input& input() const
+    {
+        return *m_input;
+    }
+
+    inline const Window& window() const
+    {
+        return *m_window;
+    }
+
+    inline const Renderer& renderer() const
+    {
+        return *m_renderer;
+    }
 
     void exit();
 

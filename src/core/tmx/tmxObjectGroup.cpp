@@ -12,14 +12,15 @@ using namespace Jackbengine;
 
 TmxObjectGroup::TmxObjectGroup()
     : m_properties {std::unique_ptr<TmxPropertyGroup>(new TmxPropertyGroup())}
-{ }
+{
+}
 
-const char* TmxObjectGroup::name() const
+const char *TmxObjectGroup::name() const
 {
     return m_name;
 }
 
-const TmxObject* TmxObjectGroup::object(int index) const
+const TmxObject *TmxObjectGroup::object(int index) const
 {
     if (0 <= index && static_cast<int>(m_objects.size()) > index)
     {
@@ -29,7 +30,7 @@ const TmxObject* TmxObjectGroup::object(int index) const
     return nullptr;
 }
 
-const TmxObject* TmxObjectGroup::object(const char *name) const
+const TmxObject *TmxObjectGroup::object(const char *name) const
 {
     for (auto& object : m_objects)
     {
@@ -85,7 +86,7 @@ bool TmxObjectGroup::hasProperty(const char *name) const
     return m_properties->hasProperty(name);
 }
 
-const TmxPropertyGroup* TmxObjectGroup::properties() const
+const TmxPropertyGroup *TmxObjectGroup::properties() const
 {
     return m_properties.get();
 }

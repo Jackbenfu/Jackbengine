@@ -17,7 +17,7 @@ namespace Jackbengine {
 
 class EntityManager
 {
-    DISALLOW_COPY_AND_MOVE(EntityManager)
+DISALLOW_COPY_AND_MOVE(EntityManager)
 
 public:
     EntityManager() = default;
@@ -30,58 +30,57 @@ public:
     ComponentCollection& getEntity(Entity entity) const;
 
     template<typename TComponent, typename ...Args>
-    TComponent* addComponent(Entity entity, Args&& ...args);
+    TComponent *addComponent(Entity entity, Args&& ...args);
 
     template<typename TComponent>
     void removeComponent(Entity entity);
 
     template<typename TComponent>
-    TComponent* getComponent(Entity entity) const;
+    TComponent *getComponent(Entity entity) const;
 
     template<typename TComponent>
     void enableComponent(Entity entity, bool enable);
 
 private:
-    std::tuple<bool, std::unique_ptr<ComponentCollection>>& findEntity(Entity entity);
-    const std::tuple<bool, std::unique_ptr<ComponentCollection>>& findEntity(Entity entity) const;
+    std::pair<bool, std::unique_ptr<ComponentCollection>>& findEntity(Entity entity);
+    const std::pair<bool, std::unique_ptr<ComponentCollection>>& findEntity(Entity entity) const;
 
     template<typename T>
     static auto findEntity(T& t, Entity entity) -> decltype(t.findEntity(entity));
 
-    std::map<Entity, std::tuple<bool, std::unique_ptr<ComponentCollection>>> m_entities;
+    std::map<Entity, std::pair<bool, std::unique_ptr<ComponentCollection>>> m_entities;
 };
 
 template<typename TComponent, typename ...Args>
-TComponent* EntityManager::addComponent(Entity entity, Args&& ...args)
+TComponent *EntityManager::addComponent(Entity entity, Args&& ...args)
 {
-    auto& tuple = findEntity(entity);
+    auto&[_, components] = findEntity(entity);
 
-    return std::get<1>(tuple)->add<TComponent>(std::forward<Args>(args)...);
+    return components->add<TComponent>(std::forward<Args>(args)...);
 }
 
 template<typename TComponent>
 void EntityManager::removeComponent(Entity entity)
 {
-    auto& tuple = findEntity(entity);
+    auto&[_, components] = findEntity(entity);
 
-    std::get<1>(tuple)->remove<TComponent>();
+    components->remove<TComponent>();
 }
 
 template<typename TComponent>
-TComponent* EntityManager::getComponent(Entity entity) const
+TComponent *EntityManager::getComponent(Entity entity) const
 {
-    auto& tuple = findEntity(entity);
-    auto& componentCollection = std::get<1>(tuple);
+    auto&[_, components] = findEntity(entity);
 
-    return componentCollection->get<TComponent>();
+    return components->get<TComponent>();
 }
 
 template<typename TComponent>
 void EntityManager::enableComponent(Entity entity, bool enable)
 {
-    auto& tuple = findEntity(entity);
+    auto&[_, components] = findEntity(entity);
 
-    std::get<1>(tuple)->enable<TComponent>(enable);
+    components->enable<TComponent>(enable);
 }
 
 template<typename T>

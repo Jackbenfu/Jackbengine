@@ -14,7 +14,7 @@ Entity EntityManager::addEntity()
 {
     static size_t entityCounter = 0;
 
-    m_entities[++entityCounter] = std::make_tuple(
+    m_entities[++entityCounter] = std::make_pair(
         true,
         std::make_unique<ComponentCollection>()
     );
@@ -29,7 +29,9 @@ void EntityManager::removeEntity(Entity entity)
 
 bool EntityManager::isEntityEnabled(Entity entity) const
 {
-    return std::get<0>(findEntity(entity));
+    const auto&[enabled, _] = findEntity(entity);
+
+    return enabled;
 }
 
 void EntityManager::enableEntity(Entity entity, bool enable)
@@ -39,15 +41,17 @@ void EntityManager::enableEntity(Entity entity, bool enable)
 
 ComponentCollection& EntityManager::getEntity(Entity entity) const
 {
-    return *std::get<1>(findEntity(entity));
+    auto&[_, components] = findEntity(entity);
+
+    return *components;
 }
 
-std::tuple<bool, std::unique_ptr<ComponentCollection>>& EntityManager::findEntity(Entity entity)
+std::pair<bool, std::unique_ptr<ComponentCollection>>& EntityManager::findEntity(Entity entity)
 {
     return findEntity(*this, entity);
 }
 
-const std::tuple<bool, std::unique_ptr<ComponentCollection>>& EntityManager::findEntity(Entity entity) const
+const std::pair<bool, std::unique_ptr<ComponentCollection>>& EntityManager::findEntity(Entity entity) const
 {
     return findEntity(*this, entity);
 }

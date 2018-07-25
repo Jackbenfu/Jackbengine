@@ -17,22 +17,35 @@ class StateMachine;
 
 class State
 {
-    DISALLOW_COPY_AND_MOVE(State)
+DISALLOW_COPY_AND_MOVE(State)
 
 public:
     State() = delete;
+
     explicit State(StateMachine& stateMachine)
         : m_stateMachine {stateMachine}
-    { }
+    {
+    }
 
     virtual ~State() = default;
 
-    virtual void enter() { }
-    virtual void frame(float) { }
-    virtual void exit() { }
+    virtual void enter()
+    {
+    }
+
+    virtual void frame(float)
+    {
+    }
+
+    virtual void exit()
+    {
+    }
 
 protected:
-    StateMachine& stateMachine() const { return m_stateMachine; }
+    StateMachine& stateMachine() const
+    {
+        return m_stateMachine;
+    }
 
 private:
     StateMachine& m_stateMachine;

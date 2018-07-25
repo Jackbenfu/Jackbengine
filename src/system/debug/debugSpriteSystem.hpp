@@ -16,7 +16,7 @@ namespace Jackbengine {
 
 class DebugSpriteSystem final : public System
 {
-    DISALLOW_COPY_AND_MOVE(DebugSpriteSystem)
+DISALLOW_COPY_AND_MOVE(DebugSpriteSystem)
 
 public:
     DebugSpriteSystem() = delete;

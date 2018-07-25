@@ -12,7 +12,8 @@ using namespace Jackbengine;
 
 ContainerComponent::ContainerComponent(float x, float y, float w, float h)
     : m_rect {x, y, w, h}
-{ }
+{
+}
 
 const Rectf& ContainerComponent::rect() const
 {
@@ -48,7 +49,7 @@ bool ContainerComponent::contains(float x, float y) const
 
 bool ContainerComponent::contains(const Vec2i& point) const
 {
-    return contains((float)point.x, (float)point.y);
+    return contains((float) point.x, (float) point.y);
 }
 
 bool ContainerComponent::contains(const Vec2f& point) const

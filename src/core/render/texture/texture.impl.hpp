@@ -21,10 +21,14 @@ public:
     Impl(const Renderer& renderer, const std::string& file);
     Impl(const Renderer& renderer, const void *data, size_t dataSize);
     Impl(const Renderer& renderer, int width, int height, Color32 color);
-    Impl(const Renderer& renderer, const TmxMap& map, const TmxLayer& layer,
-         const void *tilesetImageData, size_t tilesetImageDataSize);
-    Impl(const Renderer& renderer, const TmxMap& map, const TmxObjectGroup& objectGroup,
-         const void *tilesetImageData, size_t tilesetImageDataSize);
+    Impl(
+        const Renderer& renderer, const TmxMap& map, const TmxLayer& layer,
+        const void *tilesetImageData, size_t tilesetImageDataSize
+    );
+    Impl(
+        const Renderer& renderer, const TmxMap& map, const TmxObjectGroup& objectGroup,
+        const void *tilesetImageData, size_t tilesetImageDataSize
+    );
     Impl(const Renderer& renderer, const Font& font, const std::string& text, Color32 foreground);
 
     ~Impl();
@@ -32,7 +36,7 @@ public:
     int width() const;
     int height() const;
 
-    SDL_Texture* internalObject() const;
+    SDL_Texture *internalObject() const;
 
 private:
     void loadTextureFromSurface(const Renderer& renderer, const SdlSurface& surface);

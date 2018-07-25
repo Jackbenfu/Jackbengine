@@ -16,19 +16,18 @@ using namespace Jackbengine;
 DebugSpriteSystem::DebugSpriteSystem(const Renderer& renderer)
     : m_renderer {renderer},
       m_color {Color32(255, 0, 0)}
-{ }
+{
+}
 
 int DebugSpriteSystem::order() const
 {
-    return (int)SystemOrder::DebugSprite;
+    return (int) SystemOrder::DebugSprite;
 }
 
 void DebugSpriteSystem::frame(float)
 {
-    for (const auto entity : entities())
+    for (const auto&[entity, components] : entities())
     {
-        const auto components = entity.second;
-
         const auto boxShape = components->get<BoxShapeComponent>();
         const auto transform = components->get<TransformComponent>();
 
@@ -50,5 +49,5 @@ void DebugSpriteSystem::frame(float)
 bool DebugSpriteSystem::hasRequiredComponents(ComponentCollection& components) const
 {
     return components.any<BoxShapeComponent>()
-        && components.any<TransformComponent>();
+           && components.any<TransformComponent>();
 }

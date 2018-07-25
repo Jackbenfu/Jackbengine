@@ -12,8 +12,8 @@ using namespace Jackbengine;
 
 void System::sort(
     std::function<bool(
-        std::pair<Entity, ComponentCollection*>,
-        std::pair<Entity, ComponentCollection*>
+        std::pair<Entity, ComponentCollection *>,
+        std::pair<Entity, ComponentCollection *>
     )> comparison
 )
 {

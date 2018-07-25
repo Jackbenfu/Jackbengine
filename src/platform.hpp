@@ -11,11 +11,13 @@
 
 // Platform specific includes
 #if defined(__APPLE__)
-    #include "core/platform/osx.hpp"
+
+#include "core/platform/osx.hpp"
+
 #elif defined(_WIN32)
-    #include "core/platform/win32.hpp"
+#include "core/platform/win32.hpp"
 #elif defined(EMSCRIPTEN)
-    #include "core/platform/emscripten.hpp"
+#include "core/platform/emscripten.hpp"
 #endif
 
 #endif // __PLATFORM_H__

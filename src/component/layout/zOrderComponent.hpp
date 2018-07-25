@@ -15,7 +15,7 @@ namespace Jackbengine {
 
 class ZOrderComponent : public Component
 {
-    DISALLOW_COPY_AND_MOVE(ZOrderComponent)
+DISALLOW_COPY_AND_MOVE(ZOrderComponent)
 
 public:
     ZOrderComponent() = default;

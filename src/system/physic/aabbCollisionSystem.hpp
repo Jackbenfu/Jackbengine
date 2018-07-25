@@ -24,16 +24,16 @@ enum class AABBCollisionSide
 };
 
 using AABBCollisionCallback =
-    std::function<bool(
-        float,
-        ComponentCollection&,
-        ComponentCollection&,
-        AABBCollisionSide
-    )>;
+std::function<bool(
+    float,
+    ComponentCollection&,
+    ComponentCollection&,
+    AABBCollisionSide
+)>;
 
 class AABBCollisionSystem final : public System
 {
-    DISALLOW_COPY_AND_MOVE(AABBCollisionSystem)
+DISALLOW_COPY_AND_MOVE(AABBCollisionSystem)
 
 public:
     AABBCollisionSystem() = default;

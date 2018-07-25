@@ -16,7 +16,7 @@ namespace Jackbengine {
 
 class Timer
 {
-    DISALLOW_COPY_AND_MOVE(Timer)
+DISALLOW_COPY_AND_MOVE(Timer)
 
 public:
     explicit Timer(uint fps);
@@ -39,6 +39,7 @@ public:
 
 private:
     class Impl;
+
     std::unique_ptr<Impl> m_impl;
 };
 

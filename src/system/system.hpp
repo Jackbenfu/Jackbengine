@@ -20,19 +20,22 @@ class System : public OrderableItem
 {
     friend class SystemManager;
 
-    DISALLOW_COPY_AND_MOVE(System)
+DISALLOW_COPY_AND_MOVE(System)
 
 public:
     System() = default;
     virtual ~System() = default;
 
 protected:
-    inline const auto& entities() { return m_entities; }
+    inline const auto& entities()
+    {
+        return m_entities;
+    }
 
     void sort(
         std::function<bool(
-            std::pair<Entity, ComponentCollection*>,
-            std::pair<Entity, ComponentCollection*>
+            std::pair<Entity, ComponentCollection *>,
+            std::pair<Entity, ComponentCollection *>
         )> comparison
     );
 
@@ -52,7 +55,7 @@ private:
 
     void clean();
 
-    std::list<std::pair<Entity, ComponentCollection*>> m_entities {};
+    std::list<std::pair<Entity, ComponentCollection *>> m_entities {};
     std::unordered_map<Entity, EntityStatus> m_entityStatuses {};
 };
 

@@ -21,7 +21,7 @@ class Renderer
 {
     friend class Texture;
 
-    DISALLOW_COPY_AND_MOVE(Renderer)
+DISALLOW_COPY_AND_MOVE(Renderer)
 
 public:
     explicit Renderer(const Window& window);
@@ -42,9 +42,10 @@ public:
     int height() const;
 
 private:
-    void* internalObject() const;
+    void *internalObject() const;
 
     class Impl;
+
     std::unique_ptr<Impl> m_impl;
 };
 

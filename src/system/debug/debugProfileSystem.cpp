@@ -17,18 +17,21 @@ IMPORT_BINARY_RESOURCE(default_font)
 DebugProfileSystem::DebugProfileSystem(const Renderer& renderer, const Timer& timer)
     : m_renderer {renderer},
       m_timer {timer},
-      m_fps {m_renderer, InvalidFpsText, TextLayout::LeftTop, Color32(255, 255, 255), FontSize, default_font, default_font_size}
-{ }
+      m_fps {m_renderer, InvalidFpsText, TextLayout::LeftTop, Color32(255, 255, 255), FontSize, default_font,
+             default_font_size}
+{
+}
 
 DebugProfileSystem::DebugProfileSystem(const Renderer& renderer, const Timer& timer, Color32 foreground)
     : m_renderer {renderer},
       m_timer {timer},
       m_fps {m_renderer, InvalidFpsText, TextLayout::LeftTop, foreground, FontSize, default_font, default_font_size}
-{ }
+{
+}
 
 int DebugProfileSystem::order() const
 {
-    return (int)SystemOrder::DebugProfile;
+    return (int) SystemOrder::DebugProfile;
 }
 
 void DebugProfileSystem::frame(float)

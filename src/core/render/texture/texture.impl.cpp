@@ -40,8 +40,10 @@ Texture::Impl::Impl(const Renderer& renderer, int width, int height, Color32 col
     loadTextureFromSurface(renderer, *sdlSurface);
 }
 
-Texture::Impl::Impl(const Renderer& renderer, const TmxMap& map, const TmxLayer& layer,
-                     const void *tilesetImageData, size_t tilesetImageDataSize)
+Texture::Impl::Impl(
+    const Renderer& renderer, const TmxMap& map, const TmxLayer& layer,
+    const void *tilesetImageData, size_t tilesetImageDataSize
+)
 {
     const auto tileset = map.tileset();
 
@@ -100,8 +102,10 @@ Texture::Impl::Impl(const Renderer& renderer, const TmxMap& map, const TmxLayer&
     loadTextureFromSurface(renderer, *sdlSurface);
 }
 
-Texture::Impl::Impl(const Renderer& renderer, const TmxMap& map, const TmxObjectGroup& objectGroup,
-                     const void *tilesetImageData, size_t tilesetImageDataSize)
+Texture::Impl::Impl(
+    const Renderer& renderer, const TmxMap& map, const TmxObjectGroup& objectGroup,
+    const void *tilesetImageData, size_t tilesetImageDataSize
+)
 {
     const auto objectCount = objectGroup.objectCount();
 
@@ -180,8 +184,10 @@ Texture::Impl::Impl(const Renderer& renderer, const TmxMap& map, const TmxObject
     loadTextureFromSurface(renderer, *sdlSurface);
 }
 
-Texture::Impl::Impl(const Renderer& renderer, const Font& font,
-                     const std::string& text, Color32 foreground)
+Texture::Impl::Impl(
+    const Renderer& renderer, const Font& font,
+    const std::string& text, Color32 foreground
+)
 {
     const auto sdlSurface = std::make_unique<SdlSurface>(font, text, foreground);
 
@@ -203,14 +209,14 @@ int Texture::Impl::height() const
     return m_rect.h;
 }
 
-SDL_Texture* Texture::Impl::internalObject() const
+SDL_Texture *Texture::Impl::internalObject() const
 {
     return m_texture;
 }
 
 void Texture::Impl::loadTextureFromSurface(const Renderer& renderer, const SdlSurface& surface)
 {
-    const auto sdlRenderer = static_cast<SDL_Renderer*>(renderer.internalObject());
+    const auto sdlRenderer = static_cast<SDL_Renderer *>(renderer.internalObject());
 
     m_texture = SDL_CreateTextureFromSurface(sdlRenderer, surface.internalObject());
     if (nullptr == m_texture)

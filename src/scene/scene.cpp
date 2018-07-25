@@ -15,7 +15,8 @@ Scene::Scene(Application& application, SceneManager<Scene>& sceneManager)
       m_sceneManager {sceneManager},
       m_entityManager {std::make_unique<EntityManager>()},
       m_systemManager {std::make_unique<SystemManager>(*m_entityManager)}
-{ }
+{
+}
 
 Entity Scene::addEntity()
 {
@@ -67,4 +68,5 @@ void Scene::exitApplication()
 }
 
 void Scene::frame(float)
-{ }
+{
+}

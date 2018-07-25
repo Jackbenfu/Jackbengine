@@ -20,7 +20,7 @@ class SceneManager
 {
     friend class Scene;
 
-    DISALLOW_COPY_AND_MOVE(SceneManager)
+DISALLOW_COPY_AND_MOVE(SceneManager)
 
 public:
     SceneManager() = default;

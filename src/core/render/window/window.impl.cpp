@@ -10,7 +10,7 @@
 
 using namespace Jackbengine;
 
-Window::Impl::Impl(const std::string &title, int width, int height, bool fullscreen)
+Window::Impl::Impl(const std::string& title, int width, int height, bool fullscreen)
 {
     SDL_WindowFlags flags;
     int x;
@@ -55,7 +55,7 @@ int Window::Impl::height() const
     return m_height;
 }
 
-SDL_Window* Window::Impl::internalObject() const
+SDL_Window *Window::Impl::internalObject() const
 {
     return m_window;
 }

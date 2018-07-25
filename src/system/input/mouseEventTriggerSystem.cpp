@@ -15,11 +15,12 @@ using namespace Jackbengine;
 
 MouseEventTriggerSystem::MouseEventTriggerSystem(const Input& input)
     : m_input {input}
-{ }
+{
+}
 
 int MouseEventTriggerSystem::order() const
 {
-    return (int)SystemOrder::MouseEventTrigger;
+    return (int) SystemOrder::MouseEventTrigger;
 }
 
 void MouseEventTriggerSystem::setBubbling(bool active)
@@ -32,10 +33,8 @@ void MouseEventTriggerSystem::frame(float)
     MouseListenerComponent *clickedMouseListener {nullptr};
     auto maxZOrder = 0;
 
-    for (const auto entity : entities())
+    for (const auto&[entity, components] : entities())
     {
-        const auto components = entity.second;
-
         const auto container = components->get<ContainerComponent>();
         auto mouseListener = components->get<MouseListenerComponent>();
 
@@ -96,5 +95,5 @@ void MouseEventTriggerSystem::frame(float)
 bool MouseEventTriggerSystem::hasRequiredComponents(ComponentCollection& components) const
 {
     return components.any<ContainerComponent>()
-        && components.any<MouseListenerComponent>();
+           && components.any<MouseListenerComponent>();
 }

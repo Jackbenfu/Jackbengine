@@ -1,3 +1,5 @@
+#include <utility>
+
 //
 // aabbCollisionSystem.cpp
 // jackbengine
@@ -18,37 +20,30 @@ using namespace Jackbengine;
 
 int AABBCollisionSystem::order() const
 {
-    return (int)SystemOrder::AABBCollision;
+    return (int) SystemOrder::AABBCollision;
 }
 
 void AABBCollisionSystem::frame(float delta)
 {
-    for (auto group : m_groups)
+    for (const auto&[gtag1, gtag2] : m_groups)
     {
-        auto ltag1 = group.first;
-        auto ltag2 = group.second;
-
-        for (auto entity1 : entities())
+        for (const auto&[entity1, components1] : entities())
         {
-            auto components1 = entity1.second;
-
-            auto tag1 = components1->get<Tag>();
-            if (tag1->get() == ltag1)
+            if (const auto tag1 = components1->get<Tag>(); tag1->get() != gtag1)
             {
-                for (auto entity2 : entities())
+                continue;
+            }
+
+            for (const auto&[entity2, components2] : entities())
+            {
+                if (entity1 == entity2)
                 {
-                    if (entity1.first == entity2.first)
-                    {
-                        continue;
-                    }
+                    continue;
+                }
 
-                    auto components2 = entity2.second;
-
-                    auto tag2 = components2->get<Tag>();
-                    if (tag2->get() == ltag2)
-                    {
-                        testCollision(delta, *components1, *components2);
-                    }
+                if (const auto tag2 = components2->get<Tag>(); tag2->get() == gtag2)
+                {
+                    testCollision(delta, *components1, *components2);
                 }
             }
         }
@@ -58,9 +53,9 @@ void AABBCollisionSystem::frame(float delta)
 bool AABBCollisionSystem::hasRequiredComponents(ComponentCollection& components) const
 {
     return components.any<BoxShape>()
-        && components.any<Tag>()
-        && components.any<Transform>()
-        && components.any<Velocity>();
+           && components.any<Tag>()
+           && components.any<Transform>()
+           && components.any<Velocity>();
 }
 
 void AABBCollisionSystem::addGroup(const std::string& tag1, const std::string& tag2)
@@ -97,7 +92,7 @@ void AABBCollisionSystem::removeGroup(const std::string& tag1, const std::string
 
 void AABBCollisionSystem::setCallback(AABBCollisionCallback callback)
 {
-    m_callback = callback;
+    m_callback = std::move(callback);
 }
 
 void AABBCollisionSystem::unsetCallback()
@@ -105,7 +100,11 @@ void AABBCollisionSystem::unsetCallback()
     m_callback = nullptr;
 }
 
-void AABBCollisionSystem::testCollision(float delta, ComponentCollection& components1, ComponentCollection& components2) const
+void AABBCollisionSystem::testCollision(
+    float delta,
+    ComponentCollection& components1,
+    ComponentCollection& components2
+) const
 {
     auto transform1 = components1.get<Transform>();
     auto x1 = transform1->positionX();

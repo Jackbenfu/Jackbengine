@@ -16,8 +16,8 @@ Application::Application(ApplicationConfig& config)
       m_cursor {std::make_unique<Cursor>()},
       m_input {std::make_unique<Input>()},
       m_window {std::make_unique<Window>(
-          config.general_title, config.render_width, config.render_height, config.render_fullscreen)
-      },
+          config.general_title, config.render_width, config.render_height, config.render_fullscreen
+      )},
       m_renderer {std::make_unique<Renderer>(*m_window)}
 {
     srand(static_cast<uint>(time(nullptr)));

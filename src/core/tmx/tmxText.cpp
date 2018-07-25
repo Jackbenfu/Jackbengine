@@ -15,22 +15,22 @@ int TmxText::pixelsize() const
     return m_pixelsize;
 }
 
-const char* TmxText::color() const
+const char *TmxText::color() const
 {
     return m_color;
 }
 
-const char* TmxText::halign() const
+const char *TmxText::halign() const
 {
     return m_halign;
 }
 
-const char* TmxText::valign() const
+const char *TmxText::valign() const
 {
     return m_valign;
 }
 
-const char* TmxText::text() const
+const char *TmxText::text() const
 {
     return m_text;
 }

@@ -18,7 +18,7 @@ class Font
 {
     friend class SdlSurface;
 
-    DISALLOW_COPY_AND_MOVE(Font)
+DISALLOW_COPY_AND_MOVE(Font)
 
 public:
     Font(const std::string& file, int size);
@@ -39,9 +39,10 @@ public:
     int lineSkip() const;
 
 private:
-    void* internalObject() const;
+    void *internalObject() const;
 
     class Impl;
+
     std::unique_ptr<Impl> m_impl;
 };
 

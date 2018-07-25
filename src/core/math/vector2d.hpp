@@ -19,12 +19,14 @@ struct Vector2d
 {
     Vector2d()
         : Vector2d(0, 0)
-    { }
+    {
+    }
 
     Vector2d(T x, T y)
         : x(x),
           y(y)
-    { }
+    {
+    }
 
     ~Vector2d() = default;
 
@@ -33,10 +35,12 @@ struct Vector2d
         x = fabs(x);
         y = fabs(y);
     }
+
     void absoluteX()
     {
         x = fabs(x);
     }
+
     void absoluteY()
     {
         y = fabs(y);
@@ -52,10 +56,12 @@ struct Vector2d
         x = -x;
         y = -y;
     }
+
     void invertX()
     {
         x = -x;
     }
+
     void invertY()
     {
         y = -y;
@@ -71,10 +77,12 @@ struct Vector2d
         x = fabs(x) * -1.0f;
         y = fabs(y) * -1.0f;
     }
+
     void negateX()
     {
         x = fabs(x) * -1.0f;
     }
+
     void negateY()
     {
         y = fabs(y) * -1.0f;

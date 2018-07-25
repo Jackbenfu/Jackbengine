@@ -19,7 +19,7 @@ namespace Jackbengine {
 
 class DebugProfileSystem final : public System
 {
-    DISALLOW_COPY_AND_MOVE(DebugProfileSystem)
+DISALLOW_COPY_AND_MOVE(DebugProfileSystem)
 
 public:
     DebugProfileSystem(const Renderer& renderer, const Timer& timer);

@@ -12,7 +12,8 @@ using namespace Jackbengine;
 
 TextComponent::TextComponent(
     const Renderer& renderer, const std::string& text, TextLayout layout, Color32 foreground,
-    int size, const void *fontData, size_t fontDataSize)
+    int size, const void *fontData, size_t fontDataSize
+)
     : m_renderer {renderer},
       m_text {text},
       m_layout {layout},

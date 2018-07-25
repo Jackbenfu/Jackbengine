@@ -16,12 +16,12 @@ namespace Jackbengine {
 
 class TmxImage
 {
-    DISALLOW_COPY_AND_MOVE(TmxImage)
+DISALLOW_COPY_AND_MOVE(TmxImage)
 
     friend class TmxTileset;
 
 public:
-    const char* source() const;
+    const char *source() const;
     int width() const;
     int height() const;
 

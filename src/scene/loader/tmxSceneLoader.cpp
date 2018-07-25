@@ -20,13 +20,15 @@
 using namespace Jackbengine;
 
 TmxSceneLoader::TmxSceneLoader(Scene& scene, const unsigned char *tmxData)
-    : TmxSceneLoader {scene, tmxData, nullptr, (size_t)-1, nullptr, (size_t)-1}
-{ }
+    : TmxSceneLoader {scene, tmxData, nullptr, (size_t) -1, nullptr, (size_t) -1}
+{
+}
 
 TmxSceneLoader::TmxSceneLoader(
     Scene& scene, const unsigned char *tmxData,
-    const void *fontData, size_t fontDataSize)
-    : TmxSceneLoader {scene, tmxData, nullptr, (size_t)-1, fontData, fontDataSize}
+    const void *fontData, size_t fontDataSize
+)
+    : TmxSceneLoader {scene, tmxData, nullptr, (size_t) -1, fontData, fontDataSize}
 {
 }
 
@@ -197,11 +199,26 @@ bool TmxSceneLoader::hasObjectGroupChildGid(const TmxObjectGroup *objectGroup) c
 
 TextLayout TmxSceneLoader::getTextLayout(const TmxText *text) const
 {
-    const auto isLeft = [](const char *halign) { return nullptr == halign || 0 == strcmp("left", halign); };
-    const auto isRight = [](const char *halign) { return 0 == strcmp("right", halign); };
-    const auto isCenter = [](const char *align) { return 0 == strcmp("center", align); };
-    const auto isTop = [](const char *valign) { return nullptr == valign || 0 == strcmp("top", valign); };
-    const auto isBottom = [](const char *valign) { return 0 == strcmp("bottom", valign); };
+    const auto isLeft = [](const char *halign)
+    {
+        return nullptr == halign || 0 == strcmp("left", halign);
+    };
+    const auto isRight = [](const char *halign)
+    {
+        return 0 == strcmp("right", halign);
+    };
+    const auto isCenter = [](const char *align)
+    {
+        return 0 == strcmp("center", align);
+    };
+    const auto isTop = [](const char *valign)
+    {
+        return nullptr == valign || 0 == strcmp("top", valign);
+    };
+    const auto isBottom = [](const char *valign)
+    {
+        return 0 == strcmp("bottom", valign);
+    };
 
     auto halign = text->halign();
     auto valign = text->valign();
@@ -252,9 +269,9 @@ Color32 TmxSceneLoader::getTextColor(const TmxText *text) const
     auto hexColor = text->color();
     auto intColor = strtol(hexColor + 1, nullptr, 16);
 
-    auto r = (byte)((intColor >> 16) & 0xFF);
-    auto g = (byte)((intColor >> 8) & 0xFF);
-    auto b = (byte)(intColor & 0xFF);
+    auto r = (byte) ((intColor >> 16) & 0xFF);
+    auto g = (byte) ((intColor >> 8) & 0xFF);
+    auto b = (byte) (intColor & 0xFF);
 
     return Color32(r, g, b);
 }

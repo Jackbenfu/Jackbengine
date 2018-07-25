@@ -16,7 +16,7 @@ namespace Jackbengine {
 
 class VelocityComponent : public Component
 {
-    DISALLOW_COPY_AND_MOVE(VelocityComponent)
+DISALLOW_COPY_AND_MOVE(VelocityComponent)
 
 public:
     VelocityComponent() = default;

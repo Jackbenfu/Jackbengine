@@ -21,7 +21,7 @@ namespace Jackbengine {
 
 class TmxMap
 {
-    DISALLOW_COPY_AND_MOVE(TmxMap)
+DISALLOW_COPY_AND_MOVE(TmxMap)
 
 public:
     TmxMap();
@@ -34,17 +34,17 @@ public:
     int tileWidth() const;
     int tileHeight() const;
 
-    const TmxTileset* tileset() const;
+    const TmxTileset *tileset() const;
 
-    const TmxLayer* layer(int index) const;
-    const TmxLayer* layer(const char *name) const;
+    const TmxLayer *layer(int index) const;
+    const TmxLayer *layer(const char *name) const;
     int layerCount() const;
 
-    const TmxObjectGroup* objectGroup(int index) const;
-    const TmxObjectGroup* objectGroup(const char *name) const;
+    const TmxObjectGroup *objectGroup(int index) const;
+    const TmxObjectGroup *objectGroup(const char *name) const;
     int objectGroupCount() const;
 
-    const TmxPropertyGroup* properties() const;
+    const TmxPropertyGroup *properties() const;
 
 private:
     void loadContents();

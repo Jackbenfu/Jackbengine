@@ -23,7 +23,7 @@ public:
     int width() const;
     int height() const;
 
-    SDL_Window* internalObject() const;
+    SDL_Window *internalObject() const;
 
 private:
     void setWindowIcon();

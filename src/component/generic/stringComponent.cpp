@@ -12,7 +12,8 @@ using namespace Jackbengine;
 
 StringComponent::StringComponent(const std::string& value)
     : m_value {value}
-{ }
+{
+}
 
 const std::string& StringComponent::get() const
 {

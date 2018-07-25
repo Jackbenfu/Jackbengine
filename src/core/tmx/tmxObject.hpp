@@ -17,12 +17,12 @@ namespace Jackbengine {
 
 class TmxObject
 {
-    DISALLOW_COPY_AND_MOVE(TmxObject)
+DISALLOW_COPY_AND_MOVE(TmxObject)
 
     friend class TmxObjectGroup;
 
 public:
-    const char* name() const;
+    const char *name() const;
     int gid() const;
     bool hasGid() const;
     int x() const;
@@ -31,20 +31,20 @@ public:
     int height() const;
     double rotation() const;
 
-    const char* type() const;
+    const char *type() const;
 
     bool hasProperty(const char *name) const;
-    const TmxPropertyGroup* properties() const;
+    const TmxPropertyGroup *properties() const;
 
     bool hasText() const;
-    const TmxText* text() const;
+    const TmxText *text() const;
 
 private:
     TmxObject() = default;
 
     void load(const TiXmlElement *element);
 
-    const char* m_name {nullptr};
+    const char *m_name {nullptr};
     const char *m_type {nullptr};
     int m_gid {0};
     int m_x {0};

@@ -16,7 +16,7 @@ bool TmxPropertyGroup::hasProperty(const char *name) const
     return nullptr != rawProperty(name);
 }
 
-const char* TmxPropertyGroup::property(const char *name) const
+const char *TmxPropertyGroup::property(const char *name) const
 {
     auto property = rawProperty(name);
     if (nullptr != property)
@@ -71,7 +71,7 @@ bool TmxPropertyGroup::doubleProperty(const char *name, double *value) const
     return false;
 }
 
-const TmxProperty* TmxPropertyGroup::rawProperty(const char *name) const
+const TmxProperty *TmxPropertyGroup::rawProperty(const char *name) const
 {
     auto it = m_properties.begin();
     while (m_properties.end() != it)

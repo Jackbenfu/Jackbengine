@@ -18,7 +18,7 @@ namespace Jackbengine {
 
 class TmxSceneLoader
 {
-    DISALLOW_COPY_AND_MOVE(TmxSceneLoader)
+DISALLOW_COPY_AND_MOVE(TmxSceneLoader)
 
 public:
     TmxSceneLoader(Scene& scene, const unsigned char *tmxData);

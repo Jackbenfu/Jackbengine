@@ -16,7 +16,7 @@ namespace Jackbengine {
 
 class TmxText
 {
-    DISALLOW_COPY_AND_MOVE(TmxText)
+DISALLOW_COPY_AND_MOVE(TmxText)
 
     friend class TmxObject;
 

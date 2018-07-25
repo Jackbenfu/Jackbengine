@@ -29,8 +29,8 @@ public:
     explicit WebSocket(const TListener& listener);
     virtual ~WebSocket();
 
-    using Deserializer = const WebSocketEvent*(*)(const byte *data, int size);
-    using Callback = void(TListener::*)(const WebSocketEvent *message);
+    using Deserializer = const WebSocketEvent *(*)(const byte *data, int size);
+    using Callback = void (TListener::*)(const WebSocketEvent *message);
 
     bool open(const std::string& url);
     void close();
@@ -74,7 +74,8 @@ union MessageIdUnion
 template<typename TListener>
 WebSocket<TListener>::WebSocket(const TListener& listener)
     : m_listener(listener)
-{ }
+{
+}
 
 template<typename TListener>
 WebSocket<TListener>::~WebSocket()
@@ -131,7 +132,9 @@ void WebSocket<TListener>::poll()
             auto itd = m_deserializers.find(messageType);
             if (m_deserializers.end() == itd)
             {
-                throw std::runtime_error("No deserializer found for network message [" + std::to_string(messageType) + "]");
+                throw std::runtime_error(
+                    "No deserializer found for network message [" + std::to_string(messageType) + "]"
+                );
             }
 
             auto messageData = message.data() + MESSAGE_HEADER_SIZE;
@@ -184,7 +187,7 @@ void WebSocket<TListener>::setDeserializer(short type, Deserializer deserializer
 }
 
 template<typename TListener>
-bool WebSocket<TListener>::parseMessage(const std::vector<byte> &message, short *type, int *id)
+bool WebSocket<TListener>::parseMessage(const std::vector<byte>& message, short *type, int *id)
 {
     if (MESSAGE_HEADER_SIZE > message.size())
     {

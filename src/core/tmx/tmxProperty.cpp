@@ -10,12 +10,12 @@
 
 using namespace Jackbengine;
 
-const char* TmxProperty::name() const
+const char *TmxProperty::name() const
 {
     return m_element->Attribute("name");
 }
 
-const char* TmxProperty::value() const
+const char *TmxProperty::value() const
 {
     return m_element->Attribute("value");
 }

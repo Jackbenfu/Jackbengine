@@ -19,20 +19,20 @@ namespace Jackbengine {
 template<typename TBase>
 class HeterogeneousCollection
 {
-    DISALLOW_COPY_AND_MOVE(HeterogeneousCollection<TBase>)
+DISALLOW_COPY_AND_MOVE(HeterogeneousCollection<TBase>)
 
 public:
     HeterogeneousCollection() = default;
     ~HeterogeneousCollection() = default;
 
     template<typename TItem>
-    TItem* get() const;
+    TItem *get() const;
 
     template<typename TItem>
     bool any() const;
 
     template<typename TItem, typename ...Args>
-    TItem* add(Args&& ...args);
+    TItem *add(Args&& ...args);
 
     template<typename TItem>
     void remove();
@@ -45,29 +45,28 @@ public:
 
 private:
     template<typename TItem>
-    std::tuple<bool, std::unique_ptr<TBase>>& find();
+    std::pair<bool, std::unique_ptr<TBase>>& find();
     template<typename TItem>
-    const std::tuple<bool, std::unique_ptr<TBase>>& find() const;
+    const std::pair<bool, std::unique_ptr<TBase>>& find() const;
 
-    std::unordered_map<size_t, std::tuple<bool, std::unique_ptr<TBase>>> m_collection;
+    std::unordered_map<size_t, std::pair<bool, std::unique_ptr<TBase>>> m_collection;
 };
 
 template<typename TBase>
 template<typename TItem>
-TItem* HeterogeneousCollection<TBase>::get() const
+TItem *HeterogeneousCollection<TBase>::get() const
 {
     static_assert(std::is_base_of<TBase, TItem>::value);
 
-    const auto& tuple = find<TItem>();
-
-    if (!std::get<0>(tuple))
+    const auto&[enabled, item] = find<TItem>();
+    if (!enabled)
     {
         throw std::runtime_error(
             std::string("Item is disabled: ") + std::string(GET_TYPE_NAME(TItem))
         );
     }
 
-    return dynamic_cast<TItem*>(std::get<1>(tuple).get());
+    return dynamic_cast<TItem *>(item.get());
 }
 
 template<typename TBase>
@@ -79,12 +78,12 @@ bool HeterogeneousCollection<TBase>::any() const
     const auto typeId = GET_TYPE_ID(TItem);
     const auto it = m_collection.find(typeId);
 
-    return it != m_collection.end() && std::get<0>(it->second);
+    return it != m_collection.end() && it->second.first;
 }
 
 template<typename TBase>
 template<typename TItem, typename ...Args>
-TItem* HeterogeneousCollection<TBase>::add(Args&& ...args)
+TItem *HeterogeneousCollection<TBase>::add(Args&& ...args)
 {
     static_assert(std::is_base_of<TBase, TItem>::value);
 
@@ -122,31 +121,31 @@ void HeterogeneousCollection<TBase>::enable(bool enable)
 {
     static_assert(std::is_base_of<TBase, TItem>::value);
 
-    auto& tuple = find<TItem>();
+    auto& pair = find<TItem>();
 
-    std::get<0>(tuple) = enable;
+    pair.first = enable;
 }
 
 template<typename TBase>
 template<typename TFunction>
 void HeterogeneousCollection<TBase>::apply(TFunction function)
 {
-    for (auto& pair : m_collection)
+    for (auto&[type, item] : m_collection)
     {
-        const auto& tuple = pair.second;
-        if (!std::get<0>(tuple))
+        auto&[enabled, value] = item;
+
+        if (!enabled)
         {
             continue;
         }
 
-        auto& item = *std::get<1>(tuple);
-        function(item);
+        function(value);
     }
 }
 
 template<typename TBase>
 template<typename TItem>
-std::tuple<bool, std::unique_ptr<TBase>>& HeterogeneousCollection<TBase>::find()
+std::pair<bool, std::unique_ptr<TBase>>& HeterogeneousCollection<TBase>::find()
 {
     const auto typeId = GET_TYPE_ID(TItem);
     const auto it = m_collection.find(typeId);
@@ -163,7 +162,7 @@ std::tuple<bool, std::unique_ptr<TBase>>& HeterogeneousCollection<TBase>::find()
 
 template<typename TBase>
 template<typename TItem>
-const std::tuple<bool, std::unique_ptr<TBase>>& HeterogeneousCollection<TBase>::find() const
+const std::pair<bool, std::unique_ptr<TBase>>& HeterogeneousCollection<TBase>::find() const
 {
     const auto typeId = GET_TYPE_ID(TItem);
     const auto it = m_collection.find(typeId);

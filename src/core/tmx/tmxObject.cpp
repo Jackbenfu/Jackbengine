@@ -10,7 +10,7 @@
 
 using namespace Jackbengine;
 
-const char* TmxObject::name() const
+const char *TmxObject::name() const
 {
     return m_name;
 }
@@ -50,7 +50,7 @@ double TmxObject::rotation() const
     return m_rotation;
 }
 
-const char* TmxObject::type() const
+const char *TmxObject::type() const
 {
     return m_type;
 }
@@ -65,7 +65,7 @@ bool TmxObject::hasProperty(const char *name) const
     return m_properties->hasProperty(name);
 }
 
-const TmxPropertyGroup* TmxObject::properties() const
+const TmxPropertyGroup *TmxObject::properties() const
 {
     return m_properties.get();
 }
@@ -75,7 +75,7 @@ bool TmxObject::hasText() const
     return m_text != nullptr;
 }
 
-const TmxText* TmxObject::text() const
+const TmxText *TmxObject::text() const
 {
     return m_text.get();
 }

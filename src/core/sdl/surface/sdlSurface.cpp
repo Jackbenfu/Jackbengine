@@ -39,7 +39,7 @@ SdlSurface::SdlSurface(int width, int height, int depth)
 
 SdlSurface::SdlSurface(const Font& font, const std::string& text, Color32 foreground)
 {
-    const auto sdlFont = static_cast<TTF_Font*>(font.internalObject());
+    const auto sdlFont = static_cast<TTF_Font *>(font.internalObject());
 
     SDL_Color sdlForeground {foreground.r, foreground.g, foreground.b, foreground.a};
 
@@ -55,7 +55,7 @@ SdlSurface::~SdlSurface()
     SDL_FreeSurface(m_surface);
 }
 
-SDL_Surface* SdlSurface::internalObject() const
+SDL_Surface *SdlSurface::internalObject() const
 {
     return m_surface;
 }

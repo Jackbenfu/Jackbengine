@@ -10,7 +10,7 @@
 
 using namespace Jackbengine;
 
-const char* TmxImage::source() const
+const char *TmxImage::source() const
 {
     return m_source;
 }

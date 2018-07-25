@@ -15,7 +15,8 @@ TmxMap::TmxMap()
     : m_doc {std::make_unique<TiXmlDocument>()},
       m_tileset {std::unique_ptr<TmxTileset>(new TmxTileset())},
       tmxProperties {std::unique_ptr<TmxPropertyGroup>(new TmxPropertyGroup())}
-{ }
+{
+}
 
 void TmxMap::loadFromFile(const char *file)
 {
@@ -27,7 +28,7 @@ void TmxMap::loadFromFile(const char *file)
     CFBundleRef mainBundle = CFBundleGetMainBundle();
     CFStringRef resourceString = CFStringCreateWithCString(nullptr, file, kCFStringEncodingASCII);
     CFURLRef resourceUrl = CFBundleCopyResourceURL(mainBundle, resourceString, nullptr, nullptr);
-    CFURLGetFileSystemRepresentation(resourceUrl, true, (UInt8*)filePath, 4096);
+    CFURLGetFileSystemRepresentation(resourceUrl, true, (UInt8 *) filePath, 4096);
     CFRelease(resourceUrl);
     CFRelease(resourceString);
     CFBundleUnloadExecutable(mainBundle);
@@ -49,7 +50,7 @@ void TmxMap::loadFromFile(const char *file)
 
 void TmxMap::loadFromMemory(const unsigned char *data)
 {
-    if (nullptr == m_doc->Parse((char*)data))
+    if (nullptr == m_doc->Parse((char *) data))
     {
         throw std::runtime_error(m_doc->ErrorDesc());
     }
@@ -77,14 +78,14 @@ int TmxMap::tileHeight() const
     return m_tileHeight;
 }
 
-const TmxTileset* TmxMap::tileset() const
+const TmxTileset *TmxMap::tileset() const
 {
     return m_tileset.get();
 }
 
-const TmxLayer* TmxMap::layer(int index) const
+const TmxLayer *TmxMap::layer(int index) const
 {
-    if (m_layers.size() > (size_t)index)
+    if (m_layers.size() > (size_t) index)
     {
         return m_layers[index].get();
     }
@@ -92,7 +93,7 @@ const TmxLayer* TmxMap::layer(int index) const
     return nullptr;
 }
 
-const TmxLayer* TmxMap::layer(const char *name) const
+const TmxLayer *TmxMap::layer(const char *name) const
 {
     for (auto& layer : m_layers)
     {
@@ -107,12 +108,12 @@ const TmxLayer* TmxMap::layer(const char *name) const
 
 int TmxMap::layerCount() const
 {
-    return (int)m_layers.size();
+    return (int) m_layers.size();
 }
 
-const TmxObjectGroup* TmxMap::objectGroup(int index) const
+const TmxObjectGroup *TmxMap::objectGroup(int index) const
 {
-    if (m_objectGroups.size() > (size_t)index)
+    if (m_objectGroups.size() > (size_t) index)
     {
         return m_objectGroups[index].get();
     }
@@ -120,7 +121,7 @@ const TmxObjectGroup* TmxMap::objectGroup(int index) const
     return nullptr;
 }
 
-const TmxObjectGroup* TmxMap::objectGroup(const char *name) const
+const TmxObjectGroup *TmxMap::objectGroup(const char *name) const
 {
     for (auto& objectGroup : m_objectGroups)
     {
@@ -135,10 +136,10 @@ const TmxObjectGroup* TmxMap::objectGroup(const char *name) const
 
 int TmxMap::objectGroupCount() const
 {
-    return (int)m_objectGroups.size();
+    return (int) m_objectGroups.size();
 }
 
-const TmxPropertyGroup* TmxMap::properties() const
+const TmxPropertyGroup *TmxMap::properties() const
 {
     return tmxProperties.get();
 }

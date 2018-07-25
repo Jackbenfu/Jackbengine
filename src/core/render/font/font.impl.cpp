@@ -110,7 +110,7 @@ int Font::Impl::lineSkip() const
     return TTF_FontLineSkip(m_font);
 }
 
-TTF_Font* Font::Impl::internalObject() const
+TTF_Font *Font::Impl::internalObject() const
 {
     return m_font;
 }

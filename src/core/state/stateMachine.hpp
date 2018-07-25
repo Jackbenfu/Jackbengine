@@ -18,7 +18,7 @@ namespace Jackbengine {
 
 class StateMachine
 {
-    DISALLOW_COPY_AND_MOVE(StateMachine)
+DISALLOW_COPY_AND_MOVE(StateMachine)
 
 public:
     StateMachine() = default;

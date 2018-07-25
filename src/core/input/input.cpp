@@ -13,7 +13,8 @@ using namespace Jackbengine;
 
 Input::Input()
     : m_impl {std::make_unique<Impl>()}
-{ }
+{
+}
 
 Input::~Input() = default;
 

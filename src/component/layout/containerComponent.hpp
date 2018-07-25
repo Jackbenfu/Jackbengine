@@ -17,7 +17,7 @@ namespace Jackbengine {
 
 class ContainerComponent : public Component
 {
-    DISALLOW_COPY_AND_MOVE(ContainerComponent)
+DISALLOW_COPY_AND_MOVE(ContainerComponent)
 
 public:
     ContainerComponent(float x, float y, float w, float h);

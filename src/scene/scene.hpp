@@ -18,7 +18,7 @@ namespace Jackbengine {
 
 class Scene
 {
-    DISALLOW_COPY_AND_MOVE(Scene)
+DISALLOW_COPY_AND_MOVE(Scene)
 
 public:
     Scene(Application& application, SceneManager<Scene>& sceneManager);
@@ -37,13 +37,16 @@ public:
      * Component
      */
     template<typename TComponent, typename ...Args>
-    TComponent* addComponent(Entity entity, Args&& ...args);
+    TComponent *addComponent(Entity entity, Args&& ...args);
+
+    template<typename TComponent, typename ...Args>
+    TComponent *addDisabledComponent(Entity entity, Args&& ...args);
 
     template<typename TComponent>
     void removeComponent(Entity entity);
 
     template<typename TComponent>
-    TComponent* getComponent(Entity entity) const;
+    TComponent *getComponent(Entity entity) const;
 
     template<typename TComponent>
     void enableComponent(Entity entity);
@@ -64,7 +67,7 @@ public:
     void removeSystem();
 
     template<typename TSystem>
-    TSystem* getSystem();
+    TSystem *getSystem();
 
     template<typename TSystem>
     void enableSystem();
@@ -77,11 +80,30 @@ public:
 
     void update(float delta);
 
-    inline const Timer& timer() const { return m_application.timer(); }
-    inline const Cursor& cursor() const { return m_application.cursor(); }
-    inline const Input& input() const { return m_application.input(); }
-    inline const Window& window() const { return m_application.window(); }
-    inline const Renderer& renderer() const { return m_application.renderer(); }
+    inline const Timer& timer() const
+    {
+        return m_application.timer();
+    }
+
+    inline const Cursor& cursor() const
+    {
+        return m_application.cursor();
+    }
+
+    inline const Input& input() const
+    {
+        return m_application.input();
+    }
+
+    inline const Window& window() const
+    {
+        return m_application.window();
+    }
+
+    inline const Renderer& renderer() const
+    {
+        return m_application.renderer();
+    }
 
     void exitApplication();
 
@@ -98,7 +120,7 @@ private:
 };
 
 template<typename TComponent, typename ...Args>
-TComponent* Scene::addComponent(Entity entity, Args&& ...args)
+TComponent *Scene::addComponent(Entity entity, Args&& ...args)
 {
     const auto component = m_entityManager->addComponent<TComponent>(entity, std::forward<Args>(args)...);
 
@@ -110,6 +132,12 @@ TComponent* Scene::addComponent(Entity entity, Args&& ...args)
     return component;
 }
 
+template<typename TComponent, typename ...Args>
+TComponent *Scene::addDisabledComponent(Entity entity, Args&& ...args)
+{
+    return m_entityManager->addComponent<TComponent>(entity, std::forward<Args>(args)...);
+}
+
 template<typename TComponent>
 void Scene::removeComponent(Entity entity)
 {
@@ -118,7 +146,7 @@ void Scene::removeComponent(Entity entity)
 }
 
 template<typename TComponent>
-TComponent* Scene::getComponent(Entity entity) const
+TComponent *Scene::getComponent(Entity entity) const
 {
     return m_entityManager->getComponent<TComponent>(entity);
 }
@@ -162,7 +190,7 @@ void Scene::removeSystem()
 }
 
 template<typename TSystem>
-TSystem* Scene::getSystem()
+TSystem *Scene::getSystem()
 {
     return m_systemManager->getSystem<TSystem>();
 }

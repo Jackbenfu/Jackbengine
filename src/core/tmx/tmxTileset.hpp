@@ -17,19 +17,19 @@ namespace Jackbengine {
 
 class TmxTileset
 {
-    DISALLOW_COPY_AND_MOVE(TmxTileset)
+DISALLOW_COPY_AND_MOVE(TmxTileset)
 
     friend class TmxMap;
 
 public:
-    const char* name() const;
+    const char *name() const;
     int firstGid() const;
     int tileWidth() const;
     int tileHeight() const;
 
-    const TmxImage* image() const;
+    const TmxImage *image() const;
 
-    const TmxPropertyGroup* properties() const;
+    const TmxPropertyGroup *properties() const;
 
 private:
     TmxTileset();

@@ -16,72 +16,156 @@ namespace Jackbengine {
 
 class SceneState : public State
 {
-    DISALLOW_COPY_AND_MOVE(SceneState)
+DISALLOW_COPY_AND_MOVE(SceneState)
 
 public:
     SceneState(StateMachine& stateMachine, Scene& scene)
         : State(stateMachine),
           m_scene {scene}
-    { }
+    {
+    }
 
     ~SceneState() override = default;
 
 protected:
     template<typename TState>
-    inline void goToState() { stateMachine().goToState<TState>(); }
+    inline void goToState()
+    {
+        stateMachine().goToState<TState>();
+    }
 
-    inline Entity addEntity() { return m_scene.addEntity(); }
-    inline void removeEntity(Entity entity) { m_scene.removeEntity(entity); }
-    inline void enableEntity(Entity entity) { m_scene.enableEntity(entity); }
-    inline void enableEntity(Entity entity, bool enable) { m_scene.enableEntity(entity, enable); }
-    inline void disableEntity(Entity entity) { m_scene.disableEntity(entity); }
+    inline Entity addEntity()
+    {
+        return m_scene.addEntity();
+    }
+
+    inline void removeEntity(Entity entity)
+    {
+        m_scene.removeEntity(entity);
+    }
+
+    inline void enableEntity(Entity entity)
+    {
+        m_scene.enableEntity(entity);
+    }
+
+    inline void enableEntity(Entity entity, bool enable)
+    {
+        m_scene.enableEntity(entity, enable);
+    }
+
+    inline void disableEntity(Entity entity)
+    {
+        m_scene.disableEntity(entity);
+    }
 
     template<typename TComponent, typename ...Args>
-    inline void addComponent(Entity entity, Args&& ...args) { m_scene.addComponent<TComponent>(entity, std::forward<Args>(args)...); }
+    inline void addComponent(Entity entity, Args&& ...args)
+    {
+        m_scene.addComponent<TComponent>(entity, std::forward<Args>(args)...);
+    }
 
     template<typename TComponent>
-    inline void removeComponent(Entity entity) { m_scene.removeComponent<TComponent>(entity); }
+    inline void removeComponent(Entity entity)
+    {
+        m_scene.removeComponent<TComponent>(entity);
+    }
 
     template<typename TComponent>
-    inline TComponent* getComponent(Entity entity) const { return m_scene.getComponent<TComponent>(entity); }
+    inline TComponent *getComponent(Entity entity) const
+    {
+        return m_scene.getComponent<TComponent>(entity);
+    }
 
     template<typename TComponent>
-    inline void enableComponent(Entity entity) { m_scene.enableComponent<TComponent>(entity); }
+    inline void enableComponent(Entity entity)
+    {
+        m_scene.enableComponent<TComponent>(entity);
+    }
 
     template<typename TComponent>
-    inline void enableComponent(Entity entity, bool enable) { m_scene.enableComponent<TComponent>(entity, enable); }
+    inline void enableComponent(Entity entity, bool enable)
+    {
+        m_scene.enableComponent<TComponent>(entity, enable);
+    }
 
     template<typename TComponent>
-    inline void disableComponent(Entity entity) { m_scene.disableComponent<TComponent>(entity); }
+    inline void disableComponent(Entity entity)
+    {
+        m_scene.disableComponent<TComponent>(entity);
+    }
 
     template<typename TSystem, typename ...Args>
-    inline void addSystem(Args&& ...args) { m_scene.addSystem<TSystem>(std::forward<Args>(args)...); }
+    inline void addSystem(Args&& ...args)
+    {
+        m_scene.addSystem<TSystem>(std::forward<Args>(args)...);
+    }
 
     template<typename TSystem>
-    inline void removeSystem() { m_scene.removeSystem<TSystem>(); }
+    inline void removeSystem()
+    {
+        m_scene.removeSystem<TSystem>();
+    }
 
     template<typename TSystem>
-    inline TSystem* getSystem() { return m_scene.getSystem<TSystem>(); }
+    inline TSystem *getSystem()
+    {
+        return m_scene.getSystem<TSystem>();
+    }
 
     template<typename TSystem>
-    inline void enableSystem() { m_scene.enableSystem<TSystem>(); }
+    inline void enableSystem()
+    {
+        m_scene.enableSystem<TSystem>();
+    }
 
     template<typename TSystem>
-    inline void enableSystem(bool enable) { m_scene.enableSystem<TSystem>(enable); }
+    inline void enableSystem(bool enable)
+    {
+        m_scene.enableSystem<TSystem>(enable);
+    }
 
     template<typename TSystem>
-    inline void disableSystem() { m_scene.disableSystem<TSystem>(); }
+    inline void disableSystem()
+    {
+        m_scene.disableSystem<TSystem>();
+    }
 
-    inline const Timer& timer() const { return m_scene.timer(); }
-    inline const Cursor& cursor() const { return m_scene.cursor(); }
-    inline const Input& input() const { return m_scene.input(); }
-    inline const Window& window() const { return m_scene.window(); }
-    inline const Renderer& renderer() const { return m_scene.renderer(); }
+    inline const Timer& timer() const
+    {
+        return m_scene.timer();
+    }
 
-    inline void exitApplication() { m_scene.exitApplication(); }
+    inline const Cursor& cursor() const
+    {
+        return m_scene.cursor();
+    }
+
+    inline const Input& input() const
+    {
+        return m_scene.input();
+    }
+
+    inline const Window& window() const
+    {
+        return m_scene.window();
+    }
+
+    inline const Renderer& renderer() const
+    {
+        return m_scene.renderer();
+    }
+
+    inline void exitApplication()
+    {
+        m_scene.exitApplication();
+    }
 
     template<typename TScene>
-    inline void loadScene() { m_scene.loadScene<TScene>(); }
+    inline void loadScene()
+    {
+        m_scene.loadScene<TScene>();
+    }
 
 private:
     Scene& m_scene;

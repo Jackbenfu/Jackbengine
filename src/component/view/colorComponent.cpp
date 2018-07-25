@@ -12,15 +12,18 @@ using namespace Jackbengine;
 
 ColorComponent::ColorComponent(Color32 color)
     : ColorComponent(color.r, color.g, color.b, color.a)
-{ }
+{
+}
 
 ColorComponent::ColorComponent(byte red, byte green, byte blue, byte alpha)
     : m_color {red, green, blue, alpha}
-{ }
+{
+}
 
 ColorComponent::ColorComponent(byte red, byte green, byte blue)
     : m_color {red, green, blue}
-{ }
+{
+}
 
 Color32 ColorComponent::getColor() const
 {

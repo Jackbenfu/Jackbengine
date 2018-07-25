@@ -13,7 +13,7 @@ using namespace Jackbengine;
 
 Renderer::Impl::Impl(const Window& window)
 {
-    const auto sdlWindow = static_cast<SDL_Window*>(window.internalObject());
+    const auto sdlWindow = static_cast<SDL_Window *>(window.internalObject());
 
     m_renderer = SDL_CreateRenderer(sdlWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     if (nullptr == m_renderer)
@@ -64,7 +64,7 @@ void Renderer::Impl::renderTexture(int x, int y, const Texture& texture) const
 
 void Renderer::Impl::renderTexture(int x, int y, const Texture& texture, double angle) const
 {
-    const auto sdlTexture = static_cast<SDL_Texture*>(texture.internalObject());
+    const auto sdlTexture = static_cast<SDL_Texture *>(texture.internalObject());
 
     SDL_Rect rect {};
     rect.x = x;
@@ -81,7 +81,7 @@ void Renderer::Impl::renderLine(float x1, float y1, float x2, float y2, Color32 
 {
     setRenderColor(color);
 
-    if (SDL_RenderDrawLine(m_renderer, (int)x1, (int)y1, (int)x2, (int)y2) < 0)
+    if (SDL_RenderDrawLine(m_renderer, (int) x1, (int) y1, (int) x2, (int) y2) < 0)
     {
         throw std::runtime_error(SDL_GetError());
     }
@@ -91,7 +91,7 @@ void Renderer::Impl::renderPoint(float x, float y, Color32 color) const
 {
     setRenderColor(color);
 
-    if (SDL_RenderDrawPoint(m_renderer, (int)x, (int)y) < 0)
+    if (SDL_RenderDrawPoint(m_renderer, (int) x, (int) y) < 0)
     {
         throw std::runtime_error(SDL_GetError());
     }
@@ -107,7 +107,7 @@ int Renderer::Impl::height() const
     return m_height;
 }
 
-SDL_Renderer* Renderer::Impl::internalObject() const
+SDL_Renderer *Renderer::Impl::internalObject() const
 {
     return m_renderer;
 }

@@ -14,24 +14,24 @@ using namespace Jackbengine;
 
 DebugTextSystem::DebugTextSystem(const Renderer& renderer)
     : DebugTextSystem {renderer, Color32(255, 0, 0)}
-{ }
+{
+}
 
 DebugTextSystem::DebugTextSystem(const Renderer& renderer, Color32 color)
     : m_renderer {renderer},
       m_color {color}
-{ }
+{
+}
 
 int DebugTextSystem::order() const
 {
-    return (int)SystemOrder::DebugText;
+    return (int) SystemOrder::DebugText;
 }
 
 void DebugTextSystem::frame(float)
 {
-    for (const auto entity : entities())
+    for (const auto&[entity, components] : entities())
     {
-        const auto components = entity.second;
-
         const auto container = components->get<ContainerComponent>();
 
         const Vec2f position {container->x(), container->y()};
@@ -53,5 +53,5 @@ void DebugTextSystem::frame(float)
 bool DebugTextSystem::hasRequiredComponents(ComponentCollection& components) const
 {
     return components.any<TextComponent>()
-        && components.any<ContainerComponent>();
+           && components.any<ContainerComponent>();
 }

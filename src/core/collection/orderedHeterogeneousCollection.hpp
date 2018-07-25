@@ -21,14 +21,14 @@ namespace Jackbengine {
 template<typename TBase>
 class OrderedHeterogeneousCollection
 {
-    DISALLOW_COPY_AND_MOVE(OrderedHeterogeneousCollection<TBase>)
+DISALLOW_COPY_AND_MOVE(OrderedHeterogeneousCollection<TBase>)
 
 public:
     OrderedHeterogeneousCollection() = default;
     ~OrderedHeterogeneousCollection() = default;
 
     template<typename TItem>
-    TItem* get() const;
+    TItem *get() const;
 
     template<typename TItem>
     bool any() const;
@@ -56,20 +56,19 @@ private:
 
 template<typename TBase>
 template<typename TItem>
-TItem* OrderedHeterogeneousCollection<TBase>::get() const
+TItem *OrderedHeterogeneousCollection<TBase>::get() const
 {
     static_assert(std::is_base_of<TBase, TItem>::value);
 
-    const auto& tuple = find<TItem>();
-
-    if (!std::get<1>(tuple))
+    const auto&[_, enabled, item] = find<TItem>();
+    if (!enabled)
     {
         throw std::runtime_error(
             std::string("Item is disabled: ") + std::string(GET_TYPE_NAME(TItem))
         );
     }
 
-    return dynamic_cast<TItem*>(*std::get<2>(tuple).get());
+    return dynamic_cast<TItem *>(item.get());
 }
 
 template<typename TBase>
@@ -82,7 +81,10 @@ bool OrderedHeterogeneousCollection<TBase>::any() const
     const auto it = std::find_if(
         m_collection.cbegin(),
         m_collection.cend(),
-        [&typeId](const auto& pair) { return std::get<0>(pair.second) == typeId; }
+        [&typeId](const auto& pair)
+        {
+            return std::get<0>(pair.second) == typeId;
+        }
     );
 
     return it != m_collection.end() && std::get<1>(it->second);
@@ -105,7 +107,7 @@ void OrderedHeterogeneousCollection<TBase>::add(Args&& ...args)
     const auto typeId = GET_TYPE_ID(TItem);
 
     auto item = std::make_unique<TItem>(std::forward<Args>(args)...);
-    const auto key = (OrderableItem*)(item.get());
+    const auto key = (OrderableItem *) (item.get());
 
     m_collection.insert(
         std::make_pair(
@@ -125,7 +127,10 @@ void OrderedHeterogeneousCollection<TBase>::remove()
     const auto it = std::find_if(
         m_collection.cbegin(),
         m_collection.cend(),
-        [&typeId](const auto& pair) { return std::get<0>(pair.second) == typeId; }
+        [&typeId](const auto& pair)
+        {
+            return std::get<0>(pair.second) == typeId;
+        }
     );
 
     if (it != m_collection.end())
@@ -170,7 +175,10 @@ std::tuple<size_t, bool, std::unique_ptr<TBase>>& OrderedHeterogeneousCollection
     const auto it = std::find_if(
         m_collection.cbegin(),
         m_collection.cend(),
-        [&typeId](const auto& pair) { return std::get<0>(pair.second) == typeId; }
+        [&typeId](const auto& pair)
+        {
+            return std::get<0>(pair.second) == typeId;
+        }
     );
 
     if (it == m_collection.end())
@@ -191,7 +199,10 @@ const std::tuple<size_t, bool, std::unique_ptr<TBase>>& OrderedHeterogeneousColl
     const auto it = std::find_if(
         m_collection.cbegin(),
         m_collection.cend(),
-        [&typeId](const auto& pair) { return std::get<0>(pair.second) == typeId; }
+        [&typeId](const auto& pair)
+        {
+            return std::get<0>(pair.second) == typeId;
+        }
     );
 
     if (it == m_collection.end())

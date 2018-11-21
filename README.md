@@ -39,9 +39,6 @@ This collection of components and systems can be extended.
  * `Property` and `Properties`
  * `Text`
  
-#### WebSocket client
-- The class `WebSocket` wraps a web socket connection and allows to bind one `deserializer` and one `callback` per typed network message.
-
 ## Development information
 - All targets (except Web) are compiled using [CMake](https://cmake.org/).
 - Web targets are compiled using [Emscripten](http://emscripten.org/) and Makefiles.
@@ -55,4 +52,3 @@ The engine relies on the following awesome libraries and tools:
 - [SDL2_ttf](https://www.libsdl.org/projects/SDL_ttf/)
 - [SDL2_mixer](https://www.libsdl.org/projects/SDL_mixer/)
 - [TinyXML](https://sourceforge.net/projects/tinyxml/)
-- [easywsclient](https://github.com/dhbaird/easywsclient)

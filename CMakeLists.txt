@@ -24,13 +24,13 @@ include_directories(${PROJECT_SOURCE_DIR}/src)
 
 # Jackbengine source files
 set(SOURCE_FILES
-    external/easywsclient/easywsclient.cpp
     external/tinyxml/tinystr.cpp
     external/tinyxml/tinyxml.cpp
     external/tinyxml/tinyxmlerror.cpp
     external/tinyxml/tinyxmlparser.cpp
     src/application/abstract/abstractApplication.cpp
     src/application/application.cpp
+    src/application/entryPoint.cpp
     src/component/audio/audioSourceComponent.cpp
     src/component/body/shape/boxShapeComponent.cpp
     src/component/body/transformComponent.cpp
@@ -87,10 +87,9 @@ set(SOURCE_FILES
     src/system/render/textRenderSystem.cpp
     src/system/system.cpp
     src/system/systemManager.cpp
-    ${PLATFORM_SOURCE_FILES}
 )
 
-add_library(jackbengine ${SOURCE_FILES})
+add_library(jackbengine SHARED ${SOURCE_FILES})
 target_link_libraries(jackbengine ${SDL2_LIBRARY})
 target_link_libraries(jackbengine ${SDL2_IMAGE_LIBRARY})
 target_link_libraries(jackbengine ${SDL2_TTF_LIBRARY})

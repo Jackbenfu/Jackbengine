@@ -89,7 +89,7 @@ set(SOURCE_FILES
     src/system/systemManager.cpp
 )
 
-add_library(jackbengine SHARED ${SOURCE_FILES})
+add_library(jackbengine STATIC ${SOURCE_FILES})
 target_link_libraries(jackbengine ${SDL2_LIBRARY})
 target_link_libraries(jackbengine ${SDL2_IMAGE_LIBRARY})
 target_link_libraries(jackbengine ${SDL2_TTF_LIBRARY})

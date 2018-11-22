@@ -51,6 +51,6 @@ private:
     std::unique_ptr<Impl> m_impl;
 };
 
-} // namespace Jackbengine
+}
 
 #endif // __TEXTURE_H__

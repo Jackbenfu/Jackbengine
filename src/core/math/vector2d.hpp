@@ -128,6 +128,6 @@ struct Vector2d
 using Vec2f = Vector2d<float>;
 using Vec2i = Vector2d<int>;
 
-} // namespace Jackbengine
+}
 
 #endif // __VECTOR2D_H__

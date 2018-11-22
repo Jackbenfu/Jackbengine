@@ -8,7 +8,7 @@
 
 #include "window.impl.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 Window::Impl::Impl(const std::string& title, int width, int height, bool fullscreen)
 {
@@ -123,4 +123,6 @@ void Window::Impl::setWindowIcon()
     DestroyIcon(icon);
 
 #endif
+}
+
 }

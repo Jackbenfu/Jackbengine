@@ -6,9 +6,10 @@
 // Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
+#include "core/sdl/sdl.hpp"
 #include "sdlSurface.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 SdlSurface::SdlSurface(const std::string& file)
 {
@@ -21,7 +22,7 @@ SdlSurface::SdlSurface(const std::string& file)
 
 SdlSurface::SdlSurface(const SdlRwops& rwops)
 {
-    m_surface = IMG_Load_RW(rwops.internalObject(), 0);
+    m_surface = IMG_Load_RW((SDL_RWops *) rwops.internalObject(), 0);
     if (nullptr == m_surface)
     {
         throw std::runtime_error(IMG_GetError());
@@ -52,10 +53,12 @@ SdlSurface::SdlSurface(const Font& font, const std::string& text, Color32 foregr
 
 SdlSurface::~SdlSurface()
 {
-    SDL_FreeSurface(m_surface);
+    SDL_FreeSurface((SDL_Surface *) m_surface);
 }
 
-SDL_Surface *SdlSurface::internalObject() const
+void *SdlSurface::internalObject() const
 {
     return m_surface;
+}
+
 }

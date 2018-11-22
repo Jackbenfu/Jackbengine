@@ -8,7 +8,7 @@
 
 #include "stateMachine.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 StateMachine::~StateMachine()
 {
@@ -32,4 +32,6 @@ void StateMachine::start()
 void StateMachine::frame(float delta)
 {
     m_currentState->frame(delta);
+}
+
 }

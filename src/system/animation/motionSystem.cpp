@@ -11,7 +11,7 @@
 #include "component/body/velocityComponent.hpp"
 #include "component/layout/containerComponent.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 int MotionSystem::order() const
 {
@@ -46,4 +46,6 @@ bool MotionSystem::hasRequiredComponents(ComponentCollection& components) const
 {
     return components.any<TransformComponent>()
            && components.any<VelocityComponent>();
+}
+
 }

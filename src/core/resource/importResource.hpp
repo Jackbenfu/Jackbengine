@@ -18,6 +18,6 @@ namespace Jackbengine {
 
 #define IMPORT_TEXT_RESOURCE(name)      extern "C" unsigned char name[];
 
-} // namespace Jackbengine
+}
 
 #endif // __IMPORT_RESOURCE_H__

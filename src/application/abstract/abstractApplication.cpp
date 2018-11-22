@@ -7,13 +7,20 @@
 //
 
 #include <stdexcept>
-#include "abstractApplication.hpp"
-#include "platform.hpp"
 
-using namespace Jackbengine;
+#include "core/sdl/sdl.hpp"
+#include "core/log/log.hpp"
+#include "core/debug/profile.hpp"
+#include "abstractApplication.hpp"
+
+namespace Jackbengine {
 
 AbstractApplication::AbstractApplication()
 {
+    Log::init();
+
+    PROFILE_CORE_MILLISECONDS("AbstractApplication::AbstractApplication");
+
 #ifdef EMSCRIPTEN
     if (SDL_Init(SDL_INIT_EVERYTHING & ~(SDL_INIT_TIMER | SDL_INIT_HAPTIC)) < 0)
 #else
@@ -41,10 +48,14 @@ AbstractApplication::AbstractApplication()
 
 AbstractApplication::~AbstractApplication()
 {
+    PROFILE_CORE_MILLISECONDS("AbstractApplication::~AbstractApplication");
+
     Mix_Quit();
     TTF_Quit();
 
 #ifndef EMSCRIPTEN
     SDL_Quit();
 #endif
+}
+
 }

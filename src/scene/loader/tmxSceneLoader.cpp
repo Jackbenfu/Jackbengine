@@ -17,7 +17,7 @@
 #include "system/render/textRenderSystem.hpp"
 #include "system/render/spriteRenderSystem.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 TmxSceneLoader::TmxSceneLoader(Scene& scene, const unsigned char *tmxData)
     : TmxSceneLoader {scene, tmxData, nullptr, (size_t) -1, nullptr, (size_t) -1}
@@ -274,4 +274,6 @@ Color32 TmxSceneLoader::getTextColor(const TmxText *text) const
     auto b = (byte) (intColor & 0xFF);
 
     return Color32(r, g, b);
+}
+
 }

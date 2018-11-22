@@ -8,7 +8,7 @@
 
 #include "colorComponent.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 ColorComponent::ColorComponent(Color32 color)
     : ColorComponent(color.r, color.g, color.b, color.a)
@@ -68,4 +68,6 @@ byte ColorComponent::alpha() const
 void ColorComponent::setAlpha(byte value)
 {
     m_color.a = value;
+}
+
 }

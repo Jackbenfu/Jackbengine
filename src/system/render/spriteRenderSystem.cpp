@@ -11,7 +11,7 @@
 #include "component/body/transformComponent.hpp"
 #include "component/layout/zOrderComponent.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 SpriteRenderSystem::SpriteRenderSystem(const Renderer& renderer)
     : m_renderer {renderer}
@@ -62,4 +62,6 @@ void SpriteRenderSystem::sortByZOrder()
     };
 
     sort(lambda);
+}
+
 }

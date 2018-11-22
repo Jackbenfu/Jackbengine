@@ -9,7 +9,7 @@
 #include "texture.impl.hpp"
 #include "core/render/renderer/renderer.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 Texture::Impl::Impl(const Renderer& renderer, const std::string& file)
 {
@@ -29,7 +29,7 @@ Texture::Impl::Impl(const Renderer& renderer, const void *data, size_t dataSize)
 Texture::Impl::Impl(const Renderer& renderer, int width, int height, Color32 color)
 {
     const auto sdlSurface = std::make_unique<SdlSurface>(width, height, 32);
-    const auto sdlSurfaceObject = sdlSurface->internalObject();
+    const auto sdlSurfaceObject = (SDL_Surface *) sdlSurface->internalObject();
 
     const auto rgbUint = SDL_MapRGB(sdlSurfaceObject->format, color.r, color.g, color.b);
     if (SDL_FillRect(sdlSurfaceObject, nullptr, rgbUint) < 0)
@@ -49,7 +49,7 @@ Texture::Impl::Impl(
 
     const auto sdlRwops = std::make_unique<SdlRwops>(tilesetImageData, tilesetImageDataSize);
     const auto sdlTilesetSurface = std::make_unique<SdlSurface>(*sdlRwops);
-    const auto sdlTilesetSurfaceObject = sdlTilesetSurface->internalObject();
+    const auto sdlTilesetSurfaceObject = (SDL_Surface *) sdlTilesetSurface->internalObject();
 
     const auto layerWidth = layer.width();
     const auto layerHeight = layer.height();
@@ -93,7 +93,8 @@ Texture::Impl::Impl(
 
             SDL_BlitSurface(
                 sdlTilesetSurfaceObject,
-                &srcRect, sdlSurface->internalObject(),
+                &srcRect,
+                (SDL_Surface *) sdlSurface->internalObject(),
                 &dstRect
             );
         }
@@ -134,7 +135,7 @@ Texture::Impl::Impl(
 
     const auto sdlRwops = std::make_unique<SdlRwops>(tilesetImageData, tilesetImageDataSize);
     const auto sdlTilesetSurface = std::make_unique<SdlSurface>(*sdlRwops);
-    const auto sdlTilesetSurfaceObject = sdlTilesetSurface->internalObject();
+    const auto sdlTilesetSurfaceObject = (SDL_Surface *) sdlTilesetSurface->internalObject();
 
     const auto tileWidth = tileset->tileWidth();
     const auto tileHeight = tileset->tileHeight();
@@ -176,7 +177,8 @@ Texture::Impl::Impl(
 
         SDL_BlitSurface(
             sdlTilesetSurfaceObject,
-            &srcRect, sdlSurface->internalObject(),
+            &srcRect,
+            (SDL_Surface *) sdlSurface->internalObject(),
             &dstRect
         );
     }
@@ -218,7 +220,7 @@ void Texture::Impl::loadTextureFromSurface(const Renderer& renderer, const SdlSu
 {
     const auto sdlRenderer = static_cast<SDL_Renderer *>(renderer.internalObject());
 
-    m_texture = SDL_CreateTextureFromSurface(sdlRenderer, surface.internalObject());
+    m_texture = SDL_CreateTextureFromSurface(sdlRenderer, (SDL_Surface *) surface.internalObject());
     if (nullptr == m_texture)
     {
         throw std::runtime_error(SDL_GetError());
@@ -228,4 +230,6 @@ void Texture::Impl::loadTextureFromSurface(const Renderer& renderer, const SdlSu
     {
         throw std::runtime_error(SDL_GetError());
     }
+}
+
 }

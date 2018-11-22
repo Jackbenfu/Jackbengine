@@ -52,6 +52,6 @@ private:
 
 using Transform = TransformComponent;
 
-} // namespace Jackbengine
+}
 
 #endif // __TRANSFORM_COMPONENT_H__

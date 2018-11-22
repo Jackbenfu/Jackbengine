@@ -9,8 +9,8 @@
 #ifndef __WINDOW_IMPL_H__
 #define __WINDOW_IMPL_H__
 
+#include "core/sdl/sdl.hpp"
 #include "window.hpp"
-#include "platform.hpp"
 
 namespace Jackbengine {
 
@@ -34,6 +34,6 @@ private:
     int m_height {0};
 };
 
-} // namespace Jackbengine
+}
 
 #endif // __WINDOW_IMPL_H__

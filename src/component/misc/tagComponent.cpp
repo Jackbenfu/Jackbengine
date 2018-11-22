@@ -8,7 +8,7 @@
 
 #include "tagComponent.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 TagComponent::TagComponent(const std::string& tag)
     : m_value(tag)
@@ -23,4 +23,6 @@ const std::string& TagComponent::get() const
 void TagComponent::set(const std::string& tag)
 {
     m_value.set(tag);
+}
+
 }

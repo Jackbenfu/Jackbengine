@@ -16,7 +16,7 @@
 #include "component/body/velocityComponent.hpp"
 #include "component/misc/tagComponent.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 int AABBCollisionSystem::order() const
 {
@@ -193,4 +193,6 @@ void AABBCollisionSystem::testCollision(
             }
         }
     }
+}
+
 }

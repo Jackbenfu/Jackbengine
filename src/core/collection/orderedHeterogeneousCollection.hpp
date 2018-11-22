@@ -215,6 +215,6 @@ const std::tuple<size_t, bool, std::unique_ptr<TBase>>& OrderedHeterogeneousColl
     return it->second;
 }
 
-} // namespace Jackbengine
+}
 
 #endif // __ORDERED_HETEROGENEOUS_COLLECTION_H__

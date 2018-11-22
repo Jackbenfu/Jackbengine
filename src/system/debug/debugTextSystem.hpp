@@ -33,6 +33,6 @@ private:
     Color32 m_color;
 };
 
-} // namespace Jackbengine
+}
 
 #endif // __DEBUG_TEXT_SYSTEM_H__

@@ -31,6 +31,6 @@ private:
 
 using String = StringComponent;
 
-} // namespace Jackbengine
+}
 
 #endif // __STRING_COMPONENT_H__

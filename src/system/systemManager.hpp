@@ -71,6 +71,6 @@ void SystemManager::enableSystem(bool enable)
     m_systems.enable<TSystem>(enable);
 }
 
-} // namespace Jackbengine
+}
 
 #endif // __SYSTEM_MANAGER_H__

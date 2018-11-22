@@ -8,7 +8,7 @@
 
 #include "velocityComponent.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 VelocityComponent::VelocityComponent(float x, float y)
     : m_velocity {x, y}
@@ -44,4 +44,6 @@ float VelocityComponent::y() const
 void VelocityComponent::setY(float y)
 {
     m_velocity.y = y;
+}
+
 }

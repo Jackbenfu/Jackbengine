@@ -25,6 +25,6 @@ struct Color32
     byte a;
 };
 
-} // namespace Jackbengine
+}
 
 #endif // __COLOR_H__

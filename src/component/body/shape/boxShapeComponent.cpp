@@ -9,7 +9,7 @@
 #include <stdexcept>
 #include "boxShapeComponent.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 BoxShapeComponent::BoxShapeComponent(float width, float height)
     : m_vector {width, height}
@@ -55,4 +55,6 @@ void BoxShapeComponent::setSize(float width, float height)
 {
     setWidth(width);
     setHeight(height);
+}
+
 }

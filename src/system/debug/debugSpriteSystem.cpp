@@ -11,7 +11,7 @@
 #include "component/body/transformComponent.hpp"
 #include "debugProfileSystem.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 DebugSpriteSystem::DebugSpriteSystem(const Renderer& renderer)
     : m_renderer {renderer},
@@ -50,4 +50,6 @@ bool DebugSpriteSystem::hasRequiredComponents(ComponentCollection& components) c
 {
     return components.any<BoxShapeComponent>()
            && components.any<TransformComponent>();
+}
+
 }

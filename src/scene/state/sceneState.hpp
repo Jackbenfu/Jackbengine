@@ -171,6 +171,6 @@ private:
     Scene& m_scene;
 };
 
-} // namespace Jackbengine
+}
 
 #endif // __SCENE_STATE_H__

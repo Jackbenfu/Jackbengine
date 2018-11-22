@@ -11,7 +11,7 @@
 #include "component/input/mouseListenerComponent.hpp"
 #include "component/layout/zOrderComponent.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 MouseEventTriggerSystem::MouseEventTriggerSystem(const Input& input)
     : m_input {input}
@@ -96,4 +96,6 @@ bool MouseEventTriggerSystem::hasRequiredComponents(ComponentCollection& compone
 {
     return components.any<ContainerComponent>()
            && components.any<MouseListenerComponent>();
+}
+
 }

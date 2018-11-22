@@ -8,7 +8,7 @@
 
 #include "scene.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 Scene::Scene(Application& application, SceneManager<Scene>& sceneManager)
     : m_application {application},
@@ -69,4 +69,6 @@ void Scene::exitApplication()
 
 void Scene::frame(float)
 {
+}
+
 }

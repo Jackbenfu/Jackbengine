@@ -51,6 +51,6 @@ private:
     StateMachine& m_stateMachine;
 };
 
-} // namespace Jackbengine
+}
 
 #endif // __STATE_H__

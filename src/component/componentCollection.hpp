@@ -71,6 +71,6 @@ void ComponentCollection::enable(bool enable)
     m_components.enable<TComponent>(enable);
 }
 
-} // namespace Jackbengine
+}
 
 #endif // __COMPONENT_COLLECTION_H__

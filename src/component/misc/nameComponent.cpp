@@ -8,7 +8,7 @@
 
 #include "nameComponent.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 NameComponent::NameComponent(const std::string& name)
     : m_value {name}
@@ -23,4 +23,6 @@ const std::string& NameComponent::get() const
 void NameComponent::set(const std::string& name)
 {
     m_value.set(name);
+}
+
 }

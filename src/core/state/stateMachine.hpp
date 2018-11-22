@@ -76,6 +76,6 @@ void StateMachine::goToState()
     m_currentState->enter();
 }
 
-} // namespace Jackbengine
+}
 
 #endif // __STATE_MACHINE_H__

@@ -9,7 +9,7 @@
 #include "cursor.hpp"
 #include "cursor.impl.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 Cursor::Cursor()
     : m_impl {std::make_unique<Impl>()}
@@ -26,4 +26,6 @@ void Cursor::setCursor(CursorType cursor)
 void Cursor::showCursor(bool visible)
 {
     m_impl->showCursor(visible);
+}
+
 }

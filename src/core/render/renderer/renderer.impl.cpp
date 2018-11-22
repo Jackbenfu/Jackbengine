@@ -9,7 +9,7 @@
 #include "renderer.impl.hpp"
 #include "core/render/texture/texture.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 Renderer::Impl::Impl(const Window& window)
 {
@@ -110,4 +110,6 @@ int Renderer::Impl::height() const
 SDL_Renderer *Renderer::Impl::internalObject() const
 {
     return m_renderer;
+}
+
 }

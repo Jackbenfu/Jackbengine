@@ -66,6 +66,6 @@ void NumericalComponent<T>::decrement(T by)
     m_value -= by;
 }
 
-} // namespace Jackbengine
+}
 
 #endif // __NUMERICAL_COMPONENT_H__

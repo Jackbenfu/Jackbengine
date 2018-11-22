@@ -8,7 +8,7 @@
 
 #include "tmxObject.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 const char *TmxObject::name() const
 {
@@ -108,4 +108,6 @@ void TmxObject::load(const TiXmlElement *element)
 
         node = node->NextSibling();
     }
+}
+
 }

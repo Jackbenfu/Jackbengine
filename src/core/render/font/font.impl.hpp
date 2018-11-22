@@ -9,8 +9,8 @@
 #ifndef __FONT_IMPL_H__
 #define __FONT_IMPL_H__
 
+#include "core/sdl/sdl.hpp"
 #include "font.hpp"
-#include "platform.hpp"
 
 namespace Jackbengine {
 
@@ -40,6 +40,6 @@ private:
     TTF_Font *m_font {nullptr};
 };
 
-} // namespace Jackbengine
+}
 
 #endif // __FONT_IMPL_H__

@@ -9,7 +9,7 @@
 #include "timer.hpp"
 #include "timer.impl.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 Timer::Timer(uint fps)
     : m_impl {std::make_unique<Impl>(fps)}
@@ -66,4 +66,6 @@ void Timer::disableFixedFps()
 uint Timer::totalFrames() const
 {
     return m_impl->totalFrames();
+}
+
 }

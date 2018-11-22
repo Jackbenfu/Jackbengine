@@ -8,7 +8,7 @@
 
 #include "containerComponent.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 ContainerComponent::ContainerComponent(float x, float y, float w, float h)
     : m_rect {x, y, w, h}
@@ -75,4 +75,6 @@ float ContainerComponent::width() const
 float ContainerComponent::height() const
 {
     return m_rect.h;
+}
+
 }

@@ -39,6 +39,6 @@ private:
     const char *m_text {nullptr};
 };
 
-} // namespace Jackbengine
+}
 
 #endif // __TMX_TEXT_H__

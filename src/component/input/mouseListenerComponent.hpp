@@ -94,6 +94,6 @@ private:
 
 using MouseListener = MouseListenerComponent;
 
-} // namespace Jackbengine
+}
 
 #endif // __MOUSE_LISTENER_COMPONENT_H__

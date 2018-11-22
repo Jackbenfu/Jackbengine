@@ -10,7 +10,7 @@
 #include "debugProfileSystem.hpp"
 #include "core/resource/importResource.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 IMPORT_BINARY_RESOURCE(default_font)
 
@@ -55,4 +55,6 @@ void DebugProfileSystem::frame(float)
 bool DebugProfileSystem::hasRequiredComponents(ComponentCollection&) const
 {
     return false;
+}
+
 }

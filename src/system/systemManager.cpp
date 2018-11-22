@@ -8,7 +8,7 @@
 
 #include "systemManager.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 SystemManager::SystemManager(const EntityManager& entityManager)
     : m_entityManager {entityManager}
@@ -46,4 +46,6 @@ void SystemManager::frame(float delta)
     };
 
     m_systems.apply(lambda);
+}
+
 }

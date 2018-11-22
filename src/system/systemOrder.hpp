@@ -23,6 +23,6 @@ enum class SystemOrder
     DebugProfile = 60000,
 };
 
-} // namespace Jackbengine
+}
 
 #endif // __SYSTEM_ORDER_H__

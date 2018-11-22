@@ -51,6 +51,6 @@ private:
     uint m_totalFrames {0};
 };
 
-} // namespace Jackbengine
+}
 
 #endif // __TIMER_IMPL_H__

@@ -10,7 +10,7 @@
 #include "component/layout/containerComponent.hpp"
 #include "component/view/textComponent.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 TextRenderSystem::TextRenderSystem(const Renderer& renderer)
     : m_renderer {renderer}
@@ -117,4 +117,6 @@ bool TextRenderSystem::hasRequiredComponents(ComponentCollection& components) co
 {
     return components.any<TextComponent>()
            && components.any<ContainerComponent>();
+}
+
 }

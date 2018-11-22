@@ -40,6 +40,6 @@ private:
     const char *m_value {nullptr};
 };
 
-} // namespace Jackbengine
+}
 
 #endif // __TMX_PROPERTY_H__

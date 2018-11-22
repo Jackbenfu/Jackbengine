@@ -44,6 +44,6 @@ private:
 
 using Container = ContainerComponent;
 
-} // namespace Jackbengine
+}
 
 #endif // __CONTAINER_COMPONENT_H__

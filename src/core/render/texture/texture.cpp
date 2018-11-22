@@ -10,7 +10,7 @@
 #include "texture.hpp"
 #include "texture.impl.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 Texture::Texture(const Renderer& renderer, const std::string& file)
     : m_impl {std::make_unique<Impl>(renderer, file)}
@@ -66,4 +66,6 @@ int Texture::height() const
 void *Texture::internalObject() const
 {
     return m_impl->internalObject();
+}
+
 }

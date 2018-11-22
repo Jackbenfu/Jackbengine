@@ -32,6 +32,6 @@ private:
 
 using ZOrder = ZOrderComponent;
 
-} // namespace Jackbengine
+}
 
 #endif // __Z_ORDER_COMPONENT_H__

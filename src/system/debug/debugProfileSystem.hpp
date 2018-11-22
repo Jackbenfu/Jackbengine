@@ -43,6 +43,6 @@ private:
     TextComponent m_fps;
 };
 
-} // namespace Jackbengine
+}
 
 #endif // __DEBUG_PROFILE_SYSTEM_H__

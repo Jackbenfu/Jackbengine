@@ -9,7 +9,7 @@
 #include "window.hpp"
 #include "window.impl.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 Window::Window(const std::string& title, int width, int height, bool fullscreen)
     : m_impl {std::make_unique<Impl>(title, width, height, fullscreen)}
@@ -31,4 +31,6 @@ int Window::height() const
 void *Window::internalObject() const
 {
     return m_impl->internalObject();
+}
+
 }

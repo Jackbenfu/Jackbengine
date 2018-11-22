@@ -8,7 +8,7 @@
 
 #include "tmxText.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 int TmxText::pixelsize() const
 {
@@ -42,4 +42,6 @@ void TmxText::load(const TiXmlElement *element)
     m_halign = element->Attribute("halign");
     m_valign = element->Attribute("valign");
     m_text = element->GetText();
+}
+
 }

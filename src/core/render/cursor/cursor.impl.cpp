@@ -8,7 +8,7 @@
 
 #include "cursor.impl.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 Cursor::Impl::~Impl()
 {
@@ -42,4 +42,6 @@ void Cursor::Impl::setCursor(CursorType cursor)
 void Cursor::Impl::showCursor(bool visible)
 {
     SDL_ShowCursor(visible ? SDL_ENABLE : SDL_DISABLE);
+}
+
 }

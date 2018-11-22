@@ -9,9 +9,9 @@
 #ifndef __RENDERER_IMPL_H__
 #define __RENDERER_IMPL_H__
 
-#include "renderer.hpp"
-#include "platform.hpp"
+#include "core/sdl/sdl.hpp"
 #include "core/render/color32.hpp"
+#include "renderer.hpp"
 
 namespace Jackbengine {
 
@@ -46,6 +46,6 @@ private:
     int m_height;
 };
 
-} // namespace Jackbengine
+}
 
 #endif // __RENDERER_IMPL_H__

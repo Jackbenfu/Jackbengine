@@ -36,6 +36,6 @@ private:
     std::unique_ptr<Impl> m_impl;
 };
 
-} // namespace Jackbengine
+}
 
 #endif // __WINDOW_H__

@@ -21,6 +21,6 @@ namespace Jackbengine {
 #define GET_TYPE_ID(T)      typeid(T).hash_code()
 #define GET_TYPE_NAME(T)    typeid(T).name()
 
-} // namespace Jackbengine
+}
 
 #endif // __COMMON_MACRO_H__

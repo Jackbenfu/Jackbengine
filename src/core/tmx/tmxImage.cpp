@@ -8,7 +8,7 @@
 
 #include "tmxImage.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 const char *TmxImage::source() const
 {
@@ -30,4 +30,6 @@ void TmxImage::load(const TiXmlElement *element)
     m_source = element->Attribute("source");
     element->Attribute("width", &m_width);
     element->Attribute("height", &m_height);
+}
+
 }

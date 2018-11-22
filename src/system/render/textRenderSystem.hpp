@@ -32,6 +32,6 @@ private:
     const Renderer& m_renderer;
 };
 
-} // namespace Jackbengine
+}
 
 #endif // __TEXT_RENDER_SYSTEM_H__

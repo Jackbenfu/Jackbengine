@@ -9,7 +9,7 @@
 #include "font.hpp"
 #include "font.impl.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 Font::Font(const std::string& file, int size)
     : m_impl {std::make_unique<Impl>(file, size)}
@@ -71,4 +71,6 @@ int Font::lineSkip() const
 void *Font::internalObject() const
 {
     return m_impl->internalObject();
+}
+
 }

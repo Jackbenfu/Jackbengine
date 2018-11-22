@@ -8,7 +8,7 @@
 
 #include "audioSourceComponent.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 AudioSourceComponent::AudioSourceComponent(const std::string& file)
     : m_sound {file}
@@ -28,4 +28,6 @@ void AudioSourceComponent::play() const
 void AudioSourceComponent::play(bool loop) const
 {
     m_sound.play(loop);
+}
+
 }

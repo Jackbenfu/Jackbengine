@@ -35,6 +35,6 @@ private:
     bool m_bubbling {false};
 };
 
-} // namespace Jackbengine
+}
 
 #endif // __MOUSE_EVENT_TRIGGER_SYSTEM_H__

@@ -10,7 +10,7 @@
 #include "component/layout/containerComponent.hpp"
 #include "component/view/textComponent.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 DebugTextSystem::DebugTextSystem(const Renderer& renderer)
     : DebugTextSystem {renderer, Color32(255, 0, 0)}
@@ -54,4 +54,6 @@ bool DebugTextSystem::hasRequiredComponents(ComponentCollection& components) con
 {
     return components.any<TextComponent>()
            && components.any<ContainerComponent>();
+}
+
 }

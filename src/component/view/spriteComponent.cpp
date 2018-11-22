@@ -8,7 +8,7 @@
 
 #include "spriteComponent.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 SpriteComponent::SpriteComponent(const Renderer& renderer, const std::string& file)
     : m_texture {renderer, file}
@@ -44,4 +44,6 @@ SpriteComponent::SpriteComponent(
 const Texture& SpriteComponent::texture() const
 {
     return m_texture;
+}
+
 }

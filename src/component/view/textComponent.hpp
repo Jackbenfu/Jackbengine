@@ -86,6 +86,6 @@ private:
 
 using Text = TextComponent;
 
-} // namespace Jackbengine
+}
 
 #endif // __TEXT_COMPONENT_H__

@@ -8,7 +8,7 @@
 
 #include "tmxProperty.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 const char *TmxProperty::name() const
 {
@@ -43,4 +43,6 @@ bool TmxProperty::doubleValue(double *value) const
 void TmxProperty::load(const TiXmlElement *element)
 {
     m_element = element;
+}
+
 }

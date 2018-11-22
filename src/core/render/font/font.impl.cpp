@@ -10,7 +10,7 @@
 #include "font.impl.hpp"
 #include "core/sdl/io/sdlRwops.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 Font::Impl::Impl(const std::string& file, int size)
 {
@@ -25,7 +25,7 @@ Font::Impl::Impl(const void *data, size_t dataSize, int size)
 {
     const auto sdlRwops = std::make_unique<SdlRwops>(data, dataSize);
 
-    m_font = TTF_OpenFontRW(sdlRwops->internalObject(), 1, size);
+    m_font = TTF_OpenFontRW((SDL_RWops *) sdlRwops->internalObject(), 1, size);
     if (nullptr == m_font)
     {
         throw std::runtime_error(TTF_GetError());
@@ -113,4 +113,6 @@ int Font::Impl::lineSkip() const
 TTF_Font *Font::Impl::internalObject() const
 {
     return m_font;
+}
+
 }

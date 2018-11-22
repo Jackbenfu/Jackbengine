@@ -8,7 +8,7 @@
 
 #include "mouseListenerComponent.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 void MouseListenerComponent::onLeftClick(MouseCallback callback)
 {
@@ -184,4 +184,6 @@ bool MouseListenerComponent::hasAndRemoveEvent(MouseEvent event)
 bool MouseListenerComponent::hasEvent(MouseEvent event) const
 {
     return event == (m_events & event);
+}
+
 }

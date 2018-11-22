@@ -6,10 +6,10 @@
 // Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
+#include "core/sdl/sdl.hpp"
 #include "timer.impl.hpp"
-#include "platform.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 Timer::Impl::Impl(uint fps)
 {
@@ -111,4 +111,6 @@ void Timer::Impl::delay(uint ms) const
 uint Timer::Impl::ticks() const
 {
     return SDL_GetTicks();
+}
+
 }

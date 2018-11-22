@@ -8,7 +8,7 @@
 
 #include "textComponent.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 TextComponent::TextComponent(
     const Renderer& renderer, const std::string& text, TextLayout layout, Color32 foreground,
@@ -134,4 +134,6 @@ void TextComponent::refreshTexture()
     m_bottomWhiteSpace = abs(m_font->descent());
     m_topWhiteSpace = m_font->lineSkip() - glyphMaxY - m_bottomWhiteSpace;
     m_rightWhiteSpace = lastGlyphAdvance - lastGlyphMaxX;
+}
+
 }

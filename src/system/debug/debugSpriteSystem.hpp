@@ -33,6 +33,6 @@ private:
     const Color32 m_color;
 };
 
-} // namespace Jackbengine
+}
 
 #endif // __DEBUG_SPRITE_SYSTEM_H__

@@ -221,6 +221,6 @@ void Scene::loadScene()
     m_sceneManager.loadScene<TScene>(m_application, m_sceneManager);
 }
 
-} // namespace Jackbengine
+}
 
 #endif // __SCENE_H__

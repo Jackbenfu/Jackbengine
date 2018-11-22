@@ -25,6 +25,6 @@ struct ApplicationConfig
     uint core_fps {60};
 };
 
-} // namespace Jackbengine
+}
 
 #endif // __APPLICATION_CONFIG_H__

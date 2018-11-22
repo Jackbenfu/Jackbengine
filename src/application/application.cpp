@@ -9,7 +9,7 @@
 #include <ctime>
 #include "application.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 Application::Application(ApplicationConfig& config)
     : m_timer {std::make_unique<Timer>(config.core_fps)},
@@ -20,7 +20,7 @@ Application::Application(ApplicationConfig& config)
       )},
       m_renderer {std::make_unique<Renderer>(*m_window)}
 {
-    srand(static_cast<uint>(time(nullptr)));
+    srand(static_cast<uint>(time(nullptr))); // NOLINT
 }
 
 bool Application::running() const
@@ -53,4 +53,6 @@ void Application::loop()
 void Application::exit()
 {
     m_running = false;
+}
+
 }

@@ -9,7 +9,7 @@
 #include "renderer.hpp"
 #include "renderer.impl.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 Renderer::Renderer(const Window& window)
     : m_impl {std::make_unique<Impl>(window)}
@@ -71,4 +71,6 @@ int Renderer::height() const
 void *Renderer::internalObject() const
 {
     return m_impl->internalObject();
+}
+
 }

@@ -177,6 +177,6 @@ const std::pair<bool, std::unique_ptr<TBase>>& HeterogeneousCollection<TBase>::f
     return it->second;
 }
 
-} // namespace Jackbengine
+}
 
 #endif // __HETEROGENEOUS_COLLECTION_H__

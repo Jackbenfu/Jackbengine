@@ -9,12 +9,4 @@
 #ifndef __EMSCRIPTEN_H__
 #define __EMSCRIPTEN_H__
 
-// SDL2
-#include <SDL.h>
-#include <SDL_image.h>
-#include <SDL_ttf.h>
-
-// SDL1 for mixer
-#include <SDL/SDL_mixer.h>
-
 #endif // __EMSCRIPTEN_H__

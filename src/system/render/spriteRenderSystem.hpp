@@ -34,6 +34,6 @@ private:
     const Renderer& m_renderer;
 };
 
-} // namespace Jackbengine
+}
 
 #endif // __SPRITE_RENDER_SYSTEM_H__

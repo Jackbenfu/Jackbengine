@@ -95,6 +95,6 @@ auto EntityManager::findEntity(T& t, Entity entity) -> decltype(t.findEntity(ent
     return it->second;
 }
 
-} // namespace Jackbengine
+}
 
 #endif // __ENTITY_MANAGER_H__

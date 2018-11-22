@@ -57,6 +57,6 @@ private:
     AABBCollisionCallback m_callback {nullptr};
 };
 
-} // namespace Jackbengine
+}
 
 #endif // __AABB_COLLISION_SYSTEM_H__

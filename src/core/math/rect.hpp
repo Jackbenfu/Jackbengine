@@ -38,6 +38,6 @@ struct Rect
 using Recti = Rect<int>;
 using Rectf = Rect<float>;
 
-} // namespace Jackbengine
+}
 
 #endif // __RECT_H__

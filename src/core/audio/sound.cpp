@@ -9,7 +9,7 @@
 #include "sound.hpp"
 #include "sound.impl.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 Sound::Sound(const std::string& file)
     : m_impl {std::make_unique<Impl>(file)}
@@ -26,4 +26,6 @@ Sound::~Sound() = default;
 void Sound::play(bool loop) const
 {
     m_impl->play(loop);
+}
+
 }

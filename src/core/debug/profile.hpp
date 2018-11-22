@@ -10,14 +10,9 @@
 #define __PROFILE_H__
 
 #include <chrono>
-#include <iostream>
+#include "core/log/log.hpp"
 
 namespace Jackbengine {
-
-#define PROFILE_SECONDS(name)       Profile<std::chrono::seconds> __profile__(name)
-#define PROFILE_MILLISECONDS(name)  Profile<std::chrono::milliseconds> __profile__(name)
-#define PROFILE_MICROSECONDS(name)  Profile<std::chrono::microseconds> __profile__(name)
-#define PROFILE_NANOSECONDS(name)   Profile<std::chrono::nanoseconds> __profile__(name)
 
 template<typename Precision>
 class Profile
@@ -25,20 +20,36 @@ class Profile
     using clock = std::chrono::high_resolution_clock;
 
 public:
-    explicit Profile(const char *name)
+    explicit Profile(const char *name, bool core)
         : m_name {name},
-          m_start {clock::now()}
+          m_start {clock::now()},
+          m_core {core}
     {
     }
 
     ~Profile()
     {
+        const auto format = "{} ({} {})";
         auto duration = clock::now() - m_start;
 
-        std::cout
-            << "Time taken for scope " << m_name << ": "
-            << std::chrono::duration_cast<Precision>(duration).count() << " " << unit()
-            << std::endl;
+        if (m_core)
+        {
+            LOG_CORE_TRACE(
+                format,
+                m_name,
+                std::chrono::duration_cast<Precision>(duration).count(),
+                unit()
+            );
+        }
+        else
+        {
+            LOG_TRACE(
+                format,
+                m_name,
+                std::chrono::duration_cast<Precision>(duration).count(),
+                unit()
+            );
+        }
     }
 
 private:
@@ -46,6 +57,7 @@ private:
 
     const char *m_name;
     clock::time_point m_start;
+    bool m_core;
 };
 
 template<>
@@ -72,6 +84,15 @@ inline const char *Profile<std::chrono::nanoseconds>::unit()
     return "nanoseconds";
 }
 
-} // namespace Jackbengine
+#define PROFILE_CORE_SECONDS(name)       ::Jackbengine::Profile<std::chrono::seconds> __profile__(name, true)
+#define PROFILE_CORE_MILLISECONDS(name)  ::Jackbengine::Profile<std::chrono::milliseconds> __profile__(name, true)
+#define PROFILE_CORE_MICROSECONDS(name)  ::Jackbengine::Profile<std::chrono::microseconds> __profile__(name, true)
+#define PROFILE_CORE_NANOSECONDS(name)   ::Jackbengine::Profile<std::chrono::nanoseconds> __profile__(name, true)
+#define PROFILE_SECONDS(name)            ::Jackbengine::Profile<std::chrono::seconds> __profile__(name, false)
+#define PROFILE_MILLISECONDS(name)       ::Jackbengine::Profile<std::chrono::milliseconds> __profile__(name, false)
+#define PROFILE_MICROSECONDS(name)       ::Jackbengine::Profile<std::chrono::microseconds> __profile__(name, false)
+#define PROFILE_NANOSECONDS(name)        ::Jackbengine::Profile<std::chrono::nanoseconds> __profile__(name, false)
+
+}
 
 #endif // __PROFILE_H__

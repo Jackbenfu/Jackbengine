@@ -42,6 +42,6 @@ private:
 
 using Sprite = SpriteComponent;
 
-} // namespace Jackbengine
+}
 
 #endif // __SPRITE_COMPONENT_H__

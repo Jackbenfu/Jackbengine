@@ -10,7 +10,6 @@
 #define __SDL_RWOPS_H__
 
 #include "common.hpp"
-#include "platform.hpp"
 
 namespace Jackbengine {
 
@@ -22,12 +21,12 @@ public:
     SdlRwops(const void *data, size_t dataSize);
     ~SdlRwops() = default;
 
-    SDL_RWops *internalObject() const;
+    void *internalObject() const;
 
 private:
-    SDL_RWops *m_rwops {nullptr};
+    void *m_rwops {nullptr};
 };
 
-} // namespace Jackbengine
+}
 
 #endif // __SDL_RWOPS_H__

@@ -9,12 +9,10 @@
 #ifndef __ENTITY_H__
 #define __ENTITY_H__
 
-#include "platform.hpp"
-
 namespace Jackbengine {
 
 using Entity = size_t;
 
-} // namespace Jackbengine
+}
 
 #endif // __ENTITY_H__

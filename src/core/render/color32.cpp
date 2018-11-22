@@ -8,7 +8,7 @@
 
 #include "color32.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 Color32::Color32()
     : r(0),
@@ -32,4 +32,6 @@ Color32::Color32(byte r, byte g, byte b, byte a)
       b(b),
       a(a)
 {
+}
+
 }

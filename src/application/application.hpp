@@ -71,6 +71,6 @@ private:
     bool m_running {true};
 };
 
-} // namespace Jackbengine
+}
 
 #endif // __APPLICATION_H__

@@ -22,6 +22,6 @@ public:
     virtual ~Component() = default;
 };
 
-} // namespace Jackbengine
+}
 
 #endif // __COMPONENT_H__

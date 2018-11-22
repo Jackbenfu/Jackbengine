@@ -8,7 +8,7 @@
 
 #include "tmxLayer.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 TmxLayer::TmxLayer() = default;
 
@@ -89,4 +89,6 @@ void TmxLayer::load(const TiXmlElement *element)
 
         node = node->NextSibling();
     }
+}
+
 }

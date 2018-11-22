@@ -8,7 +8,7 @@
 
 #include "stringComponent.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 StringComponent::StringComponent(const std::string& value)
     : m_value {value}
@@ -23,4 +23,6 @@ const std::string& StringComponent::get() const
 void StringComponent::set(const std::string& value)
 {
     m_value = value;
+}
+
 }

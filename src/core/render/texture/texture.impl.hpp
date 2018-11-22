@@ -9,8 +9,8 @@
 #ifndef __TEXTURE_IMPL_H__
 #define __TEXTURE_IMPL_H__
 
+#include "core/sdl/sdl.hpp"
 #include "texture.hpp"
-#include "platform.hpp"
 #include "core/sdl/surface/sdlSurface.hpp"
 
 namespace Jackbengine {
@@ -45,6 +45,6 @@ private:
     SDL_Rect m_rect {0, 0, 0, 0};
 };
 
-} // namespace Jackbengine
+}
 
 #endif // __TEXTURE_IMPL_H__

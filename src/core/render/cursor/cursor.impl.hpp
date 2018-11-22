@@ -9,8 +9,8 @@
 #ifndef __CURSOR_IMPL_H__
 #define __CURSOR_IMPL_H__
 
+#include "core/sdl/sdl.hpp"
 #include "cursor.hpp"
-#include "platform.hpp"
 
 namespace Jackbengine {
 
@@ -28,6 +28,6 @@ private:
     SDL_Cursor *m_cursor {nullptr};
 };
 
-} // namespace Jackbengine
+}
 
 #endif // __CURSOR_IMPL_H__

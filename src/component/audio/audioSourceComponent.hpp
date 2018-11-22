@@ -33,6 +33,6 @@ private:
 
 using AudioSource = AudioSourceComponent;
 
-} // namespace Jackbengine
+}
 
 #endif // __AUDIO_SOURCE_COMPONENT_H__

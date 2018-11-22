@@ -9,8 +9,8 @@
 #ifndef __SOUND_IMPL_H__
 #define __SOUND_IMPL_H__
 
+#include "core/sdl/sdl.hpp"
 #include "sound.hpp"
-#include "platform.hpp"
 
 namespace Jackbengine {
 
@@ -28,6 +28,6 @@ private:
     Mix_Chunk *m_chunk {nullptr};
 };
 
-} // namespace Jackbengine
+}
 
 #endif // __SOUND_IMPL_H__

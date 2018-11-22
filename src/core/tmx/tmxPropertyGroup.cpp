@@ -8,8 +8,7 @@
 
 #include "tmxPropertyGroup.hpp"
 
-using namespace std;
-using namespace Jackbengine;
+namespace Jackbengine {
 
 bool TmxPropertyGroup::hasProperty(const char *name) const
 {
@@ -102,4 +101,6 @@ void TmxPropertyGroup::load(const TiXmlElement *element)
 
         node = node->NextSibling();
     }
+}
+
 }

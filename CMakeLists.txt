@@ -1,10 +1,13 @@
-cmake_minimum_required(VERSION 3.9)
+cmake_minimum_required(VERSION 3.12)
 project(jackbengine)
 
-# CMake configuration
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wpedantic")
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
+
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    add_definitions(/DDEBUG)
+endif()
 
 # SDL2 include directories
 include_directories(${SDL2_INCLUDE_DIR})
@@ -19,8 +22,9 @@ find_package(SDL2_ttf REQUIRED)
 find_package(SDL2_mixer REQUIRED)
 
 # Jackbengine include directories
-include_directories(${PROJECT_SOURCE_DIR}/external)
 include_directories(${PROJECT_SOURCE_DIR}/src)
+include_directories(${PROJECT_SOURCE_DIR}/external)
+include_directories(${PROJECT_SOURCE_DIR}/external/spdlog/include)
 
 # Jackbengine source files
 set(SOURCE_FILES
@@ -50,6 +54,7 @@ set(SOURCE_FILES
     src/core/audio/sound.impl.cpp
     src/core/input/input.cpp
     src/core/input/input.impl.cpp
+    src/core/log/log.cpp
     src/core/render/color32.cpp
     src/core/render/cursor/cursor.cpp
     src/core/render/cursor/cursor.impl.cpp

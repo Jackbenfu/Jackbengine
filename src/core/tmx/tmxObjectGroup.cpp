@@ -8,7 +8,7 @@
 
 #include "tmxObjectGroup.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 TmxObjectGroup::TmxObjectGroup()
     : m_properties {std::unique_ptr<TmxPropertyGroup>(new TmxPropertyGroup())}
@@ -111,4 +111,6 @@ void TmxObjectGroup::load(const TiXmlElement *element)
 
         node = node->NextSibling();
     }
+}
+
 }

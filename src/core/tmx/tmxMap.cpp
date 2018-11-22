@@ -9,7 +9,7 @@
 #include "tmxMap.hpp"
 #include "platform.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 TmxMap::TmxMap()
     : m_doc {std::make_unique<TiXmlDocument>()},
@@ -180,4 +180,6 @@ void TmxMap::loadContents()
 
         node = node->NextSibling();
     }
+}
+
 }

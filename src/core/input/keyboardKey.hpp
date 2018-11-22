@@ -78,6 +78,6 @@ enum class KeyboardKey
     Up,
 };
 
-} // namespace Jackbengine
+}
 
 #endif // __KEYBOARD_KEY_H__

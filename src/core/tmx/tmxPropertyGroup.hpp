@@ -49,6 +49,6 @@ private:
     std::vector<std::unique_ptr<TmxProperty>> m_properties;
 };
 
-} // namespace Jackbengine
+}
 
 #endif // __TMX_PROPERTYGROUP_H__

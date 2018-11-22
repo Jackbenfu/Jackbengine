@@ -39,6 +39,6 @@ private:
 
 using Velocity = VelocityComponent;
 
-} // namespace Jackbengine
+}
 
 #endif // __VELOCITY_COMPONENT_H__

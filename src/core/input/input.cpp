@@ -9,7 +9,7 @@
 #include "input.hpp"
 #include "input.impl.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 Input::Input()
     : m_impl {std::make_unique<Impl>()}
@@ -66,4 +66,6 @@ const Jackbengine::Vector2d<int>& Input::mousePosition() const
 bool Input::quit() const
 {
     return m_impl->quit();
+}
+
 }

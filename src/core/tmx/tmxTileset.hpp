@@ -45,6 +45,6 @@ private:
     std::unique_ptr<TmxPropertyGroup> m_properties;
 };
 
-} // namespace Jackbengine
+}
 
 #endif // __TMX_TILESET_H__

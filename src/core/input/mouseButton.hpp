@@ -20,6 +20,6 @@ enum class MouseButton
     Right,
 };
 
-} // namespace Jackbengine
+}
 
 #endif // __MOUSE_BUTTON_H__

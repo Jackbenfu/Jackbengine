@@ -30,6 +30,6 @@ private:
 
 using Name = NameComponent;
 
-} // namespace Jackbengine
+}
 
 #endif // __NAME_COMPONENT_H__

@@ -8,7 +8,7 @@
 
 #include "system.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 void System::sort(
     std::function<bool(
@@ -72,4 +72,6 @@ void System::clean()
 
         ++it;
     }
+}
+
 }

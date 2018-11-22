@@ -8,7 +8,7 @@
 
 #include "entityManager.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 Entity EntityManager::addEntity()
 {
@@ -54,4 +54,6 @@ std::pair<bool, std::unique_ptr<ComponentCollection>>& EntityManager::findEntity
 const std::pair<bool, std::unique_ptr<ComponentCollection>>& EntityManager::findEntity(Entity entity) const
 {
     return findEntity(*this, entity);
+}
+
 }

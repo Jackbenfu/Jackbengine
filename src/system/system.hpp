@@ -59,6 +59,6 @@ private:
     std::unordered_map<Entity, EntityStatus> m_entityStatuses {};
 };
 
-} // namespace Jackbengine
+}
 
 #endif // __SYSTEM_H__

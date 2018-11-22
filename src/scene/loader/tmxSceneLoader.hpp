@@ -64,6 +64,6 @@ private:
     std::unordered_map<std::string, Entity> m_entities;
 };
 
-} // namespace Jackbengine
+}
 
 #endif // __TMX_SCENE_LOADER_H__

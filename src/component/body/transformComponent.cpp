@@ -8,7 +8,7 @@
 
 #include "transformComponent.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 TransformComponent::TransformComponent(float positionX, float positionY)
     : TransformComponent {positionX, positionY, 1.0f, 1.0f, 0.0}
@@ -102,4 +102,6 @@ void TransformComponent::setScaleX(float x)
 void TransformComponent::setScaleY(float y)
 {
     m_scale.y = y;
+}
+
 }

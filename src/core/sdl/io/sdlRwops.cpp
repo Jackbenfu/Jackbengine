@@ -7,9 +7,11 @@
 //
 
 #include <stdexcept>
+
+#include "core/sdl/sdl.hpp"
 #include "sdlRwops.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 SdlRwops::SdlRwops(const void *data, size_t dataSize)
 {
@@ -21,7 +23,9 @@ SdlRwops::SdlRwops(const void *data, size_t dataSize)
     }
 }
 
-SDL_RWops *SdlRwops::internalObject() const
+void *SdlRwops::internalObject() const
 {
     return m_rwops;
+}
+
 }

@@ -35,6 +35,6 @@ private:
     int m_height {0};
 };
 
-} // namespace Jackbengine
+}
 
 #endif // __TMX_IMAGE_H__

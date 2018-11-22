@@ -22,6 +22,6 @@ public:
     virtual ~AbstractApplication();
 };
 
-} // namespace Jackbengine
+}
 
 #endif // __ABSTRACT_APPLICATION_H__

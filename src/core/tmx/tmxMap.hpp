@@ -61,6 +61,6 @@ private:
     std::unique_ptr<TmxPropertyGroup> tmxProperties;
 };
 
-} // namespace Jackbengine
+}
 
 #endif // __TMX_MAP_H__

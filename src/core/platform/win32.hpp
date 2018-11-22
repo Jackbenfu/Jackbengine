@@ -9,12 +9,6 @@
 #ifndef __WIN32_H__
 #define __WIN32_H__
 
-// SDL2
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_ttf.h>
-#include <SDL2/SDL_mixer.h>
-
 #include <cstdlib>
 #include <cstdio>
 #include <ctime>

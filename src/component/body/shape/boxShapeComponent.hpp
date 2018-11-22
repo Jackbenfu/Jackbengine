@@ -38,6 +38,6 @@ private:
 
 using BoxShape = BoxShapeComponent;
 
-} // namespace Jackbengine
+}
 
 #endif // __BOX_SHAPE_COMPONENT_H__

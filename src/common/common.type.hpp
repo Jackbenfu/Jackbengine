@@ -15,6 +15,6 @@ using uint = unsigned int;
 using ushort = unsigned short;
 using byte = unsigned char;
 
-} // namespace Jackbengine
+}
 
 #endif // __COMMON_TYPE_H__

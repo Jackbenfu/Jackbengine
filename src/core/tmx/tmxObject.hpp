@@ -57,6 +57,6 @@ private:
     std::unique_ptr<TmxText> m_text;
 };
 
-} // namespace Jackbengine
+}
 
 #endif // __TMX_OBJECT_H__

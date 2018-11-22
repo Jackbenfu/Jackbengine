@@ -8,7 +8,7 @@
 
 #include "tmxTileset.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 TmxTileset::TmxTileset()
     : m_image {std::unique_ptr<TmxImage>(new TmxImage())},
@@ -67,4 +67,6 @@ void TmxTileset::load(const TiXmlElement *element)
 
         node = node->NextSibling();
     }
+}
+
 }

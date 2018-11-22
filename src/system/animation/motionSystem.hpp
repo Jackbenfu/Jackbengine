@@ -27,6 +27,6 @@ private:
     bool hasRequiredComponents(ComponentCollection& components) const override;
 };
 
-} // namespace Jackbengine
+}
 
 #endif // __MOTION_SYSTEM_H__

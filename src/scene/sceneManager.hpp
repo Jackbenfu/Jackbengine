@@ -71,6 +71,6 @@ void SceneManager<TBase>::loadNextSceneIfRequired()
     }
 }
 
-} // namespace Jackbengine
+}
 
 #endif // __SCENE_MANAGER_H__

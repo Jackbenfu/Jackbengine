@@ -45,6 +45,6 @@ private:
 
 using Color = ColorComponent;
 
-} // namespace Jackbengine
+}
 
 #endif // __COLOR_COMPONENT_H__

@@ -8,7 +8,7 @@
 
 #include "input.impl.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 void Input::Impl::update()
 {
@@ -292,4 +292,6 @@ int Input::Impl::getButton(MouseButton button) const
         case MouseButton::Right:
             return SDL_BUTTON_RIGHT;
     }
+}
+
 }

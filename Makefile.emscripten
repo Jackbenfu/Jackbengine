@@ -13,13 +13,13 @@ CFLAGS              = -Oz                               \
 INCLUDES            = -Iexternal                        \
                       -Isrc
 
-SOURCES             =   external/easywsclient/easywsclient.cpp              \
-                        external/tinyxml/tinystr.cpp                        \
+SOURCES             =   external/tinyxml/tinystr.cpp                        \
                         external/tinyxml/tinyxml.cpp                        \
                         external/tinyxml/tinyxmlerror.cpp                   \
                         external/tinyxml/tinyxmlparser.cpp                  \
                         src/application/abstract/abstractApplication.cpp    \
                         src/application/application.cpp                     \
+                        src/application/entryPoint.cpp                      \
                         src/component/audio/audioSourceComponent.cpp        \
                         src/component/body/shape/boxShapeComponent.cpp      \
                         src/component/body/transformComponent.cpp           \

@@ -32,6 +32,6 @@ private:
     std::unique_ptr<Impl> m_impl;
 };
 
-} // namespace Jackbengine
+}
 
 #endif // __SOUND_H__

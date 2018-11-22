@@ -44,6 +44,6 @@ private:
     std::unique_ptr<Impl> m_impl;
 };
 
-} // namespace Jackbengine
+}
 
 #endif // __INPUT_H__

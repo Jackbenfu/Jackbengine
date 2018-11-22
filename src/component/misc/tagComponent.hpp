@@ -30,6 +30,6 @@ private:
 
 using Tag = TagComponent;
 
-} // namespace Jackbengine
+}
 
 #endif // __TAG_COMPONENT_H__

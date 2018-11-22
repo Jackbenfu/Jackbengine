@@ -8,7 +8,7 @@
 
 #include "zOrderComponent.hpp"
 
-using namespace Jackbengine;
+namespace Jackbengine {
 
 ZOrderComponent::ZOrderComponent(int index)
     : m_index {index}
@@ -23,4 +23,6 @@ int ZOrderComponent::index() const
 void ZOrderComponent::setIndex(int index)
 {
     m_index = index;
+}
+
 }

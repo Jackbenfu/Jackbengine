@@ -10,8 +10,9 @@
 #define __INPUT_IMPL_H__
 
 #include <vector>
+
+#include "core/sdl/sdl.hpp"
 #include "input.hpp"
-#include "platform.hpp"
 
 namespace Jackbengine {
 
@@ -56,6 +57,6 @@ private:
     bool m_quit {false};
 };
 
-} // namespace Jackbengine
+}
 
 #endif // __INPUT_IMPL_H__

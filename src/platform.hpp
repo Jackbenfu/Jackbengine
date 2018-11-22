@@ -16,8 +16,10 @@
 
 #elif defined(_WIN32)
 #include "core/platform/win32.hpp"
+
 #elif defined(EMSCRIPTEN)
 #include "core/platform/emscripten.hpp"
+
 #endif
 
 #endif // __PLATFORM_H__

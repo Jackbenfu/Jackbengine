@@ -13,6 +13,7 @@
 #include "core/audio/sound.hpp"
 #include "core/debug/profile.hpp"
 #include "core/input/input.hpp"
+#include "core/log/log.hpp"
 #include "core/math/rect.hpp"
 #include "core/math/vector2d.hpp"
 #include "core/render/color32.hpp"

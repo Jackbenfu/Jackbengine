@@ -1,9 +1,6 @@
 # Mac OS
 .DS_Store
 
-# Submodules
-/external/spdlog
-
 # CLion
 .idea/
 cmake-build-debug/

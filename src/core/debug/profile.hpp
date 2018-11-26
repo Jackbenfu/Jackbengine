@@ -29,8 +29,8 @@ public:
 
     ~Profile()
     {
-        __unused const auto format = "{} ({} {})";
-        __unused auto duration = clock::now() - m_start;
+        __attribute__((unused)) const auto format = "{} ({} {})";
+        __attribute__((unused)) auto duration = clock::now() - m_start;
 
         if (m_core)
         {

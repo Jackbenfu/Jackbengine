@@ -28,7 +28,7 @@ void parseArguments(int argc, char **argv, bool *fullscreen)
 
 #ifdef EMSCRIPTEN
 
-Application *applicationPtr;
+Jackbengine::Application *applicationPtr;
 void loop()
 {
     applicationPtr->loop();

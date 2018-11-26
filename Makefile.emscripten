@@ -2,7 +2,7 @@ CC                  = emcc
 
 CFLAGS              = -Oz                               \
                       -Wall -Wextra -Wpedantic          \
-                      -std=c++1z                        \
+                      -std=c++17                        \
                       -s USE_SDL=2                      \
                       -s USE_SDL_TTF=2                  \
                       -s USE_SDL_IMAGE=2                \
@@ -11,6 +11,7 @@ CFLAGS              = -Oz                               \
                       -s WARN_ON_UNDEFINED_SYMBOLS=1
 
 INCLUDES            = -Iexternal                        \
+                      -Iexternal/spdlog/include         \
                       -Isrc
 
 SOURCES             =   external/tinyxml/tinystr.cpp                        \

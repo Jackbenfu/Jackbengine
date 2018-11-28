@@ -11,17 +11,13 @@
 
 namespace Jackbengine {
 
-std::shared_ptr<spdlog::logger> Log::s_coreLogger;
-std::shared_ptr<spdlog::logger> Log::s_appLogger;
+std::shared_ptr<spdlog::logger> Log::s_logger;
 
 void Log::init()
 {
-    spdlog::set_pattern("%^[%D %T] [%P] [%t] [%n] [%l] %v%$");
-    s_coreLogger = spdlog::stdout_color_mt("ENGINE");
-    s_coreLogger->set_level(spdlog::level::trace);
-
-    s_appLogger = spdlog::stdout_color_mt("   APP");
-    s_appLogger->set_level(spdlog::level::trace);
+    spdlog::set_pattern("%^[%D %T.%e] [%P] [%t] [%n] [%l] %v%$");
+    s_logger = spdlog::stdout_color_mt("DEFAULT");
+    s_logger->set_level(spdlog::level::trace);
 }
 
 }

@@ -9,6 +9,10 @@
 #ifndef __LOG_H__
 #define __LOG_H__
 
+#ifdef EMSCRIPTEN
+#include <emscripten.h>
+#endif
+
 #include <memory>
 #include "common.hpp"
 #include "spdlog/spdlog.h"
@@ -22,36 +26,35 @@ DISALLOW_COPY_AND_MOVE(Log)
 public:
     static void init();
 
-    inline static std::shared_ptr<spdlog::logger>& getCoreLogger()
+    inline static std::shared_ptr<spdlog::logger>& getLogger()
     {
-        return s_coreLogger;
-    }
-
-    inline static std::shared_ptr<spdlog::logger>& getAppLogger()
-    {
-        return s_appLogger;
+        return s_logger;
     }
 
 private:
-    static std::shared_ptr<spdlog::logger> s_coreLogger;
-    static std::shared_ptr<spdlog::logger> s_appLogger;
+    static std::shared_ptr<spdlog::logger> s_logger;
 };
 
 }
 
-#define LOG_CORE_INFO(...)     ::Jackbengine::Log::getCoreLogger()->info(__VA_ARGS__)
-#define LOG_CORE_WARN(...)     ::Jackbengine::Log::getCoreLogger()->warn(__VA_ARGS__)
-#define LOG_CORE_ERROR(...)    ::Jackbengine::Log::getCoreLogger()->error(__VA_ARGS__)
-#define LOG_INFO(...)          ::Jackbengine::Log::getAppLogger()->info(__VA_ARGS__)
-#define LOG_WARN(...)          ::Jackbengine::Log::getAppLogger()->warn(__VA_ARGS__)
-#define LOG_ERROR(...)         ::Jackbengine::Log::getAppLogger()->error(__VA_ARGS__)
-
-#if DEBUG
-#define LOG_CORE_TRACE(...)    ::Jackbengine::Log::getCoreLogger()->trace(__VA_ARGS__)
-#define LOG_TRACE(...)         ::Jackbengine::Log::getAppLogger()->trace(__VA_ARGS__)
+#ifdef EMSCRIPTEN
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wgnu-zero-variadic-macro-arguments"
+#ifdef DEBUG
+#define LOG_TRACE(...)  EM_ASM(console.debug(__VA_ARGS__);)
 #else
-#define LOG_CORE_TRACE(...)
+#define LOG_TRACE
+#endif
+#define LOG_INFO(...)   EM_ASM(console.info(__VA_ARGS__);)
+#define LOG_ERROR(...)  EM_ASM(console.error(__VA_ARGS__);)
+#else
+#ifdef DEBUG
+#define LOG_TRACE(...)  Jackbengine::Log::getLogger()->trace(__VA_ARGS__)
+#else
 #define LOG_TRACE(...)
+#endif
+#define LOG_INFO(...)   Jackbengine::Log::getLogger()->info(__VA_ARGS__)
+#define LOG_ERROR(...)  Jackbengine::Log::getLogger()->error(__VA_ARGS__)
 #endif
 
 #endif // __LOG_H__

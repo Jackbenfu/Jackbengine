@@ -19,8 +19,22 @@ AbstractApplication::AbstractApplication()
 {
     Log::init();
 
-    PROFILE_CORE_MILLISECONDS("AbstractApplication::AbstractApplication");
+    PROFILE_MILLISECONDS("AbstractApplication::AbstractApplication", {
+        initSDL();
+    });
+}
 
+AbstractApplication::~AbstractApplication()
+{
+    PROFILE_MILLISECONDS("AbstractApplication::~AbstractApplication", {
+        Mix_Quit();
+        TTF_Quit();
+        SDL_Quit();
+    });
+}
+
+void AbstractApplication::initSDL()
+{
 #ifdef EMSCRIPTEN
     if (SDL_Init(SDL_INIT_EVERYTHING & ~(SDL_INIT_TIMER | SDL_INIT_HAPTIC)) < 0)
 #else
@@ -44,18 +58,6 @@ AbstractApplication::AbstractApplication()
     {
         throw std::runtime_error(Mix_GetError());
     }
-}
-
-AbstractApplication::~AbstractApplication()
-{
-    PROFILE_CORE_MILLISECONDS("AbstractApplication::~AbstractApplication");
-
-    Mix_Quit();
-    TTF_Quit();
-
-#ifndef EMSCRIPTEN
-    SDL_Quit();
-#endif
 }
 
 }

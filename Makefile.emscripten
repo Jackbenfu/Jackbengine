@@ -10,6 +10,18 @@ CFLAGS              = -Oz                               \
                       -s DEMANGLE_SUPPORT=1             \
                       -s WARN_ON_UNDEFINED_SYMBOLS=1
 
+CDFLAGS             = -g                                \
+				      -DDEBUG							\
+                      -Wall -Wextra -Wpedantic          \
+                      -std=c++17                        \
+                      -s USE_SDL=2                      \
+                      -s USE_SDL_TTF=2                  \
+                      -s USE_SDL_IMAGE=2                \
+                      -s SDL2_IMAGE_FORMATS='["png"]'   \
+                      -s DEMANGLE_SUPPORT=1             \
+                      -s WARN_ON_UNDEFINED_SYMBOLS=1	\
+                      -s DISABLE_EXCEPTION_CATCHING=0
+
 INCLUDES            = -Iexternal                        \
                       -Iexternal/spdlog/include         \
                       -Isrc
@@ -40,6 +52,7 @@ SOURCES             =   external/tinyxml/tinystr.cpp                        \
                         src/core/audio/sound.impl.cpp                       \
                         src/core/input/input.cpp                            \
                         src/core/input/input.impl.cpp                       \
+                        src/core/log/log.cpp                                \
                         src/core/render/color32.cpp                         \
                         src/core/render/cursor/cursor.cpp                   \
                         src/core/render/cursor/cursor.impl.cpp              \
@@ -82,4 +95,7 @@ SOURCES             =   external/tinyxml/tinystr.cpp                        \
 OUT                 = libjackbengine.bc
 
 all:
-	EMCC_DEBUG=1 $(CC) $(CFLAGS) $(INCLUDES) $(SOURCES) -o $(OUT)
+	$(CC) $(CFLAGS) $(INCLUDES) $(SOURCES) -o $(OUT)
+
+debug:
+	$(CC) $(CDFLAGS) $(INCLUDES) $(SOURCES) -o $(OUT)

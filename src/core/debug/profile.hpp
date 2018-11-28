@@ -20,36 +20,25 @@ class Profile
     using clock = std::chrono::high_resolution_clock;
 
 public:
-    explicit Profile(const char *name, bool core)
+    explicit Profile(const char *name)
         : m_name {name},
-          m_start {clock::now()},
-          m_core {core}
+          m_start {clock::now()}
     {
     }
 
-    ~Profile()
+    void stop()
     {
         __attribute__((unused)) const auto format = "{} ({} {})";
         __attribute__((unused)) auto duration = clock::now() - m_start;
 
-        if (m_core)
-        {
-            LOG_CORE_TRACE(
+        Jackbengine::Log::getLogger()->trace(
+            fmt::format(
                 format,
                 m_name,
                 std::chrono::duration_cast<Precision>(duration).count(),
                 unit()
-            );
-        }
-        else
-        {
-            LOG_TRACE(
-                format,
-                m_name,
-                std::chrono::duration_cast<Precision>(duration).count(),
-                unit()
-            );
-        }
+            )
+        );
     }
 
 private:
@@ -57,7 +46,6 @@ private:
 
     const char *m_name;
     clock::time_point m_start;
-    bool m_core;
 };
 
 template<>
@@ -84,15 +72,40 @@ inline const char *Profile<std::chrono::nanoseconds>::unit()
     return "nanoseconds";
 }
 
-#define PROFILE_CORE_SECONDS(name)       ::Jackbengine::Profile<std::chrono::seconds> __profile__(name, true)
-#define PROFILE_CORE_MILLISECONDS(name)  ::Jackbengine::Profile<std::chrono::milliseconds> __profile__(name, true)
-#define PROFILE_CORE_MICROSECONDS(name)  ::Jackbengine::Profile<std::chrono::microseconds> __profile__(name, true)
-#define PROFILE_CORE_NANOSECONDS(name)   ::Jackbengine::Profile<std::chrono::nanoseconds> __profile__(name, true)
-#define PROFILE_SECONDS(name)            ::Jackbengine::Profile<std::chrono::seconds> __profile__(name, false)
-#define PROFILE_MILLISECONDS(name)       ::Jackbengine::Profile<std::chrono::milliseconds> __profile__(name, false)
-#define PROFILE_MICROSECONDS(name)       ::Jackbengine::Profile<std::chrono::microseconds> __profile__(name, false)
-#define PROFILE_NANOSECONDS(name)        ::Jackbengine::Profile<std::chrono::nanoseconds> __profile__(name, false)
-
 }
+
+#ifdef DEBUG
+
+#define PROFILE_SECONDS(name, code) {                                           \
+    auto __profile__ = Jackbengine::Profile<std::chrono::seconds>(name);        \
+    { code }                                                                    \
+    __profile__.stop();                                                         \
+    }
+
+#define PROFILE_MILLISECONDS(name, code) {                                      \
+    auto __profile__ = Jackbengine::Profile<std::chrono::milliseconds>(name);   \
+    { code }                                                                    \
+    __profile__.stop();                                                         \
+    }
+
+#define PROFILE_MICROSECONDS(name, code) {                                      \
+    auto __profile__ = Jackbengine::Profile<std::chrono::microseconds>(name);   \
+    { code }                                                                    \
+    __profile__.stop();                                                         \
+    }
+#define PROFILE_NANOSECONDS(name, code) {                                       \
+    auto __profile__ = Jackbengine::Profile<std::chrono::nanoseconds>(name);    \
+    { code }                                                                    \
+    __profile__.stop();                                                         \
+    }
+
+#else
+
+#define PROFILE_SECONDS(name, code)       { code }
+#define PROFILE_MILLISECONDS(name, code)  { code }
+#define PROFILE_MICROSECONDS(name, code)  { code }
+#define PROFILE_NANOSECONDS(name, code)   { code }
+
+#endif
 
 #endif // __PROFILE_H__

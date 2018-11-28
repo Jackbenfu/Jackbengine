@@ -20,6 +20,9 @@ DISALLOW_COPY_AND_MOVE(AbstractApplication)
 public:
     AbstractApplication();
     virtual ~AbstractApplication();
+
+private:
+    void initSDL();
 };
 
 }

@@ -28,10 +28,6 @@ include_directories(${PROJECT_SOURCE_DIR}/external/spdlog/include)
 
 # Jackbengine source files
 set(SOURCE_FILES
-    external/tinyxml/tinystr.cpp
-    external/tinyxml/tinyxml.cpp
-    external/tinyxml/tinyxmlerror.cpp
-    external/tinyxml/tinyxmlparser.cpp
     src/application/abstract/abstractApplication.cpp
     src/application/application.cpp
     src/application/entryPoint.cpp
@@ -70,18 +66,7 @@ set(SOURCE_FILES
     src/core/state/stateMachine.cpp
     src/core/time/timer.cpp
     src/core/time/timer.impl.cpp
-    src/core/tmx/tmxImage.cpp
-    src/core/tmx/tmxLayer.cpp
-    src/core/tmx/tmxMap.cpp
-    src/core/tmx/tmxObject.cpp
-    src/core/tmx/tmxObjectGroup.cpp
-    src/core/tmx/tmxProperty.cpp
-    src/core/tmx/tmxPropertyGroup.cpp
-    src/core/tmx/tmxText.cpp
-    src/core/tmx/tmxTileset.cpp
     src/entity/entityManager.cpp
-    src/scene/scene.cpp
-    src/scene/loader/tmxSceneLoader.cpp
     src/system/animation/motionSystem.cpp
     src/system/debug/debugProfileSystem.cpp
     src/system/debug/debugSpriteSystem.cpp
@@ -92,6 +77,7 @@ set(SOURCE_FILES
     src/system/render/textRenderSystem.cpp
     src/system/system.cpp
     src/system/systemManager.cpp
+    src/ecs/ecsManager.cpp
 )
 
 add_library(jackbengine STATIC ${SOURCE_FILES})

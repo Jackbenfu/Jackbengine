@@ -23,14 +23,6 @@ public:
     SpriteComponent(const Renderer& renderer, const std::string& file);
     SpriteComponent(const Renderer& renderer, const void *data, size_t dataSize);
     SpriteComponent(const Renderer& renderer, int width, int height, Color32 color);
-    SpriteComponent(
-        const Renderer& renderer, const TmxMap& map, const TmxLayer& layer,
-        const void *tilesetImageData, size_t tilesetImageDataSize
-    );
-    SpriteComponent(
-        const Renderer& renderer, const TmxMap& map, const TmxObjectGroup& objectGroup,
-        const void *tilesetImageData, size_t tilesetImageDataSize
-    );
 
     ~SpriteComponent() override = default;
 

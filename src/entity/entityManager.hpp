@@ -33,9 +33,6 @@ public:
     TComponent *addComponent(Entity entity, Args&& ...args);
 
     template<typename TComponent>
-    void removeComponent(Entity entity);
-
-    template<typename TComponent>
     TComponent *getComponent(Entity entity) const;
 
     template<typename TComponent>
@@ -57,14 +54,6 @@ TComponent *EntityManager::addComponent(Entity entity, Args&& ...args)
     auto&[_, components] = findEntity(entity);
 
     return components->add<TComponent>(std::forward<Args>(args)...);
-}
-
-template<typename TComponent>
-void EntityManager::removeComponent(Entity entity)
-{
-    auto&[_, components] = findEntity(entity);
-
-    components->remove<TComponent>();
 }
 
 template<typename TComponent>

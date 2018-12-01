@@ -8,6 +8,7 @@
 
 #include <ctime>
 #include "application.hpp"
+#include "ecs/ecsManager.hpp"
 
 namespace Jackbengine {
 
@@ -37,6 +38,8 @@ void Application::loop()
 
     m_renderer->clear();
     m_input->update();
+
+    EcsManager::getManager().frame(delta);
 
     frame(delta);
 

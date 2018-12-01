@@ -107,7 +107,7 @@ void OrderedHeterogeneousCollection<TBase>::add(Args&& ...args)
     const auto typeId = GET_TYPE_ID(TItem);
 
     auto item = std::make_unique<TItem>(std::forward<Args>(args)...);
-    const auto key = (OrderableItem *) (item.get());
+    const auto key = static_cast<OrderableItem *>(item.get());
 
     m_collection.insert(
         std::make_pair(

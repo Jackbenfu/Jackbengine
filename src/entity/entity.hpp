@@ -9,6 +9,8 @@
 #ifndef __ENTITY_H__
 #define __ENTITY_H__
 
+#include <stddef.h>
+
 namespace Jackbengine {
 
 using Entity = size_t;

@@ -10,7 +10,7 @@
 
 #include "core/sdl/sdl.hpp"
 #include "core/log/log.hpp"
-#include "core/debug/profile.hpp"
+#include "core/log/profile.hpp"
 #include "abstractApplication.hpp"
 
 namespace Jackbengine {

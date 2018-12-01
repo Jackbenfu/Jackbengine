@@ -32,9 +32,6 @@ public:
     bool any() const;
 
     template<typename TComponent>
-    void remove();
-
-    template<typename TComponent>
     void enable(bool enable);
 
 private:
@@ -57,12 +54,6 @@ template<typename TComponent>
 bool ComponentCollection::any() const
 {
     return m_components.any<TComponent>();
-}
-
-template<typename TComponent>
-void ComponentCollection::remove()
-{
-    m_components.remove<TComponent>();
 }
 
 template<typename TComponent>

@@ -28,9 +28,6 @@ public:
     void addSystem(Args&& ...args);
 
     template<typename TSystem>
-    void removeSystem();
-
-    template<typename TSystem>
     TSystem *getSystem();
 
     template<typename TSystem>
@@ -57,12 +54,6 @@ template<typename TSystem>
 TSystem *SystemManager::getSystem()
 {
     return m_systems.get<TSystem>();
-}
-
-template<typename TSystem>
-void SystemManager::removeSystem()
-{
-    m_systems.remove<TSystem>();
 }
 
 template<typename TSystem>

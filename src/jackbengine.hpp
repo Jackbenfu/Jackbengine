@@ -11,7 +11,7 @@
 
 // Core
 #include "core/audio/sound.hpp"
-#include "core/debug/profile.hpp"
+#include "core/log/profile.hpp"
 #include "core/input/input.hpp"
 #include "core/log/log.hpp"
 #include "core/math/rect.hpp"
@@ -24,7 +24,6 @@
 #include "core/render/window/window.hpp"
 #include "core/resource/importResource.hpp"
 #include "core/state/stateMachine.hpp"
-#include "core/tmx/tmxMap.hpp"
 #include "core/time/timer.hpp"
 
 // Component
@@ -55,12 +54,10 @@
 #include "system/render/spriteRenderSystem.hpp"
 #include "system/render/textRenderSystem.hpp"
 
+// ECS
+#include "ecs/ecsApi.hpp"
+
 // Application
 #include "application/application.hpp"
-
-// Scene
-#include "scene/scene.hpp"
-#include "scene/loader/tmxSceneLoader.hpp"
-#include "scene/state/sceneState.hpp"
 
 #endif // __JACKBENGINE_H__

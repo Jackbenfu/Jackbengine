@@ -21,23 +21,9 @@ The engine provides standard components and systems usually needed in a game:
 
 This collection of components and systems can be extended.
 
-#### Scene management
-- Scenes can be used to split the game in logical parts (menus, in-game, options etc.) and/or functional parts (levels, screens etc.).
-- A scene has its own context and cannot interact with other scenes.
-- Transitions between scenes is possible by loading a scene from the current one (the previous scene being automatically unloaded).
-
 #### Resource management
 - Resources can be loaded from files or embedded resources.
 - Embedded resources can be generated using the [ResourceGenerator](https://github.com/Jackbenfu/ResourceGenerator) tool.
-
-#### Tile Map XML basic support (see [official reference](http://doc.mapeditor.org/reference/tmx-map-format/))
-* Current implementation supports loading of following nodes:
- * `Map`
- * `Tileset` (only one per file)
- * `Layer`
- * `Object` and `ObjectGroup`
- * `Property` and `Properties`
- * `Text`
  
 ## Development information
 - All targets (except Web) are compiled using [CMake](https://cmake.org/).
@@ -51,4 +37,3 @@ The engine relies on the following awesome libraries and tools:
 - [SDL2_image](https://www.libsdl.org/projects/SDL_image/)
 - [SDL2_ttf](https://www.libsdl.org/projects/SDL_ttf/)
 - [SDL2_mixer](https://www.libsdl.org/projects/SDL_mixer/)
-- [TinyXML](https://sourceforge.net/projects/tinyxml/)

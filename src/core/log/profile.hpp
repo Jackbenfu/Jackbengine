@@ -10,7 +10,7 @@
 #define __PROFILE_H__
 
 #include <chrono>
-#include "core/log/log.hpp"
+#include "log.hpp"
 
 namespace Jackbengine {
 

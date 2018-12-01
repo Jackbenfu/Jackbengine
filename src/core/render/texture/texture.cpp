@@ -6,7 +6,6 @@
 // Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
-#include "core/tmx/tmxMap.hpp"
 #include "texture.hpp"
 #include "texture.impl.hpp"
 
@@ -27,26 +26,7 @@ Texture::Texture(const Renderer& renderer, int width, int height, Color32 color)
 {
 }
 
-Texture::Texture(
-    const Renderer& renderer, const TmxMap& map, const TmxLayer& layer,
-    const void *tilesetImageData, size_t tilesetImageDataSize
-)
-    : m_impl {std::make_unique<Impl>(renderer, map, layer, tilesetImageData, tilesetImageDataSize)}
-{
-}
-
-Texture::Texture(
-    const Renderer& renderer, const TmxMap& map, const TmxObjectGroup& objectGroup,
-    const void *tilesetImageData, size_t tilesetImageDataSize
-)
-    : m_impl {std::make_unique<Impl>(renderer, map, objectGroup, tilesetImageData, tilesetImageDataSize)}
-{
-}
-
-Texture::Texture(
-    const Renderer& renderer, const Font& font,
-    const std::string& text, Color32 foreground
-)
+Texture::Texture(const Renderer& renderer, const Font& font, const std::string& text, Color32 foreground)
     : m_impl {std::make_unique<Impl>(renderer, font, text, foreground)}
 {
 }

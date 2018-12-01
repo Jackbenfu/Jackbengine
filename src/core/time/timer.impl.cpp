@@ -27,7 +27,7 @@ void Timer::Impl::snapshot()
 
     m_elapsedMilliseconds = ticks() - m_start;
     m_effectiveElapsedMilliseconds = m_elapsedMilliseconds;
-    uint delayTime = 0;
+    float delayTime = 0;
 
     if (0 < m_fixedFps && m_elapsedMilliseconds < m_fixedFpsDelayTime)
     {
@@ -49,16 +49,16 @@ void Timer::Impl::snapshot()
 
     if (0 < delayTime)
     {
-        delay(delayTime);
+        delay((uint)delayTime);
     }
 }
 
-uint Timer::Impl::elapsedMilliseconds() const
+float Timer::Impl::elapsedMilliseconds() const
 {
     return m_elapsedMilliseconds;
 }
 
-uint Timer::Impl::effectiveElapsedMilliseconds() const
+float Timer::Impl::effectiveElapsedMilliseconds() const
 {
     return m_effectiveElapsedMilliseconds;
 }
@@ -86,7 +86,7 @@ void Timer::Impl::enableFixedFps(uint fps)
     }
 
     m_fixedFps = fps;
-    m_fixedFpsDelayTime = 1000 / fps;
+    m_fixedFpsDelayTime = 1000.0f / fps;
 }
 
 void Timer::Impl::disableFixedFps()

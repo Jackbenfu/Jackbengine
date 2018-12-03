@@ -1,27 +1,27 @@
 //
-// debugTextSystem.hpp
+// textDebugSystem.hpp
 // jackbengine
 //
 // Created by Damien Bendejacq on 20/08/2017.
 // Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
-#ifndef __DEBUG_TEXT_SYSTEM_H__
-#define __DEBUG_TEXT_SYSTEM_H__
+#ifndef __TEXT_DEBUG_SYSTEM_H__
+#define __TEXT_DEBUG_SYSTEM_H__
 
 #include "system/system.hpp"
 #include "core/render/renderer/renderer.hpp"
 
 namespace Jackbengine {
 
-class DebugTextSystem final : public System
+class TextDebugSystem final : public System
 {
-DISALLOW_COPY_AND_MOVE(DebugTextSystem)
+DISALLOW_COPY_AND_MOVE(TextDebugSystem)
 
 public:
-    explicit DebugTextSystem(const Renderer& renderer);
-    DebugTextSystem(const Renderer& renderer, Color32 color);
-    ~DebugTextSystem() override = default;
+    explicit TextDebugSystem(const Renderer& renderer);
+    TextDebugSystem(const Renderer& renderer, Color32 color);
+    ~TextDebugSystem() override = default;
 
     int order() const final;
 
@@ -35,4 +35,4 @@ private:
 
 }
 
-#endif // __DEBUG_TEXT_SYSTEM_H__
+#endif // __TEXT_DEBUG_SYSTEM_H__

@@ -17,10 +17,10 @@ enum class SystemOrder
     MouseEventTrigger = 20000,
     AABBCollision = 30000,
     SpriteRender = 40000,
-    DebugSprite = 40001,
+    SpriteDebug = 40001,
     TextRender = 50000,
-    DebugText = 50001,
-    DebugProfile = 60000,
+    TextDebug = 50001,
+    FramerateDebug = 60000,
 };
 
 }

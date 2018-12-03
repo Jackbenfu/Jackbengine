@@ -1,5 +1,5 @@
 //
-// debugProfileSystem.cpp
+// framerateDebugSystem.cpp
 // jackbengine
 //
 // Created by Damien Bendejacq on 19/08/2017.
@@ -7,14 +7,14 @@
 //
 
 #include <sstream>
-#include "debugProfileSystem.hpp"
+#include "framerateDebugSystem.hpp"
 #include "core/resource/importResource.hpp"
 
 namespace Jackbengine {
 
 IMPORT_BINARY_RESOURCE(default_font)
 
-DebugProfileSystem::DebugProfileSystem(const Renderer& renderer, const Timer& timer)
+FramerateDebugSystem::FramerateDebugSystem(const Renderer& renderer, const Timer& timer)
     : m_renderer {renderer},
       m_timer {timer},
       m_fps {m_renderer, InvalidFpsText, TextLayout::LeftTop, Color32(255, 255, 255), FontSize, default_font,
@@ -22,19 +22,19 @@ DebugProfileSystem::DebugProfileSystem(const Renderer& renderer, const Timer& ti
 {
 }
 
-DebugProfileSystem::DebugProfileSystem(const Renderer& renderer, const Timer& timer, Color32 foreground)
+FramerateDebugSystem::FramerateDebugSystem(const Renderer& renderer, const Timer& timer, Color32 foreground)
     : m_renderer {renderer},
       m_timer {timer},
       m_fps {m_renderer, InvalidFpsText, TextLayout::LeftTop, foreground, FontSize, default_font, default_font_size}
 {
 }
 
-int DebugProfileSystem::order() const
+int FramerateDebugSystem::order() const
 {
-    return (int) SystemOrder::DebugProfile;
+    return (int) SystemOrder::FramerateDebug;
 }
 
-void DebugProfileSystem::frame(float)
+void FramerateDebugSystem::frame(float)
 {
     const auto fps = m_timer.fps();
 
@@ -52,7 +52,7 @@ void DebugProfileSystem::frame(float)
     m_renderer.renderTexture(FpsPosition.x, FpsPosition.y, m_fps.texture());
 }
 
-bool DebugProfileSystem::hasRequiredComponents(ComponentCollection&) const
+bool FramerateDebugSystem::hasRequiredComponents(ComponentCollection&) const
 {
     return false;
 }

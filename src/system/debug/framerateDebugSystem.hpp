@@ -1,13 +1,13 @@
 //
-// debugProfileSystem.hpp
+// framerateDebugSystem.hpp
 // jackbengine
 //
 // Created by Damien Bendejacq on 19/08/2017.
 // Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
-#ifndef __DEBUG_PROFILE_SYSTEM_H__
-#define __DEBUG_PROFILE_SYSTEM_H__
+#ifndef __FRAMERATE_DEBUG_SYSTEM_H__
+#define __FRAMERATE_DEBUG_SYSTEM_H__
 
 #include <core/math/vector2d.hpp>
 #include "system/system.hpp"
@@ -17,14 +17,14 @@
 
 namespace Jackbengine {
 
-class DebugProfileSystem final : public System
+class FramerateDebugSystem final : public System
 {
-DISALLOW_COPY_AND_MOVE(DebugProfileSystem)
+DISALLOW_COPY_AND_MOVE(FramerateDebugSystem)
 
 public:
-    DebugProfileSystem(const Renderer& renderer, const Timer& timer);
-    DebugProfileSystem(const Renderer& renderer, const Timer& timer, Color32 foreground);
-    ~DebugProfileSystem() override = default;
+    FramerateDebugSystem(const Renderer& renderer, const Timer& timer);
+    FramerateDebugSystem(const Renderer& renderer, const Timer& timer, Color32 foreground);
+    ~FramerateDebugSystem() override = default;
 
     int order() const final;
 
@@ -45,4 +45,4 @@ private:
 
 }
 
-#endif // __DEBUG_PROFILE_SYSTEM_H__
+#endif // __FRAMERATE_DEBUG_SYSTEM_H__

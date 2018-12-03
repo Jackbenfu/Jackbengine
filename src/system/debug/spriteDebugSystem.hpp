@@ -1,5 +1,5 @@
 //
-// debugSpriteSystem.hpp
+// spriteDebugSystem.hpp
 // jackbengine
 //
 // Created by Damien Bendejacq on 19/08/2017.

@@ -68,9 +68,9 @@ set(SOURCE_FILES
     src/core/time/timer.impl.cpp
     src/entity/entityManager.cpp
     src/system/animation/motionSystem.cpp
-    src/system/debug/debugProfileSystem.cpp
-    src/system/debug/debugSpriteSystem.cpp
-    src/system/debug/debugTextSystem.cpp
+    src/system/debug/framerateDebugSystem.cpp
+    src/system/debug/spriteDebugSystem.cpp
+    src/system/debug/textDebugSystem.cpp
     src/system/input/mouseEventTriggerSystem.cpp
     src/system/physic/aabbCollisionSystem.cpp
     src/system/render/spriteRenderSystem.cpp

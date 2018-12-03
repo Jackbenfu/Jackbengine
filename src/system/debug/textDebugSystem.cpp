@@ -1,34 +1,34 @@
 //
-// debugTextSystem.cpp
+// textDebugSystem.cpp
 // jackbengine
 //
 // Created by Damien Bendejacq on 20/08/2017.
 // Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
-#include "debugTextSystem.hpp"
+#include "textDebugSystem.hpp"
 #include "component/layout/containerComponent.hpp"
 #include "component/view/textComponent.hpp"
 
 namespace Jackbengine {
 
-DebugTextSystem::DebugTextSystem(const Renderer& renderer)
-    : DebugTextSystem {renderer, Color32(255, 0, 0)}
+TextDebugSystem::TextDebugSystem(const Renderer& renderer)
+    : TextDebugSystem {renderer, Color32(255, 0, 0)}
 {
 }
 
-DebugTextSystem::DebugTextSystem(const Renderer& renderer, Color32 color)
+TextDebugSystem::TextDebugSystem(const Renderer& renderer, Color32 color)
     : m_renderer {renderer},
       m_color {color}
 {
 }
 
-int DebugTextSystem::order() const
+int TextDebugSystem::order() const
 {
-    return (int) SystemOrder::DebugText;
+    return (int) SystemOrder::TextDebug;
 }
 
-void DebugTextSystem::frame(float)
+void TextDebugSystem::frame(float)
 {
     for (const auto&[entity, components] : entities())
     {
@@ -39,9 +39,9 @@ void DebugTextSystem::frame(float)
         const float h = container->height();
 
         const auto x1 = position.x;
-        const auto x2 = position.x + w;
+        const auto x2 = position.x + w - 1;
         const auto y1 = position.y;
-        const auto y2 = position.y + h;
+        const auto y2 = position.y + h - 1;
 
         m_renderer.renderLine(x1, y1, x2, y1, m_color);
         m_renderer.renderLine(x2, y1, x2, y2, m_color);
@@ -50,7 +50,7 @@ void DebugTextSystem::frame(float)
     }
 }
 
-bool DebugTextSystem::hasRequiredComponents(ComponentCollection& components) const
+bool TextDebugSystem::hasRequiredComponents(ComponentCollection& components) const
 {
     return components.any<TextComponent>()
            && components.any<ContainerComponent>();

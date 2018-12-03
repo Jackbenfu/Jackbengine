@@ -46,9 +46,9 @@
 // System
 #include "system/system.hpp"
 #include "system/animation/motionSystem.hpp"
-#include "system/debug/debugProfileSystem.hpp"
-#include "system/debug/debugSpriteSystem.hpp"
-#include "system/debug/debugTextSystem.hpp"
+#include "system/debug/framerateDebugSystem.hpp"
+#include "system/debug/spriteDebugSystem.hpp"
+#include "system/debug/textDebugSystem.hpp"
 #include "system/input/mouseEventTriggerSystem.hpp"
 #include "system/physic/aabbCollisionSystem.hpp"
 #include "system/render/spriteRenderSystem.hpp"
@@ -56,6 +56,11 @@
 
 // ECS
 #include "ecs/ecsApi.hpp"
+
+// Helper
+#include "helper/helper.color.hpp"
+#include "helper/helper.rect.hpp"
+#include "helper/helper.text.hpp"
 
 // Application
 #include "application/application.hpp"

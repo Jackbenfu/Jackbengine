@@ -13,11 +13,11 @@
 namespace Jackbengine {
 
 TextDebugSystem::TextDebugSystem(const Renderer& renderer)
-    : TextDebugSystem {renderer, Color32(255, 0, 0)}
+    : TextDebugSystem {renderer, Color(255, 0, 0)}
 {
 }
 
-TextDebugSystem::TextDebugSystem(const Renderer& renderer, Color32 color)
+TextDebugSystem::TextDebugSystem(const Renderer& renderer, Color color)
     : m_renderer {renderer},
       m_color {color}
 {
@@ -39,9 +39,9 @@ void TextDebugSystem::frame(float)
         const float h = container->height();
 
         const auto x1 = position.x;
-        const auto x2 = position.x + w - 1;
+        const auto x2 = position.x + w;
         const auto y1 = position.y;
-        const auto y2 = position.y + h - 1;
+        const auto y2 = position.y + h;
 
         m_renderer.renderLine(x1, y1, x2, y1, m_color);
         m_renderer.renderLine(x2, y1, x2, y2, m_color);

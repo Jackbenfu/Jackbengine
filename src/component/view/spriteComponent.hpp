@@ -22,14 +22,14 @@ DISALLOW_COPY_AND_MOVE(SpriteComponent)
 public:
     SpriteComponent(const Renderer& renderer, const std::string& file);
     SpriteComponent(const Renderer& renderer, const void *data, size_t dataSize);
-    SpriteComponent(const Renderer& renderer, int width, int height, Color32 color);
+    SpriteComponent(const Renderer& renderer, int width, int height, Color color);
 
     ~SpriteComponent() override = default;
 
     const Texture& texture() const;
 
 private:
-    Texture m_texture;
+    std::unique_ptr<Texture> m_texture;
 };
 
 using Sprite = SpriteComponent;

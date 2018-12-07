@@ -39,6 +39,9 @@ public:
     TComponent *getComponent(Entity entity) const;
 
     template<typename TComponent>
+    bool hasComponent(Entity entity) const;
+
+    template<typename TComponent>
     void enableComponent(Entity entity, bool enable);
 
     /*
@@ -84,6 +87,12 @@ template<typename TComponent>
 TComponent *EcsManager::getComponent(Entity entity) const
 {
     return m_entityManager->getComponent<TComponent>(entity);
+}
+
+template<typename TComponent>
+bool EcsManager::hasComponent(Entity entity) const
+{
+    return m_entityManager->hasComponent<TComponent>(entity);
 }
 
 template<typename TComponent>

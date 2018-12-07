@@ -6,22 +6,22 @@
 // Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
-#ifndef __DEBUG_SPRITE_SYSTEM_H__
-#define __DEBUG_SPRITE_SYSTEM_H__
+#ifndef __SPRITE_DEBUG_SYSTEM_H__
+#define __SPRITE_DEBUG_SYSTEM_H__
 
 #include "system/system.hpp"
 #include "core/render/renderer/renderer.hpp"
 
 namespace Jackbengine {
 
-class DebugSpriteSystem final : public System
+class SpriteDebugSystem final : public System
 {
-DISALLOW_COPY_AND_MOVE(DebugSpriteSystem)
+DISALLOW_COPY_AND_MOVE(SpriteDebugSystem)
 
 public:
-    DebugSpriteSystem() = delete;
-    explicit DebugSpriteSystem(const Renderer& renderer);
-    ~DebugSpriteSystem() override = default;
+    SpriteDebugSystem() = delete;
+    explicit SpriteDebugSystem(const Renderer& renderer);
+    ~SpriteDebugSystem() override = default;
 
     int order() const final;
 
@@ -30,9 +30,9 @@ private:
     bool hasRequiredComponents(ComponentCollection& components) const override;
 
     const Renderer& m_renderer;
-    const Color32 m_color;
+    const Color m_color;
 };
 
 }
 
-#endif // __DEBUG_SPRITE_SYSTEM_H__
+#endif // __SPRITE_DEBUG_SYSTEM_H__

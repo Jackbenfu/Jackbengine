@@ -13,18 +13,20 @@
 
 namespace Jackbengine {
 
-#define TEXT(text, rect, layout, color, size, font)                                                     \
+#define TEXT_DATA(text, rect, zIndex, layout, color, size, data)                                        \
 {                                                                                                       \
     auto entity = ADD_ENTITY();                                                                         \
-    ADD_COMPONENT(entity, Jackbengine::ContainerComponent, rect.x, rect.y, rect.w, rect.h);             \
-    ADD_COMPONENT(entity, Jackbengine::Text, renderer(), text, layout, color, size, font, font##_size); \
+    ADD_COMPONENT(entity, Jackbengine::Container, rect.x, rect.y, rect.w, rect.h);                      \
+    ADD_COMPONENT(entity, Jackbengine::Text, renderer(), text, layout, color, size, data, data##_size); \
+    ADD_COMPONENT(entity, Jackbengine::ZIndex, zIndex);                                                 \
 }
 
-#define TEXT_STORE(var, text, rect, layout, color, size, font)                                          \
+#define TEXT_DATA_ENTITY(entity, text, rect, zIndex, layout, color, size, data)                         \
 {                                                                                                       \
-    var = ADD_ENTITY();                                                                                 \
-    ADD_COMPONENT(var, Jackbengine::ContainerComponent,rect.x, rect.y, rect.w, rect.h);                 \
-    ADD_COMPONENT(var, Jackbengine::Text, renderer(), text, layout, color, size, font, font##_size);    \
+    entity = ADD_ENTITY();                                                                              \
+    ADD_COMPONENT(entity, Jackbengine::Container,rect.x, rect.y, rect.w, rect.h);                       \
+    ADD_COMPONENT(entity, Jackbengine::Text, renderer(), text, layout, color, size, data, data##_size); \
+    ADD_COMPONENT(entity, Jackbengine::ZIndex, zIndex);                                                 \
 }
 
 #define TEXT_LAYOUT_LEFT_TOP        Jackbengine::TextLayout::LeftTop

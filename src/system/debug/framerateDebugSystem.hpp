@@ -23,7 +23,7 @@ DISALLOW_COPY_AND_MOVE(FramerateDebugSystem)
 
 public:
     FramerateDebugSystem(const Renderer& renderer, const Timer& timer);
-    FramerateDebugSystem(const Renderer& renderer, const Timer& timer, Color32 foreground);
+    FramerateDebugSystem(const Renderer& renderer, const Timer& timer, Color foreground);
     ~FramerateDebugSystem() override = default;
 
     int order() const final;

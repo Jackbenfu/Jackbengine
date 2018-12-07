@@ -10,7 +10,7 @@
 #define __COLOR_COMPONENT_H__
 
 #include "component/component.hpp"
-#include "core/render/color32.hpp"
+#include "core/render/color.hpp"
 
 namespace Jackbengine {
 
@@ -19,13 +19,13 @@ class ColorComponent : public Component
 DISALLOW_COPY_AND_MOVE(ColorComponent)
 
 public:
-    explicit ColorComponent(Color32 color);
+    explicit ColorComponent(Color color);
     ColorComponent(byte red, byte green, byte blue, byte alpha);
     ColorComponent(byte red, byte green, byte blue);
 
     ~ColorComponent() override = default;
 
-    Color32 getColor() const;
+    Color getColor() const;
 
     byte red() const;
     void setRed(byte value);
@@ -40,10 +40,8 @@ public:
     void setAlpha(byte value);
 
 private:
-    Color32 m_color;
+    Color m_color;
 };
-
-using Color = ColorComponent;
 
 }
 

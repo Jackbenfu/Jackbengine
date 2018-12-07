@@ -10,7 +10,7 @@
 #define __TEXTURE_H__
 
 #include <memory>
-#include "core/render/color32.hpp"
+#include "core/render/color.hpp"
 #include "core/render/font/font.hpp"
 
 namespace Jackbengine {
@@ -26,8 +26,8 @@ DISALLOW_COPY_AND_MOVE(Texture)
 public:
     Texture(const Renderer& renderer, const std::string& file);
     Texture(const Renderer& renderer, const void *data, size_t dataSize);
-    Texture(const Renderer& renderer, int width, int height, Color32 color);
-    Texture(const Renderer& renderer, const Font& font, const std::string& text, Color32 foreground);
+    Texture(const Renderer& renderer, int width, int height, Color color);
+    Texture(const Renderer& renderer, const Font& font, const std::string& text, Color foreground);
 
     ~Texture();
 

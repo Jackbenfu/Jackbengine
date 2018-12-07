@@ -1,16 +1,16 @@
 //
-// color32.cpp
+// color.cpp
 // jackbengine
 //
-// Created by Damien Bendejacq on 18/06/15.
+// Created by Damien Bendejacq on 18/06/2015.
 // Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
-#include "color32.hpp"
+#include "color.hpp"
 
 namespace Jackbengine {
 
-Color32::Color32()
+Color::Color()
     : r(0),
       g(0),
       b(0),
@@ -18,7 +18,7 @@ Color32::Color32()
 {
 }
 
-Color32::Color32(byte r, byte g, byte b)
+Color::Color(byte r, byte g, byte b)
     : r(r),
       g(g),
       b(b),
@@ -26,7 +26,7 @@ Color32::Color32(byte r, byte g, byte b)
 {
 }
 
-Color32::Color32(byte r, byte g, byte b, byte a)
+Color::Color(byte r, byte g, byte b, byte a)
     : r(r),
       g(g),
       b(b),

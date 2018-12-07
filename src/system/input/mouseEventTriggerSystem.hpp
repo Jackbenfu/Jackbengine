@@ -25,14 +25,11 @@ public:
 
     int order() const final;
 
-    void setBubbling(bool active);
-
 private:
     void frame(float delta) override;
     bool hasRequiredComponents(ComponentCollection& components) const override;
 
     const Input& m_input;
-    bool m_bubbling {false};
 };
 
 }

@@ -26,7 +26,7 @@ Texture::Impl::Impl(const Renderer& renderer, const void *data, size_t dataSize)
     loadTextureFromSurface(renderer, *sdlSurface);
 }
 
-Texture::Impl::Impl(const Renderer& renderer, int width, int height, Color32 color)
+Texture::Impl::Impl(const Renderer& renderer, int width, int height, Color color)
 {
     const auto sdlSurface = std::make_unique<SdlSurface>(width, height, 32);
     const auto sdlSurfaceObject = (SDL_Surface *) sdlSurface->internalObject();
@@ -40,7 +40,7 @@ Texture::Impl::Impl(const Renderer& renderer, int width, int height, Color32 col
     loadTextureFromSurface(renderer, *sdlSurface);
 }
 
-Texture::Impl::Impl(const Renderer& renderer, const Font& font, const std::string& text, Color32 foreground)
+Texture::Impl::Impl(const Renderer& renderer, const Font& font, const std::string& text, Color foreground)
 {
     const auto sdlSurface = std::make_unique<SdlSurface>(font, text, foreground);
 

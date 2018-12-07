@@ -9,16 +9,18 @@
 #ifndef __HELPER_COLOR_H__
 #define __HELPER_COLOR_H__
 
-#include "core/render/color32.hpp"
+#include "core/render/color.hpp"
 
 namespace Jackbengine {
 
-#define COLOR(r, g, b)      Jackbengine::Color32(r, g, b)
-#define COLOR32(r, g, b, a) Jackbengine::Color32(r, g, b, a)
+#define COLOR_RGB(r, g, b)      Jackbengine::Color(r, g, b)
+#define COLOR_RGBA(r, g, b, a)  Jackbengine::Color(r, g, b, a)
 
-#define COLOR_RED           COLOR(255, 0, 0)
-#define COLOR_GREEN         COLOR(0, 255, 0)
-#define COLOR_BLUE          COLOR(0, 0, 255)
+#define COLOR_BLACK             COLOR_RGB(0, 0, 0)
+#define COLOR_WHITE             COLOR_RGB(255, 255, 255)
+#define COLOR_RED               COLOR_RGB(255, 0, 0)
+#define COLOR_GREEN             COLOR_RGB(0, 255, 0)
+#define COLOR_BLUE              COLOR_RGB(0, 0, 255)
 
 }
 

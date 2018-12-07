@@ -10,7 +10,7 @@
 
 namespace Jackbengine {
 
-ColorComponent::ColorComponent(Color32 color)
+ColorComponent::ColorComponent(Color color)
     : ColorComponent(color.r, color.g, color.b, color.a)
 {
 }
@@ -25,7 +25,7 @@ ColorComponent::ColorComponent(byte red, byte green, byte blue)
 {
 }
 
-Color32 ColorComponent::getColor() const
+Color ColorComponent::getColor() const
 {
     return m_color;
 }

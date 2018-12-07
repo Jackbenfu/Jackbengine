@@ -9,7 +9,7 @@
 #include "spriteRenderSystem.hpp"
 #include "component/view/spriteComponent.hpp"
 #include "component/body/transformComponent.hpp"
-#include "component/layout/zOrderComponent.hpp"
+#include "component/layout/zIndexComponent.hpp"
 
 namespace Jackbengine {
 
@@ -25,7 +25,7 @@ int SpriteRenderSystem::order() const
 
 void SpriteRenderSystem::frame(float)
 {
-    sortByZOrder();
+    sortByZIndex();
 
     for (const auto&[entity, components] : entities())
     {
@@ -45,20 +45,20 @@ bool SpriteRenderSystem::hasRequiredComponents(ComponentCollection& components) 
 {
     return components.any<SpriteComponent>()
            && components.any<TransformComponent>()
-           && components.any<ZOrderComponent>();
+           && components.any<ZIndexComponent>();
 }
 
-void SpriteRenderSystem::sortByZOrder()
+void SpriteRenderSystem::sortByZIndex()
 {
     const auto lambda = [](
         const std::pair<Entity, ComponentCollection *>& left,
         const std::pair<Entity, ComponentCollection *>& right
     )
     {
-        const auto leftZOrder = left.second->get<ZOrderComponent>();
-        const auto rightZOrder = right.second->get<ZOrderComponent>();
+        const auto leftZIndex = left.second->get<ZIndexComponent>();
+        const auto rightZIndex = right.second->get<ZIndexComponent>();
 
-        return leftZOrder->index() < rightZOrder->index();
+        return leftZIndex->index() < rightZIndex->index();
     };
 
     sort(lambda);

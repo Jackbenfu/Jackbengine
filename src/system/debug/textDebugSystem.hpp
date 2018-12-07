@@ -20,7 +20,7 @@ DISALLOW_COPY_AND_MOVE(TextDebugSystem)
 
 public:
     explicit TextDebugSystem(const Renderer& renderer);
-    TextDebugSystem(const Renderer& renderer, Color32 color);
+    TextDebugSystem(const Renderer& renderer, Color color);
     ~TextDebugSystem() override = default;
 
     int order() const final;
@@ -30,7 +30,7 @@ private:
     bool hasRequiredComponents(ComponentCollection& components) const override;
 
     const Renderer& m_renderer;
-    Color32 m_color;
+    Color m_color;
 };
 
 }

@@ -17,12 +17,12 @@ IMPORT_BINARY_RESOURCE(default_font)
 FramerateDebugSystem::FramerateDebugSystem(const Renderer& renderer, const Timer& timer)
     : m_renderer {renderer},
       m_timer {timer},
-      m_fps {m_renderer, InvalidFpsText, TextLayout::LeftTop, Color32(255, 255, 255), FontSize, default_font,
+      m_fps {m_renderer, InvalidFpsText, TextLayout::LeftTop, Color(255, 255, 255), FontSize, default_font,
              default_font_size}
 {
 }
 
-FramerateDebugSystem::FramerateDebugSystem(const Renderer& renderer, const Timer& timer, Color32 foreground)
+FramerateDebugSystem::FramerateDebugSystem(const Renderer& renderer, const Timer& timer, Color foreground)
     : m_renderer {renderer},
       m_timer {timer},
       m_fps {m_renderer, InvalidFpsText, TextLayout::LeftTop, foreground, FontSize, default_font, default_font_size}

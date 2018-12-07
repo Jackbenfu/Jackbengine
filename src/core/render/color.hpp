@@ -1,8 +1,8 @@
 //
-// color32.hpp
+// color.hpp
 // jackbengine
 //
-// Created by Damien Bendejacq on 18/06/15.
+// Created by Damien Bendejacq on 18/06/2015.
 // Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
@@ -13,11 +13,11 @@
 
 namespace Jackbengine {
 
-struct Color32
+struct Color
 {
-    Color32();
-    Color32(byte r, byte g, byte b);
-    Color32(byte r, byte g, byte b, byte a);
+    Color();
+    Color(byte r, byte g, byte b);
+    Color(byte r, byte g, byte b, byte a);
 
     byte r;
     byte g;

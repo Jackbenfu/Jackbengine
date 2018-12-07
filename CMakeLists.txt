@@ -37,7 +37,7 @@ set(SOURCE_FILES
     src/component/body/velocityComponent.cpp
     src/component/input/mouseListenerComponent.cpp
     src/component/layout/containerComponent.cpp
-    src/component/layout/zOrderComponent.cpp
+    src/component/layout/zIndexComponent.cpp
     src/component/misc/nameComponent.cpp
     src/component/misc/tagComponent.cpp
     src/component/view/colorComponent.cpp
@@ -51,7 +51,7 @@ set(SOURCE_FILES
     src/core/input/input.cpp
     src/core/input/input.impl.cpp
     src/core/log/log.cpp
-    src/core/render/color32.cpp
+    src/core/render/color.cpp
     src/core/render/cursor/cursor.cpp
     src/core/render/cursor/cursor.impl.cpp
     src/core/render/font/defaultFont.cpp

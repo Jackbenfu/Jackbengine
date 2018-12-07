@@ -1,26 +1,26 @@
 //
-// zOrderComponent.cpp
+// zIndexComponent.cpp
 // jackbengine
 //
 // Created by Damien Bendejacq on 29/07/2017.
 // Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
-#include "zOrderComponent.hpp"
+#include "zIndexComponent.hpp"
 
 namespace Jackbengine {
 
-ZOrderComponent::ZOrderComponent(int index)
+ZIndexComponent::ZIndexComponent(uint index)
     : m_index {index}
 {
 }
 
-int ZOrderComponent::index() const
+uint ZIndexComponent::index() const
 {
     return m_index;
 }
 
-void ZOrderComponent::setIndex(int index)
+void ZIndexComponent::setIndex(uint index)
 {
     m_index = index;
 }

@@ -28,7 +28,7 @@ public:
     void play(bool loop) const;
 
 private:
-    Sound m_sound;
+    std::unique_ptr<Sound> m_sound;
 };
 
 using AudioSource = AudioSourceComponent;

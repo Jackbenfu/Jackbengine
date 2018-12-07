@@ -36,6 +36,9 @@ public:
     TComponent *getComponent(Entity entity) const;
 
     template<typename TComponent>
+    bool hasComponent(Entity entity);
+
+    template<typename TComponent>
     void enableComponent(Entity entity, bool enable);
 
 private:
@@ -62,6 +65,14 @@ TComponent *EntityManager::getComponent(Entity entity) const
     auto&[_, components] = findEntity(entity);
 
     return components->get<TComponent>();
+}
+
+template<typename TComponent>
+bool EntityManager::hasComponent(Entity entity)
+{
+    auto&[_, components] = findEntity(entity);
+
+    return components->any<TComponent>();
 }
 
 template<typename TComponent>

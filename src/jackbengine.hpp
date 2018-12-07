@@ -2,7 +2,7 @@
 // jackbengine.hpp
 // jackbengine
 //
-// Created by Damien Bendejacq on 22/04/14.
+// Created by Damien Bendejacq on 22/04/2014.
 // Copyright © 2014 Damien Bendejacq. All rights reserved.
 //
 
@@ -16,7 +16,7 @@
 #include "core/log/log.hpp"
 #include "core/math/rect.hpp"
 #include "core/math/vector2d.hpp"
-#include "core/render/color32.hpp"
+#include "core/render/color.hpp"
 #include "core/render/cursor/cursor.hpp"
 #include "core/render/font/font.hpp"
 #include "core/render/renderer/renderer.hpp"
@@ -36,7 +36,7 @@
 #include "component/generic/numericalComponent.hpp"
 #include "component/input/mouseListenerComponent.hpp"
 #include "component/layout/containerComponent.hpp"
-#include "component/layout/zOrderComponent.hpp"
+#include "component/layout/zIndexComponent.hpp"
 #include "component/misc/nameComponent.hpp"
 #include "component/misc/tagComponent.hpp"
 #include "component/view/colorComponent.hpp"
@@ -59,7 +59,10 @@
 
 // Helper
 #include "helper/helper.color.hpp"
-#include "helper/helper.rect.hpp"
+#include "helper/helper.mouse.hpp"
+#include "helper/helper.math.hpp"
+#include "helper/helper.sprite.hpp"
+#include "helper/helper.system.hpp"
 #include "helper/helper.text.hpp"
 
 // Application

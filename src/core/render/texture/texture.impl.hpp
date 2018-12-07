@@ -20,8 +20,8 @@ class Texture::Impl
 public:
     Impl(const Renderer& renderer, const std::string& file);
     Impl(const Renderer& renderer, const void *data, size_t dataSize);
-    Impl(const Renderer& renderer, int width, int height, Color32 color);
-    Impl(const Renderer& renderer, const Font& font, const std::string& text, Color32 foreground);
+    Impl(const Renderer& renderer, int width, int height, Color color);
+    Impl(const Renderer& renderer, const Font& font, const std::string& text, Color foreground);
 
     ~Impl();
 

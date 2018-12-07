@@ -21,12 +21,12 @@ Texture::Texture(const Renderer& renderer, const void *data, size_t dataSize)
 {
 }
 
-Texture::Texture(const Renderer& renderer, int width, int height, Color32 color)
+Texture::Texture(const Renderer& renderer, int width, int height, Color color)
     : m_impl {std::make_unique<Impl>(renderer, width, height, color)}
 {
 }
 
-Texture::Texture(const Renderer& renderer, const Font& font, const std::string& text, Color32 foreground)
+Texture::Texture(const Renderer& renderer, const Font& font, const std::string& text, Color foreground)
     : m_impl {std::make_unique<Impl>(renderer, font, text, foreground)}
 {
 }

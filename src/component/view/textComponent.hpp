@@ -10,7 +10,7 @@
 #define __TEXT_COMPONENT_H__
 
 #include "component/component.hpp"
-#include "core/render/color32.hpp"
+#include "core/render/color.hpp"
 #include "core/render/font/font.hpp"
 #include "core/math/rect.hpp"
 #include "core/render/renderer/renderer.hpp"
@@ -37,7 +37,7 @@ DISALLOW_COPY_AND_MOVE(TextComponent)
 
 public:
     TextComponent(
-        const Renderer& renderer, const std::string& text, TextLayout layout, Color32 foreground,
+        const Renderer& renderer, const std::string& text, TextLayout layout, Color foreground,
         int size, const void *fontData, size_t fontDataSize
     );
 
@@ -46,8 +46,8 @@ public:
     const std::string& text() const;
     void setText(const std::string& text);
 
-    Color32 foreground() const;
-    void setForeground(Color32 color);
+    Color foreground() const;
+    void setForeground(Color color);
     void setForeground(byte r, byte g, byte b);
     void setForeground(byte r, byte g, byte b, byte a);
 
@@ -72,7 +72,7 @@ private:
 
     std::string m_text;
     TextLayout m_layout;
-    Color32 m_foreground;
+    Color m_foreground;
     int m_size;
     const void *m_fontData;
     const size_t m_fontDataSize;

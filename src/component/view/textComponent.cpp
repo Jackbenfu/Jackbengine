@@ -11,7 +11,7 @@
 namespace Jackbengine {
 
 TextComponent::TextComponent(
-    const Renderer& renderer, const std::string& text, TextLayout layout, Color32 foreground,
+    const Renderer& renderer, const std::string& text, TextLayout layout, Color foreground,
     int size, const void *fontData, size_t fontDataSize
 )
     : m_renderer {renderer},
@@ -37,12 +37,12 @@ void TextComponent::setText(const std::string& text)
     refreshTexture();
 }
 
-Color32 TextComponent::foreground() const
+Color TextComponent::foreground() const
 {
     return m_foreground;
 }
 
-void TextComponent::setForeground(Color32 color)
+void TextComponent::setForeground(Color color)
 {
     m_foreground = color;
 
@@ -51,14 +51,14 @@ void TextComponent::setForeground(Color32 color)
 
 void TextComponent::setForeground(byte r, byte g, byte b)
 {
-    m_foreground = Color32(r, g, b);
+    m_foreground = Color(r, g, b);
 
     refreshTexture();
 }
 
 void TextComponent::setForeground(byte r, byte g, byte b, byte a)
 {
-    m_foreground = Color32(r, g, b, a);
+    m_foreground = Color(r, g, b, a);
 
     refreshTexture();
 }

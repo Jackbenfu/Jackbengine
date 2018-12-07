@@ -2,7 +2,7 @@
 // vector2d.hpp
 // jackbengine
 //
-// Created by Damien Bendejacq on 10/09/13.
+// Created by Damien Bendejacq on 10/09/2013.
 // Copyright © 2013 Damien Bendejacq. All rights reserved.
 //
 

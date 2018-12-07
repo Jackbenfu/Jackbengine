@@ -7,37 +7,37 @@
 //
 
 #include "spriteDebugSystem.hpp"
-#include "component/body/shape/boxShapeComponent.hpp"
+#include "component/view/spriteComponent.hpp"
 #include "component/body/transformComponent.hpp"
-#include "framerateDebugSystem.hpp"
 
 namespace Jackbengine {
 
-DebugSpriteSystem::DebugSpriteSystem(const Renderer& renderer)
+SpriteDebugSystem::SpriteDebugSystem(const Renderer& renderer)
     : m_renderer {renderer},
-      m_color {Color32(255, 0, 0)}
+      m_color {Color(255, 0, 0)}
 {
 }
 
-int DebugSpriteSystem::order() const
+int SpriteDebugSystem::order() const
 {
     return (int) SystemOrder::SpriteDebug;
 }
 
-void DebugSpriteSystem::frame(float)
+void SpriteDebugSystem::frame(float)
 {
     for (const auto&[entity, components] : entities())
     {
-        const auto boxShape = components->get<BoxShapeComponent>();
+        const auto sprite = components->get<SpriteComponent>();
         const auto transform = components->get<TransformComponent>();
 
         const auto position = transform->position();
-        const auto size = boxShape->size();
+        const auto width = sprite->texture().width();
+        const auto height = sprite->texture().height();
 
         const auto x1 = position.x;
-        const auto x2 = position.x + size.x;
+        const auto x2 = position.x + width;
         const auto y1 = position.y;
-        const auto y2 = position.y + size.y;
+        const auto y2 = position.y + height;
 
         m_renderer.renderLine(x1, y1, x2, y1, m_color);
         m_renderer.renderLine(x2, y1, x2, y2, m_color);
@@ -46,9 +46,9 @@ void DebugSpriteSystem::frame(float)
     }
 }
 
-bool DebugSpriteSystem::hasRequiredComponents(ComponentCollection& components) const
+bool SpriteDebugSystem::hasRequiredComponents(ComponentCollection& components) const
 {
-    return components.any<BoxShapeComponent>()
+    return components.any<SpriteComponent>()
            && components.any<TransformComponent>();
 }
 

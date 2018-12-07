@@ -29,7 +29,7 @@ private:
     void frame(float delta) override;
     bool hasRequiredComponents(ComponentCollection& components) const override;
 
-    void sortByZOrder();
+    void sortByZIndex();
 
     const Renderer& m_renderer;
 };

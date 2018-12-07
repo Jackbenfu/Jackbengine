@@ -11,23 +11,23 @@
 namespace Jackbengine {
 
 AudioSourceComponent::AudioSourceComponent(const std::string& file)
-    : m_sound {file}
+    : m_sound {std::make_unique<Sound>(file)}
 {
 }
 
 AudioSourceComponent::AudioSourceComponent(const void *data, size_t dataSize)
-    : m_sound {data, dataSize}
+    : m_sound {std::make_unique<Sound>(data, dataSize)}
 {
 }
 
 void AudioSourceComponent::play() const
 {
-    m_sound.play(false);
+    m_sound->play(false);
 }
 
 void AudioSourceComponent::play(bool loop) const
 {
-    m_sound.play(loop);
+    m_sound->play(loop);
 }
 
 }

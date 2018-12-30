@@ -15,9 +15,9 @@ namespace Jackbengine {
 
 // TODO gérer le scale
 // TODO gérer la position du pivot (range 0..1, pas en pixels)
-
-//    SpriteComponent(const Renderer& renderer, const std::string& file);
-//    SpriteComponent(const Renderer& renderer, int width, int height, Color color);
+// TODO gérer les autres events mouse
+// TODO gérer le clic sur un élément non AABB
+// TODO ajouter les systèmes manquants aux helpers
 
 #define SPRITE_DATA(data, position, zIndex, scale, angle)                                           \
 {                                                                                                   \

@@ -17,8 +17,6 @@ class StateMachine;
 
 class State
 {
-DISALLOW_COPY_AND_MOVE(State)
-
 public:
     State() = delete;
 

@@ -9,7 +9,8 @@
 #ifndef __TEXTURE_H__
 #define __TEXTURE_H__
 
-#include <memory>
+#include "core/sdl/sdl.hpp"
+#include "core/sdl/surface/sdlSurface.hpp"
 #include "core/render/color.hpp"
 #include "core/render/font/font.hpp"
 
@@ -20,8 +21,6 @@ class Renderer;
 class Texture
 {
     friend class Renderer;
-
-DISALLOW_COPY_AND_MOVE(Texture)
 
 public:
     Texture(const Renderer& renderer, const std::string& file);
@@ -35,11 +34,10 @@ public:
     int height() const;
 
 private:
-    void *internalObject() const;
+    void loadTextureFromSurface(const Renderer& renderer, const SdlSurface& surface);
 
-    class Impl;
-
-    std::unique_ptr<Impl> m_impl;
+    SDL_Texture *m_texture {nullptr};
+    SDL_Rect m_rect {0, 0, 0, 0};
 };
 
 }

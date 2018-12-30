@@ -16,8 +16,6 @@ namespace Jackbengine {
 
 class MouseEventTriggerSystem final : public System
 {
-DISALLOW_COPY_AND_MOVE(MouseEventTriggerSystem)
-
 public:
     MouseEventTriggerSystem() = delete;
     explicit MouseEventTriggerSystem(const Input& input);

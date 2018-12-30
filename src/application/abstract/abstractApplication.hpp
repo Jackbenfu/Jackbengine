@@ -15,8 +15,6 @@ namespace Jackbengine {
 
 class AbstractApplication
 {
-DISALLOW_COPY_AND_MOVE(AbstractApplication)
-
 public:
     AbstractApplication();
     virtual ~AbstractApplication();

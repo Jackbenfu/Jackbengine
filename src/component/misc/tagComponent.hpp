@@ -15,8 +15,6 @@ namespace Jackbengine {
 
 class TagComponent : public Component
 {
-DISALLOW_COPY_AND_MOVE(TagComponent)
-
 public:
     explicit TagComponent(const std::string& tag);
     ~TagComponent() override = default;

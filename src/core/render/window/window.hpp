@@ -9,8 +9,8 @@
 #ifndef __WINDOW_H__
 #define __WINDOW_H__
 
-#include <memory>
 #include <string>
+#include "core/sdl/sdl.hpp"
 #include "common.hpp"
 
 namespace Jackbengine {
@@ -18,8 +18,6 @@ namespace Jackbengine {
 class Window
 {
     friend class Renderer;
-
-DISALLOW_COPY_AND_MOVE(Window)
 
 public:
     Window(const std::string& title, int width, int height, bool fullscreen);
@@ -29,11 +27,12 @@ public:
     int height() const;
 
 private:
-    void *internalObject() const;
+    void setWindowIcon();
 
-    class Impl;
+    SDL_Window *m_window {nullptr};
 
-    std::unique_ptr<Impl> m_impl;
+    int m_width {0};
+    int m_height {0};
 };
 
 }

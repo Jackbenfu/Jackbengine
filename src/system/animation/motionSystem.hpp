@@ -15,8 +15,6 @@ namespace Jackbengine {
 
 class MotionSystem final : public System
 {
-DISALLOW_COPY_AND_MOVE(MotionSystem)
-
 public:
     MotionSystem() = default;
 

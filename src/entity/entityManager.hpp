@@ -17,8 +17,6 @@ namespace Jackbengine {
 
 class EntityManager
 {
-DISALLOW_COPY_AND_MOVE(EntityManager)
-
 public:
     EntityManager() = default;
     ~EntityManager() = default;

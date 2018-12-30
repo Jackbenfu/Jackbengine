@@ -21,8 +21,6 @@ namespace Jackbengine {
 template<typename TBase>
 class OrderedHeterogeneousCollection
 {
-DISALLOW_COPY_AND_MOVE(OrderedHeterogeneousCollection<TBase>)
-
 public:
     OrderedHeterogeneousCollection() = default;
     ~OrderedHeterogeneousCollection() = default;

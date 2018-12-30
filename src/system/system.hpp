@@ -20,8 +20,6 @@ class System : public OrderableItem
 {
     friend class SystemManager;
 
-DISALLOW_COPY_AND_MOVE(System)
-
 public:
     System() = default;
     virtual ~System() = default;

@@ -9,7 +9,7 @@
 #ifndef __CURSOR_H__
 #define __CURSOR_H__
 
-#include <memory>
+#include "core/sdl/sdl.hpp"
 #include "common.hpp"
 
 namespace Jackbengine {
@@ -22,10 +22,8 @@ enum class CursorType
 
 class Cursor
 {
-DISALLOW_COPY_AND_MOVE(Cursor)
-
 public:
-    Cursor();
+    Cursor() = default;
     ~Cursor();
 
     void setCursor(CursorType cursor);
@@ -33,9 +31,7 @@ public:
     void showCursor(bool visible);
 
 private:
-    class Impl;
-
-    std::unique_ptr<Impl> m_impl;
+    SDL_Cursor *m_cursor {nullptr};
 };
 
 }

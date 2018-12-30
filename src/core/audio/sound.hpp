@@ -9,15 +9,14 @@
 #ifndef __SOUND_H__
 #define __SOUND_H__
 
-#include <memory>
+#include <string>
+#include "core/sdl/sdl.hpp"
 #include "common.hpp"
 
 namespace Jackbengine {
 
 class Sound
 {
-DISALLOW_COPY_AND_MOVE(Sound)
-
 public:
     explicit Sound(const std::string& file);
     Sound(const void *data, size_t dataSize);
@@ -27,9 +26,7 @@ public:
     void play(bool loop) const;
 
 private:
-    class Impl;
-
-    std::unique_ptr<Impl> m_impl;
+    Mix_Chunk *m_chunk {nullptr};
 };
 
 }

@@ -16,8 +16,6 @@ namespace Jackbengine {
 
 class SpriteRenderSystem final : public System
 {
-DISALLOW_COPY_AND_MOVE(SpriteRenderSystem)
-
 public:
     SpriteRenderSystem() = delete;
     explicit SpriteRenderSystem(const Renderer& renderer);

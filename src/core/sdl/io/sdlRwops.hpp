@@ -15,8 +15,6 @@ namespace Jackbengine {
 
 class SdlRwops
 {
-DISALLOW_COPY_AND_MOVE(SdlRwops)
-
 public:
     SdlRwops(const void *data, size_t dataSize);
     ~SdlRwops() = default;

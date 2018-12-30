@@ -9,7 +9,8 @@
 #ifndef __FONT_H__
 #define __FONT_H__
 
-#include <memory>
+#include <string>
+#include "core/sdl/sdl.hpp"
 #include "common.hpp"
 
 namespace Jackbengine {
@@ -17,8 +18,6 @@ namespace Jackbengine {
 class Font
 {
     friend class SdlSurface;
-
-DISALLOW_COPY_AND_MOVE(Font)
 
 public:
     Font(const std::string& file, int size);
@@ -39,11 +38,7 @@ public:
     int lineSkip() const;
 
 private:
-    void *internalObject() const;
-
-    class Impl;
-
-    std::unique_ptr<Impl> m_impl;
+    TTF_Font *m_font {nullptr};
 };
 
 }

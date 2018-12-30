@@ -33,8 +33,6 @@ std::function<bool(
 
 class AABBCollisionSystem final : public System
 {
-DISALLOW_COPY_AND_MOVE(AABBCollisionSystem)
-
 public:
     AABBCollisionSystem() = default;
     ~AABBCollisionSystem() override = default;

@@ -17,8 +17,6 @@ namespace Jackbengine {
 
 class SpriteComponent : public Component
 {
-DISALLOW_COPY_AND_MOVE(SpriteComponent)
-
 public:
     SpriteComponent(const Renderer& renderer, const std::string& file);
     SpriteComponent(const Renderer& renderer, const void *data, size_t dataSize);

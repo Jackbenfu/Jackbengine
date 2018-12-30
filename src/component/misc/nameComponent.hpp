@@ -15,8 +15,6 @@ namespace Jackbengine {
 
 class NameComponent : public Component
 {
-DISALLOW_COPY_AND_MOVE(NameComponent)
-
 public:
     explicit NameComponent(const std::string& name);
     ~NameComponent() override = default;

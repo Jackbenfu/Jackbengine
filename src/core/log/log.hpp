@@ -21,8 +21,6 @@ namespace Jackbengine {
 
 class Log
 {
-DISALLOW_COPY_AND_MOVE(Log)
-
 public:
     static void init();
 

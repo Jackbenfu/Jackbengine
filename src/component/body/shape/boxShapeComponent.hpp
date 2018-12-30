@@ -16,8 +16,6 @@ namespace Jackbengine {
 
 class BoxShapeComponent : public Component
 {
-DISALLOW_COPY_AND_MOVE(BoxShapeComponent)
-
 public:
     BoxShapeComponent() = default;
     BoxShapeComponent(float width, float height);

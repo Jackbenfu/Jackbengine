@@ -16,8 +16,6 @@ namespace Jackbengine {
 
 class TransformComponent : public Component
 {
-DISALLOW_COPY_AND_MOVE(TransformComponent)
-
 public:
     TransformComponent() = default;
     TransformComponent(float positionX, float positionY);

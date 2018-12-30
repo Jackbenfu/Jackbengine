@@ -16,8 +16,6 @@ namespace Jackbengine {
 
 class SpriteDebugSystem final : public System
 {
-DISALLOW_COPY_AND_MOVE(SpriteDebugSystem)
-
 public:
     SpriteDebugSystem() = delete;
     explicit SpriteDebugSystem(const Renderer& renderer);

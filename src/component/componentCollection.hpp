@@ -16,8 +16,6 @@ namespace Jackbengine {
 
 class ComponentCollection
 {
-DISALLOW_COPY_AND_MOVE(ComponentCollection)
-
 public:
     ComponentCollection() = default;
     ~ComponentCollection() = default;

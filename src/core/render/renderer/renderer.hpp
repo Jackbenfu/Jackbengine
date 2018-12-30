@@ -9,7 +9,7 @@
 #ifndef __RENDERER_H__
 #define __RENDERER_H__
 
-#include <memory>
+#include "core/sdl/sdl.hpp"
 #include "core/render/color.hpp"
 #include "core/render/window/window.hpp"
 
@@ -21,8 +21,6 @@ class Renderer
 {
     friend class Texture;
 
-DISALLOW_COPY_AND_MOVE(Renderer)
-
 public:
     explicit Renderer(const Window& window);
     ~Renderer();
@@ -31,7 +29,7 @@ public:
     void present();
 
     void setClearColor(Color color);
-    void setRenderColor(Color color);
+    void setRenderColor(Color color) const;
 
     void renderTexture(int x, int y, const Texture& texture) const;
     void renderTexture(int x, int y, const Texture& texture, double angle) const;
@@ -42,11 +40,12 @@ public:
     int height() const;
 
 private:
-    void *internalObject() const;
+    SDL_Renderer *m_renderer {nullptr};
 
-    class Impl;
+    mutable Color m_clearColor {Color(0, 0, 0)};
 
-    std::unique_ptr<Impl> m_impl;
+    int m_width;
+    int m_height;
 };
 
 }

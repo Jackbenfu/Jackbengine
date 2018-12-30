@@ -7,45 +7,75 @@
 //
 
 #include "texture.hpp"
-#include "texture.impl.hpp"
+#include "core/render/renderer/renderer.hpp"
 
 namespace Jackbengine {
 
 Texture::Texture(const Renderer& renderer, const std::string& file)
-    : m_impl {std::make_unique<Impl>(renderer, file)}
 {
+    const auto sdlSurface = std::make_unique<SdlSurface>(file);
+
+    loadTextureFromSurface(renderer, *sdlSurface);
 }
 
 Texture::Texture(const Renderer& renderer, const void *data, size_t dataSize)
-    : m_impl {std::make_unique<Impl>(renderer, data, dataSize)}
 {
+    const auto sdlRwops = std::make_unique<SdlRwops>(data, dataSize);
+    const auto sdlSurface = std::make_unique<SdlSurface>(*sdlRwops);
+
+    loadTextureFromSurface(renderer, *sdlSurface);
 }
 
 Texture::Texture(const Renderer& renderer, int width, int height, Color color)
-    : m_impl {std::make_unique<Impl>(renderer, width, height, color)}
 {
+    const auto sdlSurface = std::make_unique<SdlSurface>(width, height, 32);
+    const auto sdlSurfaceObject = (SDL_Surface *) sdlSurface->internalObject();
+
+    const auto rgbUint = SDL_MapRGB(sdlSurfaceObject->format, color.r, color.g, color.b);
+    if (SDL_FillRect(sdlSurfaceObject, nullptr, rgbUint) < 0)
+    {
+        throw std::runtime_error(SDL_GetError());
+    }
+
+    loadTextureFromSurface(renderer, *sdlSurface);
 }
 
 Texture::Texture(const Renderer& renderer, const Font& font, const std::string& text, Color foreground)
-    : m_impl {std::make_unique<Impl>(renderer, font, text, foreground)}
 {
+    const auto sdlSurface = std::make_unique<SdlSurface>(font, text, foreground);
+
+    loadTextureFromSurface(renderer, *sdlSurface);
 }
 
-Texture::~Texture() = default;
+Texture::~Texture()
+{
+    SDL_DestroyTexture(m_texture);
+}
 
 int Texture::width() const
 {
-    return m_impl->width();
+    return m_rect.w;
 }
 
 int Texture::height() const
 {
-    return m_impl->height();
+    return m_rect.h;
 }
 
-void *Texture::internalObject() const
+void Texture::loadTextureFromSurface(const Renderer& renderer, const SdlSurface& surface)
 {
-    return m_impl->internalObject();
+    const auto sdlRenderer = renderer.m_renderer;
+
+    m_texture = SDL_CreateTextureFromSurface(sdlRenderer, (SDL_Surface *) surface.internalObject());
+    if (nullptr == m_texture)
+    {
+        throw std::runtime_error(SDL_GetError());
+    }
+
+    if (SDL_QueryTexture(m_texture, nullptr, nullptr, &m_rect.w, &m_rect.h) < 0)
+    {
+        throw std::runtime_error(SDL_GetError());
+    }
 }
 
 }

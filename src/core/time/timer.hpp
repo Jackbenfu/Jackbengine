@@ -9,15 +9,12 @@
 #ifndef __TIMER_H__
 #define __TIMER_H__
 
-#include <memory>
 #include "common.hpp"
 
 namespace Jackbengine {
 
 class Timer
 {
-DISALLOW_COPY_AND_MOVE(Timer)
-
 public:
     explicit Timer(uint fps);
     ~Timer();
@@ -25,8 +22,8 @@ public:
     void start();
     void snapshot();
 
-    uint elapsedMilliseconds() const;
-    uint effectiveElapsedMilliseconds() const;
+    float elapsedMilliseconds() const;
+    float effectiveElapsedMilliseconds() const;
 
     int fps() const;
 
@@ -38,9 +35,21 @@ public:
     uint totalFrames() const;
 
 private:
-    class Impl;
+    void delay(uint ms) const;
+    uint ticks() const;
 
-    std::unique_ptr<Impl> m_impl;
+    float m_start {0};
+    float m_elapsedMilliseconds {0};
+    float m_effectiveElapsedMilliseconds {0};
+
+    float m_fpsElapsedMilliseconds {0};
+    uint m_fpsTemp {0};
+    uint m_fps {0};
+
+    uint m_fixedFps {0};
+    float m_fixedFpsDelayTime {0};
+
+    uint m_totalFrames {0};
 };
 
 }

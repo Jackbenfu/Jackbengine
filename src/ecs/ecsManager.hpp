@@ -16,8 +16,6 @@ namespace Jackbengine {
 
 class EcsManager
 {
-DISALLOW_COPY_AND_MOVE(EcsManager)
-
 public:
     EcsManager();
     ~EcsManager() = default;

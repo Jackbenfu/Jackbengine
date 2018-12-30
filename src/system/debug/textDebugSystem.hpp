@@ -16,8 +16,6 @@ namespace Jackbengine {
 
 class TextDebugSystem final : public System
 {
-DISALLOW_COPY_AND_MOVE(TextDebugSystem)
-
 public:
     explicit TextDebugSystem(const Renderer& renderer);
     TextDebugSystem(const Renderer& renderer, Color color);

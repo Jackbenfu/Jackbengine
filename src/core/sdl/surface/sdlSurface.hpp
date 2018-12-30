@@ -19,8 +19,6 @@ namespace Jackbengine {
 
 class SdlSurface
 {
-DISALLOW_COPY_AND_MOVE(SdlSurface)
-
 public:
     explicit SdlSurface(const std::string& file);
     explicit SdlSurface(const SdlRwops& rwops);

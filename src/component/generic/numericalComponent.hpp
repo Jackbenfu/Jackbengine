@@ -18,8 +18,6 @@ class NumericalComponent : public Component
 {
     static_assert(std::is_arithmetic<T>::value);
 
-DISALLOW_COPY_AND_MOVE(NumericalComponent)
-
 public:
     explicit NumericalComponent(T value);
     ~NumericalComponent() override = default;

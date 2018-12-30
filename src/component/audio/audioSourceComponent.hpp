@@ -16,8 +16,6 @@ namespace Jackbengine {
 
 class AudioSourceComponent : public Component
 {
-DISALLOW_COPY_AND_MOVE(AudioSourceComponent)
-
 public:
     explicit AudioSourceComponent(const std::string& file);
     AudioSourceComponent(const void *data, size_t dataSize);

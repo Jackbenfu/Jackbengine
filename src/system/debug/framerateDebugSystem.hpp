@@ -19,8 +19,6 @@ namespace Jackbengine {
 
 class FramerateDebugSystem final : public System
 {
-DISALLOW_COPY_AND_MOVE(FramerateDebugSystem)
-
 public:
     FramerateDebugSystem(const Renderer& renderer, const Timer& timer);
     FramerateDebugSystem(const Renderer& renderer, const Timer& timer, Color foreground);

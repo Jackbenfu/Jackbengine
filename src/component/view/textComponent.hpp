@@ -33,8 +33,6 @@ enum class TextLayout
 
 class TextComponent : public Component
 {
-DISALLOW_COPY_AND_MOVE(TextComponent)
-
 public:
     TextComponent(
         const Renderer& renderer, const std::string& text, TextLayout layout, Color foreground,

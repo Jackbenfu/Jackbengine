@@ -16,8 +16,6 @@ namespace Jackbengine {
 
 class ColorComponent : public Component
 {
-DISALLOW_COPY_AND_MOVE(ColorComponent)
-
 public:
     explicit ColorComponent(Color color);
     ColorComponent(byte red, byte green, byte blue, byte alpha);

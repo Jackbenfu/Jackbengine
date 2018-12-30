@@ -30,8 +30,6 @@ class MouseListenerComponent : public Component
 {
     friend class MouseEventTriggerSystem;
 
-DISALLOW_COPY_AND_MOVE(MouseListenerComponent)
-
 public:
     MouseListenerComponent() = default;
     ~MouseListenerComponent() override = default;

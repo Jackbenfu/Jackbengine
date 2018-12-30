@@ -15,8 +15,6 @@ namespace Jackbengine {
 
 class ZIndexComponent : public Component
 {
-DISALLOW_COPY_AND_MOVE(ZIndexComponent)
-
 public:
     ZIndexComponent() = default;
     explicit ZIndexComponent(uint index);

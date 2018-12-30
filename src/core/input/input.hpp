@@ -9,20 +9,19 @@
 #ifndef __INPUT_H__
 #define __INPUT_H__
 
-#include <memory>
+#include <vector>
 #include "keyboardKey.hpp"
 #include "mouseButton.hpp"
+#include "core/sdl/sdl.hpp"
 #include "core/math/vector2d.hpp"
 
 namespace Jackbengine {
 
 class Input
 {
-DISALLOW_COPY_AND_MOVE(Input)
-
 public:
-    Input();
-    ~Input();
+    Input() = default;
+    ~Input() = default;
 
     void update();
 
@@ -39,9 +38,25 @@ public:
     bool quit() const;
 
 private:
-    class Impl;
+    int getKey(KeyboardKey key) const;
+    int getButton(MouseButton button) const;
 
-    std::unique_ptr<Impl> m_impl;
+    std::vector<bool> m_keyboardKeysDown = std::vector<bool>(SDL_NUM_SCANCODES, false);
+    std::vector<bool> m_keyboardKeysPress = std::vector<bool>(SDL_NUM_SCANCODES, false);
+
+    // Hard coded max mouse button number, SDL does not provide the info
+    // We only support the three basic mouse buttons: left, middle and right
+    // Need to set it to 4 instead of 3, because the first button starts at 1, not 0
+    const uint MaxMouseButtons {4};
+
+    std::vector<bool> m_mouseButtonsDown = std::vector<bool>(MaxMouseButtons, false);
+    std::vector<bool> m_mouseButtonsClick = std::vector<bool>(MaxMouseButtons, false);
+
+    mutable Vec2i m_mousePos;
+
+    bool m_mouseMove {false};
+
+    bool m_quit {false};
 };
 
 }

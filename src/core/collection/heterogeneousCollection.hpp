@@ -19,8 +19,6 @@ namespace Jackbengine {
 template<typename TBase>
 class HeterogeneousCollection
 {
-DISALLOW_COPY_AND_MOVE(HeterogeneousCollection<TBase>)
-
 public:
     HeterogeneousCollection() = default;
     ~HeterogeneousCollection() = default;

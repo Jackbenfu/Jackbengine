@@ -7,25 +7,38 @@
 //
 
 #include "sound.hpp"
-#include "sound.impl.hpp"
+#include "core/sdl/io/sdlRwops.hpp"
 
 namespace Jackbengine {
 
 Sound::Sound(const std::string& file)
-    : m_impl {std::make_unique<Impl>(file)}
 {
+    m_chunk = Mix_LoadWAV(file.c_str());
+    if (nullptr == m_chunk)
+    {
+        throw std::runtime_error(Mix_GetError());
+    }
 }
 
 Sound::Sound(const void *data, size_t dataSize)
-    : m_impl {std::make_unique<Impl>(data, dataSize)}
 {
+    const auto sdlRwops = std::make_unique<SdlRwops>(data, dataSize);
+
+    m_chunk = Mix_LoadWAV_RW((SDL_RWops *) sdlRwops->internalObject(), 1);
+    if (nullptr == m_chunk)
+    {
+        throw std::runtime_error(Mix_GetError());
+    }
 }
 
-Sound::~Sound() = default;
+Sound::~Sound()
+{
+    Mix_FreeChunk(m_chunk);
+}
 
 void Sound::play(bool loop) const
 {
-    m_impl->play(loop);
+    Mix_PlayChannel(MIX_DEFAULT_CHANNELS, m_chunk, loop ? 1 : 0);
 }
 
 }

@@ -52,6 +52,7 @@
 #include "system/input/mouseEventTriggerSystem.hpp"
 #include "system/physic/aabbCollisionSystem.hpp"
 #include "system/render/spriteRenderSystem.hpp"
+#include "system/render/glRenderSystem.hpp"
 #include "system/render/textRenderSystem.hpp"
 
 // ECS

@@ -42,7 +42,7 @@ public:
 private:
     SDL_Renderer *m_renderer {nullptr};
 
-    mutable Color m_clearColor {Color(0, 0, 0)};
+    mutable Color m_clearColor {Color(0, 0, 0, 1)};
 
     int m_width;
     int m_height;

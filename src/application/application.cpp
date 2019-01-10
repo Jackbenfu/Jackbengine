@@ -18,8 +18,8 @@ Application::Application(ApplicationConfig& config)
       m_input {std::make_unique<Input>()},
       m_window {std::make_unique<Window>(
           config.general_title, config.render_width, config.render_height, config.render_fullscreen
-      )},
-      m_renderer {std::make_unique<Renderer>(*m_window)}
+      )}//,
+      //m_renderer {std::make_unique<Renderer>(*m_window)}
 {
     srand(static_cast<uint>(time(nullptr))); // NOLINT
 }
@@ -36,14 +36,14 @@ void Application::loop()
     const auto deltaMultiplier = 0.001f;
     const auto delta = m_timer->elapsedMilliseconds() * deltaMultiplier;
 
-    m_renderer->clear();
+    //m_renderer->clear();
     m_input->update();
 
     EcsManager::getManager().frame(delta);
 
     frame(delta);
 
-    m_renderer->present();
+    //m_renderer->present();
 
     if (m_input->quit())
     {

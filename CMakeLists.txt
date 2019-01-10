@@ -9,17 +9,21 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     add_definitions(/DDEBUG)
 endif()
 
-# SDL2 include directories
-include_directories(${SDL2_INCLUDE_DIR})
-include_directories(${SDL2_IMAGE_INCLUDE_DIR})
-include_directories(${SDL2_TTF_INCLUDE_DIR})
-include_directories(${SDL2_MIXER_INCLUDE_DIR})
-
-# SDL2 library references
+# External packages
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
 find_package(SDL2_ttf REQUIRED)
 find_package(SDL2_mixer REQUIRED)
+find_package(GLEW REQUIRED)
+find_package(OpenGL REQUIRED)
+
+# External include directories
+include_directories(${SDL2_INCLUDE_DIR})
+include_directories(${SDL2_IMAGE_INCLUDE_DIR})
+include_directories(${SDL2_TTF_INCLUDE_DIR})
+include_directories(${SDL2_MIXER_INCLUDE_DIR})
+include_directories(${GLEW_INCLUDE_DIR})
+include_directories(${OPENGL_INCLUDE_DIR})
 
 # Jackbengine include directories
 include_directories(${PROJECT_SOURCE_DIR}/src)
@@ -66,6 +70,7 @@ set(SOURCE_FILES
     src/system/input/mouseEventTriggerSystem.cpp
     src/system/physic/aabbCollisionSystem.cpp
     src/system/render/spriteRenderSystem.cpp
+    src/system/render/glRenderSystem.cpp
     src/system/render/textRenderSystem.cpp
     src/system/system.cpp
     src/system/systemManager.cpp
@@ -77,3 +82,5 @@ target_link_libraries(jackbengine ${SDL2_LIBRARY})
 target_link_libraries(jackbengine ${SDL2_IMAGE_LIBRARY})
 target_link_libraries(jackbengine ${SDL2_TTF_LIBRARY})
 target_link_libraries(jackbengine ${SDL2_MIXER_LIBRARY})
+target_link_libraries(jackbengine ${GLEW_LIBRARIES})
+target_link_libraries(jackbengine ${OPENGL_gl_LIBRARY})

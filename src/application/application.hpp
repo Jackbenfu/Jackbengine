@@ -52,10 +52,10 @@ public:
         return *m_window;
     }
 
-    inline const Renderer& renderer() const
+    /*inline const Renderer& renderer() const
     {
         return *m_renderer;
-    }
+    }*/
 
     void exit();
 
@@ -64,7 +64,7 @@ private:
     std::unique_ptr<Cursor> m_cursor;
     std::unique_ptr<Input> m_input;
     std::unique_ptr<Window> m_window;
-    std::unique_ptr<Renderer> m_renderer;
+    //std::unique_ptr<Renderer> m_renderer;
 
     bool m_running {true};
 };

@@ -36,7 +36,7 @@ AbstractApplication::~AbstractApplication()
 void AbstractApplication::initSDL()
 {
 #ifdef EMSCRIPTEN
-    if (SDL_Init(SDL_INIT_EVERYTHING & ~(SDL_INIT_TIMER | SDL_INIT_HAPTIC)) < 0)
+    if (SDL_Init(SDL_INIT_TIMER | SDL_INIT_AUDIO | SDL_INIT_VIDEO | SDL_INIT_EVENTS) < 0)
 #else
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
 #endif

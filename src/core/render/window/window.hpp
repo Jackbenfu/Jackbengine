@@ -18,6 +18,7 @@ namespace Jackbengine {
 class Window
 {
     friend class Renderer;
+    friend class GlRenderSystem;
 
 public:
     Window(const std::string& title, int width, int height, bool fullscreen);
@@ -30,6 +31,7 @@ private:
     void setWindowIcon();
 
     SDL_Window *m_window {nullptr};
+    SDL_GLContext m_glContext {nullptr};
 
     int m_width {0};
     int m_height {0};

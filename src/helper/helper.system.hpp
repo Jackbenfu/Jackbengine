@@ -16,6 +16,7 @@ namespace Jackbengine {
 // Render
 #define ADD_SYSTEM_TEXT_RENDER()            ADD_SYSTEM(Jackbengine::TextRenderSystem, renderer())
 #define ADD_SYSTEM_SPRITE_RENDER()          ADD_SYSTEM(Jackbengine::SpriteRenderSystem, renderer())
+#define ADD_SYSTEM_GL_RENDER()              ADD_SYSTEM(Jackbengine::GlRenderSystem, window())
 
 // Mouse
 #define ADD_SYSTEM_MOUSE_EVENT_TRIGGER()    ADD_SYSTEM(Jackbengine::MouseEventTriggerSystem, input())

@@ -5,10 +5,12 @@ CFLAGS              = -Oz                               \
                       -std=c++17                        \
                       -s USE_SDL=2                      \
                       -s USE_SDL_TTF=2                  \
+                      -s USE_SDL_MIXER=2				\
                       -s USE_SDL_IMAGE=2                \
                       -s SDL2_IMAGE_FORMATS='["png"]'   \
                       -s DEMANGLE_SUPPORT=1             \
-                      -s WARN_ON_UNDEFINED_SYMBOLS=1
+                      -s WARN_ON_UNDEFINED_SYMBOLS=1	\
+                      -s USE_WEBGL2=1
 
 CDFLAGS             = -g                                \
 				      -DDEBUG							\
@@ -16,10 +18,12 @@ CDFLAGS             = -g                                \
                       -std=c++17                        \
                       -s USE_SDL=2                      \
                       -s USE_SDL_TTF=2                  \
+                      -s USE_SDL_MIXER=2				\
                       -s USE_SDL_IMAGE=2                \
                       -s SDL2_IMAGE_FORMATS='["png"]'   \
                       -s DEMANGLE_SUPPORT=1             \
                       -s WARN_ON_UNDEFINED_SYMBOLS=1	\
+                      -s USE_WEBGL2=1					\
                       -s DISABLE_EXCEPTION_CATCHING=0
 
 INCLUDES            = -Iexternal                        \
@@ -64,6 +68,7 @@ SOURCES             =   src/application/abstract/abstractApplication.cpp    \
                         src/system/input/mouseEventTriggerSystem.cpp        \
                         src/system/physic/aabbCollisionSystem.cpp           \
                         src/system/render/spriteRenderSystem.cpp            \
+                        src/system/render/glRenderSystem.cpp	            \
                         src/system/render/textRenderSystem.cpp              \
                         src/system/system.cpp                               \
                         src/system/systemManager.cpp						\

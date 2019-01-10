@@ -6,6 +6,11 @@
 // Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
+#ifdef EMSCRIPTEN
+#include <emscripten.h>
+#include <emscripten/html5.h>
+#endif
+
 #include "window.hpp"
 
 namespace Jackbengine {
@@ -28,11 +33,27 @@ Window::Window(const std::string& title, int width, int height, bool fullscreen)
         y = SDL_WINDOWPOS_CENTERED;
     }
 
-    m_window = SDL_CreateWindow(title.c_str(), x, y, width, height, flags);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+
+    m_window = SDL_CreateWindow(title.c_str(), x, y, width, height, flags | SDL_WINDOW_OPENGL);
     if (nullptr == m_window)
     {
         throw std::runtime_error(SDL_GetError());
     }
+
+#ifdef EMSCRIPTEN
+    EmscriptenWebGLContextAttributes attrs;
+    attrs.antialias = true;
+    attrs.majorVersion = 2;
+    attrs.minorVersion = 0;
+    attrs.alpha = false;
+    EMSCRIPTEN_WEBGL_CONTEXT_HANDLE webgl_context = emscripten_webgl_create_context(0, &attrs);
+    emscripten_webgl_make_context_current(webgl_context);
+#else
+    m_glContext = SDL_GL_CreateContext(m_window);
+#endif
 
     SDL_GetWindowSize(m_window, &m_width, &m_height);
 
@@ -42,6 +63,7 @@ Window::Window(const std::string& title, int width, int height, bool fullscreen)
 
 Window::~Window()
 {
+    SDL_GL_DeleteContext(m_glContext);
     SDL_DestroyWindow(m_window);
 }
 

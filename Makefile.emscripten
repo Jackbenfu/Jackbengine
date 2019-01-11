@@ -1,7 +1,6 @@
 CC                  = emcc
 
-CFLAGS              = -Oz                               \
-                      -Wall -Wextra -Wpedantic          \
+CFLAGS              = -Wall -Wextra -Wpedantic          \
                       -std=c++17                        \
                       -s USE_SDL=2                      \
                       -s USE_SDL_TTF=2                  \

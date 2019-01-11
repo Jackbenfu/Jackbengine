@@ -11,7 +11,9 @@
 #endif
 
 #ifndef EMSCRIPTEN
+
 #include <GL/glew.h>
+
 #endif
 
 #include "glRenderSystem.hpp"
@@ -52,7 +54,8 @@ GlRenderSystem::GlRenderSystem(const Window& window)
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), nullptr);
 
-    const std::string vertexShader =
+#ifndef EMSCRIPTEN
+    program = createProgram(
         "#version 330 core\n"
         "\n"
         "layout(location = 0) in vec4 position;\n"
@@ -60,8 +63,8 @@ GlRenderSystem::GlRenderSystem(const Window& window)
         "void main()\n"
         "{\n"
         "   gl_Position = position;\n"
-        "}\n";
-    const std::string fragmentShader =
+        "}\n"
+        "\n",
         "#version 330 core\n"
         "\n"
         "out vec4 color;\n"
@@ -69,9 +72,26 @@ GlRenderSystem::GlRenderSystem(const Window& window)
         "void main()\n"
         "{\n"
         "   color = vec4(1.0, 0.0, 0.0, 1.0);\n"
-        "}\n";
+        "}\n"
+    );
+#else
+    program = createProgram(
+        "attribute vec4 position;\n"
+        "\n"
+        "void main()\n"
+        "{\n"
+        "    gl_Position = position;\n"
+        "}\n"
+        "\n",
+        "precision mediump float;\n"
+        "\n"
+        "void main()\n"
+        "{\n"
+        "gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);\n"
+        "}"
+    );
+#endif
 
-    program = createProgram(vertexShader, fragmentShader);
     glUseProgram(program);
 
     glClearColor(1.0f, 1.0f, 0.0f, 1.0f);

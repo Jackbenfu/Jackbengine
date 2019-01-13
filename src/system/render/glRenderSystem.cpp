@@ -34,10 +34,16 @@ GlRenderSystem::GlRenderSystem(const Window& window)
     }
 #endif
 
-    float positions[6] = {
-        -0.5f, -0.5f,
-        0.0f, 0.5f,
-        0.5f, -0.5f,
+    float positions[] = {
+        -0.5f, -0.5f,   // 0
+        0.5f, -0.5f,    // 1
+        0.5f, 0.5f,     // 2
+        -0.5f, 0.5f,    // 3
+    };
+
+    uint indices[] = {
+        0, 1, 2,
+        2, 3, 0,
     };
 
 #ifndef EMSCRIPTEN
@@ -46,13 +52,18 @@ GlRenderSystem::GlRenderSystem(const Window& window)
     glBindVertexArray(va);
 #endif
 
-    uint buffer;
-    glGenBuffers(1, &buffer);
-    glBindBuffer(GL_ARRAY_BUFFER, buffer);
-    glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(float), positions, GL_STATIC_DRAW);
+    uint vbo;
+    glGenBuffers(1, &vbo);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glBufferData(GL_ARRAY_BUFFER, 6 * 2 * sizeof(float), positions, GL_STATIC_DRAW);
 
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), nullptr);
+
+    uint ibo;
+    glGenBuffers(1, &ibo);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(uint), indices, GL_STATIC_DRAW);
 
 #ifndef EMSCRIPTEN
     program = createProgram(
@@ -94,7 +105,7 @@ GlRenderSystem::GlRenderSystem(const Window& window)
 
     glUseProgram(program);
 
-    glClearColor(1.0f, 1.0f, 0.0f, 1.0f);
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 }
 
 GlRenderSystem::~GlRenderSystem()
@@ -111,7 +122,7 @@ void GlRenderSystem::frame(float)
 {
     glClear(GL_COLOR_BUFFER_BIT);
 
-    glDrawArrays(GL_TRIANGLES, 0, 3);
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 
     SDL_GL_SwapWindow(m_window.m_window);
 }

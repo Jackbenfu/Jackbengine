@@ -16,13 +16,13 @@ namespace Jackbengine {
 struct Color
 {
     Color();
-    Color(byte r, byte g, byte b);
-    Color(byte r, byte g, byte b, byte a);
+    Color(unsigned char r, unsigned char g, unsigned char b);
+    Color(unsigned char r, unsigned char g, unsigned char b, unsigned char a);
 
-    byte r;
-    byte g;
-    byte b;
-    byte a;
+    unsigned char r;
+    unsigned char g;
+    unsigned char b;
+    unsigned char a;
 };
 
 }

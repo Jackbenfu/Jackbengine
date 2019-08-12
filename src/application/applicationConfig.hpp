@@ -16,13 +16,13 @@ namespace Jackbengine {
 
 struct ApplicationConfig
 {
-    std::string general_title {"<Insert title here!>"};
+    std::string general_title{"<Insert title here!>"};
 
-    uint render_width {640};
-    uint render_height {480};
-    bool render_fullscreen {false};
+    unsigned int render_width{640};
+    unsigned int render_height{480};
+    bool render_fullscreen{false};
 
-    uint core_fps {60};
+    unsigned int core_fps{60};
 };
 
 }

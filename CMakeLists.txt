@@ -28,22 +28,6 @@ include_directories(${PROJECT_SOURCE_DIR}/external/spdlog/include)
 
 # Jackbengine source files
 set(SOURCE_FILES
-    src/application/abstract/abstractApplication.cpp
-    src/application/application.cpp
-    src/application/entryPoint.cpp
-    src/component/audio/audioSourceComponent.cpp
-    src/component/body/shape/boxShapeComponent.cpp
-    src/component/body/transformComponent.cpp
-    src/component/body/velocityComponent.cpp
-    src/component/input/mouseListenerComponent.cpp
-    src/component/layout/containerComponent.cpp
-    src/component/layout/zIndexComponent.cpp
-    src/component/misc/nameComponent.cpp
-    src/component/misc/tagComponent.cpp
-    src/component/view/colorComponent.cpp
-    src/component/view/spriteComponent.cpp
-    src/component/view/textComponent.cpp
-    src/component/generic/stringComponent.cpp
     src/core/sdl/io/sdlRwops.cpp
     src/core/sdl/surface/sdlSurface.cpp
     src/core/audio/sound.cpp
@@ -58,18 +42,9 @@ set(SOURCE_FILES
     src/core/render/window/window.cpp
     src/core/state/stateMachine.cpp
     src/core/time/timer.cpp
-    src/entity/entityManager.cpp
-    src/system/animation/motionSystem.cpp
-    src/system/debug/framerateDebugSystem.cpp
-    src/system/debug/spriteDebugSystem.cpp
-    src/system/debug/textDebugSystem.cpp
-    src/system/input/mouseEventTriggerSystem.cpp
-    src/system/physic/aabbCollisionSystem.cpp
-    src/system/render/spriteRenderSystem.cpp
-    src/system/render/textRenderSystem.cpp
-    src/system/system.cpp
-    src/system/systemManager.cpp
-    src/ecs/ecsManager.cpp
+    src/application/abstract/abstractApplication.cpp
+    src/application/application.cpp
+    src/application/entryPoint.cpp
 )
 
 add_library(jackbengine STATIC ${SOURCE_FILES})

@@ -18,7 +18,7 @@ Color::Color()
 {
 }
 
-Color::Color(byte r, byte g, byte b)
+Color::Color(unsigned char r, unsigned char g, unsigned char b)
     : r(r),
       g(g),
       b(b),
@@ -26,7 +26,7 @@ Color::Color(byte r, byte g, byte b)
 {
 }
 
-Color::Color(byte r, byte g, byte b, byte a)
+Color::Color(unsigned char r, unsigned char g, unsigned char b, unsigned char a)
     : r(r),
       g(g),
       b(b),

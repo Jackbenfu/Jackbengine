@@ -8,7 +8,6 @@
 
 #include <ctime>
 #include "application.hpp"
-#include "ecs/ecsManager.hpp"
 
 namespace Jackbengine {
 
@@ -21,7 +20,7 @@ Application::Application(ApplicationConfig& config)
       )},
       m_renderer {std::make_unique<Renderer>(*m_window)}
 {
-    srand(static_cast<uint>(time(nullptr))); // NOLINT
+    srand(static_cast<unsigned int>(time(nullptr))); // NOLINT
 }
 
 bool Application::running() const
@@ -39,7 +38,7 @@ void Application::loop()
     m_renderer->clear();
     m_input->update();
 
-    EcsManager::getManager().frame(delta);
+    //EcsManager::getManager().frame(delta);
 
     frame(delta);
 

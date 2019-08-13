@@ -3,10 +3,7 @@
 
 # CLion
 .idea/
-cmake-build-debug/
-cmake-build-minsizerel/
-cmake-build-release/
-cmake-build-relwithdebinfo/
+build/
 
 # Jackbengine library
 libjackbengine.bc

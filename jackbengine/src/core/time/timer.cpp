@@ -20,14 +20,14 @@ Timer::~Timer() = default;
 
 void Timer::start()
 {
-    m_start = ticks();
+    m_start = (float) ticks();
 }
 
 void Timer::snapshot()
 {
     ++m_totalFrames;
 
-    m_elapsedMilliseconds = ticks() - m_start;
+    m_elapsedMilliseconds = (float) ticks() - m_start;
     m_effectiveElapsedMilliseconds = m_elapsedMilliseconds;
     float delayTime = 0;
 
@@ -65,7 +65,7 @@ float Timer::effectiveElapsedMilliseconds() const
     return m_effectiveElapsedMilliseconds;
 }
 
-int Timer::fps() const
+unsigned int Timer::fps() const
 {
     return m_fps;
 }
@@ -75,7 +75,7 @@ bool Timer::isFixedFps() const
     return 0 < m_fixedFps;
 }
 
-int Timer::fixedFps() const
+unsigned int Timer::fixedFps() const
 {
     return m_fixedFps;
 }
@@ -88,7 +88,7 @@ void Timer::enableFixedFps(unsigned int fps)
     }
 
     m_fixedFps = fps;
-    m_fixedFpsDelayTime = 1000.0f / fps;
+    m_fixedFpsDelayTime = 1000.0f / (float) fps;
 }
 
 void Timer::disableFixedFps()

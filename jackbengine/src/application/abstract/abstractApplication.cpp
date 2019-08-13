@@ -6,8 +6,6 @@
 // Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
-#include <stdexcept>
-
 #include "core/sdl/sdl.hpp"
 #include "core/log/log.hpp"
 #include "core/log/profile.hpp"
@@ -19,18 +17,18 @@ AbstractApplication::AbstractApplication()
 {
     Log::init();
 
-    PROFILE_MILLISECONDS("AbstractApplication::AbstractApplication", {
+    PROFILE("AbstractApplication::AbstractApplication", {
         initSDL();
-    });
+    })
 }
 
 AbstractApplication::~AbstractApplication()
 {
-    PROFILE_MILLISECONDS("AbstractApplication::~AbstractApplication", {
+    PROFILE("AbstractApplication::~AbstractApplication", {
         Mix_Quit();
         TTF_Quit();
         SDL_Quit();
-    });
+    })
 }
 
 void AbstractApplication::initSDL()
@@ -49,7 +47,7 @@ void AbstractApplication::initSDL()
         throw std::runtime_error(TTF_GetError());
     }
 
-    if (0 == Mix_Init(MIX_INIT_FLAC | MIX_INIT_MOD | MIX_INIT_MP3 | MIX_INIT_OGG))
+    if (0 == Mix_Init((unsigned) MIX_INIT_FLAC | MIX_INIT_MOD | MIX_INIT_MP3 | MIX_INIT_OGG))
     {
         throw std::runtime_error(Mix_GetError());
     }

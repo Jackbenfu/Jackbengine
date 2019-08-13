@@ -25,10 +25,10 @@ public:
     float elapsedMilliseconds() const;
     float effectiveElapsedMilliseconds() const;
 
-    int fps() const;
+    unsigned int fps() const;
 
     bool isFixedFps() const;
-    int fixedFps() const;
+    unsigned int fixedFps() const;
     void enableFixedFps(unsigned int fps);
     void disableFixedFps();
 

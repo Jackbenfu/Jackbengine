@@ -3,7 +3,9 @@
 
 # CLion
 .idea/
-build/
+cmake-build-debug/
+cmake-build-release/
+cmake-build-releaseprofile/
 
 # Jackbengine library
 libjackbengine.bc

@@ -44,8 +44,8 @@ private:
 
     mutable Color m_clearColor {Color(0, 0, 0)};
 
-    int m_width;
-    int m_height;
+    int m_width {0};
+    int m_height {0};
 };
 
 }

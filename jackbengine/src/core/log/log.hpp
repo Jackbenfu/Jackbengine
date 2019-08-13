@@ -38,7 +38,7 @@ private:
 #ifdef EMSCRIPTEN
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wgnu-zero-variadic-macro-arguments"
-#ifdef DEBUG
+#ifdef __DEBUG__
 #define LOG_TRACE(...)  EM_ASM(console.debug(__VA_ARGS__);)
 #else
 #define LOG_TRACE
@@ -46,7 +46,7 @@ private:
 #define LOG_INFO(...)   EM_ASM(console.info(__VA_ARGS__);)
 #define LOG_ERROR(...)  EM_ASM(console.error(__VA_ARGS__);)
 #else
-#ifdef DEBUG
+#ifdef __DEBUG__
 #define LOG_TRACE(...)  Jackbengine::Log::getLogger()->trace(__VA_ARGS__)
 #else
 #define LOG_TRACE(...)

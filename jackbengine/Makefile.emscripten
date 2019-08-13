@@ -12,7 +12,7 @@ CFLAGS              = -Oz                               \
                       -s WARN_ON_UNDEFINED_SYMBOLS=1
 
 CDFLAGS             = -g                                \
-				      -DDEBUG							\
+				      -D__DEBUG__   					\
                       -Wall -Wextra -Wpedantic          \
                       -std=c++17                        \
                       -s USE_SDL=2                      \

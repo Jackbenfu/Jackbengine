@@ -16,7 +16,10 @@ Application::Application(ApplicationConfig &config)
       m_cursor {std::make_unique<Cursor>()},
       m_input {std::make_unique<Input>()},
       m_window {std::make_unique<Window>(
-          config.general_title, config.render_width, config.render_height, config.render_fullscreen
+          config.general_title,
+          config.render_width,
+          config.render_height,
+          config.render_fullscreen
       )},
       m_renderer {std::make_unique<Renderer>(*m_window)}
 {
@@ -32,7 +35,7 @@ void Application::loop()
 {
     m_timer->start();
 
-    const auto deltaMultiplier = 0.001f;
+    const auto deltaMultiplier = .001f;
     const auto delta = m_timer->elapsedMilliseconds() * deltaMultiplier;
 
     m_renderer->clear();

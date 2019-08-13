@@ -23,7 +23,6 @@
 #include "core/render/texture/texture.hpp"
 #include "core/render/window/window.hpp"
 #include "core/resource/importResource.hpp"
-#include "core/state/stateMachine.hpp"
 #include "core/time/timer.hpp"
 
 // Application

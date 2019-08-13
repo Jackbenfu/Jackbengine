@@ -14,7 +14,6 @@
 
 namespace Jackbengine {
 
-template<typename Precision>
 class Profile
 {
     using clock = std::chrono::high_resolution_clock;
@@ -28,68 +27,32 @@ public:
 
     void stop()
     {
-        __attribute__((unused)) const auto format = "{} ({} {})";
-        __attribute__((unused)) auto duration = clock::now() - m_start;
+        auto start = std::chrono::time_point_cast<std::chrono::microseconds>(m_start).time_since_epoch().count();
+        auto end = std::chrono::time_point_cast<std::chrono::microseconds>(clock::now()).time_since_epoch().count();
+        auto us = end - start;
+        auto ms = us * .001;
 
-        Jackbengine::Log::getLogger()->trace(
-            fmt::format(
-                format, m_name, std::chrono::duration_cast<Precision>(duration).count(), unit()
-            )
-        );
+        Jackbengine::Log::getLogger()->trace(fmt::format("PROFILE {}: {}ms ({}μs)", m_name, ms, us));
     }
 
 private:
-    inline const char *unit();
-
     const char *m_name;
     clock::time_point m_start;
 };
 
-template<>
-inline const char *Profile<std::chrono::seconds>::unit()
-{
-    return "seconds";
 }
 
-template<>
-inline const char *Profile<std::chrono::milliseconds>::unit()
-{
-    return "milliseconds";
-}
+#ifdef __PROFILE__
 
-template<>
-inline const char *Profile<std::chrono::microseconds>::unit()
-{
-    return "microseconds";
-}
-
-}
-
-#ifdef DEBUG
-
-#define PROFILE_SECONDS(name, code) {                                           \
-    auto __profile__ = Jackbengine::Profile<std::chrono::seconds>(name);        \
-    { code }                                                                    \
-    __profile__.stop();                                                         \
-    }
-
-#define PROFILE_MILLISECONDS(name, code) {                                      \
-    auto __profile__ = Jackbengine::Profile<std::chrono::milliseconds>(name);   \
-    { code }                                                                    \
-    __profile__.stop();                                                         \
-    }
-
-#define PROFILE_MICROSECONDS(name, code) {                                      \
-    auto __profile__ = Jackbengine::Profile<std::chrono::microseconds>(name);   \
-    { code }                                                                    \
-    __profile__.stop();                                                         \
+#define PROFILE(name, scope) {                      \
+    auto __profile__ = Jackbengine::Profile(name);  \
+    { scope }                                       \
+    __profile__.stop();                             \
     }
 
 #else
 
-#define PROFILE_SECONDS(name, code)       { code }
-#define PROFILE_MILLISECONDS(name, code)  { code }
-#define PROFILE_MICROSECONDS(name, code)  { code }
+#define PROFILE(name, scope)  { scope }
 
 #endif
 

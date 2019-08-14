@@ -7,8 +7,6 @@
 //
 
 #include "pch.h"
-#include "core/log/log.h"
-#include "core/log/profile.h"
 #include "abstractApplication.h"
 
 namespace Jackbengine {
@@ -17,14 +15,14 @@ AbstractApplication::AbstractApplication()
 {
     Log::init();
 
-    PROFILE("AbstractApplication::AbstractApplication", {
+    PROFILE("AbstractApplication::ctor", {
         initSDL();
     })
 }
 
 AbstractApplication::~AbstractApplication()
 {
-    PROFILE("AbstractApplication::~AbstractApplication", {
+    PROFILE("AbstractApplication::dtor", {
         Mix_Quit();
         TTF_Quit();
         SDL_Quit();

@@ -24,14 +24,14 @@ public:
     {
     }
 
-    void stop()
+    ~Profile()
     {
         auto start = std::chrono::time_point_cast<std::chrono::microseconds>(m_start).time_since_epoch().count();
         auto end = std::chrono::time_point_cast<std::chrono::microseconds>(clock::now()).time_since_epoch().count();
         auto us = end - start;
         auto ms = us * .001;
 
-        Jackbengine::Log::getLogger()->trace(fmt::format("PROFILE {}: {}ms ({}μs)", m_name, ms, us));
+        Jackbengine::Log::getLogger()->trace(fmt::format("PROFILE {:<30} {}ms ({}μs)", m_name, ms, us));
     }
 
 private:
@@ -43,15 +43,13 @@ private:
 
 #ifdef __PROFILE__
 
-#define PROFILE(name, scope) {                      \
-    auto __profile__ = Jackbengine::Profile(name);  \
-    { scope }                                       \
-    __profile__.stop();                             \
-    }
+#define PROFILE(name, scope)                \
+    Jackbengine::Profile profile(name);     \
+    scope
 
 #else
 
-#define PROFILE(name, scope)  { scope }
+#define PROFILE(name, scope)    scope
 
 #endif
 

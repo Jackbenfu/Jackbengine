@@ -24,6 +24,8 @@
 #include <unordered_map>
 #include <vector>
 
+#include "core/log/profile.h"
+
 // Platform specific includes
 #if defined(__APPLE__)
 

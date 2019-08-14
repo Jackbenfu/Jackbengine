@@ -31,26 +31,35 @@ bool Application::running() const
     return m_running;
 }
 
-void Application::loop()
+void Application::frame()
 {
-    m_timer->start();
+    PROFILE("Application::frame", {
+        m_timer->start();
 
-    const auto deltaMultiplier = .001f;
-    const auto delta = m_timer->elapsedMilliseconds() * deltaMultiplier;
+        const auto deltaMultiplier = .001f;
+        const auto delta = m_timer->elapsedMilliseconds() * deltaMultiplier;
 
-    m_renderer->clear();
-    m_input->update();
+        m_renderer->clear();
+        m_input->update();
 
-    frame(delta);
+        userFrame(delta);
 
-    m_renderer->present();
+        m_renderer->present();
 
-    if (m_input->quit())
-    {
-        exit();
-    }
+        if (m_input->quit())
+        {
+            exit();
+        }
 
-    m_timer->snapshot();
+        m_timer->snapshot();
+    })
+}
+
+void Application::userFrame(float delta)
+{
+    PROFILE("Application::userFrame", {
+        frame(delta);
+    })
 }
 
 void Application::exit()

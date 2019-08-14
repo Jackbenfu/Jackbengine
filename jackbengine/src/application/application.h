@@ -28,8 +28,9 @@ public:
     ~Application() override = default;
 
     bool running() const;
-    void loop();
+    void frame();
 
+    void userFrame(float delta);
     virtual void frame(float delta) = 0;
 
     inline const Timer &timer() const

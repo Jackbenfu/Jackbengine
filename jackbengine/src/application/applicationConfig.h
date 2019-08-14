@@ -9,8 +9,7 @@
 #ifndef __APPLICATION_CONFIG_H__
 #define __APPLICATION_CONFIG_H__
 
-#include <string>
-#include "common.h"
+#include "common/common.h"
 
 namespace Jackbengine {
 

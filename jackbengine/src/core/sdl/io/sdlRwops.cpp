@@ -6,9 +6,7 @@
 // Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
-#include <stdexcept>
-
-#include "core/sdl/sdl.h"
+#include "pch.h"
 #include "sdlRwops.h"
 
 namespace Jackbengine {

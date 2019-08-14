@@ -9,12 +9,7 @@
 #ifndef __LOG_H__
 #define __LOG_H__
 
-#ifdef EMSCRIPTEN
-#include <emscripten.h>
-#endif
-
-#include <memory>
-#include "common.h"
+#include "common/common.h"
 #include "spdlog/spdlog.h"
 
 namespace Jackbengine {

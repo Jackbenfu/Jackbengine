@@ -6,7 +6,7 @@
 // Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
-#include "core/sdl/sdl.h"
+#include "pch.h"
 #include "core/log/log.h"
 #include "core/log/profile.h"
 #include "abstractApplication.h"

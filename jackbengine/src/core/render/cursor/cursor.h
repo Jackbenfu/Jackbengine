@@ -10,7 +10,7 @@
 #define __CURSOR_H__
 
 #include "core/sdl/sdl.h"
-#include "common.h"
+#include "common/common.h"
 
 namespace Jackbengine {
 

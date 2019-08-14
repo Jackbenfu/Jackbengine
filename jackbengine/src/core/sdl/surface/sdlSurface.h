@@ -9,8 +9,6 @@
 #ifndef __SDL_SURFACE_H__
 #define __SDL_SURFACE_H__
 
-#include <string>
-
 #include "core/render/font/font.h"
 #include "core/render/color.h"
 #include "core/sdl/io/sdlRwops.h"

@@ -10,7 +10,7 @@
 #define __APPLICATION_H__
 
 #include "applicationConfig.h"
-#include "application/abstract/abstractApplication.h"
+#include "abstract/abstractApplication.h"
 
 #include "core/input/input.h"
 #include "core/render/cursor/cursor.h"

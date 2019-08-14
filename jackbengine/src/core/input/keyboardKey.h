@@ -9,7 +9,7 @@
 #ifndef __KEYBOARD_KEY_H__
 #define __KEYBOARD_KEY_H__
 
-#include "common.h"
+#include "common/common.h"
 
 namespace Jackbengine {
 

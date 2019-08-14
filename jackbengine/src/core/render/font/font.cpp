@@ -6,7 +6,7 @@
 // Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
-#include <string>
+#include "pch.h"
 #include "font.h"
 #include "core/sdl/io/sdlRwops.h"
 

@@ -9,7 +9,7 @@
 #ifndef __SDL_RWOPS_H__
 #define __SDL_RWOPS_H__
 
-#include "common.h"
+#include "common/common.h"
 
 namespace Jackbengine {
 

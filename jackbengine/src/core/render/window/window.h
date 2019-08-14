@@ -9,9 +9,8 @@
 #ifndef __WINDOW_H__
 #define __WINDOW_H__
 
-#include <string>
 #include "core/sdl/sdl.h"
-#include "common.h"
+#include "common/common.h"
 
 namespace Jackbengine {
 

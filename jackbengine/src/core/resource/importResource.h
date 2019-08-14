@@ -9,7 +9,7 @@
 #ifndef __IMPORT_RESOURCE_H__
 #define __IMPORT_RESOURCE_H__
 
-#include "common.h"
+#include "common/common.h"
 
 namespace Jackbengine {
 

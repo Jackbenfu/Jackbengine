@@ -9,9 +9,8 @@
 #ifndef __SOUND_H__
 #define __SOUND_H__
 
-#include <string>
-#include "core/sdl/sdl.h"
-#include "common.h"
+#include "pch.h"
+#include "common/common.h"
 
 namespace Jackbengine {
 

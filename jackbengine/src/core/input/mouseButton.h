@@ -9,7 +9,7 @@
 #ifndef __MOUSE_BUTTON_H__
 #define __MOUSE_BUTTON_H__
 
-#include "common.h"
+#include "common/common.h"
 
 namespace Jackbengine {
 

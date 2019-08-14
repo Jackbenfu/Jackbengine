@@ -9,7 +9,7 @@
 #ifndef __ABSTRACT_APPLICATION_H__
 #define __ABSTRACT_APPLICATION_H__
 
-#include "common.h"
+#include "common/common.h"
 
 namespace Jackbengine {
 

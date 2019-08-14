@@ -9,11 +9,8 @@
 #ifndef __ORDERED_HETEROGENEOUS_COLLECTION_H__
 #define __ORDERED_HETEROGENEOUS_COLLECTION_H__
 
-#include <map>
-#include <string>
-#include <memory>
-#include <algorithm>
-#include "common.h"
+#include "pch.h"
+#include "common/common.h"
 #include "orderableItem.h"
 
 namespace Jackbengine {

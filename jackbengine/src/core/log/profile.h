@@ -9,7 +9,6 @@
 #ifndef __PROFILE_H__
 #define __PROFILE_H__
 
-#include <chrono>
 #include "log.h"
 
 namespace Jackbengine {

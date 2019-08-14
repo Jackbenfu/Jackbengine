@@ -6,6 +6,7 @@
 // Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
+#include "pch.h"
 #include "sound.h"
 #include "core/sdl/io/sdlRwops.h"
 

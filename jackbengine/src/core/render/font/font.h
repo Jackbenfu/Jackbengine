@@ -9,9 +9,8 @@
 #ifndef __FONT_H__
 #define __FONT_H__
 
-#include <string>
 #include "core/sdl/sdl.h"
-#include "common.h"
+#include "common/common.h"
 
 namespace Jackbengine {
 

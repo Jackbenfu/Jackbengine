@@ -8,7 +8,7 @@
 
 #ifndef __SDL_H__
 #define __SDL_H__
-
+/*
 #if defined(__APPLE__)
 
 #include <SDL2/SDL.h>
@@ -31,5 +31,6 @@
 #include <SDL2/SDL_mixer.h>
 
 #endif
+*/
 
 #endif // __SDL_H__

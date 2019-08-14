@@ -6,7 +6,7 @@
 // Copyright © 2018 Damien Bendejacq. All rights reserved.
 //
 
-#include "log.hpp"
+#include "log.h"
 #include "spdlog/sinks/stdout_color_sinks.h"
 
 namespace Jackbengine {

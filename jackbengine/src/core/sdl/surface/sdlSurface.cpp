@@ -6,8 +6,8 @@
 // Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
-#include "core/sdl/sdl.hpp"
-#include "sdlSurface.hpp"
+#include "core/sdl/sdl.h"
+#include "sdlSurface.h"
 
 namespace Jackbengine {
 

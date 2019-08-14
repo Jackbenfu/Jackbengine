@@ -6,8 +6,8 @@
 // Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
-#include "sound.hpp"
-#include "core/sdl/io/sdlRwops.hpp"
+#include "sound.h"
+#include "core/sdl/io/sdlRwops.h"
 
 namespace Jackbengine {
 

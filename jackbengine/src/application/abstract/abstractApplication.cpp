@@ -6,10 +6,10 @@
 // Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
-#include "core/sdl/sdl.hpp"
-#include "core/log/log.hpp"
-#include "core/log/profile.hpp"
-#include "abstractApplication.hpp"
+#include "core/sdl/sdl.h"
+#include "core/log/log.h"
+#include "core/log/profile.h"
+#include "abstractApplication.h"
 
 namespace Jackbengine {
 

@@ -6,7 +6,7 @@
 // Copyright © 2019 Damien Bendejacq. All rights reserved.
 //
 
-#include "app.hpp"
+#include "app.h"
 
 namespace Jackbengine {
 

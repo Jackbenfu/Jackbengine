@@ -6,7 +6,7 @@
 // Copyright © 2018 Damien Bendejacq. All rights reserved.
 //
 
-#include "entryPoint.hpp"
+#include "entryPoint.h"
 
 #ifdef EMSCRIPTEN
 #include <emscripten.h>

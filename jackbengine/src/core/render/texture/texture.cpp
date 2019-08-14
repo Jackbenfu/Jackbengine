@@ -6,8 +6,8 @@
 // Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
-#include "texture.hpp"
-#include "core/render/renderer/renderer.hpp"
+#include "texture.h"
+#include "core/render/renderer/renderer.h"
 
 namespace Jackbengine {
 

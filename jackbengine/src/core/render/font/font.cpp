@@ -7,8 +7,8 @@
 //
 
 #include <string>
-#include "font.hpp"
-#include "core/sdl/io/sdlRwops.hpp"
+#include "font.h"
+#include "core/sdl/io/sdlRwops.h"
 
 namespace Jackbengine {
 

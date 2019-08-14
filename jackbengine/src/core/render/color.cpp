@@ -6,7 +6,7 @@
 // Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
-#include "color.hpp"
+#include "color.h"
 
 namespace Jackbengine {
 

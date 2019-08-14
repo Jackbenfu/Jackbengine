@@ -6,7 +6,7 @@
 // Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
-#include "cursor.hpp"
+#include "cursor.h"
 
 namespace Jackbengine {
 

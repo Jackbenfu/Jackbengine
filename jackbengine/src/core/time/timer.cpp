@@ -6,8 +6,8 @@
 // Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
-#include "core/sdl/sdl.hpp"
-#include "timer.hpp"
+#include "core/sdl/sdl.h"
+#include "timer.h"
 
 namespace Jackbengine {
 

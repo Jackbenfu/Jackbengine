@@ -8,8 +8,8 @@
 
 #include <stdexcept>
 
-#include "core/sdl/sdl.hpp"
-#include "sdlRwops.hpp"
+#include "core/sdl/sdl.h"
+#include "sdlRwops.h"
 
 namespace Jackbengine {
 

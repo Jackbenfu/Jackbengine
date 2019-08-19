@@ -9,9 +9,6 @@
 #ifndef __FONT_H__
 #define __FONT_H__
 
-#include "core/sdl/sdl.h"
-#include "common/common.h"
-
 namespace Jackbengine {
 
 class Font
@@ -32,9 +29,9 @@ public:
     void glyphMaxY(ushort glyph, int *maxY) const;
     void glyphAdvance(ushort glyph, int *advance) const;
 
-    int ascent() const;
-    int descent() const;
-    int lineSkip() const;
+    [[nodiscard]] int ascent() const;
+    [[nodiscard]] int descent() const;
+    [[nodiscard]] int lineSkip() const;
 
 private:
     TTF_Font *m_font {nullptr};

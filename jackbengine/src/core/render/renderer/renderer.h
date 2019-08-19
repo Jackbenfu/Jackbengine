@@ -9,7 +9,6 @@
 #ifndef __RENDERER_H__
 #define __RENDERER_H__
 
-#include "core/sdl/sdl.h"
 #include "core/render/color.h"
 #include "core/render/window/window.h"
 

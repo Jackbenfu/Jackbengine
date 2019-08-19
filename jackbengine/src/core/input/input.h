@@ -11,7 +11,6 @@
 
 #include "keyboardKey.h"
 #include "mouseButton.h"
-#include "core/sdl/sdl.h"
 #include "core/math/vector2d.h"
 
 namespace Jackbengine {
@@ -32,7 +31,7 @@ public:
     bool mouseUp(MouseButton button) const;
     bool mouseClick(MouseButton button) const;
     bool mouseMove() const;
-    const Vec2i &mousePosition() const;
+    std::pair<int, int> mousePosition() const;
 
     bool quit() const;
 

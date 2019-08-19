@@ -22,7 +22,7 @@ SdlSurface::SdlSurface(const std::string &file)
 
 SdlSurface::SdlSurface(const SdlRwops &rwops)
 {
-    m_surface = IMG_Load_RW((SDL_RWops *) rwops.internalObject(), 0);
+    m_surface = IMG_Load_RW((SDL_RWops *) rwops.nativeObject(), 0);
     if (nullptr == m_surface)
     {
         throw std::runtime_error(IMG_GetError());
@@ -56,7 +56,7 @@ SdlSurface::~SdlSurface()
     SDL_FreeSurface((SDL_Surface *) m_surface);
 }
 
-void *SdlSurface::internalObject() const
+void *SdlSurface::nativeObject() const
 {
     return m_surface;
 }

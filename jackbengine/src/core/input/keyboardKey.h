@@ -9,8 +9,6 @@
 #ifndef __KEYBOARD_KEY_H__
 #define __KEYBOARD_KEY_H__
 
-#include "common/common.h"
-
 namespace Jackbengine {
 
 enum class KeyboardKey

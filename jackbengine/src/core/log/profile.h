@@ -43,13 +43,20 @@ private:
 
 #ifdef __PROFILE__
 
-#define PROFILE(name, scope)                \
-    Jackbengine::Profile profile(name);     \
-    scope
+#define PROFILE(name, enabled, scope)       \
+    if (enabled)                            \
+    {                                       \
+        Jackbengine::Profile profile(name); \
+        scope                               \
+    }                                       \
+    else                                    \
+    {                                       \
+        scope                               \
+    }
 
 #else
 
-#define PROFILE(name, scope)    scope
+#define PROFILE(name, enabled, scope)       scope
 
 #endif
 

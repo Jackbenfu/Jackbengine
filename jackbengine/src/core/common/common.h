@@ -9,6 +9,11 @@
 #ifndef __COMMON_H__
 #define __COMMON_H__
 
-#include "common/common.macro.h"
+namespace Jackbengine {
+
+#define GET_TYPE_ID(T)      typeid(T).hash_code()
+#define GET_TYPE_NAME(T)    typeid(T).name()
+
+}
 
 #endif // __COMMON_H__

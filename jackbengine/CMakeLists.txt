@@ -40,7 +40,7 @@ set(SOURCE_FILES
         src/core/render/texture/texture.cpp
         src/core/render/window/window.cpp
         src/core/time/timer.cpp
-        src/application/abstract/abstractApplication.cpp
+        src/application/sdl/sdlApplication.cpp
         src/application/application.cpp
         src/application/entryPoint.cpp)
 

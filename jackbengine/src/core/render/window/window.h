@@ -9,9 +9,6 @@
 #ifndef __WINDOW_H__
 #define __WINDOW_H__
 
-#include "core/sdl/sdl.h"
-#include "common/common.h"
-
 namespace Jackbengine {
 
 class Window
@@ -22,8 +19,8 @@ public:
     Window(const std::string &title, int width, int height, bool fullscreen);
     ~Window();
 
-    int width() const;
-    int height() const;
+    [[nodiscard]] int width() const;
+    [[nodiscard]] int height() const;
 
 private:
     static void setWindowIcon();

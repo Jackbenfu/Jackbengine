@@ -9,9 +9,6 @@
 #ifndef __CURSOR_H__
 #define __CURSOR_H__
 
-#include "core/sdl/sdl.h"
-#include "common/common.h"
-
 namespace Jackbengine {
 
 enum class CursorType

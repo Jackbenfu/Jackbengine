@@ -15,6 +15,31 @@ namespace Jackbengine {
 
 extern std::unique_ptr<Application> CreateApplication(bool fullscreen);
 
+namespace details {
+
+class ApplicationWrapper
+{
+public:
+    explicit ApplicationWrapper(Application *application)
+        : m_application {application}
+    {}
+
+    [[nodiscard]] inline bool running() const
+    {
+        return m_application->running();
+    }
+
+    inline void frame()
+    {
+        m_application->frame();
+    }
+
+private:
+    Application *m_application;
+};
+
+}
+
 }
 
 #endif // __ENTRY_POINT_H__

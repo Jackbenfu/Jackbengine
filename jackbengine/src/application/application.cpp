@@ -33,11 +33,10 @@ bool Application::running() const
 
 void Application::frame()
 {
-    PROFILE("Application::frame", {
+    PROFILE("Application::frame", false, {
         m_timer->start();
 
-        const auto deltaMultiplier = .001f;
-        const auto delta = m_timer->elapsedMilliseconds() * deltaMultiplier;
+        const auto delta = m_timer->elapsedSeconds();
 
         m_renderer->clear();
         m_input->update();
@@ -48,7 +47,7 @@ void Application::frame()
 
         if (m_input->quit())
         {
-            exit();
+            m_running = false;
         }
 
         m_timer->snapshot();
@@ -57,14 +56,9 @@ void Application::frame()
 
 void Application::userFrame(float delta)
 {
-    PROFILE("Application::userFrame", {
+    PROFILE("Application::userFrame", true, {
         frame(delta);
     })
-}
-
-void Application::exit()
-{
-    m_running = false;
 }
 
 }

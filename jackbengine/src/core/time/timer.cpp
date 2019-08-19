@@ -55,6 +55,11 @@ void Timer::snapshot()
     }
 }
 
+float Timer::elapsedSeconds() const
+{
+    return m_elapsedMilliseconds * .001f;
+}
+
 float Timer::elapsedMilliseconds() const
 {
     return m_elapsedMilliseconds;

@@ -30,12 +30,12 @@ void Input::update()
 
             case SDL_KEYUP:
             {
-                const auto scancode = event.key.keysym.scancode;
-                if (m_keyboardKeysDown[scancode])
+                const auto scanCode = event.key.keysym.scancode;
+                if (m_keyboardKeysDown[scanCode])
                 {
-                    m_keyboardKeysPress[scancode] = true;
+                    m_keyboardKeysPress[scanCode] = true;
                 }
-                m_keyboardKeysDown[scancode] = false;
+                m_keyboardKeysDown[scanCode] = false;
 
                 break;
             }
@@ -143,11 +143,13 @@ bool Input::mouseMove() const
     return m_mouseMove;
 }
 
-const Jackbengine::Vector2d<int> &Input::mousePosition() const
+std::pair<int, int> Input::mousePosition() const
 {
-    SDL_GetMouseState(&m_mousePos.x, &m_mousePos.y);
+    int x;
+    int y;
+    SDL_GetMouseState(&x, &y);
 
-    return m_mousePos;
+    return {x, y};
 }
 
 bool Input::quit() const

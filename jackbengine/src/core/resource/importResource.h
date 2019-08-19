@@ -9,8 +9,6 @@
 #ifndef __IMPORT_RESOURCE_H__
 #define __IMPORT_RESOURCE_H__
 
-#include "common/common.h"
-
 namespace Jackbengine {
 
 #define IMPORT_BINARY_RESOURCE(name)    extern "C" unsigned char name[];  \

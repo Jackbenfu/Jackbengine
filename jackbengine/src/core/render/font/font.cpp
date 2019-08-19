@@ -25,7 +25,7 @@ Font::Font(const void *data, size_t dataSize, int size)
 {
     const auto sdlRwops = std::make_unique<SdlRwops>(data, dataSize);
 
-    m_font = TTF_OpenFontRW((SDL_RWops *) sdlRwops->internalObject(), 1, size);
+    m_font = TTF_OpenFontRW((SDL_RWops *) sdlRwops->nativeObject(), 1, size);
     if (nullptr == m_font)
     {
         throw std::runtime_error(TTF_GetError());

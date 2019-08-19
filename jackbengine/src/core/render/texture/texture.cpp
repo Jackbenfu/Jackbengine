@@ -30,7 +30,7 @@ Texture::Texture(const Renderer &renderer, const void *data, size_t dataSize)
 Texture::Texture(const Renderer &renderer, int width, int height, Color color)
 {
     const auto sdlSurface = std::make_unique<SdlSurface>(width, height, 32);
-    const auto sdlSurfaceObject = (SDL_Surface *) sdlSurface->internalObject();
+    const auto sdlSurfaceObject = (SDL_Surface *) sdlSurface->nativeObject();
 
     const auto rgbUint = SDL_MapRGB(sdlSurfaceObject->format, color.r, color.g, color.b);
     if (SDL_FillRect(sdlSurfaceObject, nullptr, rgbUint) < 0)
@@ -67,7 +67,7 @@ void Texture::loadTextureFromSurface(const Renderer &renderer, const SdlSurface 
 {
     const auto sdlRenderer = renderer.m_renderer;
 
-    m_texture = SDL_CreateTextureFromSurface(sdlRenderer, (SDL_Surface *) surface.internalObject());
+    m_texture = SDL_CreateTextureFromSurface(sdlRenderer, (SDL_Surface *) surface.nativeObject());
     if (nullptr == m_texture)
     {
         throw std::runtime_error(SDL_GetError());

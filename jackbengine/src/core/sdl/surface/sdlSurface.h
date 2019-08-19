@@ -24,7 +24,7 @@ public:
     SdlSurface(const Font &font, const std::string &text, Color foreground);
     ~SdlSurface();
 
-    void *internalObject() const;
+    [[nodiscard]] void *nativeObject() const;
 
 private:
     void *m_surface {nullptr};

@@ -10,57 +10,37 @@
 #define __APPLICATION_H__
 
 #include "applicationConfig.h"
-#include "abstract/abstractApplication.h"
+#include "sdl/sdlApplication.h"
 
+#include "core/time/timer.h"
 #include "core/input/input.h"
 #include "core/render/cursor/cursor.h"
-#include "core/render/renderer/renderer.h"
 #include "core/render/window/window.h"
-#include "core/time/timer.h"
+#include "core/render/renderer/renderer.h"
 
 namespace Jackbengine {
 
-class Application : public AbstractApplication
+namespace details {
+class ApplicationWrapper;
+}
+
+class Application : public details::SDLApplication
 {
+    friend class details::ApplicationWrapper;
+
 public:
     Application() = delete;
     explicit Application(ApplicationConfig &config);
     ~Application() override = default;
 
-    bool running() const;
-    void frame();
-
-    void userFrame(float delta);
+protected:
     virtual void frame(float delta) = 0;
 
-    inline const Timer &timer() const
-    {
-        return *m_timer;
-    }
-
-    inline const Cursor &cursor() const
-    {
-        return *m_cursor;
-    }
-
-    inline const Input &input() const
-    {
-        return *m_input;
-    }
-
-    inline const Window &window() const
-    {
-        return *m_window;
-    }
-
-    inline const Renderer &renderer() const
-    {
-        return *m_renderer;
-    }
-
-    void exit();
-
 private:
+    [[nodiscard]] bool running() const;
+    void frame();
+    void userFrame(float delta);
+
     std::unique_ptr<Timer> m_timer;
     std::unique_ptr<Cursor> m_cursor;
     std::unique_ptr<Input> m_input;

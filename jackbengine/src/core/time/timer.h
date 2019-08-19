@@ -9,8 +9,6 @@
 #ifndef __TIMER_H__
 #define __TIMER_H__
 
-#include "common/common.h"
-
 namespace Jackbengine {
 
 class Timer
@@ -22,21 +20,22 @@ public:
     void start();
     void snapshot();
 
-    float elapsedMilliseconds() const;
-    float effectiveElapsedMilliseconds() const;
+    [[nodiscard]] float elapsedSeconds() const;
+    [[nodiscard]] float elapsedMilliseconds() const;
+    [[nodiscard]] float effectiveElapsedMilliseconds() const;
 
-    unsigned int fps() const;
+    [[nodiscard]] unsigned int fps() const;
 
-    bool isFixedFps() const;
-    unsigned int fixedFps() const;
+    [[nodiscard]] bool isFixedFps() const;
+    [[nodiscard]] unsigned int fixedFps() const;
     void enableFixedFps(unsigned int fps);
     void disableFixedFps();
 
-    unsigned int totalFrames() const;
+    [[nodiscard]] unsigned int totalFrames() const;
 
 private:
     void delay(unsigned int ms) const;
-    unsigned int ticks() const;
+    [[nodiscard]] unsigned int ticks() const;
 
     float m_start {0};
     float m_elapsedMilliseconds {0};

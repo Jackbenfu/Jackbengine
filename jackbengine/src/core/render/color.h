@@ -9,8 +9,6 @@
 #ifndef __COLOR_H__
 #define __COLOR_H__
 
-#include "common/common.h"
-
 namespace Jackbengine {
 
 struct Color

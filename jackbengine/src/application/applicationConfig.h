@@ -9,8 +9,6 @@
 #ifndef __APPLICATION_CONFIG_H__
 #define __APPLICATION_CONFIG_H__
 
-#include "common/common.h"
-
 namespace Jackbengine {
 
 struct ApplicationConfig

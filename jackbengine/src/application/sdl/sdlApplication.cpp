@@ -1,5 +1,5 @@
 //
-// abstractApplication.cpp
+// sdlApplication.cpp
 // jackbengine
 //
 // Created by Damien Bendejacq on 12/07/2017.
@@ -7,29 +7,29 @@
 //
 
 #include "pch.h"
-#include "abstractApplication.h"
+#include "sdlApplication.h"
 
-namespace Jackbengine {
+namespace Jackbengine::details {
 
-AbstractApplication::AbstractApplication()
+SDLApplication::SDLApplication()
 {
     Log::init();
 
-    PROFILE("AbstractApplication::ctor", {
-        initSDL();
+    PROFILE("SDLApplication::ctor", true, {
+        init();
     })
 }
 
-AbstractApplication::~AbstractApplication()
+SDLApplication::~SDLApplication()
 {
-    PROFILE("AbstractApplication::dtor", {
+    PROFILE("SDLApplication::dtor", true, {
         Mix_Quit();
         TTF_Quit();
         SDL_Quit();
     })
 }
 
-void AbstractApplication::initSDL()
+void SDLApplication::init()
 {
 #ifdef EMSCRIPTEN
     if (SDL_Init(SDL_INIT_EVERYTHING & ~(SDL_INIT_TIMER | SDL_INIT_HAPTIC)) < 0)

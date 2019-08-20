@@ -9,7 +9,7 @@
 #ifndef __TEXTURE_H__
 #define __TEXTURE_H__
 
-#include "core/sdl/surface/sdlSurface.h"
+#include "core/render/surface/surface.h"
 #include "core/render/color.h"
 #include "core/render/font/font.h"
 
@@ -33,7 +33,7 @@ public:
     [[nodiscard]] int height() const;
 
 private:
-    void loadTextureFromSurface(const Renderer &renderer, const SdlSurface &surface);
+    void loadTextureFromSurface(const Renderer &renderer, const Surface &surface);
 
     SDL_Texture *m_texture {nullptr};
     SDL_Rect m_rect {0, 0, 0, 0};

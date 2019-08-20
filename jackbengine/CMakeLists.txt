@@ -27,20 +27,20 @@ include_directories(
         ${PROJECT_SOURCE_DIR}/external)
 
 set(SOURCE_FILES
-        src/core/sdl/io/sdlRwops.cpp
-        src/core/sdl/surface/sdlSurface.cpp
         src/core/audio/sound.cpp
+        src/core/event/eventManager.cpp
         src/core/input/input.cpp
+        src/core/io/rwops.cpp
         src/core/log/log.cpp
         src/core/render/color.cpp
         src/core/render/cursor/cursor.cpp
         src/core/render/font/defaultFont.cpp
         src/core/render/font/font.cpp
         src/core/render/renderer/renderer.cpp
+        src/core/render/surface/surface.cpp
         src/core/render/texture/texture.cpp
         src/core/render/window/window.cpp
         src/core/time/timer.cpp
-        src/application/sdl/sdlApplication.cpp
         src/application/application.cpp
         src/application/entryPoint.cpp)
 

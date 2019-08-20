@@ -13,7 +13,7 @@ namespace Jackbengine {
 
 class Font
 {
-    friend class SdlSurface;
+    friend class Surface;
 
 public:
     Font(const std::string &file, int size);

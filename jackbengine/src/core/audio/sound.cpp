@@ -8,7 +8,7 @@
 
 #include "pch.h"
 #include "sound.h"
-#include "core/sdl/io/sdlRwops.h"
+#include "core/io/rwops.h"
 
 namespace Jackbengine {
 
@@ -23,7 +23,7 @@ Sound::Sound(const std::string &file)
 
 Sound::Sound(const void *data, size_t dataSize)
 {
-    const auto sdlRwops = std::make_unique<SdlRwops>(data, dataSize);
+    const auto sdlRwops = std::make_unique<RWops>(data, dataSize);
 
     m_chunk = Mix_LoadWAV_RW((SDL_RWops *) sdlRwops->nativeObject(), 1);
     if (nullptr == m_chunk)

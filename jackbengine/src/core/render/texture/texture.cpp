@@ -14,22 +14,22 @@ namespace Jackbengine {
 
 Texture::Texture(const Renderer &renderer, const std::string &file)
 {
-    const auto sdlSurface = std::make_unique<SdlSurface>(file);
+    const auto sdlSurface = std::make_unique<Surface>(file);
 
     loadTextureFromSurface(renderer, *sdlSurface);
 }
 
 Texture::Texture(const Renderer &renderer, const void *data, size_t dataSize)
 {
-    const auto sdlRwops = std::make_unique<SdlRwops>(data, dataSize);
-    const auto sdlSurface = std::make_unique<SdlSurface>(*sdlRwops);
+    const auto sdlRwops = std::make_unique<RWops>(data, dataSize);
+    const auto sdlSurface = std::make_unique<Surface>(*sdlRwops);
 
     loadTextureFromSurface(renderer, *sdlSurface);
 }
 
 Texture::Texture(const Renderer &renderer, int width, int height, Color color)
 {
-    const auto sdlSurface = std::make_unique<SdlSurface>(width, height, 32);
+    const auto sdlSurface = std::make_unique<Surface>(width, height, 32);
     const auto sdlSurfaceObject = (SDL_Surface *) sdlSurface->nativeObject();
 
     const auto rgbUint = SDL_MapRGB(sdlSurfaceObject->format, color.r, color.g, color.b);
@@ -43,7 +43,7 @@ Texture::Texture(const Renderer &renderer, int width, int height, Color color)
 
 Texture::Texture(const Renderer &renderer, const Font &font, const std::string &text, Color foreground)
 {
-    const auto sdlSurface = std::make_unique<SdlSurface>(font, text, foreground);
+    const auto sdlSurface = std::make_unique<Surface>(font, text, foreground);
 
     loadTextureFromSurface(renderer, *sdlSurface);
 }
@@ -63,7 +63,7 @@ int Texture::height() const
     return m_rect.h;
 }
 
-void Texture::loadTextureFromSurface(const Renderer &renderer, const SdlSurface &surface)
+void Texture::loadTextureFromSurface(const Renderer &renderer, const Surface &surface)
 {
     const auto sdlRenderer = renderer.m_renderer;
 

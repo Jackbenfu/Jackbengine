@@ -8,7 +8,7 @@
 
 #include "pch.h"
 #include "font.h"
-#include "core/sdl/io/sdlRwops.h"
+#include "core/io/rwops.h"
 
 namespace Jackbengine {
 
@@ -23,7 +23,7 @@ Font::Font(const std::string &file, int size)
 
 Font::Font(const void *data, size_t dataSize, int size)
 {
-    const auto sdlRwops = std::make_unique<SdlRwops>(data, dataSize);
+    const auto sdlRwops = std::make_unique<RWops>(data, dataSize);
 
     m_font = TTF_OpenFontRW((SDL_RWops *) sdlRwops->nativeObject(), 1, size);
     if (nullptr == m_font)

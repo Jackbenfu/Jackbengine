@@ -33,8 +33,6 @@ public:
     bool mouseMove() const;
     std::pair<int, int> mousePosition() const;
 
-    bool quit() const;
-
 private:
     int getKey(KeyboardKey key) const;
     int getButton(MouseButton button) const;
@@ -53,8 +51,6 @@ private:
     mutable Vec2i m_mousePos;
 
     bool m_mouseMove {false};
-
-    bool m_quit {false};
 };
 
 }

@@ -1,5 +1,5 @@
 //
-// sdlSurface.cpp
+// surface.cpp
 // jackbengine
 //
 // Created by Damien Bendejacq on 15/07/2017.
@@ -7,11 +7,11 @@
 //
 
 #include "pch.h"
-#include "sdlSurface.h"
+#include "surface.h"
 
 namespace Jackbengine {
 
-SdlSurface::SdlSurface(const std::string &file)
+Surface::Surface(const std::string &file)
 {
     m_surface = IMG_Load(file.c_str());
     if (nullptr == m_surface)
@@ -20,7 +20,7 @@ SdlSurface::SdlSurface(const std::string &file)
     }
 }
 
-SdlSurface::SdlSurface(const SdlRwops &rwops)
+Surface::Surface(const RWops &rwops)
 {
     m_surface = IMG_Load_RW((SDL_RWops *) rwops.nativeObject(), 0);
     if (nullptr == m_surface)
@@ -29,7 +29,7 @@ SdlSurface::SdlSurface(const SdlRwops &rwops)
     }
 }
 
-SdlSurface::SdlSurface(int width, int height, int depth)
+Surface::Surface(int width, int height, int depth)
 {
     m_surface = SDL_CreateRGBSurface(SDL_SWSURFACE, width, height, depth, 0, 0, 0, 0);
     if (nullptr == m_surface)
@@ -38,7 +38,7 @@ SdlSurface::SdlSurface(int width, int height, int depth)
     }
 }
 
-SdlSurface::SdlSurface(const Font &font, const std::string &text, Color foreground)
+Surface::Surface(const Font &font, const std::string &text, Color foreground)
 {
     const auto sdlFont = font.m_font;
 
@@ -51,12 +51,12 @@ SdlSurface::SdlSurface(const Font &font, const std::string &text, Color foregrou
     }
 }
 
-SdlSurface::~SdlSurface()
+Surface::~Surface()
 {
     SDL_FreeSurface((SDL_Surface *) m_surface);
 }
 
-void *SdlSurface::nativeObject() const
+void *Surface::nativeObject() const
 {
     return m_surface;
 }

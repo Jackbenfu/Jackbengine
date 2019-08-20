@@ -96,12 +96,6 @@ void Input::update()
                 break;
             }
 
-            case SDL_QUIT:
-            {
-                m_quit = true;
-                break;
-            }
-
             default:
                 break;
         }
@@ -150,11 +144,6 @@ std::pair<int, int> Input::mousePosition() const
     SDL_GetMouseState(&x, &y);
 
     return {x, y};
-}
-
-bool Input::quit() const
-{
-    return m_quit;
 }
 
 int Input::getKey(KeyboardKey key) const

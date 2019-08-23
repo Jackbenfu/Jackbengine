@@ -9,7 +9,8 @@
 #ifndef __SOUND_H__
 #define __SOUND_H__
 
-#include "pch.h"
+#include <string>
+#include "core/sdl/sdl.h"
 
 namespace Jackbengine {
 

@@ -6,7 +6,6 @@
 // Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
-#include "pch.h"
 #include "texture.h"
 #include "core/render/renderer/renderer.h"
 

@@ -9,7 +9,6 @@
 #ifndef __HETEROGENEOUS_COLLECTION_H__
 #define __HETEROGENEOUS_COLLECTION_H__
 
-#include "pch.h"
 #include "common/common.h"
 
 namespace Jackbengine {

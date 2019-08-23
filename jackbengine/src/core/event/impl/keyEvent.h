@@ -10,6 +10,7 @@
 #define __KEY_EVENT_H__
 
 #include "core/event/event.h"
+#include "spdlog/fmt/fmt.h"
 
 namespace Jackbengine {
 

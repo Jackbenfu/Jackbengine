@@ -11,6 +11,7 @@
 
 #include "core/render/color.h"
 #include "core/render/window/window.h"
+#include "core/sdl/sdl.h"
 
 namespace Jackbengine {
 

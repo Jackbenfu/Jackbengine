@@ -9,6 +9,8 @@
 #ifndef __WINDOW_H__
 #define __WINDOW_H__
 
+#include "core/sdl/sdl.h"
+
 namespace Jackbengine {
 
 class Window

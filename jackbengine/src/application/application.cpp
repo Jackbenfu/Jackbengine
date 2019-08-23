@@ -6,8 +6,8 @@
 // Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
-#include "pch.h"
 #include "application.h"
+#include "core/log/profile.h"
 
 namespace Jackbengine {
 
@@ -112,37 +112,37 @@ bool Application::onApplicationCloseEvent(const ApplicationCloseEvent &)
     return true;
 }
 
-bool Application::onKeyDownEvent(const KeyDownEvent &) // NOLINT
+bool Application::onKeyDownEvent(const KeyDownEvent &)
 {
     return true;
 }
 
-bool Application::onKeyUpEvent(const KeyUpEvent &) // NOLINT
+bool Application::onKeyUpEvent(const KeyUpEvent &)
 {
     return true;
 }
 
-bool Application::onKeyPressEvent(const KeyPressEvent &) // NOLINT
+bool Application::onKeyPressEvent(const KeyPressEvent &)
 {
     return true;
 }
 
-bool Application::onMouseMotionEvent(const MouseMotionEvent &) // NOLINT
+bool Application::onMouseMotionEvent(const MouseMotionEvent &)
 {
     return true;
 }
 
-bool Application::onMouseDownEvent(const MouseDownEvent &) // NOLINT
+bool Application::onMouseDownEvent(const MouseDownEvent &)
 {
     return true;
 }
 
-bool Application::onMouseUpEvent(const MouseUpEvent &) // NOLINT
+bool Application::onMouseUpEvent(const MouseUpEvent &)
 {
     return true;
 }
 
-bool Application::onMouseClickEvent(const MouseClickEvent &) // NOLINT
+bool Application::onMouseClickEvent(const MouseClickEvent &)
 {
     return true;
 }

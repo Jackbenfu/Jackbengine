@@ -6,7 +6,6 @@
 // Copyright © 2018 Damien Bendejacq. All rights reserved.
 //
 
-#include "pch.h"
 #include "entryPoint.h"
 
 void parseArguments(int argc, char **argv, bool *fullscreen)

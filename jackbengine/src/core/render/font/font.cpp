@@ -6,7 +6,6 @@
 // Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
-#include "pch.h"
 #include "font.h"
 #include "core/io/rwops.h"
 

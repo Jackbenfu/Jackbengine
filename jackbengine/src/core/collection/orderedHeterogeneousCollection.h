@@ -9,7 +9,6 @@
 #ifndef __ORDERED_HETEROGENEOUS_COLLECTION_H__
 #define __ORDERED_HETEROGENEOUS_COLLECTION_H__
 
-#include "pch.h"
 #include "common/common.h"
 #include "orderableItem.h"
 

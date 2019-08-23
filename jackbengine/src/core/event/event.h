@@ -9,8 +9,6 @@
 #ifndef __EVENT_H__
 #define __EVENT_H__
 
-#include "pch.h"
-
 namespace Jackbengine {
 
 enum class EventType

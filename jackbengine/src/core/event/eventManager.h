@@ -10,6 +10,7 @@
 #define __EVENT_MANAGER_H__
 
 #include "core/event/event.h"
+#include "core/sdl/sdl.h"
 #include "keyboardKey.h"
 #include "mouseButton.h"
 

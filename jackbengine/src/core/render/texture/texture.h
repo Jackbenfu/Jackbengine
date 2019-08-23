@@ -12,6 +12,7 @@
 #include "core/render/surface/surface.h"
 #include "core/render/color.h"
 #include "core/render/font/font.h"
+#include "core/sdl/sdl.h"
 
 namespace Jackbengine {
 

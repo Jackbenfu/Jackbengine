@@ -6,8 +6,6 @@
 // Copyright © 2016 Damien Bendejacq. All rights reserved.
 //
 
-#include "pch.h"
-
 // Original font: Volter (Goldfish) by cocoFabien
 // http://www.dafont.com/fr/volter-goldfish.font
 

@@ -14,7 +14,6 @@
 #include "core/event/eventManager.h"
 #include "core/event/impl/eventImpl.h"
 #include "core/time/timer.h"
-#include "core/input/input.h"
 #include "core/render/cursor/cursor.h"
 #include "core/render/window/window.h"
 #include "core/render/renderer/renderer.h"
@@ -54,7 +53,6 @@ private:
 
     std::unique_ptr<Timer> m_timer;
     std::unique_ptr<Cursor> m_cursor;
-    std::unique_ptr<Input> m_input;
     std::unique_ptr<Window> m_window;
     std::unique_ptr<Renderer> m_renderer;
     std::unique_ptr<details::EventManager> m_eventManager;

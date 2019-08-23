@@ -17,7 +17,7 @@ Application::Application(ApplicationConfig &config)
     srand(time(nullptr)); // NOLINT
 
     {
-        PROFILE("Application::Application")
+        NO_PROFILE("Application::Application")
 
 #ifdef EMSCRIPTEN
         if (SDL_Init(SDL_INIT_EVERYTHING & ~(SDL_INIT_TIMER | SDL_INIT_HAPTIC)) < 0)
@@ -45,7 +45,6 @@ Application::Application(ApplicationConfig &config)
 
         m_timer = std::make_unique<Timer>(config.core_fps);
         m_cursor = std::make_unique<Cursor>();
-        m_input = std::make_unique<Input>();
         m_window = std::make_unique<Window>(config.general_title, config.render_width, config.render_height, config.render_fullscreen);
         m_renderer = std::make_unique<Renderer>(*m_window);
         m_eventManager = std::make_unique<details::EventManager>(BIND_EVENT_CALLBACK(onEvent));
@@ -55,7 +54,7 @@ Application::Application(ApplicationConfig &config)
 Application::~Application()
 {
     {
-        PROFILE("Application::~Application")
+        NO_PROFILE("Application::~Application")
         Mix_Quit();
         TTF_Quit();
         SDL_Quit();
@@ -70,13 +69,12 @@ bool Application::running() const
 void Application::frame()
 {
     {
-//        PROFILE("Application::frame")
+        NO_PROFILE("Application::frame")
 
         m_timer->start();
         const auto delta = m_timer->elapsedSeconds();
 
         m_renderer->clear();
-        //m_input->update();
         m_eventManager->update();
 
         userFrame(delta);
@@ -89,7 +87,7 @@ void Application::frame()
 void Application::userFrame(float delta)
 {
     {
-//        PROFILE("Application::userFrame")
+        NO_PROFILE("Application::userFrame")
         frame(delta);
     }
 }

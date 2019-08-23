@@ -10,7 +10,7 @@
 #define __MOUSE_CLICK_EVENT_H__
 
 #include "mouseEvent.h"
-#include "core/input/mouseButton.h"
+#include "core/event/mouseButton.h"
 
 namespace Jackbengine {
 

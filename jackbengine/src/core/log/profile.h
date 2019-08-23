@@ -42,11 +42,13 @@ private:
 
 #ifdef __PROFILE__
 
-#define PROFILE(name)   Profile p(name);
+#define PROFILE(name)       Profile p(name);
+#define NO_PROFILE(name)
 
 #else
 
 #define PROFILE(name)
+#define NO_PROFILE(name)
 
 #endif
 

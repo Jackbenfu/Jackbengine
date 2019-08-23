@@ -10,8 +10,8 @@
 #define __EVENT_MANAGER_H__
 
 #include "core/event/event.h"
-#include "core/input/keyboardKey.h"
-#include "core/input/mouseButton.h"
+#include "keyboardKey.h"
+#include "mouseButton.h"
 
 namespace Jackbengine::details {
 

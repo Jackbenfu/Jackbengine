@@ -29,7 +29,6 @@ include_directories(
 set(SOURCE_FILES
         src/core/audio/sound.cpp
         src/core/event/eventManager.cpp
-        src/core/input/input.cpp
         src/core/io/rwops.cpp
         src/core/log/log.cpp
         src/core/render/color.cpp

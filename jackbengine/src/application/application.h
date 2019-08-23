@@ -12,6 +12,7 @@
 #include "applicationConfig.h"
 
 #include "core/event/eventManager.h"
+#include "core/event/impl/eventImpl.h"
 #include "core/time/timer.h"
 #include "core/input/input.h"
 #include "core/render/cursor/cursor.h"
@@ -42,7 +43,14 @@ private:
     void userFrame(float delta);
 
     void onEvent(Event &e);
-    bool onApplicationClosedEvent(const ApplicationClosedEvent &e);
+    bool onApplicationCloseEvent(const ApplicationCloseEvent &e);
+    bool onKeyDownEvent(const KeyDownEvent &e);
+    bool onKeyUpEvent(const KeyUpEvent &e);
+    bool onKeyPressEvent(const KeyPressEvent &e);
+    bool onMouseMotionEvent(const MouseMotionEvent &e);
+    bool onMouseDownEvent(const MouseDownEvent &e);
+    bool onMouseUpEvent(const MouseUpEvent &e);
+    bool onMouseClickEvent(const MouseClickEvent &e);
 
     std::unique_ptr<Timer> m_timer;
     std::unique_ptr<Cursor> m_cursor;

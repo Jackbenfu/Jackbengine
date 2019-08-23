@@ -13,9 +13,11 @@ namespace Jackbengine {
 
 enum class MouseButton
 {
-    Left,
-    Middle,
-    Right,
+    Unknown = 0,
+
+    Left = 1,
+    Middle = 2,
+    Right = 3,
 };
 
 }

@@ -15,14 +15,22 @@ namespace Jackbengine {
 
 enum class EventType
 {
-    ApplicationClosed,
+    ApplicationClose,
+
+    KeyDown,
+    KeyUp,
+    KeyPress,
+
+    MouseDown,
+    MouseUp,
+    MouseClick,
+    MouseMotion,
 };
 
-#define EVENT_CLASS_TYPE(type)  static EventType staticType() { return type; }                          \
-                                virtual EventType eventType() const override { return staticType(); }   \
-                                virtual const char* name() const override { return #type; }
+#define EVENT_CLASS_TYPE(type)  inline static EventType staticType() { return type; }                           \
+                                inline virtual EventType eventType() const override { return staticType(); }
 
-#define BIND_EVENT_FUNC(func) std::bind(&Application::func, this, std::placeholders::_1)
+#define BIND_EVENT_CALLBACK(func) std::bind(&Application::func, this, std::placeholders::_1)
 
 class Event
 {
@@ -30,25 +38,22 @@ public:
     bool handled {false};
 
     [[nodiscard]] virtual EventType eventType() const = 0;
-    [[nodiscard]] virtual const char *name() const = 0;
+    [[nodiscard]] virtual std::string toString() const = 0;
 };
 
 class EventDispatcher
 {
-    template<typename T>
-    using EventFunc = std::function<bool(const T &)>;
-
 public:
     explicit EventDispatcher(Event &e)
         : m_event {e}
     {}
 
     template<typename T>
-    bool dispatch(EventFunc<T> func)
+    bool dispatch(std::function<bool(const T &)> callback)
     {
         if (m_event.eventType() == T::staticType())
         {
-            m_event.handled = (func(*(T *) &m_event));
+            m_event.handled = (callback(*(T *) &m_event));
             return true;
         }
 

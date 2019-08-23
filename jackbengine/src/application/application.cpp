@@ -48,7 +48,7 @@ Application::Application(ApplicationConfig &config)
         m_input = std::make_unique<Input>();
         m_window = std::make_unique<Window>(config.general_title, config.render_width, config.render_height, config.render_fullscreen);
         m_renderer = std::make_unique<Renderer>(*m_window);
-        m_eventManager = std::make_unique<details::EventManager>(BIND_EVENT_FUNC(onEvent));
+        m_eventManager = std::make_unique<details::EventManager>(BIND_EVENT_CALLBACK(onEvent));
     }
 }
 
@@ -70,10 +70,9 @@ bool Application::running() const
 void Application::frame()
 {
     {
-        PROFILE("Application::frame")
+//        PROFILE("Application::frame")
 
         m_timer->start();
-
         const auto delta = m_timer->elapsedSeconds();
 
         m_renderer->clear();
@@ -83,7 +82,6 @@ void Application::frame()
         userFrame(delta);
 
         m_renderer->present();
-
         m_timer->snapshot();
     }
 }
@@ -91,7 +89,7 @@ void Application::frame()
 void Application::userFrame(float delta)
 {
     {
-        PROFILE("Application::userFrame")
+//        PROFILE("Application::userFrame")
         frame(delta);
     }
 }
@@ -99,12 +97,55 @@ void Application::userFrame(float delta)
 void Application::onEvent(Event &e)
 {
     EventDispatcher dispatcher(e);
-    dispatcher.dispatch<ApplicationClosedEvent>(BIND_EVENT_FUNC(onApplicationClosedEvent));
+
+    dispatcher.dispatch<ApplicationCloseEvent>(BIND_EVENT_CALLBACK(onApplicationCloseEvent));
+    dispatcher.dispatch<KeyDownEvent>(BIND_EVENT_CALLBACK(onKeyDownEvent));
+    dispatcher.dispatch<KeyUpEvent>(BIND_EVENT_CALLBACK(onKeyUpEvent));
+    dispatcher.dispatch<KeyPressEvent>(BIND_EVENT_CALLBACK(onKeyPressEvent));
+    dispatcher.dispatch<MouseMotionEvent>(BIND_EVENT_CALLBACK(onMouseMotionEvent));
+    dispatcher.dispatch<MouseDownEvent>(BIND_EVENT_CALLBACK(onMouseDownEvent));
+    dispatcher.dispatch<MouseUpEvent>(BIND_EVENT_CALLBACK(onMouseUpEvent));
+    dispatcher.dispatch<MouseClickEvent>(BIND_EVENT_CALLBACK(onMouseClickEvent));
 }
 
-bool Application::onApplicationClosedEvent(const ApplicationClosedEvent &)
+bool Application::onApplicationCloseEvent(const ApplicationCloseEvent &)
 {
     m_running = false;
+    return true;
+}
+
+bool Application::onKeyDownEvent(const KeyDownEvent &) // NOLINT
+{
+    return true;
+}
+
+bool Application::onKeyUpEvent(const KeyUpEvent &) // NOLINT
+{
+    return true;
+}
+
+bool Application::onKeyPressEvent(const KeyPressEvent &) // NOLINT
+{
+    return true;
+}
+
+bool Application::onMouseMotionEvent(const MouseMotionEvent &) // NOLINT
+{
+    return true;
+}
+
+bool Application::onMouseDownEvent(const MouseDownEvent &) // NOLINT
+{
+    return true;
+}
+
+bool Application::onMouseUpEvent(const MouseUpEvent &) // NOLINT
+{
+    return true;
+}
+
+bool Application::onMouseClickEvent(const MouseClickEvent &) // NOLINT
+{
     return true;
 }
 

@@ -150,6 +150,9 @@ int Input::getKey(KeyboardKey key) const
 {
     switch (key)
     {
+        case KeyboardKey::Unknown:
+            return SDL_SCANCODE_UNKNOWN;
+
         case KeyboardKey::A:
             return SDL_SCANCODE_A;
         case KeyboardKey::B:

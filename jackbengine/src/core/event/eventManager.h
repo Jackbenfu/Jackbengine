@@ -27,22 +27,25 @@ public:
     void update();
 
 private:
-    [[nodiscard]] KeyboardKey getPhysicalKey(SDL_Keysym keysym) const;
-    [[nodiscard]] KeyboardKey getVirtualKey(SDL_Keysym keysym) const;
-    [[nodiscard]] MouseButton getButton(int button) const;
+    void handleKeyDown(const SDL_Keysym &keysym);
+    void handleKeyUp(const SDL_Keysym &keysym);
 
-    void handleMouseDown(const SDL_MouseButtonEvent& event, int button, int mouseX, int mouseY);
-    void handleMouseUp(const SDL_MouseButtonEvent& event, int button, int mouseX, int mouseY);
+    void handleMouseDown(const SDL_MouseButtonEvent &event, int button, int mouseX, int mouseY);
     void handleMouseDownRepeat(int button, int mouseX, int mouseY);
+    void handleMouseUp(const SDL_MouseButtonEvent &event, int button, int mouseX, int mouseY);
+
+    [[nodiscard]] KeyboardKey getPhysicalKey(int scanCode) const;
+    [[nodiscard]] KeyboardKey getVirtualKey(int sym) const;
+    [[nodiscard]] MouseButton getButton(int button) const;
 
     std::function<void(Event &)> m_callback;
 
-    std::vector<bool> m_keyboardKeysDown = std::vector<bool>(SDL_NUM_SCANCODES, false);
-    std::vector<bool> m_keyboardKeysPress = std::vector<bool>(SDL_NUM_SCANCODES, false);
+    std::vector<bool> m_keysDown = std::vector<bool>(SDL_NUM_SCANCODES, false);
+    std::vector<int> m_keysDownRepeat = std::vector<int>(SDL_NUM_SCANCODES, 0);
 
     const unsigned int MaxMouseButtons {4};
-    std::vector<bool> m_mouseButtonsDown = std::vector<bool>(MaxMouseButtons, false);
-    std::vector<bool> m_mouseButtonsDownOnCurrentFrame = std::vector<bool>(MaxMouseButtons, false);
+    std::vector<bool> m_mouseDown = std::vector<bool>(MaxMouseButtons, false);
+    std::vector<int> m_mouseDownRepeat = std::vector<int>(MaxMouseButtons, 0);
 };
 
 }

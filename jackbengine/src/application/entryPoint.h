@@ -13,7 +13,7 @@
 
 namespace Jackbengine {
 
-extern std::unique_ptr<Application> CreateApplication(bool fullscreen);
+extern std::unique_ptr<Application> createApplication(bool fullscreen);
 
 namespace details {
 

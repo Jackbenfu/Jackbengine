@@ -18,9 +18,6 @@ EventManager::EventManager(std::function<void(Event &)> callback)
 
 void EventManager::update()
 {
-    std::fill(m_keyboardKeysPress.begin(), m_keyboardKeysPress.end(), false);
-    std::fill(m_mouseButtonsDownOnCurrentFrame.begin(), m_mouseButtonsDownOnCurrentFrame.end(), false);
-
     int mouseX;
     int mouseY;
     SDL_GetMouseState(&mouseX, &mouseY);
@@ -39,33 +36,13 @@ void EventManager::update()
 
             case SDL_KEYDOWN:
             {
-                const auto physicalKey = getPhysicalKey(event.key.keysym);
-                const auto virtualKey = getVirtualKey(event.key.keysym);
-
-                m_keyboardKeysDown[event.key.keysym.scancode] = true;
-
-                KeyDownEvent e {physicalKey, virtualKey};
-                m_callback(e);
+                handleKeyDown(event.key.keysym);
                 break;
             }
 
             case SDL_KEYUP:
             {
-                const auto physicalKey = getPhysicalKey(event.key.keysym);
-                const auto virtualKey = getVirtualKey(event.key.keysym);
-
-                const auto scanCode = event.key.keysym.scancode;
-                if (m_keyboardKeysDown[scanCode])
-                {
-                    m_keyboardKeysPress[scanCode] = true;
-
-                    KeyPressEvent e {physicalKey, virtualKey};
-                    m_callback(e);
-                }
-                m_keyboardKeysDown[scanCode] = false;
-
-                KeyUpEvent e {physicalKey, virtualKey};
-                m_callback(e);
+                handleKeyUp(event.key.keysym);
                 break;
             }
 
@@ -103,9 +80,88 @@ void EventManager::update()
     handleMouseDownRepeat(SDL_BUTTON_RIGHT, mouseX, mouseY);
 }
 
-KeyboardKey EventManager::getPhysicalKey(SDL_Keysym keysym) const
+void EventManager::handleKeyDown(const SDL_Keysym &keysym)
 {
-    switch (keysym.scancode)
+    const auto scanCode = keysym.scancode;
+    const auto physicalKey = getPhysicalKey(scanCode);
+    const auto virtualKey = getVirtualKey(keysym.sym);
+
+    m_keysDown[scanCode] = true;
+
+    KeyDownEvent e {physicalKey, virtualKey, m_keysDownRepeat[scanCode]};
+    m_callback(e);
+
+    ++m_keysDownRepeat[scanCode];
+}
+
+void EventManager::handleKeyUp(const SDL_Keysym &keysym)
+{
+    const auto scanCode = keysym.scancode;
+    const auto physicalKey = getPhysicalKey(scanCode);
+    const auto virtualKey = getVirtualKey(keysym.sym);
+
+    if (m_keysDown[scanCode])
+    {
+        KeyPressEvent e {physicalKey, virtualKey};
+        m_callback(e);
+    }
+
+    m_keysDown[scanCode] = false;
+    m_keysDownRepeat[scanCode] = 0;
+
+    KeyUpEvent e {physicalKey, virtualKey};
+    m_callback(e);
+}
+
+void EventManager::handleMouseDown(const SDL_MouseButtonEvent &event, int button, int mouseX, int mouseY)
+{
+    if (event.button != button)
+    {
+        return;
+    }
+
+    m_mouseDown[button] = true;
+
+    MouseDownEvent e {mouseX, mouseY, getButton(button), 0};
+    m_callback(e);
+}
+
+void EventManager::handleMouseDownRepeat(int button, int mouseX, int mouseY)
+{
+    if (m_mouseDown[button])
+    {
+        auto repeat = ++m_mouseDownRepeat[button];
+
+        MouseDownEvent e {mouseX, mouseY, getButton(button), repeat};
+        m_callback(e);
+    }
+}
+
+void EventManager::handleMouseUp(const SDL_MouseButtonEvent &event, int button, int mouseX, int mouseY)
+{
+    if (event.button != button)
+    {
+        return;
+    }
+
+    const auto b = getButton(button);
+
+    if (m_mouseDown[button])
+    {
+        MouseClickEvent e {mouseX, mouseY, b};
+        m_callback(e);
+    }
+
+    m_mouseDown[button] = false;
+    m_mouseDownRepeat[button] = 0;
+
+    MouseUpEvent e {mouseX, mouseY, b};
+    m_callback(e);
+}
+
+KeyboardKey EventManager::getPhysicalKey(int scanCode) const
+{
+    switch (scanCode)
     {
         case SDL_SCANCODE_A:
             return KeyboardKey::A;
@@ -231,9 +287,9 @@ KeyboardKey EventManager::getPhysicalKey(SDL_Keysym keysym) const
     }
 }
 
-KeyboardKey EventManager::getVirtualKey(SDL_Keysym keysym) const
+KeyboardKey EventManager::getVirtualKey(int sym) const
 {
-    switch (keysym.sym)
+    switch (sym)
     {
         case SDLK_a:
             return KeyboardKey::A;
@@ -372,49 +428,6 @@ MouseButton EventManager::getButton(int button) const
 
         default:
             return MouseButton::Unknown;
-    }
-}
-
-void EventManager::handleMouseDown(const SDL_MouseButtonEvent &event, int button, int mouseX, int mouseY)
-{
-    if (event.button != button)
-    {
-        return;
-    }
-
-    m_mouseButtonsDownOnCurrentFrame[button] = !m_mouseButtonsDown[button];
-
-    m_mouseButtonsDown[button] = true;
-    MouseDownEvent e {mouseX, mouseY, getButton(button)};
-    m_callback(e);
-}
-
-void EventManager::handleMouseUp(const SDL_MouseButtonEvent &event, int button, int mouseX, int mouseY)
-{
-    if (event.button != button)
-    {
-        return;
-    }
-
-    const auto b = getButton(button);
-
-    if (m_mouseButtonsDown[button])
-    {
-        MouseClickEvent e {mouseX, mouseY, b};
-        m_callback(e);
-    }
-
-    m_mouseButtonsDown[button] = false;
-    MouseUpEvent e {mouseX, mouseY, b};
-    m_callback(e);
-}
-
-void EventManager::handleMouseDownRepeat(int button, int mouseX, int mouseY)
-{
-    if (!m_mouseButtonsDownOnCurrentFrame[button] && m_mouseButtonsDown[button])
-    {
-        MouseDownEvent e {mouseX, mouseY, getButton(button)};
-        m_callback(e);
     }
 }
 

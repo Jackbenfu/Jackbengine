@@ -18,14 +18,18 @@ class KeyDownEvent : public KeyEvent
 public:
     EVENT_CLASS_TYPE(EventType::KeyDown)
 
-    KeyDownEvent(KeyboardKey physicalKey, KeyboardKey virtualKey)
-        : KeyEvent {physicalKey, virtualKey}
+    KeyDownEvent(KeyboardKey physicalKey, KeyboardKey virtualKey, int repeat)
+        : KeyEvent {physicalKey, virtualKey},
+          m_repeat {repeat}
     {}
 
     [[nodiscard]] std::string toString() const override
     {
-        return fmt::format("KeyDownEvent: {}", keys());
+        return fmt::format("KeyDownEvent: {}, repeat={}", keys(), m_repeat);
     }
+
+private:
+    int m_repeat;
 };
 
 }

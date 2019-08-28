@@ -44,8 +44,7 @@ int main(int argc, char **argv)
     emscripten_set_main_loop(frameMock, 0, 0);
 #endif
 
-
-    auto application = Jackbengine::CreateApplication(fullscreen);
+    auto application = Jackbengine::createApplication(fullscreen);
     auto wrapper = Jackbengine::details::ApplicationWrapper(application.get());
 
 #ifdef EMSCRIPTEN

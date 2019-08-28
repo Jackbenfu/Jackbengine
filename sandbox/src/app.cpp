@@ -10,7 +10,7 @@
 
 namespace Jackbengine {
 
-std::unique_ptr<Application> CreateApplication(bool fullscreen)
+std::unique_ptr<Application> createApplication(bool fullscreen)
 {
     ApplicationConfig config {"Sandbox", 640, 480, fullscreen};
 
@@ -19,7 +19,8 @@ std::unique_ptr<Application> CreateApplication(bool fullscreen)
 
 }
 
-Sandbox::App::App(Jackbengine::ApplicationConfig &config) : Application(config)
+Sandbox::App::App(Jackbengine::ApplicationConfig &config)
+    : Application(config)
 {
 }
 

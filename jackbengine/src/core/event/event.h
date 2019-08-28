@@ -47,7 +47,7 @@ public:
     {}
 
     template<typename T>
-    bool dispatch(std::function<bool(const T &)> callback)
+    bool dispatch(std::function<bool(T &)> callback)
     {
         if (m_event.eventType() == T::staticType())
         {

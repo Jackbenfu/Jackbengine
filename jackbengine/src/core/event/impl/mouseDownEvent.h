@@ -19,18 +19,20 @@ class MouseDownEvent : public MouseEvent
 public:
     EVENT_CLASS_TYPE(EventType::MouseDown)
 
-    MouseDownEvent(int x, int y, MouseButton button)
+    MouseDownEvent(int x, int y, MouseButton button, int repeat)
         : MouseEvent {x, y},
-          m_button {button}
+          m_button {button},
+          m_repeat {repeat}
     {}
 
     [[nodiscard]] std::string toString() const override
     {
-        return fmt::format("MouseDownEvent: x={}, y={}, button={}", x(), y(), (int) m_button);
+        return fmt::format("MouseDownEvent: x={}, y={}, button={}, repeat={}", x(), y(), (int) m_button, m_repeat);
     }
 
 private:
     MouseButton m_button;
+    int m_repeat;
 };
 
 }

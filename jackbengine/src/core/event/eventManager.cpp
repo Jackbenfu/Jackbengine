@@ -22,6 +22,9 @@ void EventManager::update()
     int mouseY;
     SDL_GetMouseState(&mouseX, &mouseY);
 
+    std::fill(m_mouseDownOnFrame.begin(), m_mouseDownOnFrame.end(), false);
+    std::fill(m_keyDownOnFrame.begin(), m_keyDownOnFrame.end(), false);
+
     SDL_Event event {};
     while (SDL_PollEvent(&event) > 0)
     {
@@ -63,7 +66,6 @@ void EventManager::update()
 
             case SDL_MOUSEBUTTONUP:
             {
-
                 handleMouseUp(event.button, SDL_BUTTON_LEFT, mouseX, mouseY);
                 handleMouseUp(event.button, SDL_BUTTON_MIDDLE, mouseX, mouseY);
                 handleMouseUp(event.button, SDL_BUTTON_RIGHT, mouseX, mouseY);
@@ -78,39 +80,72 @@ void EventManager::update()
     handleMouseDownRepeat(SDL_BUTTON_LEFT, mouseX, mouseY);
     handleMouseDownRepeat(SDL_BUTTON_MIDDLE, mouseX, mouseY);
     handleMouseDownRepeat(SDL_BUTTON_RIGHT, mouseX, mouseY);
+
+    for (auto key = (int) KeyboardKey::Unknown; key < (int) KeyboardKey::KeyboardKeyCount; ++key)
+    {
+        handleKeyDownRepeat((KeyboardKey) key);
+    }
 }
 
 void EventManager::handleKeyDown(const SDL_Keysym &keysym)
 {
-    const auto scanCode = keysym.scancode;
-    const auto physicalKey = getPhysicalKey(scanCode);
+    const auto physicalKey = getPhysicalKey(keysym.scancode);
+    if (KeyboardKey::Unknown == physicalKey)
+    {
+        return;
+    }
+
     const auto virtualKey = getVirtualKey(keysym.sym);
 
-    m_keysDown[scanCode] = true;
+    m_keyDownOnFrame[(int) physicalKey] = !m_keyDown[(int) physicalKey];
 
-    KeyDownEvent e {physicalKey, virtualKey, m_keysDownRepeat[scanCode]};
+    m_keyDown[(int) physicalKey] = true;
+
+    KeyDownEvent e {physicalKey, virtualKey, m_keyDownRepeat[(int) physicalKey]};
     m_callback(e);
+}
 
-    ++m_keysDownRepeat[scanCode];
+void EventManager::handleKeyDownRepeat(KeyboardKey key)
+{
+    const auto scanCode = getScanCode(key);
+    if (SDL_SCANCODE_UNKNOWN == scanCode)
+    {
+        return;
+    }
+
+    const auto sym = SDL_GetKeyFromScancode(scanCode);
+    const auto physicalKey = getPhysicalKey(scanCode);
+    const auto virtualKey = getVirtualKey(sym);
+
+    if (!m_keyDownOnFrame[(int) physicalKey] && m_keyDown[(int) physicalKey])
+    {
+        ++m_keyDownRepeat[(int) physicalKey];
+
+        KeyDownEvent e {physicalKey, virtualKey, m_keyDownRepeat[(int) physicalKey]};
+        m_callback(e);
+    }
 }
 
 void EventManager::handleKeyUp(const SDL_Keysym &keysym)
 {
-    const auto scanCode = keysym.scancode;
-    const auto physicalKey = getPhysicalKey(scanCode);
-    const auto virtualKey = getVirtualKey(keysym.sym);
-
-    if (m_keysDown[scanCode])
+    const auto physicalKey = getPhysicalKey(keysym.scancode);
+    if (KeyboardKey::Unknown == physicalKey)
     {
-        KeyPressEvent e {physicalKey, virtualKey};
-        m_callback(e);
+        return;
     }
 
-    m_keysDown[scanCode] = false;
-    m_keysDownRepeat[scanCode] = 0;
+    const auto virtualKey = getVirtualKey(keysym.sym);
 
-    KeyUpEvent e {physicalKey, virtualKey};
-    m_callback(e);
+    KeyUpEvent eUp {physicalKey, virtualKey};
+    m_callback(eUp);
+
+    if (m_keyDown[(int) physicalKey])
+    {
+        KeyPressEvent ePress {physicalKey, virtualKey};
+        m_callback(ePress);
+    }
+
+    m_keyDown[(int) physicalKey] = false;
 }
 
 void EventManager::handleMouseDown(const SDL_MouseButtonEvent &event, int button, int mouseX, int mouseY)
@@ -120,6 +155,8 @@ void EventManager::handleMouseDown(const SDL_MouseButtonEvent &event, int button
         return;
     }
 
+    m_mouseDownOnFrame[button] = !m_mouseDown[button];
+
     m_mouseDown[button] = true;
 
     MouseDownEvent e {mouseX, mouseY, getButton(button), 0};
@@ -128,7 +165,7 @@ void EventManager::handleMouseDown(const SDL_MouseButtonEvent &event, int button
 
 void EventManager::handleMouseDownRepeat(int button, int mouseX, int mouseY)
 {
-    if (m_mouseDown[button])
+    if (!m_mouseDownOnFrame[button] && m_mouseDown[button])
     {
         auto repeat = ++m_mouseDownRepeat[button];
 
@@ -146,17 +183,141 @@ void EventManager::handleMouseUp(const SDL_MouseButtonEvent &event, int button, 
 
     const auto b = getButton(button);
 
+    MouseUpEvent eUp {mouseX, mouseY, b};
+    m_callback(eUp);
+
     if (m_mouseDown[button])
     {
-        MouseClickEvent e {mouseX, mouseY, b};
-        m_callback(e);
+        MouseClickEvent eClick {mouseX, mouseY, b};
+        m_callback(eClick);
     }
 
     m_mouseDown[button] = false;
     m_mouseDownRepeat[button] = 0;
+}
 
-    MouseUpEvent e {mouseX, mouseY, b};
-    m_callback(e);
+SDL_Scancode EventManager::getScanCode(Jackbengine::KeyboardKey key) const
+{
+    switch (key)
+    {
+        case KeyboardKey::A:
+            return SDL_SCANCODE_A;
+        case KeyboardKey::B:
+            return SDL_SCANCODE_B;
+        case KeyboardKey::C:
+            return SDL_SCANCODE_C;
+        case KeyboardKey::D:
+            return SDL_SCANCODE_D;
+        case KeyboardKey::E:
+            return SDL_SCANCODE_E;
+        case KeyboardKey::F:
+            return SDL_SCANCODE_F;
+        case KeyboardKey::G:
+            return SDL_SCANCODE_G;
+        case KeyboardKey::H:
+            return SDL_SCANCODE_H;
+        case KeyboardKey::I:
+            return SDL_SCANCODE_I;
+        case KeyboardKey::J:
+            return SDL_SCANCODE_J;
+        case KeyboardKey::K:
+            return SDL_SCANCODE_K;
+        case KeyboardKey::L:
+            return SDL_SCANCODE_L;
+        case KeyboardKey::M:
+            return SDL_SCANCODE_M;
+        case KeyboardKey::N:
+            return SDL_SCANCODE_N;
+        case KeyboardKey::O:
+            return SDL_SCANCODE_O;
+        case KeyboardKey::P:
+            return SDL_SCANCODE_P;
+        case KeyboardKey::Q:
+            return SDL_SCANCODE_Q;
+        case KeyboardKey::R:
+            return SDL_SCANCODE_R;
+        case KeyboardKey::S:
+            return SDL_SCANCODE_S;
+        case KeyboardKey::T:
+            return SDL_SCANCODE_T;
+        case KeyboardKey::U:
+            return SDL_SCANCODE_U;
+        case KeyboardKey::V:
+            return SDL_SCANCODE_V;
+        case KeyboardKey::W:
+            return SDL_SCANCODE_W;
+        case KeyboardKey::X:
+            return SDL_SCANCODE_X;
+        case KeyboardKey::Y:
+            return SDL_SCANCODE_Y;
+        case KeyboardKey::Z:
+            return SDL_SCANCODE_Z;
+        case KeyboardKey::DIGIT_1:
+            return SDL_SCANCODE_1;
+        case KeyboardKey::DIGIT_2:
+            return SDL_SCANCODE_2;
+        case KeyboardKey::DIGIT_3:
+            return SDL_SCANCODE_3;
+        case KeyboardKey::DIGIT_4:
+            return SDL_SCANCODE_4;
+        case KeyboardKey::DIGIT_5:
+            return SDL_SCANCODE_5;
+        case KeyboardKey::DIGIT_6:
+            return SDL_SCANCODE_6;
+        case KeyboardKey::DIGIT_7:
+            return SDL_SCANCODE_7;
+        case KeyboardKey::DIGIT_8:
+            return SDL_SCANCODE_8;
+        case KeyboardKey::DIGIT_9:
+            return SDL_SCANCODE_9;
+        case KeyboardKey::DIGIT_0:
+            return SDL_SCANCODE_0;
+        case KeyboardKey::Return:
+            return SDL_SCANCODE_RETURN;
+        case KeyboardKey::Escape:
+            return SDL_SCANCODE_ESCAPE;
+        case KeyboardKey::Backspace:
+            return SDL_SCANCODE_BACKSPACE;
+        case KeyboardKey::Tab:
+            return SDL_SCANCODE_TAB;
+        case KeyboardKey::Space:
+            return SDL_SCANCODE_SPACE;
+        case KeyboardKey::F1:
+            return SDL_SCANCODE_F1;
+        case KeyboardKey::F2:
+            return SDL_SCANCODE_F2;
+        case KeyboardKey::F3:
+            return SDL_SCANCODE_F3;
+        case KeyboardKey::F4:
+            return SDL_SCANCODE_F4;
+        case KeyboardKey::F5:
+            return SDL_SCANCODE_F5;
+        case KeyboardKey::F6:
+            return SDL_SCANCODE_F6;
+        case KeyboardKey::F7:
+            return SDL_SCANCODE_F7;
+        case KeyboardKey::F8:
+            return SDL_SCANCODE_F8;
+        case KeyboardKey::F9:
+            return SDL_SCANCODE_F9;
+        case KeyboardKey::F10:
+            return SDL_SCANCODE_F10;
+        case KeyboardKey::F11:
+            return SDL_SCANCODE_F11;
+        case KeyboardKey::F12:
+            return SDL_SCANCODE_F2;
+        case KeyboardKey::Right:
+            return SDL_SCANCODE_RIGHT;
+        case KeyboardKey::Left:
+            return SDL_SCANCODE_LEFT;
+        case KeyboardKey::Down:
+            return SDL_SCANCODE_DOWN;
+        case KeyboardKey::Up:
+            return SDL_SCANCODE_UP;
+
+        default:
+            return SDL_SCANCODE_UNKNOWN;
+    }
 }
 
 KeyboardKey EventManager::getPhysicalKey(int scanCode) const

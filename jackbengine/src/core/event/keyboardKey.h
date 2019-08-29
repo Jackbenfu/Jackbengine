@@ -76,6 +76,8 @@ enum class KeyboardKey
     Left = 55,
     Down = 56,
     Up = 57,
+
+    KeyboardKeyCount = 64,
 };
 
 }

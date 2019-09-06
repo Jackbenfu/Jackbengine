@@ -14,19 +14,31 @@
 #include "keyboardKey.h"
 #include "mouseButton.h"
 
-namespace Jackbengine::details {
+namespace Jackbengine {
+
+class Application;
+
+namespace details {
 
 class EventManager
 {
-    friend class Application;
+    friend class Jackbengine::Application;
 
 public:
     explicit EventManager(std::function<void(Event &)> callback);
     ~EventManager() = default;
 
-    void update();
+    [[nodiscard]] bool isKeyDown(KeyboardKey key) const;
+    [[nodiscard]] bool isKeyUp(KeyboardKey key) const;
+    [[nodiscard]] bool isKeyPress(KeyboardKey key) const;
+
+    [[nodiscard]] bool isMouseDown(MouseButton button) const;
+    [[nodiscard]] bool isMouseUp(MouseButton button) const;
+    [[nodiscard]] bool isMouseClick(MouseButton button) const;
 
 private:
+    void update();
+
     void handleKeyDown(const SDL_Keysym &keysym);
     void handleKeyDownRepeat(KeyboardKey key);
     void handleKeyUp(const SDL_Keysym &keysym);
@@ -45,13 +57,16 @@ private:
     std::vector<bool> m_keyDown = std::vector<bool>((int) KeyboardKey::KeyboardKeyCount, false);
     std::vector<bool> m_keyDownOnFrame = std::vector<bool>((int) KeyboardKey::KeyboardKeyCount, false);
     std::vector<int> m_keyDownRepeat = std::vector<int>((int) KeyboardKey::KeyboardKeyCount, 0);
+    std::vector<int> m_keyPress = std::vector<int>((int) KeyboardKey::KeyboardKeyCount, 0);
 
     const unsigned int MaxMouseButtons {4};
     std::vector<bool> m_mouseDown = std::vector<bool>(MaxMouseButtons, false);
     std::vector<bool> m_mouseDownOnFrame = std::vector<bool>(MaxMouseButtons, false);
     std::vector<int> m_mouseDownRepeat = std::vector<int>(MaxMouseButtons, 0);
+    std::vector<int> m_mouseClick = std::vector<int>(MaxMouseButtons, 0);
 };
 
+}
 }
 
 #endif // __EVENT_MANAGER_H__

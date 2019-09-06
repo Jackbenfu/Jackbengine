@@ -16,14 +16,46 @@ EventManager::EventManager(std::function<void(Event &)> callback)
 {
 }
 
+bool EventManager::isKeyDown(KeyboardKey key) const
+{
+    return m_keyDown[(int) key];
+}
+
+bool EventManager::isKeyUp(KeyboardKey key) const
+{
+    return !m_keyDown[(int) key];
+}
+
+bool EventManager::isKeyPress(KeyboardKey key) const
+{
+    return m_keyPress[(int) key];
+}
+
+bool EventManager::isMouseDown(MouseButton button) const
+{
+    return m_mouseDown[(int) button];
+}
+
+bool EventManager::isMouseUp(MouseButton button) const
+{
+    return !m_mouseDown[(int) button];
+}
+
+bool EventManager::isMouseClick(MouseButton button) const
+{
+    return m_mouseClick[(int) button];
+}
+
 void EventManager::update()
 {
     int mouseX;
     int mouseY;
     SDL_GetMouseState(&mouseX, &mouseY);
 
-    std::fill(m_mouseDownOnFrame.begin(), m_mouseDownOnFrame.end(), false);
     std::fill(m_keyDownOnFrame.begin(), m_keyDownOnFrame.end(), false);
+    std::fill(m_keyPress.begin(), m_keyPress.end(), false);
+    std::fill(m_mouseDownOnFrame.begin(), m_mouseDownOnFrame.end(), false);
+    std::fill(m_mouseClick.begin(), m_mouseClick.end(), false);
 
     SDL_Event event {};
     while (SDL_PollEvent(&event) > 0)
@@ -143,6 +175,8 @@ void EventManager::handleKeyUp(const SDL_Keysym &keysym)
     {
         KeyPressEvent ePress {physicalKey, virtualKey};
         m_callback(ePress);
+
+        m_keyPress[(int) physicalKey] = true;
     }
 
     m_keyDown[(int) physicalKey] = false;
@@ -188,6 +222,8 @@ void EventManager::handleMouseUp(const SDL_MouseButtonEvent &event, int button, 
 
     if (m_mouseDown[button])
     {
+        m_mouseClick[(int) b] = true;
+
         MouseClickEvent eClick {mouseX, mouseY, b};
         m_callback(eClick);
     }

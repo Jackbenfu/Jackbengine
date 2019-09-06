@@ -30,6 +30,7 @@ set(SOURCE_FILES
         src/core/audio/sound.cpp
         src/core/event/eventManager.cpp
         src/core/io/rwops.cpp
+        src/core/layer/layer.cpp
         src/core/log/log.cpp
         src/core/render/color.cpp
         src/core/render/cursor/cursor.cpp

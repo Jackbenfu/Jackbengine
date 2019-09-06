@@ -21,7 +21,9 @@
 namespace Jackbengine {
 
 namespace details {
+
 class ApplicationWrapper;
+
 }
 
 class Application

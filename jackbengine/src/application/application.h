@@ -47,11 +47,9 @@ private:
     bool onApplicationCloseEvent(const ApplicationCloseEvent &e);
     bool onKeyDownEvent(const KeyDownEvent &e);
     bool onKeyUpEvent(const KeyUpEvent &e);
-    bool onKeyPressEvent(const KeyPressEvent &e);
     bool onMouseMotionEvent(const MouseMotionEvent &e);
     bool onMouseDownEvent(const MouseDownEvent &e);
     bool onMouseUpEvent(const MouseUpEvent &e);
-    bool onMouseClickEvent(const MouseClickEvent &e);
 
     std::unique_ptr<Timer> m_timer;
     std::unique_ptr<Cursor> m_cursor;

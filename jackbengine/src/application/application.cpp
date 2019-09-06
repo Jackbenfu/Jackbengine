@@ -99,11 +99,9 @@ void Application::onEvent(Event &e)
     dispatcher.dispatch<ApplicationCloseEvent>(BIND_EVENT_CALLBACK(onApplicationCloseEvent));
     dispatcher.dispatch<KeyDownEvent>(BIND_EVENT_CALLBACK(onKeyDownEvent));
     dispatcher.dispatch<KeyUpEvent>(BIND_EVENT_CALLBACK(onKeyUpEvent));
-    dispatcher.dispatch<KeyPressEvent>(BIND_EVENT_CALLBACK(onKeyPressEvent));
     dispatcher.dispatch<MouseMotionEvent>(BIND_EVENT_CALLBACK(onMouseMotionEvent));
     dispatcher.dispatch<MouseDownEvent>(BIND_EVENT_CALLBACK(onMouseDownEvent));
     dispatcher.dispatch<MouseUpEvent>(BIND_EVENT_CALLBACK(onMouseUpEvent));
-    dispatcher.dispatch<MouseClickEvent>(BIND_EVENT_CALLBACK(onMouseClickEvent));
 }
 
 bool Application::onApplicationCloseEvent(const ApplicationCloseEvent &)
@@ -122,11 +120,6 @@ bool Application::onKeyUpEvent(const KeyUpEvent &)
     return true;
 }
 
-bool Application::onKeyPressEvent(const KeyPressEvent &)
-{
-    return true;
-}
-
 bool Application::onMouseMotionEvent(const MouseMotionEvent &)
 {
     return true;
@@ -138,11 +131,6 @@ bool Application::onMouseDownEvent(const MouseDownEvent &)
 }
 
 bool Application::onMouseUpEvent(const MouseUpEvent &)
-{
-    return true;
-}
-
-bool Application::onMouseClickEvent(const MouseClickEvent &)
 {
     return true;
 }

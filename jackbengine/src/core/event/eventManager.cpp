@@ -26,7 +26,7 @@ bool EventManager::isKeyUp(KeyboardKey key) const
     return !m_keyDown[(int) key];
 }
 
-bool EventManager::isKeyPress(KeyboardKey key) const
+bool EventManager::isKeyPressed(KeyboardKey key) const
 {
     return m_keyPress[(int) key];
 }
@@ -41,7 +41,7 @@ bool EventManager::isMouseUp(MouseButton button) const
     return !m_mouseDown[(int) button];
 }
 
-bool EventManager::isMouseClick(MouseButton button) const
+bool EventManager::isMouseClicked(MouseButton button) const
 {
     return m_mouseClick[(int) button];
 }
@@ -173,9 +173,6 @@ void EventManager::handleKeyUp(const SDL_Keysym &keysym)
 
     if (m_keyDown[(int) physicalKey])
     {
-        KeyPressEvent ePress {physicalKey, virtualKey};
-        m_callback(ePress);
-
         m_keyPress[(int) physicalKey] = true;
     }
 
@@ -223,9 +220,6 @@ void EventManager::handleMouseUp(const SDL_MouseButtonEvent &event, int button, 
     if (m_mouseDown[button])
     {
         m_mouseClick[(int) b] = true;
-
-        MouseClickEvent eClick {mouseX, mouseY, b};
-        m_callback(eClick);
     }
 
     m_mouseDown[button] = false;

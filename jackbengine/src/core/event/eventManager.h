@@ -30,11 +30,11 @@ public:
 
     [[nodiscard]] bool isKeyDown(KeyboardKey key) const;
     [[nodiscard]] bool isKeyUp(KeyboardKey key) const;
-    [[nodiscard]] bool isKeyPress(KeyboardKey key) const;
+    [[nodiscard]] bool isKeyPressed(KeyboardKey key) const;
 
     [[nodiscard]] bool isMouseDown(MouseButton button) const;
     [[nodiscard]] bool isMouseUp(MouseButton button) const;
-    [[nodiscard]] bool isMouseClick(MouseButton button) const;
+    [[nodiscard]] bool isMouseClicked(MouseButton button) const;
 
 private:
     void update();

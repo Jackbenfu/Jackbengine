@@ -8,8 +8,9 @@
 
 #include "sound.h"
 #include "core/io/rwops.h"
+#include "core/sdl/sdlinc.h"
 
-namespace Jackbengine {
+namespace Jackbengine::details {
 
 Sound::Sound(const std::string &file)
 {

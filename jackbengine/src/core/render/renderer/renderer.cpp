@@ -8,9 +8,9 @@
 
 #include "renderer.h"
 #include "core/render/texture/texture.h"
-#include "core/sdl/sdl.h"
+#include "core/sdl/sdlinc.h"
 
-namespace Jackbengine {
+namespace Jackbengine::details {
 
 Renderer::Renderer(const Window &window)
 {

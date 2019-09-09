@@ -9,9 +9,11 @@
 #ifndef __FONT_H__
 #define __FONT_H__
 
-#include "core/sdl/sdl.h"
+#include <string>
 
-namespace Jackbengine {
+typedef struct _TTF_Font TTF_Font;
+
+namespace Jackbengine::details {
 
 class Font
 {
@@ -23,13 +25,13 @@ public:
 
     ~Font();
 
-    void glyphMetrics(ushort glyph, int *minX, int *maxX, int *minY, int *maxY, int *advance) const;
+    void glyphMetrics(unsigned short glyph, int *minX, int *maxX, int *minY, int *maxY, int *advance) const;
 
-    void glyphMinX(ushort glyph, int *minX) const;
-    void glyphMaxX(ushort glyph, int *maxX) const;
-    void glyphMinY(ushort glyph, int *minY) const;
-    void glyphMaxY(ushort glyph, int *maxY) const;
-    void glyphAdvance(ushort glyph, int *advance) const;
+    void glyphMinX(unsigned short glyph, int *minX) const;
+    void glyphMaxX(unsigned short glyph, int *maxX) const;
+    void glyphMinY(unsigned short glyph, int *minY) const;
+    void glyphMaxY(unsigned short glyph, int *maxY) const;
+    void glyphAdvance(unsigned short glyph, int *advance) const;
 
     [[nodiscard]] int ascent() const;
     [[nodiscard]] int descent() const;

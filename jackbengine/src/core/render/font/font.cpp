@@ -7,9 +7,10 @@
 //
 
 #include "font.h"
+#include "core/sdl/sdlinc.h"
 #include "core/io/rwops.h"
 
-namespace Jackbengine {
+namespace Jackbengine::details {
 
 Font::Font(const std::string &file, int size)
 {
@@ -36,7 +37,7 @@ Font::~Font()
     TTF_CloseFont(m_font);
 }
 
-void Font::glyphMetrics(ushort glyph, int *minX, int *maxX, int *minY, int *maxY, int *advance) const
+void Font::glyphMetrics(unsigned short glyph, int *minX, int *maxX, int *minY, int *maxY, int *advance) const
 {
     if (TTF_GlyphMetrics(m_font, glyph, minX, maxX, minY, maxY, advance) < 0)
     {
@@ -44,7 +45,7 @@ void Font::glyphMetrics(ushort glyph, int *minX, int *maxX, int *minY, int *maxY
     }
 }
 
-void Font::glyphMinX(ushort glyph, int *minX) const
+void Font::glyphMinX(unsigned short glyph, int *minX) const
 {
     int maxX;
     int minY;
@@ -54,7 +55,7 @@ void Font::glyphMinX(ushort glyph, int *minX) const
     glyphMetrics(glyph, minX, &maxX, &minY, &maxY, &advance);
 }
 
-void Font::glyphMaxX(ushort glyph, int *maxX) const
+void Font::glyphMaxX(unsigned short glyph, int *maxX) const
 {
     int minX;
     int minY;
@@ -64,7 +65,7 @@ void Font::glyphMaxX(ushort glyph, int *maxX) const
     return glyphMetrics(glyph, &minX, maxX, &minY, &maxY, &advance);
 }
 
-void Font::glyphMinY(ushort glyph, int *minY) const
+void Font::glyphMinY(unsigned short glyph, int *minY) const
 {
     int minX;
     int maxX;
@@ -74,7 +75,7 @@ void Font::glyphMinY(ushort glyph, int *minY) const
     return glyphMetrics(glyph, &minX, &maxX, minY, &maxY, &advance);
 }
 
-void Font::glyphMaxY(ushort glyph, int *maxY) const
+void Font::glyphMaxY(unsigned short glyph, int *maxY) const
 {
     int minX;
     int maxX;
@@ -84,7 +85,7 @@ void Font::glyphMaxY(ushort glyph, int *maxY) const
     return glyphMetrics(glyph, &minX, &maxX, &minY, maxY, &advance);
 }
 
-void Font::glyphAdvance(ushort glyph, int *advance) const
+void Font::glyphAdvance(unsigned short glyph, int *advance) const
 {
     int minX;
     int maxX;

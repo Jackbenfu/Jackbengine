@@ -12,9 +12,10 @@
 #include "core/render/surface/surface.h"
 #include "core/render/color.h"
 #include "core/render/font/font.h"
-#include "core/sdl/sdl.h"
 
-namespace Jackbengine {
+typedef struct SDL_Texture SDL_Texture;
+
+namespace Jackbengine::details {
 
 class Renderer;
 
@@ -37,7 +38,8 @@ private:
     void loadTextureFromSurface(const Renderer &renderer, const Surface &surface);
 
     SDL_Texture *m_texture {nullptr};
-    SDL_Rect m_rect {0, 0, 0, 0};
+    int m_width {0};
+    int m_height {0};
 };
 
 }

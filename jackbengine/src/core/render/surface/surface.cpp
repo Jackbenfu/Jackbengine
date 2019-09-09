@@ -6,10 +6,12 @@
 // Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
-#include "surface.h"
-#include "core/sdl/sdl.h"
+#include <stdexcept>
 
-namespace Jackbengine {
+#include "surface.h"
+#include "core/sdl/sdlinc.h"
+
+namespace Jackbengine::details {
 
 Surface::Surface(const std::string &file)
 {

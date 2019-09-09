@@ -10,13 +10,13 @@
 #define __KEY_EVENT_H__
 
 #include "core/event/event.h"
-#include "spdlog/fmt/fmt.h"
+#include "core/event/keyboardKey.h"
 
-namespace Jackbengine {
+namespace Jackbengine::details {
 
 class KeyEvent : public Event
 {
-public:
+protected:
     KeyEvent(KeyboardKey physicalKey, KeyboardKey virtualKey)
         : m_physicalKey {physicalKey}, m_virtualKey {virtualKey}
     {}
@@ -32,10 +32,7 @@ public:
     }
 
 protected:
-    [[nodiscard]] std::string keys() const
-    {
-        return fmt::format("physicalKey={}, virtualKey={}", (int) physicalKey(), (int) virtualKey());
-    }
+    [[nodiscard]] std::string keys() const;
 
 private:
     KeyboardKey m_physicalKey;

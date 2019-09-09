@@ -1,17 +1,17 @@
 cmake_minimum_required(VERSION 3.14)
 project(jackbengine)
 
-set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
-
-include(cotire)
-
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wpedantic")
+set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
+
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
     add_definitions(/D__DEBUG__)
 elseif (CMAKE_BUILD_TYPE STREQUAL "ReleaseProfile")
     add_definitions(/D__PROFILE__)
 endif ()
+
+add_subdirectory(${PROJECT_SOURCE_DIR}/external/imgui)
 
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
@@ -29,9 +29,16 @@ include_directories(
 set(SOURCE_FILES
         src/core/audio/sound.cpp
         src/core/event/eventManager.cpp
+        src/core/event/impl/keyEvent.cpp
+        src/core/event/impl/keyDownEvent.cpp
+        src/core/event/impl/keyUpEvent.cpp
+        src/core/event/impl/mouseMotionEvent.cpp
+        src/core/event/impl/mouseDownEvent.cpp
+        src/core/event/impl/mouseUpEvent.cpp
         src/core/io/rwops.cpp
         src/core/layer/layer.cpp
         src/core/log/log.cpp
+        src/core/log/profile.cpp
         src/core/render/color.cpp
         src/core/render/cursor/cursor.cpp
         src/core/render/font/defaultFont.cpp
@@ -42,8 +49,8 @@ set(SOURCE_FILES
         src/core/render/window/window.cpp
         src/core/time/timer.cpp
         src/application/application.cpp
-        src/application/entryPoint.cpp)
+        src/application/entryPoint.cpp
+        )
 
 add_library(jackbengine STATIC ${SOURCE_FILES})
-target_link_libraries(jackbengine ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARY} ${SDL2_TTF_LIBRARY} ${SDL2_MIXER_LIBRARY})
-cotire(jackbengine)
+target_link_libraries(jackbengine ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARY} ${SDL2_TTF_LIBRARY} ${SDL2_MIXER_LIBRARY} imgui)

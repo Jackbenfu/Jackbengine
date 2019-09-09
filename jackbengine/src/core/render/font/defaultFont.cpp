@@ -9,6 +9,8 @@
 // Original font: Volter (Goldfish) by cocoFabien
 // http://www.dafont.com/fr/volter-goldfish.font
 
+#include <cstddef>
+
 extern "C" const unsigned char default_font[] =
 {
     0x00, 0x01, 0x00, 0x00, 0x00, 0x11, 0x01, 0x00, 0x00, 0x04,

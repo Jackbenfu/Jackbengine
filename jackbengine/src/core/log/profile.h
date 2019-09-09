@@ -9,6 +9,8 @@
 #ifndef __PROFILE_H__
 #define __PROFILE_H__
 
+#include <chrono>
+
 #include "log.h"
 
 namespace Jackbengine {
@@ -18,20 +20,8 @@ class Profile
     using clock = std::chrono::high_resolution_clock;
 
 public:
-    explicit Profile(const char *name)
-        : m_name {name},
-          m_start {clock::now()}
-    {}
-
-    ~Profile()
-    {
-        auto start = std::chrono::time_point_cast<std::chrono::microseconds>(m_start).time_since_epoch().count();
-        auto end = std::chrono::time_point_cast<std::chrono::microseconds>(clock::now()).time_since_epoch().count();
-        auto us = end - start;
-        auto ms = us * .001;
-
-        Jackbengine::Log::getLogger()->trace(fmt::format("PROFILE {:<30} {}ms ({}μs)", m_name, ms, us));
-    }
+    explicit Profile(const char *name);
+    ~Profile();
 
 private:
     const char *m_name;

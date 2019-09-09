@@ -9,6 +9,8 @@
 #ifndef __EVENT_H__
 #define __EVENT_H__
 
+#include <string>
+
 namespace Jackbengine {
 
 enum class EventType
@@ -27,6 +29,8 @@ enum class EventType
                                 inline virtual EventType eventType() const override { return staticType(); }
 
 #define BIND_EVENT_CALLBACK(func) std::bind(&Application::func, this, std::placeholders::_1)
+
+namespace details {
 
 class Event
 {
@@ -60,6 +64,7 @@ private:
     Event &m_event;
 };
 
+}
 }
 
 #endif // __EVENT_H__

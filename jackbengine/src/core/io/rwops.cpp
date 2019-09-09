@@ -6,10 +6,12 @@
 // Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
-#include "rwops.h"
-#include "core/sdl/sdl.h"
+#include <stdexcept>
 
-namespace Jackbengine {
+#include "rwops.h"
+#include "core/sdl/sdlinc.h"
+
+namespace Jackbengine::details {
 
 RWops::RWops(const void *data, size_t dataSize)
 {

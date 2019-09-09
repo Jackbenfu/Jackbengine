@@ -43,7 +43,7 @@ private:
     void frame();
     void userFrame(float delta);
 
-    void onEvent(Event &e);
+    void onEvent(details::Event &e);
     bool onApplicationCloseEvent(const ApplicationCloseEvent &e);
     bool onKeyDownEvent(const KeyDownEvent &e);
     bool onKeyUpEvent(const KeyUpEvent &e);
@@ -51,10 +51,10 @@ private:
     bool onMouseDownEvent(const MouseDownEvent &e);
     bool onMouseUpEvent(const MouseUpEvent &e);
 
-    std::unique_ptr<Timer> m_timer;
-    std::unique_ptr<Cursor> m_cursor;
-    std::unique_ptr<Window> m_window;
-    std::unique_ptr<Renderer> m_renderer;
+    std::unique_ptr<details::Timer> m_timer;
+    std::unique_ptr<details::Cursor> m_cursor;
+    std::unique_ptr<details::Window> m_window;
+    std::unique_ptr<details::Renderer> m_renderer;
     std::unique_ptr<details::EventManager> m_eventManager;
 
     bool m_running {true};

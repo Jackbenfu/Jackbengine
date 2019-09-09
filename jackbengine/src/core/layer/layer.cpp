@@ -8,7 +8,7 @@
 
 #include "layer.h"
 
-namespace Jackbengine {
+namespace Jackbengine::details {
 
 Layer::Layer(const std::string &name)
     : m_name {name}

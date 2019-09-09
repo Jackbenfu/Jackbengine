@@ -9,9 +9,11 @@
 #ifndef __WINDOW_H__
 #define __WINDOW_H__
 
-#include "core/sdl/sdl.h"
+#include <string>
 
-namespace Jackbengine {
+typedef struct SDL_Window SDL_Window;
+
+namespace Jackbengine::details {
 
 class Window
 {

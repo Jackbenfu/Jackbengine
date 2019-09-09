@@ -9,9 +9,9 @@
 #ifndef __CURSOR_H__
 #define __CURSOR_H__
 
-#include "core/sdl/sdl.h"
+typedef struct SDL_Cursor SDL_Cursor;
 
-namespace Jackbengine {
+namespace Jackbengine::details {
 
 enum class CursorType
 {

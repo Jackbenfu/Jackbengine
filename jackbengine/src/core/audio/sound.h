@@ -10,9 +10,10 @@
 #define __SOUND_H__
 
 #include <string>
-#include "core/sdl/sdl.h"
 
-namespace Jackbengine {
+struct Mix_Chunk;
+
+namespace Jackbengine::details {
 
 class Sound
 {

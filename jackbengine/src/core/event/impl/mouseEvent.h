@@ -11,7 +11,7 @@
 
 #include "core/event/event.h"
 
-namespace Jackbengine {
+namespace Jackbengine::details {
 
 class MouseEvent : public Event
 {
@@ -20,12 +20,12 @@ public:
         : m_x {x}, m_y {y}
     {}
 
-    inline int x() const
+    [[nodiscard]] inline int x() const
     {
         return m_x;
     }
 
-    inline int y() const
+    [[nodiscard]] inline int y() const
     {
         return m_y;
     }

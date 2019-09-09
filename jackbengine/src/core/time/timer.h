@@ -9,7 +9,7 @@
 #ifndef __TIMER_H__
 #define __TIMER_H__
 
-namespace Jackbengine {
+namespace Jackbengine::details {
 
 class Timer
 {

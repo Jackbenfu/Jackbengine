@@ -9,7 +9,9 @@
 #ifndef __RWOPS_H__
 #define __RWOPS_H__
 
-namespace Jackbengine {
+#include <cstddef>
+
+namespace Jackbengine::details {
 
 class RWops
 {

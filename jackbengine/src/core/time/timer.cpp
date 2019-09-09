@@ -7,9 +7,9 @@
 //
 
 #include "timer.h"
-#include "core/sdl/sdl.h"
+#include "core/sdl/sdlinc.h"
 
-namespace Jackbengine {
+namespace Jackbengine::details {
 
 Timer::Timer(unsigned int fps)
 {

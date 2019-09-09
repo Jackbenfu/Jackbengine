@@ -7,6 +7,7 @@
 //
 
 #include "eventManager.h"
+#include "core/sdl/sdlinc.h"
 #include "impl/eventImpl.h"
 
 namespace Jackbengine::details {
@@ -139,7 +140,7 @@ void EventManager::handleKeyDown(const SDL_Keysym &keysym)
 
 void EventManager::handleKeyDownRepeat(KeyboardKey key)
 {
-    const auto scanCode = getScanCode(key);
+    const auto scanCode = (SDL_Scancode) getScanCode(key);
     if (SDL_SCANCODE_UNKNOWN == scanCode)
     {
         return;
@@ -177,6 +178,7 @@ void EventManager::handleKeyUp(const SDL_Keysym &keysym)
     }
 
     m_keyDown[(int) physicalKey] = false;
+    m_keyDownRepeat[(int) physicalKey] = 0;
 }
 
 void EventManager::handleMouseDown(const SDL_MouseButtonEvent &event, int button, int mouseX, int mouseY)
@@ -226,7 +228,7 @@ void EventManager::handleMouseUp(const SDL_MouseButtonEvent &event, int button, 
     m_mouseDownRepeat[button] = 0;
 }
 
-SDL_Scancode EventManager::getScanCode(Jackbengine::KeyboardKey key) const
+int EventManager::getScanCode(Jackbengine::KeyboardKey key) const
 {
     switch (key)
     {

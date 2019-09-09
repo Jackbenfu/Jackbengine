@@ -9,10 +9,14 @@
 #ifndef __EVENT_MANAGER_H__
 #define __EVENT_MANAGER_H__
 
+#include <vector>
+
 #include "core/event/event.h"
-#include "core/sdl/sdl.h"
 #include "keyboardKey.h"
 #include "mouseButton.h"
+
+struct SDL_Keysym;
+typedef struct SDL_MouseButtonEvent SDL_MouseButtonEvent;
 
 namespace Jackbengine {
 
@@ -47,7 +51,7 @@ private:
     void handleMouseDownRepeat(int button, int mouseX, int mouseY);
     void handleMouseUp(const SDL_MouseButtonEvent &event, int button, int mouseX, int mouseY);
 
-    [[nodiscard]] SDL_Scancode getScanCode(KeyboardKey key) const;
+    [[nodiscard]] int getScanCode(KeyboardKey key) const;
     [[nodiscard]] KeyboardKey getPhysicalKey(int scanCode) const;
     [[nodiscard]] KeyboardKey getVirtualKey(int sym) const;
     [[nodiscard]] MouseButton getButton(int button) const;
@@ -57,13 +61,13 @@ private:
     std::vector<bool> m_keyDown = std::vector<bool>((int) KeyboardKey::KeyboardKeyCount, false);
     std::vector<bool> m_keyDownOnFrame = std::vector<bool>((int) KeyboardKey::KeyboardKeyCount, false);
     std::vector<int> m_keyDownRepeat = std::vector<int>((int) KeyboardKey::KeyboardKeyCount, 0);
-    std::vector<int> m_keyPress = std::vector<int>((int) KeyboardKey::KeyboardKeyCount, 0);
+    std::vector<int> m_keyPress = std::vector<int>((int) KeyboardKey::KeyboardKeyCount, false);
 
     const unsigned int MaxMouseButtons {4};
     std::vector<bool> m_mouseDown = std::vector<bool>(MaxMouseButtons, false);
     std::vector<bool> m_mouseDownOnFrame = std::vector<bool>(MaxMouseButtons, false);
     std::vector<int> m_mouseDownRepeat = std::vector<int>(MaxMouseButtons, 0);
-    std::vector<int> m_mouseClick = std::vector<int>(MaxMouseButtons, 0);
+    std::vector<int> m_mouseClick = std::vector<int>(MaxMouseButtons, false);
 };
 
 }

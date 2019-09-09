@@ -13,7 +13,7 @@
 
 namespace Jackbengine {
 
-class KeyDownEvent : public KeyEvent
+class KeyDownEvent : public details::KeyEvent
 {
 public:
     EVENT_CLASS_TYPE(EventType::KeyDown)
@@ -23,10 +23,7 @@ public:
           m_repeat {repeat}
     {}
 
-    [[nodiscard]] std::string toString() const override
-    {
-        return fmt::format("KeyDownEvent: {}, repeat={}", keys(), m_repeat);
-    }
+    [[nodiscard]] std::string toString() const override;
 
 private:
     int m_repeat;

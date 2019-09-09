@@ -12,7 +12,7 @@
 #include "common/common.h"
 #include "orderableItem.h"
 
-namespace Jackbengine {
+namespace Jackbengine::details {
 
 template<typename TBase>
 class OrderedHeterogeneousCollection

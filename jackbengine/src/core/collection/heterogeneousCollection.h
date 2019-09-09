@@ -11,7 +11,7 @@
 
 #include "common/common.h"
 
-namespace Jackbengine {
+namespace Jackbengine::details {
 
 template<typename TBase>
 class HeterogeneousCollection

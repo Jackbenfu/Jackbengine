@@ -9,7 +9,9 @@
 #ifndef __LAYER_H__
 #define __LAYER_H__
 
-namespace Jackbengine {
+#include <string>
+
+namespace Jackbengine::details {
 
 class Layer
 {

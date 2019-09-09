@@ -13,7 +13,7 @@
 
 namespace Jackbengine {
 
-class MouseMotionEvent : public MouseEvent
+class MouseMotionEvent : public details::MouseEvent
 {
 public:
     EVENT_CLASS_TYPE(EventType::MouseMotion)
@@ -22,10 +22,7 @@ public:
         : MouseEvent {x, y}
     {}
 
-    [[nodiscard]] std::string toString() const override
-    {
-        return fmt::format("MouseMotionEvent: x={}, y={}", x(), y());
-    }
+    [[nodiscard]] std::string toString() const override;
 };
 
 }

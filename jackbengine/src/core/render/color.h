@@ -9,7 +9,7 @@
 #ifndef __COLOR_H__
 #define __COLOR_H__
 
-namespace Jackbengine {
+namespace Jackbengine::details {
 
 struct Color
 {

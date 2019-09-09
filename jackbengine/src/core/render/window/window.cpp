@@ -7,8 +7,9 @@
 //
 
 #include "window.h"
+#include "core/sdl/sdlinc.h"
 
-namespace Jackbengine {
+namespace Jackbengine::details {
 
 Window::Window(const std::string &title, int width, int height, bool fullscreen)
 {

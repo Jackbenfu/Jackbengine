@@ -9,6 +9,8 @@
 #ifndef __VECTOR2D_H__
 #define __VECTOR2D_H__
 
+#include <cmath>
+
 namespace Jackbengine {
 
 template<typename T>

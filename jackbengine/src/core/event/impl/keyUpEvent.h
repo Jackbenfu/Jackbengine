@@ -13,7 +13,7 @@
 
 namespace Jackbengine {
 
-class KeyUpEvent : public KeyEvent
+class KeyUpEvent : public details::KeyEvent
 {
 public:
     EVENT_CLASS_TYPE(EventType::KeyUp)
@@ -22,10 +22,7 @@ public:
         : KeyEvent {physicalKey, virtualKey}
     {}
 
-    [[nodiscard]] std::string toString() const override
-    {
-        return fmt::format("KeyUpEvent: {}", keys());
-    }
+    [[nodiscard]] std::string toString() const override;
 };
 
 }

@@ -7,8 +7,9 @@
 //
 
 #include "cursor.h"
+#include "core/sdl/sdlinc.h"
 
-namespace Jackbengine {
+namespace Jackbengine::details {
 
 Cursor::~Cursor()
 {

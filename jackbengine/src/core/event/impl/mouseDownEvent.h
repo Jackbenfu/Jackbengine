@@ -14,7 +14,7 @@
 
 namespace Jackbengine {
 
-class MouseDownEvent : public MouseEvent
+class MouseDownEvent : public details::MouseEvent
 {
 public:
     EVENT_CLASS_TYPE(EventType::MouseDown)
@@ -25,10 +25,7 @@ public:
           m_repeat {repeat}
     {}
 
-    [[nodiscard]] std::string toString() const override
-    {
-        return fmt::format("MouseDownEvent: x={}, y={}, button={}, repeat={}", x(), y(), (int) m_button, m_repeat);
-    }
+    [[nodiscard]] std::string toString() const override;
 
 private:
     MouseButton m_button;

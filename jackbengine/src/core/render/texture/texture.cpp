@@ -8,8 +8,9 @@
 
 #include "texture.h"
 #include "core/render/renderer/renderer.h"
+#include "core/sdl/sdlinc.h"
 
-namespace Jackbengine {
+namespace Jackbengine::details {
 
 Texture::Texture(const Renderer &renderer, const std::string &file)
 {
@@ -54,12 +55,12 @@ Texture::~Texture()
 
 int Texture::width() const
 {
-    return m_rect.w;
+    return m_width;
 }
 
 int Texture::height() const
 {
-    return m_rect.h;
+    return m_height;
 }
 
 void Texture::loadTextureFromSurface(const Renderer &renderer, const Surface &surface)
@@ -72,7 +73,7 @@ void Texture::loadTextureFromSurface(const Renderer &renderer, const Surface &su
         throw std::runtime_error(SDL_GetError());
     }
 
-    if (SDL_QueryTexture(m_texture, nullptr, nullptr, &m_rect.w, &m_rect.h) < 0)
+    if (SDL_QueryTexture(m_texture, nullptr, nullptr, &m_width, &m_height) < 0)
     {
         throw std::runtime_error(SDL_GetError());
     }

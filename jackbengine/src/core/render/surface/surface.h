@@ -13,7 +13,7 @@
 #include "core/render/color.h"
 #include "core/io/rwops.h"
 
-namespace Jackbengine {
+namespace Jackbengine::details {
 
 class Surface
 {

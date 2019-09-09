@@ -8,7 +8,7 @@
 
 #include "color.h"
 
-namespace Jackbengine {
+namespace Jackbengine::details {
 
 Color::Color()
     : r(0),

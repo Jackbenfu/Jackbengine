@@ -8,6 +8,7 @@
 
 #include "application.h"
 #include "core/log/profile.h"
+#include "core/sdl/sdlinc.h"
 
 namespace Jackbengine {
 
@@ -43,11 +44,14 @@ Application::Application(ApplicationConfig &config)
             throw std::runtime_error(Mix_GetError());
         }
 
-        m_timer = std::make_unique<Timer>(config.core_fps);
-        m_cursor = std::make_unique<Cursor>();
-        m_window = std::make_unique<Window>(config.general_title, config.render_width, config.render_height, config.render_fullscreen);
-        m_renderer = std::make_unique<Renderer>(*m_window);
+        m_timer = std::make_unique<details::Timer>(config.core_fps);
+        m_cursor = std::make_unique<details::Cursor>();
+        m_window = std::make_unique<details::Window>(config.general_title, config.render_width, config.render_height, config.render_fullscreen);
+        m_renderer = std::make_unique<details::Renderer>(*m_window);
         m_eventManager = std::make_unique<details::EventManager>(BIND_EVENT_CALLBACK(onEvent));
+
+        //ImGui::CreateContext();
+        //ImGui::StyleColorsDark();
     }
 }
 
@@ -92,9 +96,9 @@ void Application::userFrame(float delta)
     }
 }
 
-void Application::onEvent(Event &e)
+void Application::onEvent(details::Event &e)
 {
-    EventDispatcher dispatcher(e);
+    details::EventDispatcher dispatcher(e);
 
     dispatcher.dispatch<ApplicationCloseEvent>(BIND_EVENT_CALLBACK(onApplicationCloseEvent));
     dispatcher.dispatch<KeyDownEvent>(BIND_EVENT_CALLBACK(onKeyDownEvent));

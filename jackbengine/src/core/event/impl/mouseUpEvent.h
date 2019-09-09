@@ -14,7 +14,7 @@
 
 namespace Jackbengine {
 
-class MouseUpEvent : public MouseEvent
+class MouseUpEvent : public details::MouseEvent
 {
 public:
     EVENT_CLASS_TYPE(EventType::MouseUp)
@@ -24,10 +24,7 @@ public:
           m_button {button}
     {}
 
-    [[nodiscard]] std::string toString() const override
-    {
-        return fmt::format("MouseUpEvent: x={}, y={}, button={}", x(), y(), (int) m_button);
-    }
+    [[nodiscard]] std::string toString() const override;
 
 private:
     MouseButton m_button;

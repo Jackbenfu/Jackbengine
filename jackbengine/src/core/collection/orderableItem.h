@@ -9,10 +9,14 @@
 #ifndef __ORDERABLE_ITEM_H__
 #define __ORDERABLE_ITEM_H__
 
+namespace Jackbengine::details {
+
 class OrderableItem
 {
 public:
     virtual int order() const = 0;
 };
+
+}
 
 #endif // __ORDERABLE_ITEM_H__

@@ -13,6 +13,8 @@
 #include "core/render/color.h"
 #include "core/io/rwops.h"
 
+typedef struct SDL_Surface SDL_Surface;
+
 namespace Jackbengine::details {
 
 class Surface
@@ -24,10 +26,10 @@ public:
     Surface(const Font &font, const std::string &text, Color foreground);
     ~Surface();
 
-    [[nodiscard]] void *nativeObject() const;
+    [[nodiscard]] SDL_Surface *nativeObject() const;
 
 private:
-    void *m_surface {nullptr};
+    SDL_Surface *m_surface {nullptr};
 };
 
 }

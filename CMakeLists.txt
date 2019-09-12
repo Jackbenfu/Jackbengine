@@ -13,13 +13,14 @@ endif ()
 add_subdirectory(${PROJECT_SOURCE_DIR}/jackbengine)
 
 include_directories(
-        ${PROJECT_SOURCE_DIR}/jackbengine/src
-        ${PROJECT_SOURCE_DIR}/jackbengine/external
+    ${PROJECT_SOURCE_DIR}/jackbengine/src
+    ${PROJECT_SOURCE_DIR}/jackbengine/external
 )
 
-set(SOURCE_FILES
-        sandbox/src/app.cpp
-        )
+set(
+    SOURCE_FILES
+    sandbox/src/app.cpp
+)
 
 add_executable(sandbox ${SOURCE_FILES})
 target_link_libraries(sandbox jackbengine)

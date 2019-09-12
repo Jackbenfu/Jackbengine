@@ -23,7 +23,7 @@ RWops::RWops(const void *data, size_t dataSize)
     }
 }
 
-void *RWops::nativeObject() const
+SDL_RWops *RWops::nativeObject() const
 {
     return m_rwops;
 }

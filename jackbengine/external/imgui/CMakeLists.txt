@@ -7,15 +7,20 @@ set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/../../cmake)
 
 find_package(SDL2 REQUIRED)
 
-include_directories(${SDL2_INCLUDE_DIR})
+include_directories(
+    ${SDL2_INCLUDE_DIR}
+    ../glad/include
+)
 
-set(SOURCE_FILES
-        imgui_widgets.cpp
-        imgui_draw.cpp
-        imgui_demo.cpp
-        imgui.cpp
-        imgui_impl_sdl.cpp
-        )
+set(
+    SOURCE_FILES
+    imgui_widgets.cpp
+    imgui_draw.cpp
+    imgui_demo.cpp
+    imgui.cpp
+    imgui_impl_sdl.cpp
+    imgui_impl_opengl3.cpp
+)
 
 add_library(imgui STATIC ${SOURCE_FILES})
 target_link_libraries(imgui ${SDL2_LIBRARY})

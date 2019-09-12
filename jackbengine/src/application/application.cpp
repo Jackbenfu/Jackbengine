@@ -10,6 +10,11 @@
 #include "core/log/profile.h"
 #include "core/sdl/sdlinc.h"
 
+#include "glad/glad.h"
+#include "imgui/imgui.h"
+#include "imgui/imgui_impl_sdl.h"
+#include "imgui/imgui_impl_opengl3.h"
+
 namespace Jackbengine {
 
 Application::Application(ApplicationConfig &config)
@@ -46,12 +51,25 @@ Application::Application(ApplicationConfig &config)
 
         m_timer = std::make_unique<details::Timer>(config.core_fps);
         m_cursor = std::make_unique<details::Cursor>();
-        m_window = std::make_unique<details::Window>(config.general_title, config.render_width, config.render_height, config.render_fullscreen);
+        m_window = std::make_unique<details::Window>(
+            config.general_title,
+            config.render_width,
+            config.render_height,
+            config.render_fullscreen
+        );
         m_renderer = std::make_unique<details::Renderer>(*m_window);
         m_eventManager = std::make_unique<details::EventManager>(BIND_EVENT_CALLBACK(onEvent));
 
-        //ImGui::CreateContext();
-        //ImGui::StyleColorsDark();
+        ImGui::CreateContext();
+        ImGuiIO &io = ImGui::GetIO();
+        io.DisplaySize = ImVec2 {(float) m_window->width(), (float) m_window->height()};
+        io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+        io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;
+
+        ImGui::StyleColorsDark();
+
+        ImGui_ImplSDL2_InitForOpenGL(m_window->nativeWindow(), m_window->nativeGLContext());
+        ImGui_ImplOpenGL3_Init("#version 150");
     }
 }
 
@@ -59,6 +77,11 @@ Application::~Application()
 {
     {
         NO_PROFILE("Application::~Application")
+
+        ImGui_ImplOpenGL3_Shutdown();
+        ImGui_ImplSDL2_Shutdown();
+        ImGui::DestroyContext();
+
         Mix_Quit();
         TTF_Quit();
         SDL_Quit();
@@ -78,13 +101,28 @@ void Application::frame()
         m_timer->start();
         const auto delta = m_timer->elapsedSeconds();
 
-        m_renderer->clear();
+//        m_renderer->clear();
         m_eventManager->update();
 
         userFrame(delta);
 
-        m_renderer->present();
+//        m_renderer->present();
         m_timer->snapshot();
+
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplSDL2_NewFrame(m_window->nativeWindow());
+        ImGui::NewFrame();
+        auto demo = true;
+        ImGui::ShowDemoWindow(&demo);
+
+        ImGui::Render();
+        ImGuiIO &io = ImGui::GetIO();
+        glViewport(0, 0, (int) io.DisplaySize.x, (int) io.DisplaySize.y);
+        glClearColor(1, 0, 0, 1);
+        glClear(GL_COLOR_BUFFER_BIT);
+
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+        SDL_GL_SwapWindow(m_window->nativeWindow());
     }
 }
 

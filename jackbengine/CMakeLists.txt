@@ -12,6 +12,7 @@ elseif (CMAKE_BUILD_TYPE STREQUAL "ReleaseProfile")
 endif ()
 
 add_subdirectory(${PROJECT_SOURCE_DIR}/external/imgui)
+add_subdirectory(${PROJECT_SOURCE_DIR}/external/glad)
 
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
@@ -19,38 +20,49 @@ find_package(SDL2_ttf REQUIRED)
 find_package(SDL2_mixer REQUIRED)
 
 include_directories(
-        ${SDL2_INCLUDE_DIR}
-        ${SDL2_IMAGE_INCLUDE_DIR}
-        ${SDL2_TTF_INCLUDE_DIR}
-        ${SDL2_MIXER_INCLUDE_DIR}
-        ${PROJECT_SOURCE_DIR}/src
-        ${PROJECT_SOURCE_DIR}/external)
+    ${SDL2_INCLUDE_DIR}
+    ${SDL2_IMAGE_INCLUDE_DIR}
+    ${SDL2_TTF_INCLUDE_DIR}
+    ${SDL2_MIXER_INCLUDE_DIR}
+    ${PROJECT_SOURCE_DIR}/src
+    ${PROJECT_SOURCE_DIR}/external
+    ${PROJECT_SOURCE_DIR}/external/glad/include
+)
 
-set(SOURCE_FILES
-        src/core/audio/sound.cpp
-        src/core/event/eventManager.cpp
-        src/core/event/impl/keyEvent.cpp
-        src/core/event/impl/keyDownEvent.cpp
-        src/core/event/impl/keyUpEvent.cpp
-        src/core/event/impl/mouseMotionEvent.cpp
-        src/core/event/impl/mouseDownEvent.cpp
-        src/core/event/impl/mouseUpEvent.cpp
-        src/core/io/rwops.cpp
-        src/core/layer/layer.cpp
-        src/core/log/log.cpp
-        src/core/log/profile.cpp
-        src/core/render/color.cpp
-        src/core/render/cursor/cursor.cpp
-        src/core/render/font/defaultFont.cpp
-        src/core/render/font/font.cpp
-        src/core/render/renderer/renderer.cpp
-        src/core/render/surface/surface.cpp
-        src/core/render/texture/texture.cpp
-        src/core/render/window/window.cpp
-        src/core/time/timer.cpp
-        src/application/application.cpp
-        src/application/entryPoint.cpp
-        )
+set(
+    SOURCE_FILES
+    src/core/audio/sound.cpp
+    src/core/event/eventManager.cpp
+    src/core/event/impl/keyEvent.cpp
+    src/core/event/impl/keyDownEvent.cpp
+    src/core/event/impl/keyUpEvent.cpp
+    src/core/event/impl/mouseMotionEvent.cpp
+    src/core/event/impl/mouseDownEvent.cpp
+    src/core/event/impl/mouseUpEvent.cpp
+    src/core/io/rwops.cpp
+    src/core/layer/layer.cpp
+    src/core/log/log.cpp
+    src/core/log/profile.cpp
+    src/core/render/color.cpp
+    src/core/render/cursor/cursor.cpp
+    src/core/render/font/defaultFont.cpp
+    src/core/render/font/font.cpp
+    src/core/render/renderer/renderer.cpp
+    src/core/render/surface/surface.cpp
+    src/core/render/texture/texture.cpp
+    src/core/render/window/window.cpp
+    src/core/time/timer.cpp
+    src/application/application.cpp
+    src/application/entryPoint.cpp
+)
 
 add_library(jackbengine STATIC ${SOURCE_FILES})
-target_link_libraries(jackbengine ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARY} ${SDL2_TTF_LIBRARY} ${SDL2_MIXER_LIBRARY} imgui)
+target_link_libraries(
+    jackbengine
+    ${SDL2_LIBRARY}
+    ${SDL2_IMAGE_LIBRARY}
+    ${SDL2_TTF_LIBRARY}
+    ${SDL2_MIXER_LIBRARY}
+    imgui
+    glad
+)

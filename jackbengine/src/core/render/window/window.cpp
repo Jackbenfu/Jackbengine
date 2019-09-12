@@ -6,8 +6,9 @@
 // Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
-#include "window.h"
+#include "glad/glad.h"
 #include "core/sdl/sdlinc.h"
+#include "window.h"
 
 namespace Jackbengine::details {
 
@@ -25,15 +26,34 @@ Window::Window(const std::string &title, int width, int height, bool fullscreen)
     else
     {
         flags = SDL_WINDOW_HIDDEN;
-        x = SDL_WINDOWPOS_CENTERED;
-        y = SDL_WINDOWPOS_CENTERED;
+        x = SDL_WINDOWPOS_CENTERED; // NOLINT(hicpp-signed-bitwise)
+        y = SDL_WINDOWPOS_CENTERED; // NOLINT(hicpp-signed-bitwise)
     }
+
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
 
     m_window = SDL_CreateWindow(title.c_str(), x, y, width, height, flags);
     if (nullptr == m_window)
     {
         throw std::runtime_error(SDL_GetError());
     }
+
+    m_glContext = SDL_GL_CreateContext(m_window);
+    if (nullptr == m_glContext)
+    {
+        throw std::runtime_error(SDL_GetError());
+    }
+
+    auto gladStatus = gladLoadGLLoader(SDL_GL_GetProcAddress);
+    if (!gladStatus)
+    {
+        throw std::runtime_error("Failed to initialize Glad");
+    }
+
+    SDL_GL_MakeCurrent(m_window, m_glContext);
+    SDL_GL_SetSwapInterval(1);
 
     SDL_GetWindowSize(m_window, &m_width, &m_height);
 
@@ -43,6 +63,7 @@ Window::Window(const std::string &title, int width, int height, bool fullscreen)
 
 Window::~Window()
 {
+    SDL_GL_DeleteContext(m_glContext);
     SDL_DestroyWindow(m_window);
 }
 
@@ -54,6 +75,16 @@ int Window::width() const
 int Window::height() const
 {
     return m_height;
+}
+
+SDL_Window *Window::nativeWindow() const
+{
+    return m_window;
+}
+
+SDL_GLContext Window::nativeGLContext() const
+{
+    return m_glContext;
 }
 
 void Window::setWindowIcon()

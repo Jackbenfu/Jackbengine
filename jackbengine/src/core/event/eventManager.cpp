@@ -6,9 +6,11 @@
 // Copyright © 2019 Damien Bendejacq. All rights reserved.
 //
 
-#include "eventManager.h"
 #include "core/sdl/sdlinc.h"
+#include "eventManager.h"
 #include "impl/eventImpl.h"
+
+bool ImGui_ImplSDL2_ProcessEvent(const SDL_Event *event);
 
 namespace Jackbengine::details {
 
@@ -61,6 +63,8 @@ void EventManager::update()
     SDL_Event event {};
     while (SDL_PollEvent(&event) > 0)
     {
+        ImGui_ImplSDL2_ProcessEvent(&event);
+
         switch (event.type)
         {
             case SDL_QUIT:

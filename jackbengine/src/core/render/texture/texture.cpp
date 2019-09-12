@@ -67,7 +67,7 @@ void Texture::loadTextureFromSurface(const Renderer &renderer, const Surface &su
 {
     const auto sdlRenderer = renderer.m_renderer;
 
-    m_texture = SDL_CreateTextureFromSurface(sdlRenderer, (SDL_Surface *) surface.nativeObject());
+    m_texture = SDL_CreateTextureFromSurface(sdlRenderer, surface.nativeObject());
     if (nullptr == m_texture)
     {
         throw std::runtime_error(SDL_GetError());

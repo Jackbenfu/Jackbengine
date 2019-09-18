@@ -15,13 +15,15 @@ class Timer
 {
 public:
     explicit Timer(unsigned int fps);
-    ~Timer();
+    ~Timer() = default;
 
     void start();
     void snapshot();
 
     [[nodiscard]] float elapsedSeconds() const;
     [[nodiscard]] float elapsedMilliseconds() const;
+    [[nodiscard]] float spentMilliseconds() const;
+    [[nodiscard]] float waitingMilliseconds() const;
 
     [[nodiscard]] unsigned int fps() const;
 
@@ -38,6 +40,8 @@ private:
 
     float m_start {0};
     float m_elapsedMilliseconds {0};
+    float m_spentMilliseconds {0};
+    float m_waitingMilliseconds {0};
 
     float m_fpsElapsedMilliseconds {0};
     unsigned int m_fpsTemp {0};

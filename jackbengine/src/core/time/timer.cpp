@@ -16,8 +16,6 @@ Timer::Timer(unsigned int fps)
     enableFixedFps(fps);
 }
 
-Timer::~Timer() = default;
-
 void Timer::start()
 {
     m_start = (float) ticks();
@@ -27,14 +25,20 @@ void Timer::snapshot()
 {
     ++m_totalFrames;
 
-    m_elapsedMilliseconds = (float) ticks() - m_start;
-    float delayTime = 0;
+    m_spentMilliseconds = (float) ticks() - m_start;
+    auto delayTime = 0.0f;
 
-    if (0 < m_fixedFps && m_elapsedMilliseconds < m_fixedFpsDelayTime)
+    if (0 < m_fixedFps && m_spentMilliseconds < m_fixedFpsDelayTime)
     {
-        delayTime = m_fixedFpsDelayTime - m_elapsedMilliseconds;
-        m_elapsedMilliseconds += delayTime;
+        delayTime = m_fixedFpsDelayTime - m_spentMilliseconds;
+        m_waitingMilliseconds = delayTime;
     }
+    else
+    {
+        m_waitingMilliseconds = 0;
+    }
+
+    m_elapsedMilliseconds = m_spentMilliseconds + m_waitingMilliseconds;
 
     if (1000 < m_fpsElapsedMilliseconds)
     {
@@ -62,6 +66,16 @@ float Timer::elapsedSeconds() const
 float Timer::elapsedMilliseconds() const
 {
     return m_elapsedMilliseconds;
+}
+
+float Timer::spentMilliseconds() const
+{
+    return m_spentMilliseconds;
+}
+
+float Timer::waitingMilliseconds() const
+{
+    return m_waitingMilliseconds;
 }
 
 unsigned int Timer::fps() const

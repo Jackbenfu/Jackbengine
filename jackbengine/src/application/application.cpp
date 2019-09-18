@@ -131,7 +131,14 @@ void Application::frame()
                 | ImGuiWindowFlags_NoBackground
                 | ImGuiWindowFlags_NoInputs
             );
-            ImGui::Text("%u FPS (%.2fms) frame #%u", m_timer->fps(), m_timer->elapsedMilliseconds(), m_timer->totalFrames());
+            ImGui::Text(
+                "%u FPS (spent=%.2fms, waiting=%.2fms, total=%.2fms) frame #%u",
+                m_timer->fps(),
+                m_timer->spentMilliseconds(),
+                m_timer->waitingMilliseconds(),
+                m_timer->elapsedMilliseconds(),
+                m_timer->totalFrames()
+            );
             ImGui::PopStyleVar();
             ImGui::End();
 

@@ -53,7 +53,7 @@ Window::Window(const std::string &title, int width, int height, bool fullscreen)
     }
 
     SDL_GL_MakeCurrent(m_window, m_glContext);
-    SDL_GL_SetSwapInterval(1);
+    SDL_GL_SetSwapInterval(0);
 
     SDL_GetWindowSize(m_window, &m_width, &m_height);
 

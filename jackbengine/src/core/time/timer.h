@@ -22,7 +22,6 @@ public:
 
     [[nodiscard]] float elapsedSeconds() const;
     [[nodiscard]] float elapsedMilliseconds() const;
-    [[nodiscard]] float effectiveElapsedMilliseconds() const;
 
     [[nodiscard]] unsigned int fps() const;
 
@@ -39,7 +38,6 @@ private:
 
     float m_start {0};
     float m_elapsedMilliseconds {0};
-    float m_effectiveElapsedMilliseconds {0};
 
     float m_fpsElapsedMilliseconds {0};
     unsigned int m_fpsTemp {0};

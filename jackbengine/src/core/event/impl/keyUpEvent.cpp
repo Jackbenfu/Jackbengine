@@ -7,13 +7,13 @@
 //
 
 #include "keyUpEvent.h"
-#include "spdlog/fmt/fmt.h"
 
 namespace Jackbengine {
 
 std::string KeyUpEvent::toString() const
 {
-    return fmt::format("KeyUpEvent: {}", keys());
+    return std::string();
+//    return fmt::format("KeyUpEvent: {}", keys());
 }
 
 }

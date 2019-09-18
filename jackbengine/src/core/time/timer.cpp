@@ -28,7 +28,6 @@ void Timer::snapshot()
     ++m_totalFrames;
 
     m_elapsedMilliseconds = (float) ticks() - m_start;
-    m_effectiveElapsedMilliseconds = m_elapsedMilliseconds;
     float delayTime = 0;
 
     if (0 < m_fixedFps && m_elapsedMilliseconds < m_fixedFpsDelayTime)
@@ -63,11 +62,6 @@ float Timer::elapsedSeconds() const
 float Timer::elapsedMilliseconds() const
 {
     return m_elapsedMilliseconds;
-}
-
-float Timer::effectiveElapsedMilliseconds() const
-{
-    return m_effectiveElapsedMilliseconds;
 }
 
 unsigned int Timer::fps() const

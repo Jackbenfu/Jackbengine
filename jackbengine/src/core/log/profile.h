@@ -30,7 +30,7 @@ private:
 
 }
 
-#ifdef __PROFILE__
+#ifdef __RELEASE_PROFILE__
 
 #define PROFILE(name)       Profile p(name);
 #define NO_PROFILE(name)

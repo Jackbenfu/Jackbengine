@@ -7,14 +7,13 @@
 //
 
 #include "keyDownEvent.h"
-#include "spdlog/fmt/fmt.h"
 
 namespace Jackbengine {
 
 std::string KeyDownEvent::toString() const
 {
-    return fmt::format("KeyDownEvent: {}, repeat={}", keys(), m_repeat);
-
+    return std::string();
+//    return fmt::format("KeyDownEvent: {}, repeat={}", keys(), m_repeat);
 }
 
 }

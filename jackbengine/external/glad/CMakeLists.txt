@@ -3,6 +3,6 @@ project(glad)
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Wpedantic")
 
-include_directories(./include)
+include_directories(include)
 
 add_library(glad STATIC src/glad.c)

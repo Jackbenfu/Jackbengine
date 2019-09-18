@@ -19,20 +19,20 @@ Window::Window(const std::string &title, int width, int height, bool fullscreen)
     int y;
     if (fullscreen)
     {
-        flags = SDL_WINDOW_FULLSCREEN;
+        flags = (SDL_WindowFlags) (SDL_WINDOW_FULLSCREEN | SDL_WINDOW_OPENGL);
         x = 0;
         y = 0;
     }
     else
     {
-        flags = SDL_WINDOW_HIDDEN;
-        x = SDL_WINDOWPOS_CENTERED; // NOLINT(hicpp-signed-bitwise)
-        y = SDL_WINDOWPOS_CENTERED; // NOLINT(hicpp-signed-bitwise)
+        flags = (SDL_WindowFlags) (SDL_WINDOW_OPENGL);
+        x = SDL_WINDOWPOS_CENTERED;
+        y = SDL_WINDOWPOS_CENTERED;
     }
 
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
 
     m_window = SDL_CreateWindow(title.c_str(), x, y, width, height, flags);
     if (nullptr == m_window)

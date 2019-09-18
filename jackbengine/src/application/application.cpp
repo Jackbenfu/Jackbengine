@@ -6,21 +6,20 @@
 // Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
-#include "application.h"
-#include "core/log/profile.h"
-#include "core/sdl/sdlinc.h"
-
-#include "glad/glad.h"
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_sdl.h"
 #include "imgui/imgui_impl_opengl3.h"
+
+#include "core/log/profile.h"
+#include "core/sdl/sdlinc.h"
+#include "application.h"
 
 namespace Jackbengine {
 
 Application::Application(ApplicationConfig &config)
 {
     Log::init();
-    srand(time(nullptr)); // NOLINT
+    srand(time(nullptr));
 
     {
         NO_PROFILE("Application::Application")
@@ -57,11 +56,14 @@ Application::Application(ApplicationConfig &config)
             config.render_height,
             config.render_fullscreen
         );
-        m_renderer = std::make_unique<details::Renderer>(*m_window);
+        m_renderer = std::make_unique<details::GlRenderer>(*m_window);
         m_eventManager = std::make_unique<details::EventManager>(BIND_EVENT_CALLBACK(onEvent));
+
+        m_renderer->initTest();
 
         ImGui::CreateContext();
         ImGuiIO &io = ImGui::GetIO();
+        io.IniFilename = nullptr;
         io.DisplaySize = ImVec2 {(float) m_window->width(), (float) m_window->height()};
         io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
         io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;
@@ -69,7 +71,7 @@ Application::Application(ApplicationConfig &config)
         ImGui::StyleColorsDark();
 
         ImGui_ImplSDL2_InitForOpenGL(m_window->nativeWindow(), m_window->nativeGLContext());
-        ImGui_ImplOpenGL3_Init("#version 150");
+        ImGui_ImplOpenGL3_Init("#version 330");
     }
 }
 
@@ -101,28 +103,46 @@ void Application::frame()
         m_timer->start();
         const auto delta = m_timer->elapsedSeconds();
 
-//        m_renderer->clear();
+        m_renderer->clear();
         m_eventManager->update();
 
         userFrame(delta);
 
-//        m_renderer->present();
+        m_renderer->test();
+
+        {
+            ImGui_ImplOpenGL3_NewFrame();
+            ImGui_ImplSDL2_NewFrame(m_window->nativeWindow());
+            ImGui::NewFrame();
+
+//            auto demo = true;
+//            ImGui::ShowDemoWindow(&demo);
+
+            ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiCond_Always, ImVec2(0, 0));
+            ImGui::SetNextWindowSize(ImVec2(m_window->width(), 32), ImGuiCond_Always);
+            ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
+            ImGui::Begin(
+                "Timer",
+                nullptr,
+                ImGuiWindowFlags_NoTitleBar
+                | ImGuiWindowFlags_NoResize
+                | ImGuiWindowFlags_NoMove
+                | ImGuiWindowFlags_NoScrollbar
+                | ImGuiWindowFlags_NoBackground
+                | ImGuiWindowFlags_NoInputs
+            );
+            ImGui::Text("%u FPS (%.2fms) frame #%u", m_timer->fps(), m_timer->elapsedMilliseconds(), m_timer->totalFrames());
+            ImGui::PopStyleVar();
+            ImGui::End();
+
+            ImGui::Render();
+
+            ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+        }
+
+        m_renderer->present();
+
         m_timer->snapshot();
-
-        ImGui_ImplOpenGL3_NewFrame();
-        ImGui_ImplSDL2_NewFrame(m_window->nativeWindow());
-        ImGui::NewFrame();
-        auto demo = true;
-        ImGui::ShowDemoWindow(&demo);
-
-        ImGui::Render();
-        ImGuiIO &io = ImGui::GetIO();
-        glViewport(0, 0, (int) io.DisplaySize.x, (int) io.DisplaySize.y);
-        glClearColor(1, 0, 0, 1);
-        glClear(GL_COLOR_BUFFER_BIT);
-
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-        SDL_GL_SwapWindow(m_window->nativeWindow());
     }
 }
 

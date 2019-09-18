@@ -8,7 +8,9 @@ set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
     add_definitions(/D__DEBUG__)
 elseif (CMAKE_BUILD_TYPE STREQUAL "ReleaseProfile")
-    add_definitions(/D__PROFILE__)
+    add_definitions(/D__RELEASE_PROFILE__)
+elseif (CMAKE_BUILD_TYPE STREQUAL "Release")
+    add_definitions(/D__RELEASE__)
 endif ()
 
 add_subdirectory(${PROJECT_SOURCE_DIR}/external/imgui)
@@ -47,6 +49,7 @@ set(
     src/core/render/cursor/cursor.cpp
     src/core/render/font/defaultFont.cpp
     src/core/render/font/font.cpp
+    src/core/render/renderer/glRenderer.cpp
     src/core/render/renderer/renderer.cpp
     src/core/render/surface/surface.cpp
     src/core/render/texture/texture.cpp
@@ -58,11 +61,17 @@ set(
 
 add_library(jackbengine STATIC ${SOURCE_FILES})
 target_link_libraries(
-    jackbengine
+    ${PROJECT_NAME}
     ${SDL2_LIBRARY}
     ${SDL2_IMAGE_LIBRARY}
     ${SDL2_TTF_LIBRARY}
     ${SDL2_MIXER_LIBRARY}
     imgui
     glad
+)
+
+target_include_directories(
+    ${PROJECT_NAME}
+    INTERFACE src
+    INTERFACE external
 )

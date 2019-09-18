@@ -7,15 +7,12 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wpedantic")
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
     add_definitions(/D__DEBUG__)
 elseif (CMAKE_BUILD_TYPE STREQUAL "ReleaseProfile")
-    add_definitions(/D__PROFILE__)
+    add_definitions(/D__RELEASE_PROFILE__)
+elseif (CMAKE_BUILD_TYPE STREQUAL "Release")
+    add_definitions(/D__RELEASE__)
 endif ()
 
 add_subdirectory(${PROJECT_SOURCE_DIR}/jackbengine)
-
-include_directories(
-    ${PROJECT_SOURCE_DIR}/jackbengine/src
-    ${PROJECT_SOURCE_DIR}/jackbengine/external
-)
 
 set(
     SOURCE_FILES

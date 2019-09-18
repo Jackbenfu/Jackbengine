@@ -7,13 +7,13 @@
 //
 
 #include "mouseDownEvent.h"
-#include "spdlog/fmt/fmt.h"
 
 namespace Jackbengine {
 
 std::string MouseDownEvent::toString() const
 {
-    return fmt::format("MouseDownEvent: x={}, y={}, button={}, repeat={}", x(), y(), (int) m_button, m_repeat);
+    return std::string();
+//    return fmt::format("MouseDownEvent: x={}, y={}, button={}, repeat={}", x(), y(), (int) m_button, m_repeat);
 }
 
 }

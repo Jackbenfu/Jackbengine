@@ -7,13 +7,13 @@
 //
 
 #include "mouseMotionEvent.h"
-#include "spdlog/fmt/fmt.h"
 
 namespace Jackbengine {
 
 std::string MouseMotionEvent::toString() const
 {
-    return fmt::format("MouseMotionEvent: x={}, y={}", x(), y());
+    return std::string();
+//    return fmt::format("MouseMotionEvent: x={}, y={}", x(), y());
 }
 
 }

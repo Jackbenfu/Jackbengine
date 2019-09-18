@@ -26,8 +26,8 @@ public:
     static void test();
 
 private:
-    static unsigned int createProgram(const std::string &vertexShader, const std::string &fragmentShader);
-    static unsigned int compileShader(unsigned int type, const std::string &source);
+    static unsigned int createProgram(const char *vertexShader, const char *fragmentShader);
+    static unsigned int compileShader(unsigned int type, const char *source);
     static void logError(const char *function, const char *file, int line);
 
     const Window &m_window;

@@ -8,9 +8,13 @@
 
 #include "glad/glad.h"
 
-#include "core/sdl/sdlinc.h"
-#include "core/log/log.h"
 #include "glRenderer.h"
+#include "core/sdl/sdlinc.h"
+#include "core/resource/importResource.h"
+#include "core/log/log.h"
+
+IMPORT_TEXT_RESOURCE(defaultVertex_glsl)
+IMPORT_TEXT_RESOURCE(defaultFragment_glsl)
 
 namespace Jackbengine::details {
 
@@ -74,25 +78,7 @@ void GlRenderer::initTest()
     GL_CALL(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo));
     GL_CALL(glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(unsigned int), indices, GL_STATIC_DRAW));
 
-    m_program = createProgram(
-        "#version 330 core\n"
-        "\n"
-        "layout(location = 0) in vec4 position;\n"
-        "\n"
-        "void main()\n"
-        "{\n"
-        "   gl_Position = position;\n"
-        "}\n"
-        "\n",
-        "#version 330 core\n"
-        "\n"
-        "out vec4 color;\n"
-        "\n"
-        "void main()\n"
-        "{\n"
-        "   color = vec4(1.0, 1.0, 1.0, 1.0);\n"
-        "}\n"
-    );
+    m_program = createProgram(defaultVertex_glsl, defaultFragment_glsl);
 
     GL_CALL(glUseProgram(m_program));
 }
@@ -102,7 +88,7 @@ void GlRenderer::test()
     GL_CALL(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
 }
 
-unsigned int GlRenderer::createProgram(const std::string &vertexShader, const std::string &fragmentShader)
+unsigned int GlRenderer::createProgram(const char *vertexShader, const char *fragmentShader)
 {
     const auto program = GL_CALL(glCreateProgram());
     const auto vs = compileShader(GL_VERTEX_SHADER, vertexShader);
@@ -119,11 +105,10 @@ unsigned int GlRenderer::createProgram(const std::string &vertexShader, const st
     return program;
 }
 
-unsigned int GlRenderer::compileShader(unsigned int type, const std::string &source)
+unsigned int GlRenderer::compileShader(unsigned int type, const char *source)
 {
     const auto shader = GL_CALL(glCreateShader(type));
-    const auto src = source.c_str();
-    GL_CALL(glShaderSource(shader, 1, &src, nullptr));
+    GL_CALL(glShaderSource(shader, 1, &source, nullptr));
     GL_CALL(glCompileShader(shader));
 
     int result;

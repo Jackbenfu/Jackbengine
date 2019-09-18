@@ -35,6 +35,22 @@ include_directories(
     ${PROJECT_SOURCE_DIR}/external/fmt/
 )
 
+add_executable(
+    resourceGenerator
+    ${PROJECT_SOURCE_DIR}/external/resourceGenerator/resourceGenerator.c
+)
+
+add_custom_command(
+    OUTPUT resources.cpp
+    COMMAND resourceGenerator
+    resources.cpp
+    -t${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/defaultVertex.glsl
+    -t${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/defaultFragment.glsl
+    DEPENDS
+    ${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/defaultVertex.glsl
+    ${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/defaultFragment.glsl
+)
+
 set(
     SOURCE_FILES
     src/core/audio/sound.cpp
@@ -61,6 +77,7 @@ set(
     src/core/time/timer.cpp
     src/application/application.cpp
     src/application/entryPoint.cpp
+    resources.cpp
 )
 
 add_library(jackbengine STATIC ${SOURCE_FILES})

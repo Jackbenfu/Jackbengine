@@ -6,14 +6,14 @@
 // Copyright © 2019 Damien Bendejacq. All rights reserved.
 //
 
+#include "fmt/format.h"
 #include "keyDownEvent.h"
 
 namespace Jackbengine {
 
 std::string KeyDownEvent::toString() const
 {
-    return std::string();
-//    return fmt::format("KeyDownEvent: {}, repeat={}", keys(), m_repeat);
+    return fmt::format("KeyDownEvent: {}, repeat={}", keys(), m_repeat);
 }
 
 }

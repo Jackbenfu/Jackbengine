@@ -13,8 +13,11 @@ elseif (CMAKE_BUILD_TYPE STREQUAL "Release")
     add_definitions(/D__RELEASE__)
 endif ()
 
+add_definitions(/DFMT_HEADER_ONLY)
+
 add_subdirectory(${PROJECT_SOURCE_DIR}/external/imgui)
 add_subdirectory(${PROJECT_SOURCE_DIR}/external/glad)
+add_subdirectory(${PROJECT_SOURCE_DIR}/external/fmt)
 
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
@@ -29,6 +32,7 @@ include_directories(
     ${PROJECT_SOURCE_DIR}/src
     ${PROJECT_SOURCE_DIR}/external
     ${PROJECT_SOURCE_DIR}/external/glad/include
+    ${PROJECT_SOURCE_DIR}/external/fmt/
 )
 
 set(
@@ -68,6 +72,7 @@ target_link_libraries(
     ${SDL2_MIXER_LIBRARY}
     imgui
     glad
+    fmt
 )
 
 target_include_directories(

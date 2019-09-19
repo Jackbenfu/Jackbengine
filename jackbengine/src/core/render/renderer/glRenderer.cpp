@@ -10,11 +10,16 @@
 
 #include "glRenderer.h"
 #include "core/sdl/sdlinc.h"
+#include "core/render/surface/surface.h"
 #include "core/resource/importResource.h"
 #include "core/log/log.h"
 
-IMPORT_TEXT_RESOURCE(defaultVertex_glsl)
-IMPORT_TEXT_RESOURCE(defaultFragment_glsl)
+IMPORT_TEXT_RESOURCE(colorVertex_glsl)
+IMPORT_TEXT_RESOURCE(colorFragment_glsl)
+IMPORT_TEXT_RESOURCE(textureVertex_glsl)
+IMPORT_TEXT_RESOURCE(textureFragment_glsl)
+IMPORT_BINARY_RESOURCE(aquarelle_damien_square_png)
+IMPORT_BINARY_RESOURCE(aquarelle_damien_square_light_jpg)
 
 namespace Jackbengine::details {
 
@@ -47,45 +52,107 @@ void GlRenderer::present()
     SDL_GL_SwapWindow(m_window.nativeWindow());
 }
 
-void GlRenderer::initTest()
+void GlRenderer::initColorTest()
 {
-    float positions[] = {
-        -0.5f, -0.5f,   // 0
-        0.5f, -0.5f,    // 1
-        0.5f, 0.5f,     // 2
-        -0.5f, 0.5f,    // 3
+    float vertices[] = {
+        0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
+        0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
+        -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f,
+        -0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 0.0f,
     };
 
     unsigned int indices[] = {
-        0, 1, 2,
-        2, 3, 0,
+        0, 1, 3,
+        1, 2, 3,
     };
 
-    unsigned int va;
-    GL_CALL(glGenVertexArrays(1, &va));
-    GL_CALL(glBindVertexArray(va));
+    unsigned int vao;
+    GL_CALL(glGenVertexArrays(1, &vao));
+    GL_CALL(glBindVertexArray(vao));
 
     unsigned int vbo;
     GL_CALL(glGenBuffers(1, &vbo));
 
     GL_CALL(glBindBuffer(GL_ARRAY_BUFFER, vbo));
-    GL_CALL(glBufferData(GL_ARRAY_BUFFER, 6 * 2 * sizeof(float), positions, GL_STATIC_DRAW));
+    GL_CALL(glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW));
+
+    GL_CALL(glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *) 0));
     GL_CALL(glEnableVertexAttribArray(0));
-    GL_CALL(glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), nullptr));
+    GL_CALL(glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *) (3 * sizeof(float))));
+    GL_CALL(glEnableVertexAttribArray(1));
 
     unsigned int ibo;
     GL_CALL(glGenBuffers(1, &ibo));
     GL_CALL(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo));
-    GL_CALL(glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(unsigned int), indices, GL_STATIC_DRAW));
+    GL_CALL(glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW));
 
-    m_program = createProgram(defaultVertex_glsl, defaultFragment_glsl);
+    m_program = createProgram((const char *) colorVertex_glsl, (const char *) colorFragment_glsl);
 
     GL_CALL(glUseProgram(m_program));
 }
 
-void GlRenderer::test()
+void GlRenderer::colorTest()
 {
-    GL_CALL(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
+    GL_CALL(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0));
+}
+
+void GlRenderer::initTextureTest()
+{
+    float vertices[] = {
+        0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, // top right
+        0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, // bottom right
+        -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, // bottom left
+        -0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, // top left
+    };
+
+    unsigned int indices[] = {
+        0, 1, 3,
+        1, 2, 3,
+    };
+
+    unsigned int vao;
+    GL_CALL(glGenVertexArrays(1, &vao));
+    GL_CALL(glBindVertexArray(vao));
+
+    unsigned int vbo;
+    GL_CALL(glGenBuffers(1, &vbo));
+    GL_CALL(glBindBuffer(GL_ARRAY_BUFFER, vbo));
+    GL_CALL(glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW));
+
+    unsigned int ibo;
+    GL_CALL(glGenBuffers(1, &ibo));
+    GL_CALL(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo));
+    GL_CALL(glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW));
+
+    GL_CALL(glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void *) 0));
+    GL_CALL(glEnableVertexAttribArray(0));
+    GL_CALL(glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void *) (3 * sizeof(float))));
+    GL_CALL(glEnableVertexAttribArray(1));
+    GL_CALL(glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void *) (6 * sizeof(float))));
+    GL_CALL(glEnableVertexAttribArray(2));
+
+    GL_CALL(glGenTextures(1, &m_texture));
+    GL_CALL(glBindTexture(GL_TEXTURE_2D, m_texture));
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    const auto rwops = RWops(aquarelle_damien_square_png, aquarelle_damien_square_png_size);
+    const auto surface = Surface(rwops);
+    const auto texInfo = surface.nativeObject();
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, texInfo->w, texInfo->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, texInfo->pixels);
+
+    m_program = createProgram((const char *) textureVertex_glsl, (const char *) textureFragment_glsl);
+
+    GL_CALL(glUseProgram(m_program));
+}
+
+void GlRenderer::textureTest()
+{
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, m_texture);
+    GL_CALL(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0));
 }
 
 unsigned int GlRenderer::createProgram(const char *vertexShader, const char *fragmentShader)

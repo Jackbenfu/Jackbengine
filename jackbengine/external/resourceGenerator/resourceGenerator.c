@@ -123,11 +123,11 @@ int appendResource(FILE *outputFile, char *resourceName)
     fprintf(outputFile, "\n");
     fprintf(
         outputFile,
-        "extern \"C\" const char %s[] =\n{\n",
+        "extern \"C\" const unsigned char %s[] =\n{\n",
         resourceVariableName
     );
 
-    char buf[READ_FILE_BUFFER_LENGTH];
+    unsigned char buf[READ_FILE_BUFFER_LENGTH];
     size_t nRead = 0;
     size_t lineCount = 0;
     do

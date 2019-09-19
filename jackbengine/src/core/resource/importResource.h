@@ -11,10 +11,10 @@
 
 namespace Jackbengine {
 
-#define IMPORT_BINARY_RESOURCE(name)    extern "C" char name[];         \
+#define IMPORT_BINARY_RESOURCE(name)    extern "C" unsigned char name[];    \
                                         extern "C" size_t name##_size;
 
-#define IMPORT_TEXT_RESOURCE(name)      extern "C" char name[];
+#define IMPORT_TEXT_RESOURCE(name)      extern "C" unsigned char name[];
 
 }
 

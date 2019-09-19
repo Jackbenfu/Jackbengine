@@ -22,8 +22,11 @@ public:
     static void clear();
     void present();
 
-    void initTest();
-    static void test();
+    void initColorTest();
+    static void colorTest();
+
+    void initTextureTest();
+    void textureTest();
 
 private:
     static unsigned int createProgram(const char *vertexShader, const char *fragmentShader);
@@ -32,6 +35,7 @@ private:
 
     const Window &m_window;
     unsigned int m_program {0};
+    unsigned int m_texture {0};
 };
 
 }

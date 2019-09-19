@@ -44,11 +44,19 @@ add_custom_command(
     OUTPUT resources.cpp
     COMMAND resourceGenerator
     resources.cpp
-    -t${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/defaultVertex.glsl
-    -t${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/defaultFragment.glsl
+    -t${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/colorVertex.glsl
+    -t${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/colorFragment.glsl
+    -t${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/textureVertex.glsl
+    -t${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/textureFragment.glsl
+    -b${PROJECT_SOURCE_DIR}/resource/aquarelle_damien_square.png
+    -b${PROJECT_SOURCE_DIR}/resource/aquarelle_damien_square_light.jpg
     DEPENDS
-    ${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/defaultVertex.glsl
-    ${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/defaultFragment.glsl
+    ${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/colorVertex.glsl
+    ${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/colorFragment.glsl
+    ${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/textureVertex.glsl
+    ${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/textureFragment.glsl
+    ${PROJECT_SOURCE_DIR}/resource/aquarelle_damien_square.png
+    ${PROJECT_SOURCE_DIR}/resource/aquarelle_damien_square_light.jpg
 )
 
 set(

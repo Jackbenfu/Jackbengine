@@ -59,7 +59,7 @@ Application::Application(ApplicationConfig &config)
         m_renderer = std::make_unique<details::GlRenderer>(*m_window);
         m_eventManager = std::make_unique<details::EventManager>(BIND_EVENT_CALLBACK(onEvent));
 
-        m_renderer->initTest();
+        m_renderer->initTextureTest();
 
         ImGui::CreateContext();
         ImGuiIO &io = ImGui::GetIO();
@@ -108,7 +108,7 @@ void Application::frame()
 
         userFrame(delta);
 
-        m_renderer->test();
+        m_renderer->textureTest();
 
         {
             ImGui_ImplOpenGL3_NewFrame();

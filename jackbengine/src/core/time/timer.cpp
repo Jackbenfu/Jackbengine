@@ -6,6 +6,9 @@
 // Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
+#include <vector>
+#include <numeric>
+
 #include "timer.h"
 #include "core/sdl/sdlinc.h"
 
@@ -13,24 +16,24 @@ namespace Jackbengine::details {
 
 Timer::Timer(unsigned int fps)
 {
-    enableFixedFps(fps);
+    m_targetFps = fps;
+    m_targetFrameTime = 1000.0f / (float) fps;
+    m_frameTimes = std::vector<float>(fps, 0);
 }
 
 void Timer::start()
 {
-    m_start = (float) ticks();
+    m_start = ticks();
 }
 
 void Timer::snapshot()
 {
-    ++m_totalFrames;
-
-    m_spentMilliseconds = (float) ticks() - m_start;
+    m_spentMilliseconds = ticks() - m_start;
     auto delayTime = 0.0f;
 
-    if (0 < m_fixedFps && m_spentMilliseconds < m_fixedFpsDelayTime)
+    if (0 < m_targetFps && m_spentMilliseconds < m_targetFrameTime)
     {
-        delayTime = m_fixedFpsDelayTime - m_spentMilliseconds;
+        delayTime = m_targetFrameTime - m_spentMilliseconds;
         m_waitingMilliseconds = delayTime;
     }
     else
@@ -40,22 +43,24 @@ void Timer::snapshot()
 
     m_elapsedMilliseconds = m_spentMilliseconds + m_waitingMilliseconds;
 
-    if (1000 < m_fpsElapsedMilliseconds)
+    if (m_totalFrames > m_frameTimes.capacity())
     {
-        m_fps = m_fpsTemp;
-        m_fpsElapsedMilliseconds = 0;
-        m_fpsTemp = 0;
+        m_fps = 1000.0f / (std::accumulate(m_frameTimes.begin(), m_frameTimes.end(), 0.0f) / m_frameTimes.capacity());
     }
-    else
-    {
-        m_fpsElapsedMilliseconds += m_elapsedMilliseconds;
-        ++m_fpsTemp;
-    }
+
+    m_frameTimes[m_totalFrames % m_frameTimes.capacity()] = m_elapsedMilliseconds;
+
+    ++m_totalFrames;
 
     if (0 < delayTime)
     {
         delay((unsigned int) delayTime);
     }
+}
+
+std::optional<float> Timer::fps() const
+{
+    return m_fps;
 }
 
 float Timer::elapsedSeconds() const
@@ -78,37 +83,6 @@ float Timer::waitingMilliseconds() const
     return m_waitingMilliseconds;
 }
 
-unsigned int Timer::fps() const
-{
-    return m_fps;
-}
-
-bool Timer::isFixedFps() const
-{
-    return 0 < m_fixedFps;
-}
-
-unsigned int Timer::fixedFps() const
-{
-    return m_fixedFps;
-}
-
-void Timer::enableFixedFps(unsigned int fps)
-{
-    if (0 >= fps)
-    {
-        fps = 60; // Defaulting to 60 fps
-    }
-
-    m_fixedFps = fps;
-    m_fixedFpsDelayTime = 1000.0f / (float) fps;
-}
-
-void Timer::disableFixedFps()
-{
-    m_fixedFps = 0;
-}
-
 unsigned int Timer::totalFrames() const
 {
     return m_totalFrames;
@@ -123,9 +97,9 @@ void Timer::delay(unsigned int ms) const
 #endif
 }
 
-unsigned int Timer::ticks() const
+float Timer::ticks() const
 {
-    return SDL_GetTicks();
+    return (float) SDL_GetTicks();
 }
 
 }

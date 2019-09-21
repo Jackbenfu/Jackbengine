@@ -115,42 +115,42 @@ void Application::frame()
             ImGui_ImplSDL2_NewFrame(m_window->nativeWindow());
             ImGui::NewFrame();
 
-//            auto demo = true;
-//            ImGui::ShowDemoWindow(&demo);
-
-            ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiCond_Always, ImVec2(0, 0));
-            ImGui::SetNextWindowSize(ImVec2(m_window->width(), 32), ImGuiCond_Always);
-            ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
-            ImGui::Begin(
-                "Timer",
-                nullptr,
-                ImGuiWindowFlags_NoTitleBar
-                | ImGuiWindowFlags_NoResize
-                | ImGuiWindowFlags_NoMove
-                | ImGuiWindowFlags_NoScrollbar
-                | ImGuiWindowFlags_NoBackground
-                | ImGuiWindowFlags_NoInputs
-            );
-            ImGui::Text(
-                "%u FPS (spent=%.2fms, waiting=%.2fms, total=%.2fms) frame #%u",
-                m_timer->fps(),
-                m_timer->spentMilliseconds(),
-                m_timer->waitingMilliseconds(),
-                m_timer->elapsedMilliseconds(),
-                m_timer->totalFrames()
-            );
-            ImGui::PopStyleVar();
-            ImGui::End();
-
-            ImGui::Render();
-
-            ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+            if (m_timer->fps().has_value())
+            {
+                ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiCond_Always, ImVec2(0, 0));
+                ImGui::SetNextWindowSize(ImVec2(m_window->width(), 32), ImGuiCond_Always);
+                ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
+                ImGui::Begin(
+                    "Timer",
+                    nullptr,
+                    ImGuiWindowFlags_NoTitleBar
+                    | ImGuiWindowFlags_NoResize
+                    | ImGuiWindowFlags_NoMove
+                    | ImGuiWindowFlags_NoScrollbar
+                    | ImGuiWindowFlags_NoBackground
+                    | ImGuiWindowFlags_NoInputs
+                );
+                ImGui::Text(
+                    "%.1f FPS (spent=%.2fms, waiting=%.2fms, total=%.2fms) frame #%u",
+                    m_timer->fps().value(),
+                    m_timer->spentMilliseconds(),
+                    m_timer->waitingMilliseconds(),
+                    m_timer->elapsedMilliseconds(),
+                    m_timer->totalFrames()
+                );
+                ImGui::PopStyleVar();
+                ImGui::End();
+            }
         }
 
-        m_renderer->present();
+        ImGui::Render();
 
-        m_timer->snapshot();
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
     }
+
+    m_renderer->present();
+
+    m_timer->snapshot();
 }
 
 void Application::userFrame(float delta)

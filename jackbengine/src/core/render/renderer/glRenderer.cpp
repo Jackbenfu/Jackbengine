@@ -138,7 +138,7 @@ void GlRenderer::initTextureTest()
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-    const auto rwops = RWops(aquarelle_damien_square_png, aquarelle_damien_square_png_size);
+    const auto rwops = RWops(aquarelle_damien_square_light_jpg, aquarelle_damien_square_light_jpg_size);
     const auto surface = Surface(rwops);
     const auto texInfo = surface.nativeObject();
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, texInfo->w, texInfo->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, texInfo->pixels);

@@ -9,6 +9,8 @@
 #ifndef __TIMER_H__
 #define __TIMER_H__
 
+#include <optional>
+
 namespace Jackbengine::details {
 
 class Timer
@@ -20,37 +22,30 @@ public:
     void start();
     void snapshot();
 
+    [[nodiscard]] std::optional<float> fps() const;
+
     [[nodiscard]] float elapsedSeconds() const;
     [[nodiscard]] float elapsedMilliseconds() const;
     [[nodiscard]] float spentMilliseconds() const;
     [[nodiscard]] float waitingMilliseconds() const;
 
-    [[nodiscard]] unsigned int fps() const;
-
-    [[nodiscard]] bool isFixedFps() const;
-    [[nodiscard]] unsigned int fixedFps() const;
-    void enableFixedFps(unsigned int fps);
-    void disableFixedFps();
-
     [[nodiscard]] unsigned int totalFrames() const;
 
 private:
     void delay(unsigned int ms) const;
-    [[nodiscard]] unsigned int ticks() const;
+    [[nodiscard]] float ticks() const;
+
+    unsigned int m_targetFps {0};
+    float m_targetFrameTime {0};
+    std::vector<float> m_frameTimes;
+    unsigned int m_totalFrames {0};
+
+    std::optional<float> m_fps;
 
     float m_start {0};
     float m_elapsedMilliseconds {0};
     float m_spentMilliseconds {0};
     float m_waitingMilliseconds {0};
-
-    float m_fpsElapsedMilliseconds {0};
-    unsigned int m_fpsTemp {0};
-    unsigned int m_fps {0};
-
-    unsigned int m_fixedFps {0};
-    float m_fixedFpsDelayTime {0};
-
-    unsigned int m_totalFrames {0};
 };
 
 }

@@ -14,7 +14,7 @@
 
 namespace Jackbengine {
 
-class MouseUpEvent : public details::MouseEvent
+class MouseUpEvent : public MouseEvent
 {
 public:
     EVENT_CLASS_TYPE(EventType::MouseUp)

@@ -9,7 +9,7 @@
 #include "fmt/format.h"
 #include "keyEvent.h"
 
-namespace Jackbengine::details {
+namespace Jackbengine {
 
 std::string KeyEvent::keys() const
 {

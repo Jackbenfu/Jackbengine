@@ -70,7 +70,9 @@ set(
     src/core/event/impl/mouseDownEvent.cpp
     src/core/event/impl/mouseUpEvent.cpp
     src/core/io/rwops.cpp
-    src/core/layer/layer.cpp
+    src/core/layer/layerManager.cpp
+    src/core/layer/impl/debugLayer.cpp
+    src/core/imgui/imguiLoader.cpp
     src/core/log/log.cpp
     src/core/log/profile.cpp
     src/core/render/color.cpp

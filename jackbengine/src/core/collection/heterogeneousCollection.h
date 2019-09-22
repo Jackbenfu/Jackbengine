@@ -9,7 +9,10 @@
 #ifndef __HETEROGENEOUS_COLLECTION_H__
 #define __HETEROGENEOUS_COLLECTION_H__
 
-#include "common/common.h"
+#include <unordered_map>
+#include <string>
+
+#include "core/common/common.h"
 
 namespace Jackbengine::details {
 

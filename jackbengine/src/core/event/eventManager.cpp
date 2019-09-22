@@ -49,7 +49,7 @@ bool EventManager::isMouseClicked(MouseButton button) const
     return m_mouseClick[(int) button];
 }
 
-void EventManager::update()
+void EventManager::update(float)
 {
     int mouseX;
     int mouseY;

@@ -9,8 +9,10 @@
 #ifndef __ORDERED_HETEROGENEOUS_COLLECTION_H__
 #define __ORDERED_HETEROGENEOUS_COLLECTION_H__
 
-#include "common/common.h"
-#include "orderableItem.h"
+#include <map>
+#include <string>
+
+#include "core/common/common.h"
 
 namespace Jackbengine::details {
 
@@ -28,13 +30,18 @@ public:
     bool any() const;
 
     template<typename TItem, typename ...Args>
-    void add(Args &&...args);
+    void add(int index, Args &&...args);
 
     template<typename TItem>
     void remove();
 
     template<typename TItem>
     void enable(bool enable);
+
+    typename std::map<int, std::tuple<size_t, bool, std::unique_ptr<TBase>>>::iterator begin();
+    typename std::map<int, std::tuple<size_t, bool, std::unique_ptr<TBase>>>::iterator end();
+    typename std::map<int, std::tuple<size_t, bool, std::unique_ptr<TBase>>>::reverse_iterator rbegin();
+    typename std::map<int, std::tuple<size_t, bool, std::unique_ptr<TBase>>>::reverse_iterator rend();
 
     template<typename TFunction>
     void apply(TFunction function);
@@ -84,10 +91,9 @@ bool OrderedHeterogeneousCollection<TBase>::any() const
 
 template<typename TBase>
 template<typename TItem, typename ...Args>
-void OrderedHeterogeneousCollection<TBase>::add(Args &&...args)
+void OrderedHeterogeneousCollection<TBase>::add(int index, Args &&...args)
 {
     static_assert(std::is_base_of<TBase, TItem>::value);
-    static_assert(std::is_base_of<OrderableItem, TBase>::value);
 
     if (any<TItem>())
     {
@@ -99,11 +105,10 @@ void OrderedHeterogeneousCollection<TBase>::add(Args &&...args)
     const auto typeId = GET_TYPE_ID(TItem);
 
     auto item = std::make_unique<TItem>(std::forward<Args>(args)...);
-    const auto key = static_cast<OrderableItem *>(item.get());
 
     m_collection.insert(
         std::make_pair(
-            key->order(), std::make_tuple(typeId, true, std::move(item))
+            index, std::make_tuple(typeId, true, std::move(item))
         )
     );
 }
@@ -140,6 +145,30 @@ void OrderedHeterogeneousCollection<TBase>::enable(bool enable)
 }
 
 template<typename TBase>
+typename std::map<int, std::tuple<size_t, bool, std::unique_ptr<TBase>>>::iterator OrderedHeterogeneousCollection<TBase>::begin()
+{
+    return m_collection.begin();
+}
+
+template<typename TBase>
+typename std::map<int, std::tuple<size_t, bool, std::unique_ptr<TBase>>>::iterator OrderedHeterogeneousCollection<TBase>::end()
+{
+    return m_collection.end();
+}
+
+template<typename TBase>
+typename std::map<int, std::tuple<size_t, bool, std::unique_ptr<TBase>>>::reverse_iterator OrderedHeterogeneousCollection<TBase>::rbegin()
+{
+    return m_collection.rbegin();
+}
+
+template<typename TBase>
+typename std::map<int, std::tuple<size_t, bool, std::unique_ptr<TBase>>>::reverse_iterator OrderedHeterogeneousCollection<TBase>::rend()
+{
+    return m_collection.rend();
+}
+
+template<typename TBase>
 template<typename TFunction>
 void OrderedHeterogeneousCollection<TBase>::apply(TFunction function)
 {
@@ -152,7 +181,10 @@ void OrderedHeterogeneousCollection<TBase>::apply(TFunction function)
         }
 
         auto &item = *std::get<2>(tuple);
-        function(item);
+        if (function(item))
+        {
+            break;
+        }
     }
 }
 

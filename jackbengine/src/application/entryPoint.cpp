@@ -24,12 +24,12 @@ void parseArguments(int argc, char **argv, bool *fullscreen)
 
 #ifdef EMSCRIPTEN
 Jackbengine::Application *applicationPtr;
-void frame()
+void update()
 {
-    applicationPtr->frame();
+    applicationPtr->update();
 }
 
-void frameMock()
+void updateMock()
 {
 }
 
@@ -41,7 +41,7 @@ int main(int argc, char **argv)
     parseArguments(argc, argv, &fullscreen);
 
 #ifdef EMSCRIPTEN
-    emscripten_set_main_loop(frameMock, 0, 0);
+    emscripten_set_main_loop(updateMock, 0, 0);
 #endif
 
     auto application = Jackbengine::createApplication(fullscreen);
@@ -50,11 +50,11 @@ int main(int argc, char **argv)
 #ifdef EMSCRIPTEN
     applicationPtr = application.get();
     emscripten_cancel_main_loop();
-    emscripten_set_main_loop(frame, 0, 1);
+    emscripten_set_main_loop(update, 0, 1);
 #else
     while (wrapper.running())
     {
-        wrapper.frame();
+        wrapper.update();
     }
 #endif
 

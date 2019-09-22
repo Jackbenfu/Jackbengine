@@ -13,7 +13,7 @@
 
 namespace Jackbengine {
 
-class MouseMotionEvent : public details::MouseEvent
+class MouseMotionEvent : public MouseEvent
 {
 public:
     EVENT_CLASS_TYPE(EventType::MouseMotion)

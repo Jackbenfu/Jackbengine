@@ -41,7 +41,7 @@ public:
     [[nodiscard]] bool isMouseClicked(MouseButton button) const;
 
 private:
-    void update();
+    void update(float delta);
 
     void handleKeyDown(const SDL_Keysym &keysym);
     void handleKeyDownRepeat(KeyboardKey key);

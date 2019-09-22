@@ -24,6 +24,6 @@ Sandbox::App::App(Jackbengine::ApplicationConfig &config)
 {
 }
 
-void Sandbox::App::frame(float)
+void Sandbox::App::update(float)
 {
 }

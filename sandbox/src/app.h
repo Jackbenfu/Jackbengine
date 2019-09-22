@@ -19,7 +19,7 @@ public:
     explicit App(Jackbengine::ApplicationConfig &config);
     ~App() override = default;
 
-    void frame(float delta) final;
+    void update(float delta) final;
 };
 
 }

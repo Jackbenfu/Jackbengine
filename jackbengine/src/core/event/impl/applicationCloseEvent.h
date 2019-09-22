@@ -13,7 +13,7 @@
 
 namespace Jackbengine {
 
-class ApplicationCloseEvent : public details::Event
+class ApplicationCloseEvent : public Event
 {
 public:
     EVENT_CLASS_TYPE(EventType::ApplicationClose)

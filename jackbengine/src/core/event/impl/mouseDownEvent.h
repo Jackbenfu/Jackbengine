@@ -14,7 +14,7 @@
 
 namespace Jackbengine {
 
-class MouseDownEvent : public details::MouseEvent
+class MouseDownEvent : public MouseEvent
 {
 public:
     EVENT_CLASS_TYPE(EventType::MouseDown)

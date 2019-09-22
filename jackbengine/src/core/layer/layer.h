@@ -11,18 +11,18 @@
 
 #include <string>
 
-namespace Jackbengine::details {
+#include "core/event/event.h"
+
+namespace Jackbengine {
 
 class Layer
 {
 public:
-    explicit Layer(const std::string &name);
+    Layer() = default;
     virtual ~Layer() = default;
 
-    virtual void frame(float delta) = 0;
-
-private:
-    const std::string &m_name;
+    virtual void update(float delta) = 0;
+    virtual void onEvent(Event &e) = 0;
 };
 
 }

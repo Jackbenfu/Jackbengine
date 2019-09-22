@@ -29,9 +29,9 @@ public:
         return m_application->running();
     }
 
-    inline void frame()
+    inline void update()
     {
-        m_application->frame();
+        m_application->update();
     }
 
 private:

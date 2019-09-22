@@ -11,7 +11,7 @@
 
 #include "core/event/event.h"
 
-namespace Jackbengine::details {
+namespace Jackbengine {
 
 class MouseEvent : public Event
 {

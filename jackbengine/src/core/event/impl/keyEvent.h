@@ -12,7 +12,7 @@
 #include "core/event/event.h"
 #include "core/event/keyboardKey.h"
 
-namespace Jackbengine::details {
+namespace Jackbengine {
 
 class KeyEvent : public Event
 {

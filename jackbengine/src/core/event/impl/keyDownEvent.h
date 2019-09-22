@@ -13,7 +13,7 @@
 
 namespace Jackbengine {
 
-class KeyDownEvent : public details::KeyEvent
+class KeyDownEvent : public KeyEvent
 {
 public:
     EVENT_CLASS_TYPE(EventType::KeyDown)

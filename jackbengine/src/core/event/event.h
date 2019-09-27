@@ -9,6 +9,7 @@
 #ifndef __EVENT_H__
 #define __EVENT_H__
 
+#include <functional>
 #include <string>
 
 namespace Jackbengine {

@@ -11,14 +11,14 @@
 #include "imgui/imgui_impl_opengl3.h"
 
 #include "core/event/event.h"
-#include "core/log/log.h"
 #include "debugLayer.h"
 
 namespace Jackbengine {
 
-DebugLayer::DebugLayer(const details::Timer *timer, const details::Window *window)
+DebugLayer::DebugLayer(const details::Timer *timer, const details::Window *window, bool demo)
     : m_timer {timer},
-      m_window {window}
+      m_window {window},
+      m_demo {demo}
 {
 }
 
@@ -33,8 +33,8 @@ void DebugLayer::update(float)
     ImGui_ImplSDL2_NewFrame(m_window->nativeWindow());
     ImGui::NewFrame();
 
-    ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiCond_Always, ImVec2(0, 0));
-    ImGui::SetNextWindowSize(ImVec2(m_window->width(), 32), ImGuiCond_Always);
+    ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiCond_Always);
+    ImGui::SetNextWindowSize(ImVec2(m_window->width(), 20), ImGuiCond_Always);
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
     ImGui::Begin(
         "DebugLayerTimer",
@@ -46,6 +46,18 @@ void DebugLayer::update(float)
         | ImGuiWindowFlags_NoBackground
         | ImGuiWindowFlags_NoInputs
     );
+
+#if defined(__DEBUG__)
+    ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 1.0f), "[DEBUG]");
+    ImGui::SameLine();
+#elif defined(__RELEASE_PROFILE__)
+    ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "[RELEASE_PROFILE]");
+    ImGui::SameLine();
+#elif defined(__RELEASE__)
+    ImGui::TextColored(ImVec4(0.0f, 1.0f, 0.0f, 1.0f), "[RELEASE]");
+    ImGui::SameLine();
+#endif
+
     ImGui::Text(
         "%.1f FPS (spent=%.2fms, waiting=%.2fms, total=%.2fms) frame #%u",
         m_timer->fps().value(),
@@ -57,49 +69,19 @@ void DebugLayer::update(float)
     ImGui::PopStyleVar();
     ImGui::End();
 
+    if (m_demo)
+    {
+        ImGui::SetNextWindowPos(ImVec2(0, 20), ImGuiCond_Always);
+        ImGui::SetNextWindowSize(ImVec2 {(float) m_window->width() * 2 / 3, (float) m_window->height() * 2 / 3}, ImGuiCond_Always);
+        ImGui::ShowDemoWindow(&m_demo);
+    }
+
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
-void DebugLayer::onEvent(Event &e)
+void DebugLayer::onEvent(Event &)
 {
-    EventDispatcher dispatcher(e);
-
-    dispatcher.dispatch<KeyDownEvent>(BIND_EVENT_CALLBACK(&DebugLayer::onKeyDownEvent));
-    dispatcher.dispatch<KeyUpEvent>(BIND_EVENT_CALLBACK(&DebugLayer::onKeyUpEvent));
-    dispatcher.dispatch<MouseMotionEvent>(BIND_EVENT_CALLBACK(&DebugLayer::onMouseMotionEvent));
-    dispatcher.dispatch<MouseDownEvent>(BIND_EVENT_CALLBACK(&DebugLayer::onMouseDownEvent));
-    dispatcher.dispatch<MouseUpEvent>(BIND_EVENT_CALLBACK(&DebugLayer::onMouseUpEvent));
-}
-
-bool DebugLayer::onKeyDownEvent(const KeyDownEvent &e)
-{
-    LOG_INFO(e.toString());
-    return false;
-}
-
-bool DebugLayer::onKeyUpEvent(const KeyUpEvent &e)
-{
-    LOG_INFO(e.toString());
-    return false;
-}
-
-bool DebugLayer::onMouseMotionEvent(const MouseMotionEvent &e)
-{
-    LOG_INFO(e.toString());
-    return false;
-}
-
-bool DebugLayer::onMouseDownEvent(const MouseDownEvent &e)
-{
-    LOG_INFO(e.toString());
-    return false;
-}
-
-bool DebugLayer::onMouseUpEvent(const MouseUpEvent &e)
-{
-    LOG_INFO(e.toString());
-    return false;
 }
 
 }

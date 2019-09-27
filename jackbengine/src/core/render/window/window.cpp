@@ -6,7 +6,16 @@
 // Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
+#ifdef EMSCRIPTEN
+#include <emscripten.h>
+#include <emscripten/html5.h>
+#include <GLES3/gl3.h>
+#else
+
 #include "glad/glad.h"
+
+#endif
+
 #include "core/sdl/sdlinc.h"
 #include "window.h"
 
@@ -30,9 +39,17 @@ Window::Window(const std::string &title, int width, int height, bool fullscreen)
         y = SDL_WINDOWPOS_CENTERED;
     }
 
+#ifndef EMSCRIPTEN
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
+#else
+    EmscriptenWebGLContextAttributes attrs;
+    attrs.majorVersion = 2;
+    attrs.minorVersion = 0;
+    auto webgl_context = emscripten_webgl_create_context(0, &attrs);
+    emscripten_webgl_make_context_current(webgl_context);
+#endif
 
     m_window = SDL_CreateWindow(title.c_str(), x, y, width, height, flags);
     if (nullptr == m_window)
@@ -46,15 +63,16 @@ Window::Window(const std::string &title, int width, int height, bool fullscreen)
         throw std::runtime_error(SDL_GetError());
     }
 
+#ifndef EMSCRIPTEN
     auto gladStatus = gladLoadGLLoader(SDL_GL_GetProcAddress);
     if (!gladStatus)
     {
         throw std::runtime_error("Failed to initialize Glad");
     }
+#endif
 
     SDL_GL_MakeCurrent(m_window, m_glContext);
     SDL_GL_SetSwapInterval(0);
-
     SDL_GetWindowSize(m_window, &m_width, &m_height);
 
     setWindowIcon();

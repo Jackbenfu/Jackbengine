@@ -8,6 +8,10 @@
 
 #include "entryPoint.h"
 
+#ifdef EMSCRIPTEN
+#include <emscripten.h>
+#endif
+
 void parseArguments(int argc, char **argv, bool *fullscreen)
 {
     const auto FullscreenOption = "-fullscreen";
@@ -45,13 +49,13 @@ int main(int argc, char **argv)
 #endif
 
     auto application = Jackbengine::createApplication(fullscreen);
-    auto wrapper = Jackbengine::details::ApplicationWrapper(application.get());
 
 #ifdef EMSCRIPTEN
     applicationPtr = application.get();
     emscripten_cancel_main_loop();
     emscripten_set_main_loop(update, 0, 1);
 #else
+    auto wrapper = Jackbengine::details::ApplicationWrapper(application.get());
     while (wrapper.running())
     {
         wrapper.update();

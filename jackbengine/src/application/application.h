@@ -21,6 +21,7 @@
 #include "core/render/cursor/cursor.h"
 #include "core/render/window/window.h"
 #include "core/render/renderer/glRenderer.h"
+#include "core/render/renderer/renderer.h"
 
 namespace Jackbengine {
 
@@ -48,9 +49,16 @@ protected:
     template<typename TLayer>
     void removeLayer();
 
+#ifdef EMSCRIPTEN
+    public:
+        void update();
+#else
+private:
+    void update();
+#endif
+
 private:
     [[nodiscard]] bool running() const;
-    void update();
     void userUpdate(float delta);
 
     void onEvent(Event &e);

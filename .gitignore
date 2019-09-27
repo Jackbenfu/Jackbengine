@@ -7,5 +7,16 @@ cmake-build-debug/
 cmake-build-release/
 cmake-build-releaseprofile/
 
-# Jackbengine library
+# Generated source files
+resources.cpp
+
+# WebGL export folder
+export/*.js
+export/*.wasm
+export/*.wasm.map
+export/*.wast
+
+# Libraries
 libjackbengine.bc
+libimgui.bc
+resourceGenerator

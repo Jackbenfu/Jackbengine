@@ -39,7 +39,7 @@ public:
     void enable(bool enable);
 
     template<typename TFunction>
-    void apply(TFunction function);
+    void apply(TFunction func);
 
 private:
     template<typename TItem>
@@ -125,7 +125,7 @@ void HeterogeneousCollection<TBase>::enable(bool enable)
 
 template<typename TBase>
 template<typename TFunction>
-void HeterogeneousCollection<TBase>::apply(TFunction function)
+void HeterogeneousCollection<TBase>::apply(TFunction func)
 {
     for (auto&[type, item] : m_collection)
     {
@@ -136,7 +136,7 @@ void HeterogeneousCollection<TBase>::apply(TFunction function)
             continue;
         }
 
-        function(value);
+        func(value);
     }
 }
 

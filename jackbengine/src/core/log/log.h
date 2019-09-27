@@ -30,15 +30,40 @@ private:
 }
 
 #ifdef EMSCRIPTEN
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wgnu-zero-variadic-macro-arguments"
 #ifdef __DEBUG__
-#define LOG_TRACE(...)  EM_ASM(console.debug(__VA_ARGS__);)
+template<typename... Args>
+static inline void LOG_TRACE(spdlog::string_view_t fmt, const Args &... args)
+{
+    Jackbengine::Log::getLogger()->trace(fmt, args...);
+}
+template<typename T>
+static inline void LOG_TRACE(const T& msg)
+{
+    Jackbengine::Log::getLogger()->trace(msg);
+}
 #else
 #define LOG_TRACE
 #endif
-#define LOG_INFO(...)   EM_ASM(console.info(__VA_ARGS__);)
-#define LOG_ERROR(...)  EM_ASM(console.error(__VA_ARGS__);)
+template<typename... Args>
+static inline void LOG_INFO(spdlog::string_view_t fmt, const Args &... args)
+{
+    Jackbengine::Log::getLogger()->info(fmt, args...);
+}
+template<typename T>
+static inline void LOG_INFO(const T& msg)
+{
+    Jackbengine::Log::getLogger()->info(msg);
+}
+template<typename... Args>
+static inline void LOG_ERROR(spdlog::string_view_t fmt, const Args &... args)
+{
+    Jackbengine::Log::getLogger()->error(fmt, args...);
+}
+template<typename T>
+static inline void LOG_ERROR(const T& msg)
+{
+    Jackbengine::Log::getLogger()->error(msg);
+}
 #else
 #ifdef __DEBUG__
 #define LOG_TRACE(...)  Jackbengine::Log::getLogger()->trace(__VA_ARGS__)

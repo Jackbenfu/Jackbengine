@@ -15,7 +15,7 @@ CDFLAGS             = -g                                \
                       -s USE_WEBGL2=1					\
                       -DFMT_HEADER_ONLY
 
-CRPFLAGS            = -Oz                              	\
+CRPFLAGS            = -Oz                               \
 				      -D__RELEASE_PROFILE__				\
                       -Wall -Wextra -Wpedantic          \
                       -std=c++17                        \
@@ -45,49 +45,21 @@ CFLAGS              = -Oz                               \
                       -s USE_WEBGL2=1					\
                       -DFMT_HEADER_ONLY
 
-INCLUDES            = -Isrc                        	\
-                      -Iexternal					\
-					  -Iexternal/glad/include		\
-					  -Iexternal/fmt
+INCLUDES            = -Isandbox/src						\
+					  -Ijackbengine/src					\
+					  -Ijackbengine/external
 
-SOURCES             = resources.cpp								\
-                      src/core/audio/sound.cpp					\
-					  src/core/event/eventManager.cpp			\
-					  src/core/event/impl/keyEvent.cpp			\
-					  src/core/event/impl/keyDownEvent.cpp		\
-					  src/core/event/impl/keyUpEvent.cpp		\
-					  src/core/event/impl/mouseMotionEvent.cpp	\
-				      src/core/event/impl/mouseDownEvent.cpp	\
-					  src/core/event/impl/mouseUpEvent.cpp		\
-					  src/core/io/rwops.cpp						\
-					  src/core/layer/layerManager.cpp			\
-					  src/core/layer/impl/debugLayer.cpp		\
-					  src/core/imgui/imguiLoader.cpp			\
-					  src/core/sdl/sdlLoader.cpp				\
-					  src/core/log/log.cpp						\
-					  src/core/log/profile.cpp					\
-					  src/core/render/color.cpp					\
-					  src/core/render/cursor/cursor.cpp			\
-					  src/core/render/font/defaultFont.cpp		\
-					  src/core/render/font/font.cpp				\
-					  src/core/render/renderer/glRenderer.cpp	\
-					  src/core/render/renderer/renderer.cpp		\
-					  src/core/render/surface/surface.cpp		\
-					  src/core/render/texture/texture.cpp		\
-					  src/core/render/window/window.cpp			\
-					  src/core/time/timer.cpp					\
-					  src/application/application.cpp			\
-					  src/application/entryPoint.cpp
+SOURCES             = sandbox/src/app.cpp
 
-LIB_IMGUI           = external/imgui/libimgui.bc
+LIB_JACKBENGINE     = jackbengine/libjackbengine.bc
 
-OUT                 = libjackbengine.bc
+OUT                 = export/sandbox.js
 
 debug:
-	$(CC) $(CDFLAGS) $(INCLUDES) $(LIB_IMGUI) $(SOURCES) -o $(OUT)
+	$(CC) $(CDFLAGS) $(INCLUDES) $(LIB_JACKBENGINE) $(SOURCES) -o $(OUT)
 
 release_profile:
-	$(CC) $(CRPFLAGS) $(INCLUDES) $(LIB_IMGUI) $(SOURCES) -o $(OUT)
+	$(CC) $(CRPFLAGS) $(INCLUDES) $(LIB_JACKBENGINE) $(SOURCES) -o $(OUT)
 
 release:
-	$(CC) $(CFLAGS) $(INCLUDES) $(LIB_IMGUI) $(SOURCES) -o $(OUT)
+	$(CC) $(CFLAGS) $(INCLUDES) $(LIB_JACKBENGINE) $(SOURCES) -o $(OUT)

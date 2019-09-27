@@ -27,7 +27,11 @@ void initImGui(const Window *window)
     ImGui::StyleColorsDark();
 
     ImGui_ImplSDL2_InitForOpenGL(window->nativeWindow(), window->nativeGLContext());
-    ImGui_ImplOpenGL3_Init("#version 330");
+#ifdef EMSCRIPTEN
+    ImGui_ImplOpenGL3_Init("#version 100");
+#else
+    ImGui_ImplOpenGL3_Init("#version 330 core");
+#endif
 }
 
 void destroyImGui()

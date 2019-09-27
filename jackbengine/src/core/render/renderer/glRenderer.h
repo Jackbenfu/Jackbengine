@@ -22,16 +22,13 @@ public:
     static void clear();
     void present();
 
-    void initColorTest();
-    static void colorTest();
-
-    void initTextureTest();
+    void colorTest();
     void textureTest();
 
 private:
     static unsigned int createProgram(const char *vertexShader, const char *fragmentShader);
     static unsigned int compileShader(unsigned int type, const char *source);
-    static void logError(const char *function, const char *file, int line);
+    static void logError(const char *func, const char *file, int line);
 
     const Window &m_window;
     unsigned int m_program {0};

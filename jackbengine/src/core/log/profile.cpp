@@ -24,7 +24,7 @@ Profile::~Profile()
     auto us = end - start;
     auto ms = us * .001;
 
-    Log::getLogger()->trace(fmt::format("PROFILE {:<30} {}ms ({}μs)", m_name, ms, us));
+    LOG_INFO("PROFILE {:<30} {}ms ({}μs)", m_name, ms, us);
 }
 
 }

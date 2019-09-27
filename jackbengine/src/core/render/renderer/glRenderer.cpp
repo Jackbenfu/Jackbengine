@@ -6,7 +6,13 @@
 // Copyright © 2019 Damien Bendejacq. All rights reserved.
 //
 
+#ifdef EMSCRIPTEN
+#include <GLES3/gl3.h>
+#else
+
 #include "glad/glad.h"
+
+#endif
 
 #include "glRenderer.h"
 #include "core/sdl/sdlinc.h"
@@ -18,6 +24,8 @@ IMPORT_TEXT_RESOURCE(colorVertex_glsl)
 IMPORT_TEXT_RESOURCE(colorFragment_glsl)
 IMPORT_TEXT_RESOURCE(textureVertex_glsl)
 IMPORT_TEXT_RESOURCE(textureFragment_glsl)
+IMPORT_TEXT_RESOURCE(colorVertexWebgl_glsl)
+IMPORT_TEXT_RESOURCE(colorFragmentWebgl_glsl)
 IMPORT_BINARY_RESOURCE(aquarelle_damien_square_png)
 IMPORT_BINARY_RESOURCE(aquarelle_damien_square_light_jpg)
 
@@ -26,7 +34,7 @@ namespace Jackbengine::details {
 #ifdef __RELEASE__
 #define GL_CALL(f) f
 #else
-#define GL_CALL(f) f;\
+#define GL_CALL(f)  f;\
                     logError(#f, __FILE__, __LINE__)
 #endif
 
@@ -52,13 +60,13 @@ void GlRenderer::present()
     SDL_GL_SwapWindow(m_window.nativeWindow());
 }
 
-void GlRenderer::initColorTest()
+void GlRenderer::colorTest()
 {
     float vertices[] = {
-        0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
-        0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
-        -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f,
-        -0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 0.0f,
+        0.5f, 0.5f, 0.0f,
+        0.5f, -0.5f, 0.0f,
+        -0.5f, -0.5f, 0.0f,
+        -0.5f, 0.5f, 0.0f,
     };
 
     unsigned int indices[] = {
@@ -66,37 +74,37 @@ void GlRenderer::initColorTest()
         1, 2, 3,
     };
 
+#ifndef EMSCRIPTEN
     unsigned int vao;
     GL_CALL(glGenVertexArrays(1, &vao));
     GL_CALL(glBindVertexArray(vao));
+#endif
 
     unsigned int vbo;
     GL_CALL(glGenBuffers(1, &vbo));
-
     GL_CALL(glBindBuffer(GL_ARRAY_BUFFER, vbo));
-    GL_CALL(glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW));
+    GL_CALL(glBufferData(GL_ARRAY_BUFFER, 6 * 2 * sizeof(float), vertices, GL_STATIC_DRAW));
 
-    GL_CALL(glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *) 0));
     GL_CALL(glEnableVertexAttribArray(0));
-    GL_CALL(glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *) (3 * sizeof(float))));
-    GL_CALL(glEnableVertexAttribArray(1));
+    GL_CALL(glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void *) 0));
 
     unsigned int ibo;
     GL_CALL(glGenBuffers(1, &ibo));
     GL_CALL(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo));
-    GL_CALL(glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW));
+    GL_CALL(glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(uint), indices, GL_STATIC_DRAW));
 
+#ifdef EMSCRIPTEN
+    m_program = createProgram((const char *) colorVertexWebgl_glsl, (const char *) colorFragmentWebgl_glsl);
+#else
     m_program = createProgram((const char *) colorVertex_glsl, (const char *) colorFragment_glsl);
+#endif
 
     GL_CALL(glUseProgram(m_program));
-}
 
-void GlRenderer::colorTest()
-{
     GL_CALL(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0));
 }
 
-void GlRenderer::initTextureTest()
+void GlRenderer::textureTest()
 {
     float vertices[] = {
         0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, // top right
@@ -110,9 +118,11 @@ void GlRenderer::initTextureTest()
         1, 2, 3,
     };
 
+#ifndef EMSCRIPTEN
     unsigned int vao;
     GL_CALL(glGenVertexArrays(1, &vao));
     GL_CALL(glBindVertexArray(vao));
+#endif
 
     unsigned int vbo;
     GL_CALL(glGenBuffers(1, &vbo));
@@ -133,25 +143,22 @@ void GlRenderer::initTextureTest()
 
     GL_CALL(glGenTextures(1, &m_texture));
     GL_CALL(glBindTexture(GL_TEXTURE_2D, m_texture));
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    GL_CALL(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT));
+    GL_CALL(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT));
+    GL_CALL(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
+    GL_CALL(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
 
     const auto rwops = RWops(aquarelle_damien_square_light_jpg, aquarelle_damien_square_light_jpg_size);
     const auto surface = Surface(rwops);
     const auto texInfo = surface.nativeObject();
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, texInfo->w, texInfo->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, texInfo->pixels);
+    GL_CALL(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, texInfo->w, texInfo->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, texInfo->pixels));
 
     m_program = createProgram((const char *) textureVertex_glsl, (const char *) textureFragment_glsl);
 
     GL_CALL(glUseProgram(m_program));
-}
 
-void GlRenderer::textureTest()
-{
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, m_texture);
+    GL_CALL(glActiveTexture(GL_TEXTURE0));
+    GL_CALL(glBindTexture(GL_TEXTURE_2D, m_texture));
     GL_CALL(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0));
 }
 
@@ -195,7 +202,11 @@ unsigned int GlRenderer::compileShader(unsigned int type, const char *source)
     return shader;
 }
 
-void GlRenderer::logError(const char *function, const char *file, int line)
+void GlRenderer::logError(
+    [[maybe_unused]] const char *func,
+    [[maybe_unused]] const char *file,
+    [[maybe_unused]] int line
+)
 {
     GLenum error;
     while ((error = glGetError()) != GL_NO_ERROR)
@@ -223,7 +234,7 @@ void GlRenderer::logError(const char *function, const char *file, int line)
                 break;
         }
 
-        LOG_ERROR("Handled OpenGL error code={}, type={}, function={}, location={}({})", error, type, function, file, line);
+        LOG_ERROR("Handled OpenGL error code={}, type={}, function={}, location={}({})", error, type, func, file, line);
     }
 }
 

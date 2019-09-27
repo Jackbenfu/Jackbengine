@@ -44,7 +44,7 @@ public:
     typename std::map<int, std::tuple<size_t, bool, std::unique_ptr<TBase>>>::reverse_iterator rend();
 
     template<typename TFunction>
-    void apply(TFunction function);
+    void apply(TFunction func);
 
 private:
     template<typename TItem>
@@ -170,7 +170,7 @@ typename std::map<int, std::tuple<size_t, bool, std::unique_ptr<TBase>>>::revers
 
 template<typename TBase>
 template<typename TFunction>
-void OrderedHeterogeneousCollection<TBase>::apply(TFunction function)
+void OrderedHeterogeneousCollection<TBase>::apply(TFunction func)
 {
     for (const auto &pair : m_collection)
     {
@@ -181,7 +181,7 @@ void OrderedHeterogeneousCollection<TBase>::apply(TFunction function)
         }
 
         auto &item = *std::get<2>(tuple);
-        if (function(item))
+        if (func(item))
         {
             break;
         }

@@ -2,14 +2,16 @@ cmake_minimum_required(VERSION 3.14)
 project(sandbox)
 
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wpedantic")
 
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
     add_definitions(/D__DEBUG__)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS_DEBUG} -Wall -Wextra -Wpedantic")
 elseif (CMAKE_BUILD_TYPE STREQUAL "ReleaseProfile")
     add_definitions(/D__RELEASE_PROFILE__)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS_RELEASE} -Wall -Wextra -Wpedantic")
 elseif (CMAKE_BUILD_TYPE STREQUAL "Release")
     add_definitions(/D__RELEASE__)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS_RELEASE} -Wall -Wextra -Wpedantic")
 endif ()
 
 add_subdirectory(${PROJECT_SOURCE_DIR}/jackbengine)

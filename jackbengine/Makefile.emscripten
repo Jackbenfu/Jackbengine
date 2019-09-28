@@ -15,7 +15,7 @@ CDFLAGS             = -g                                \
                       -s USE_WEBGL2=1					\
                       -DFMT_HEADER_ONLY
 
-CRPFLAGS            = -Oz                              	\
+CRPFLAGS            = -O3 -DNDEBUG						\
 				      -D__RELEASE_PROFILE__				\
                       -Wall -Wextra -Wpedantic          \
                       -std=c++17                        \
@@ -30,7 +30,7 @@ CRPFLAGS            = -Oz                              	\
                       -s USE_WEBGL2=1					\
                       -DFMT_HEADER_ONLY
 
-CFLAGS              = -Oz                               \
+CFLAGS              = -O3 -DNDEBUG						\
 				      -D__RELEASE__						\
                       -Wall -Wextra -Wpedantic          \
                       -std=c++17                        \

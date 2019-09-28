@@ -1,6 +1,6 @@
 CC                  = emcc
 
-CFLAGS              = -Oz								\
+CFLAGS              = -O3 -DNDEBUG						\
                       -std=c++17						\
                       -s USE_SDL=2                      \
 					  -s DEMANGLE_SUPPORT=1             \

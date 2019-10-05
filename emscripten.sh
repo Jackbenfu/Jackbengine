@@ -7,8 +7,6 @@ YELLOW='\033[0;33m'
 
 pwd=$(pwd)
 
-echo ${pwd}
-
 debug=0
 release_profile=0
 release=0
@@ -36,6 +34,21 @@ else
   echo -e "${RED}Usage: emscripten.sh {debug|release_profile|release}${NC}"
   exit 42
 fi
+
+echo -e "${GREEN}Building ResourceGenerator...${NC}"
+cd ${pwd}/jackbengine/external/resourceGenerator
+make -f Makefile.emscripten
+
+cd ${pwd}/jackbengine
+echo -e "${GREEN}Generating resources.cpp...${NC}"
+./external/resourceGenerator/resourceGenerator \
+  resources.cpp \
+  -tsrc/core/render/renderer/shader/colorVertex.glsl \
+  -tsrc/core/render/renderer/shader/colorFragment.glsl \
+  -tsrc/core/render/renderer/shader/textureVertex.glsl \
+  -tsrc/core/render/renderer/shader/textureFragment.glsl \
+  -bresource/aquarelle_damien_square.png \
+  -bresource/aquarelle_damien_square_light.jpg
 
 echo -e "${GREEN}Building ImGui...${NC}"
 cd ${pwd}/jackbengine/external/imgui

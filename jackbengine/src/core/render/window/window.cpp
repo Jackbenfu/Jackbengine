@@ -39,16 +39,16 @@ Window::Window(const std::string &title, int width, int height, bool fullscreen)
         y = SDL_WINDOWPOS_CENTERED;
     }
 
-#ifndef EMSCRIPTEN
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
-#else
+#ifdef EMSCRIPTEN
     EmscriptenWebGLContextAttributes attrs;
     attrs.majorVersion = 2;
     attrs.minorVersion = 0;
     auto webgl_context = emscripten_webgl_create_context(0, &attrs);
     emscripten_webgl_make_context_current(webgl_context);
+#else
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
 #endif
 
     m_window = SDL_CreateWindow(title.c_str(), x, y, width, height, flags);

@@ -53,8 +53,6 @@ add_custom_command(
     -t${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/colorFragment.glsl
     -t${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/textureVertex.glsl
     -t${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/textureFragment.glsl
-    -t${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/colorVertexWebgl.glsl
-    -t${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/colorFragmentWebgl.glsl
     -b${PROJECT_SOURCE_DIR}/resource/aquarelle_damien_square.png
     -b${PROJECT_SOURCE_DIR}/resource/aquarelle_damien_square_light.jpg
     DEPENDS
@@ -62,8 +60,6 @@ add_custom_command(
     ${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/colorFragment.glsl
     ${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/textureVertex.glsl
     ${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/textureFragment.glsl
-    ${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/colorVertexWebgl.glsl
-    ${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/colorFragmentWebgl.glsl
     ${PROJECT_SOURCE_DIR}/resource/aquarelle_damien_square.png
     ${PROJECT_SOURCE_DIR}/resource/aquarelle_damien_square_light.jpg
 )

@@ -1,4 +1,4 @@
-#version 330 core
+precision mediump float;
 
 in vec3 vColor;
 in vec2 vTexcoord;

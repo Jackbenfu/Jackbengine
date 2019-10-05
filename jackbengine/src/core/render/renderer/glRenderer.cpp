@@ -24,8 +24,6 @@ IMPORT_TEXT_RESOURCE(colorVertex_glsl)
 IMPORT_TEXT_RESOURCE(colorFragment_glsl)
 IMPORT_TEXT_RESOURCE(textureVertex_glsl)
 IMPORT_TEXT_RESOURCE(textureFragment_glsl)
-IMPORT_TEXT_RESOURCE(colorVertexWebgl_glsl)
-IMPORT_TEXT_RESOURCE(colorFragmentWebgl_glsl)
 IMPORT_BINARY_RESOURCE(aquarelle_damien_square_png)
 IMPORT_BINARY_RESOURCE(aquarelle_damien_square_light_jpg)
 
@@ -41,6 +39,12 @@ namespace Jackbengine::details {
 GlRenderer::GlRenderer(const Window &window)
     : m_window {window}
 {
+#ifdef EMSCRIPTEN
+    m_glslVersion = "#version 300 es";
+#else
+    m_glslVersion = "#version 330 core";
+#endif
+
     GL_CALL(glViewport(0, 0, m_window.width(), m_window.height()));
     GL_CALL(glClearColor(0, 0, 0, 1));
 }
@@ -93,11 +97,7 @@ void GlRenderer::colorTest()
     GL_CALL(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo));
     GL_CALL(glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(uint), indices, GL_STATIC_DRAW));
 
-#ifdef EMSCRIPTEN
-    m_program = createProgram((const char *) colorVertexWebgl_glsl, (const char *) colorFragmentWebgl_glsl);
-#else
     m_program = createProgram((const char *) colorVertex_glsl, (const char *) colorFragment_glsl);
-#endif
 
     GL_CALL(glUseProgram(m_program));
 
@@ -107,10 +107,10 @@ void GlRenderer::colorTest()
 void GlRenderer::textureTest()
 {
     float vertices[] = {
-        0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, // top right
-        0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, // bottom right
-        -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, // bottom left
-        -0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, // top left
+        0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, // top right
+        0.5f, -0.5f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f, // bottom right
+        -0.5f, -0.5f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f, // bottom left
+        -0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f, // top left
     };
 
     unsigned int indices[] = {
@@ -118,11 +118,9 @@ void GlRenderer::textureTest()
         1, 2, 3,
     };
 
-#ifndef EMSCRIPTEN
     unsigned int vao;
     GL_CALL(glGenVertexArrays(1, &vao));
     GL_CALL(glBindVertexArray(vao));
-#endif
 
     unsigned int vbo;
     GL_CALL(glGenBuffers(1, &vbo));
@@ -138,7 +136,7 @@ void GlRenderer::textureTest()
     GL_CALL(glEnableVertexAttribArray(0));
     GL_CALL(glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void *) (3 * sizeof(float))));
     GL_CALL(glEnableVertexAttribArray(1));
-    GL_CALL(glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void *) (6 * sizeof(float))));
+    GL_CALL(glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void *) (6 * sizeof(float))));
     GL_CALL(glEnableVertexAttribArray(2));
 
     GL_CALL(glGenTextures(1, &m_texture));
@@ -148,10 +146,16 @@ void GlRenderer::textureTest()
     GL_CALL(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
     GL_CALL(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
 
-    const auto rwops = RWops(aquarelle_damien_square_light_jpg, aquarelle_damien_square_light_jpg_size);
+    const auto rwops = RWops(aquarelle_damien_square_png, aquarelle_damien_square_png_size);
     const auto surface = Surface(rwops);
+    LOG_INFO("{}", SDL_GetPixelFormatName(surface.nativeObject()->format->format));
     const auto texInfo = surface.nativeObject();
-    GL_CALL(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, texInfo->w, texInfo->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, texInfo->pixels));
+
+#ifdef EMSCRIPTEN
+    GL_CALL(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, texInfo->w, texInfo->h, 0, GL_RGB, GL_UNSIGNED_BYTE, texInfo->pixels));
+#else
+    GL_CALL(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, texInfo->w, texInfo->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, texInfo->pixels));
+#endif
 
     m_program = createProgram((const char *) textureVertex_glsl, (const char *) textureFragment_glsl);
 
@@ -182,7 +186,9 @@ unsigned int GlRenderer::createProgram(const char *vertexShader, const char *fra
 unsigned int GlRenderer::compileShader(unsigned int type, const char *source)
 {
     const auto shader = GL_CALL(glCreateShader(type));
-    GL_CALL(glShaderSource(shader, 1, &source, nullptr));
+    const GLchar *sourceWithVersion[3] = {m_glslVersion, "\n", source};
+
+    GL_CALL(glShaderSource(shader, 3, sourceWithVersion, nullptr));
     GL_CALL(glCompileShader(shader));
 
     int result;
@@ -196,17 +202,28 @@ unsigned int GlRenderer::compileShader(unsigned int type, const char *source)
 
         GL_CALL(glDeleteShader(shader));
 
+        const char *typeS;
+        switch (type)
+        {
+            case GL_VERTEX_SHADER:
+                typeS = "GL_VERTEX_SHADER";
+                break;
+            case GL_FRAGMENT_SHADER:
+                typeS = "GL_FRAGMENT_SHADER";
+                break;
+            default:
+                typeS = std::to_string(type).c_str();
+        }
+
+        LOG_INFO("{} {}", typeS, message);
+
         throw std::runtime_error(message);
     }
 
     return shader;
 }
 
-void GlRenderer::logError(
-    [[maybe_unused]] const char *func,
-    [[maybe_unused]] const char *file,
-    [[maybe_unused]] int line
-)
+void GlRenderer::logError([[maybe_unused]] const char *func, [[maybe_unused]] const char *file, [[maybe_unused]] int line)
 {
     GLenum error;
     while ((error = glGetError()) != GL_NO_ERROR)

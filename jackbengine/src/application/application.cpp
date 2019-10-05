@@ -37,7 +37,7 @@ Application::Application(ApplicationConfig &config)
 
         details::initImGui(m_window.get());
 
-        addLayer<DebugLayer>(m_timer.get(), m_window.get(), true);
+//        addLayer<DebugLayer>(m_timer.get(), m_window.get(), true);
     }
 }
 
@@ -68,7 +68,8 @@ void Application::update()
         m_eventManager->update(delta);
         userUpdate(delta);
 
-        m_renderer->colorTest();
+        m_renderer->textureTest();
+//        m_renderer->colorTest();
         m_layerManager->update(delta);
 
         m_renderer->present();

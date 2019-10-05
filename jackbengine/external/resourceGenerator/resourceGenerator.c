@@ -93,6 +93,8 @@ int appendResource(FILE *outputFile, char *resourceName)
         return -1;
     }
 
+    fprintf(stdout, "Generating resource: %s\n", resourceName);
+
     int resourceNameLength = (int) strlen(resourceName);
     int resourceNameIndex = resourceNameLength - 1;
     while (resourceNameIndex > -1)

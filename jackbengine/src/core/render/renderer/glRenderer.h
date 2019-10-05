@@ -26,11 +26,12 @@ public:
     void textureTest();
 
 private:
-    static unsigned int createProgram(const char *vertexShader, const char *fragmentShader);
-    static unsigned int compileShader(unsigned int type, const char *source);
+    unsigned int createProgram(const char *vertexShader, const char *fragmentShader);
+    unsigned int compileShader(unsigned int type, const char *source);
     static void logError(const char *func, const char *file, int line);
 
     const Window &m_window;
+    const char *m_glslVersion;
     unsigned int m_program {0};
     unsigned int m_texture {0};
 };

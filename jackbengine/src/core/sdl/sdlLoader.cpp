@@ -22,6 +22,11 @@ void initSDL()
         throw std::runtime_error(SDL_GetError());
     }
 
+    if (0 == IMG_Init(IMG_INIT_PNG))
+    {
+        throw std::runtime_error(IMG_GetError());
+    }
+
     if (TTF_Init() < 0)
     {
         throw std::runtime_error(TTF_GetError());
@@ -42,6 +47,7 @@ void destroySDL()
 {
     Mix_Quit();
     TTF_Quit();
+    IMG_Quit();
     SDL_Quit();
 }
 

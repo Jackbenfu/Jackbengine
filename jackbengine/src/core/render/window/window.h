@@ -12,6 +12,7 @@
 #include <string>
 
 typedef struct SDL_Window SDL_Window;
+typedef struct SDL_Surface SDL_Surface;
 typedef void *SDL_GLContext;
 
 namespace Jackbengine::details {
@@ -28,12 +29,14 @@ public:
     [[nodiscard]] int height() const;
 
     [[nodiscard]] SDL_Window *nativeWindow() const;
-    [[nodiscard]] SDL_GLContext  nativeGLContext() const;
+    [[nodiscard]] SDL_Surface *nativeSurface() const;
+    [[nodiscard]] SDL_GLContext nativeGLContext() const;
 
 private:
     static void setWindowIcon();
 
     SDL_Window *m_window {nullptr};
+    SDL_Surface *m_surface {nullptr};
     SDL_GLContext m_glContext {nullptr};
 
     int m_width {0};

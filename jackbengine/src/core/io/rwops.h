@@ -19,9 +19,11 @@ class RWops
 {
 public:
     RWops(const void *data, size_t dataSize);
-    ~RWops() = default;
+    ~RWops();
 
     [[nodiscard]] SDL_RWops *nativeObject() const;
+
+    void seekBegin();
 
 private:
     SDL_RWops *m_rwops {nullptr};

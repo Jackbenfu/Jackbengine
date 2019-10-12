@@ -57,9 +57,17 @@ Window::Window(const std::string &title, int width, int height, bool fullscreen)
         throw std::runtime_error(SDL_GetError());
     }
 
+    m_surface = SDL_GetWindowSurface(m_window);
+    if (nullptr == m_surface)
+    {
+        SDL_DestroyWindow(m_window);
+        throw std::runtime_error(SDL_GetError());
+    }
+
     m_glContext = SDL_GL_CreateContext(m_window);
     if (nullptr == m_glContext)
     {
+        SDL_DestroyWindow(m_window);
         throw std::runtime_error(SDL_GetError());
     }
 
@@ -67,6 +75,8 @@ Window::Window(const std::string &title, int width, int height, bool fullscreen)
     auto gladStatus = gladLoadGLLoader(SDL_GL_GetProcAddress);
     if (!gladStatus)
     {
+        SDL_GL_DeleteContext(m_glContext);
+        SDL_DestroyWindow(m_window);
         throw std::runtime_error("Failed to initialize Glad");
     }
 #endif
@@ -98,6 +108,11 @@ int Window::height() const
 SDL_Window *Window::nativeWindow() const
 {
     return m_window;
+}
+
+SDL_Surface *Window::nativeSurface() const
+{
+    return m_surface;
 }
 
 SDL_GLContext Window::nativeGLContext() const

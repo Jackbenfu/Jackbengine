@@ -8,7 +8,7 @@ cmake-build-release/
 cmake-build-releaseprofile/
 
 # Generated source files
-resources.cpp
+jackbengine/resources.cpp
 
 # WebGL export folder
 export/*.js
@@ -17,6 +17,6 @@ export/*.wasm.map
 export/*.wast
 
 # Libraries
-libjackbengine.bc
-libimgui.bc
-resourceGenerator
+jackbengine/libjackbengine.bc
+jackbengine/external/imgui/libimgui.bc
+jackbengine/external/resourceGenerator/resourceGenerator

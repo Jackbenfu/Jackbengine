@@ -49,19 +49,21 @@ add_custom_command(
     OUTPUT ${PROJECT_SOURCE_DIR}/resources.cpp
     COMMAND resourceGenerator
     ${PROJECT_SOURCE_DIR}/resources.cpp
-    -t${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/colorVertex.glsl
-    -t${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/colorFragment.glsl
-    -t${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/textureVertex.glsl
-    -t${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/textureFragment.glsl
+    -t${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/color.vertex.default.glsl
+    -t${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/color.fragment.default.glsl
+    -t${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/texture.vertex.default.glsl
+    -t${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/texture.fragment.default.glsl
+    -t${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/texture.fragment.grayscale.glsl
     -b${PROJECT_SOURCE_DIR}/resource/aquarelle_damien_square.png
-    -b${PROJECT_SOURCE_DIR}/resource/aquarelle_damien_square_light.jpg
+    -b${PROJECT_SOURCE_DIR}/resource/aquarelle_damien_square_alpha.png
     DEPENDS
-    ${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/colorVertex.glsl
-    ${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/colorFragment.glsl
-    ${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/textureVertex.glsl
-    ${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/textureFragment.glsl
+    ${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/color.vertex.default.glsl
+    ${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/color.fragment.default.glsl
+    ${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/texture.vertex.default.glsl
+    ${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/texture.fragment.default.glsl
+    ${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/texture.fragment.grayscale.glsl
     ${PROJECT_SOURCE_DIR}/resource/aquarelle_damien_square.png
-    ${PROJECT_SOURCE_DIR}/resource/aquarelle_damien_square_light.jpg
+    ${PROJECT_SOURCE_DIR}/resource/aquarelle_damien_square_alpha.png
 )
 
 set(

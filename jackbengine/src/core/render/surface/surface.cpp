@@ -7,6 +7,7 @@
 //
 
 #include <stdexcept>
+#include <core/render/window/window.h>
 
 #include "surface.h"
 #include "core/sdl/sdlinc.h"
@@ -29,6 +30,12 @@ Surface::Surface(const RWops &rwops)
     {
         throw std::runtime_error(IMG_GetError());
     }
+}
+
+Surface::Surface(const Window &window)
+{
+    m_mustBeFreed = false;
+    m_surface = SDL_GetWindowSurface(window.nativeWindow());
 }
 
 Surface::Surface(int width, int height, int depth)
@@ -55,7 +62,10 @@ Surface::Surface(const Font &font, const std::string &text, Color foreground)
 
 Surface::~Surface()
 {
-    SDL_FreeSurface((SDL_Surface *) m_surface);
+    if (m_mustBeFreed)
+    {
+        SDL_FreeSurface((SDL_Surface *) m_surface);
+    }
 }
 
 SDL_Surface *Surface::nativeObject() const

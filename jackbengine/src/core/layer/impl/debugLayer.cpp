@@ -61,9 +61,9 @@ void DebugLayer::update(float)
     ImGui::Text(
         "%.1f FPS (spent=%.2fms, waiting=%.2fms, total=%.2fms) frame #%u",
         m_timer->fps().value(),
-        m_timer->spentMilliseconds(),
-        m_timer->waitingMilliseconds(),
-        m_timer->elapsedMilliseconds(),
+        m_timer->averageSpentMilliseconds(),
+        m_timer->averageWaitingMilliseconds(),
+        m_timer->averageElapsedMilliseconds(),
         m_timer->totalFrames()
     );
     ImGui::PopStyleVar();

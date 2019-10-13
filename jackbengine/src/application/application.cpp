@@ -37,7 +37,7 @@ Application::Application(ApplicationConfig &config)
 
         details::initImGui(m_window.get());
 
-//        addLayer<DebugLayer>(m_timer.get(), m_window.get(), true);
+        addLayer<DebugLayer>(m_timer.get(), m_window.get(), true);
     }
 }
 

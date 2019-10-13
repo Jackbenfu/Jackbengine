@@ -18,7 +18,9 @@ Timer::Timer(unsigned int fps)
 {
     m_targetFps = fps;
     m_targetFrameTime = 1000.0f / (float) fps;
-    m_frameTimes = std::vector<float>(fps, 0);
+    m_elapsedMillisecondsBuffer = std::vector<float>(fps, 0);
+    m_spentMillisecondsBuffer = std::vector<float>(fps, 0);
+    m_waitingMillisecondsBuffer = std::vector<float>(fps, 0);
 }
 
 void Timer::start()
@@ -43,12 +45,35 @@ void Timer::snapshot()
 
     m_elapsedMilliseconds = m_spentMilliseconds + m_waitingMilliseconds;
 
-    if (m_totalFrames > m_frameTimes.capacity())
-    {
-        m_fps = 1000.0f / (std::accumulate(m_frameTimes.begin(), m_frameTimes.end(), 0.0f) / m_frameTimes.capacity());
-    }
+    m_elapsedMillisecondsBuffer[m_totalFrames % m_elapsedMillisecondsBuffer.capacity()] = m_elapsedMilliseconds;
+    m_spentMillisecondsBuffer[m_totalFrames % m_spentMillisecondsBuffer.capacity()] = m_spentMilliseconds;
+    m_waitingMillisecondsBuffer[m_totalFrames % m_waitingMillisecondsBuffer.capacity()] = m_waitingMilliseconds;
 
-    m_frameTimes[m_totalFrames % m_frameTimes.capacity()] = m_elapsedMilliseconds;
+    if (m_totalFrames > m_elapsedMillisecondsBuffer.capacity())
+    {
+        const auto averageElapsed = std::accumulate(
+            m_elapsedMillisecondsBuffer.begin(),
+            m_elapsedMillisecondsBuffer.end(),
+            0.0f
+        ) / m_elapsedMillisecondsBuffer.capacity();
+
+        m_fps = 1000.0f / averageElapsed;
+
+        if (m_totalFrames % m_elapsedMillisecondsBuffer.capacity() == 0)
+        {
+            m_averageElapsedMilliseconds = averageElapsed;
+            m_averageSpentMilliseconds = std::accumulate(
+                m_spentMillisecondsBuffer.begin(),
+                m_spentMillisecondsBuffer.end(),
+                0.0f
+            ) / m_spentMillisecondsBuffer.capacity();
+            m_averageWaitingMilliseconds = std::accumulate(
+                m_waitingMillisecondsBuffer.begin(),
+                m_waitingMillisecondsBuffer.end(),
+                0.0f
+            ) / m_waitingMillisecondsBuffer.capacity();
+        }
+    }
 
     ++m_totalFrames;
 
@@ -81,6 +106,21 @@ float Timer::spentMilliseconds() const
 float Timer::waitingMilliseconds() const
 {
     return m_waitingMilliseconds;
+}
+
+float Timer::averageElapsedMilliseconds() const
+{
+    return m_averageElapsedMilliseconds;
+}
+
+float Timer::averageSpentMilliseconds() const
+{
+    return m_averageSpentMilliseconds;
+}
+
+float Timer::averageWaitingMilliseconds() const
+{
+    return m_averageWaitingMilliseconds;
 }
 
 unsigned int Timer::totalFrames() const

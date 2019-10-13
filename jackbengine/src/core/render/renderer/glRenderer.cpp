@@ -137,7 +137,6 @@ void GlRenderer::colorTest()
     m_program = createProgram((const char *) color_vertex_default_glsl, (const char *) color_fragment_default_glsl);
     GL_CALL(glUseProgram(m_program));
 
-    // TODO triangle strip ? less indices
     GL_CALL(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0));
 }
 

@@ -30,6 +30,10 @@ public:
     [[nodiscard]] float spentMilliseconds() const;
     [[nodiscard]] float waitingMilliseconds() const;
 
+    [[nodiscard]] float averageElapsedMilliseconds() const;
+    [[nodiscard]] float averageSpentMilliseconds() const;
+    [[nodiscard]] float averageWaitingMilliseconds() const;
+
     [[nodiscard]] unsigned int totalFrames() const;
 
 private:
@@ -37,16 +41,22 @@ private:
     [[nodiscard]] float ticks() const;
 
     unsigned int m_targetFps {0};
-    float m_targetFrameTime {0};
-    std::vector<float> m_frameTimes;
     unsigned int m_totalFrames {0};
+    float m_targetFrameTime {0};
+
+    std::vector<float> m_elapsedMillisecondsBuffer;
+    std::vector<float> m_spentMillisecondsBuffer;
+    std::vector<float> m_waitingMillisecondsBuffer;
 
     std::optional<float> m_fps;
 
     float m_start {0};
     float m_elapsedMilliseconds {0};
+    float m_averageElapsedMilliseconds {0};
     float m_spentMilliseconds {0};
+    float m_averageSpentMilliseconds {0};
     float m_waitingMilliseconds {0};
+    float m_averageWaitingMilliseconds {0};
 };
 
 }

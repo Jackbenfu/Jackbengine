@@ -16,8 +16,6 @@ elseif (CMAKE_BUILD_TYPE STREQUAL "Release")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS_RELEASE} -Wall -Wextra -Wpedantic")
 endif ()
 
-message(${CMAKE_CXX_FLAGS})
-
 add_definitions(/DFMT_HEADER_ONLY)
 
 add_subdirectory(${PROJECT_SOURCE_DIR}/external/imgui)

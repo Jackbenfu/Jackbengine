@@ -2,81 +2,88 @@
 // texture.cpp
 // jackbengine
 //
-// Created by Damien Bendejacq on 13/07/2017.
-// Copyright © 2017 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 19/10/2019.
+// Copyright © 2019 Damien Bendejacq. All rights reserved.
 //
 
 #include "texture.h"
-#include "core/render/renderer/renderer.h"
+#include "core/render/renderer/glUtils.h"
 #include "core/sdl/sdlinc.h"
+#include "core/io/rwops.h"
+#include "core/render/surface/surface.h"
 
 namespace Jackbengine::details {
 
-Texture::Texture(const Renderer &renderer, const std::string &file)
+Texture::Texture(unsigned int id, const std::string &file)
+    : m_id {id}
 {
-    const auto sdlSurface = std::make_unique<Surface>(file);
+    const Surface surface(file);
 
-    loadTextureFromSurface(renderer, *sdlSurface);
+    loadTextureFromSurface(surface);
 }
 
-Texture::Texture(const Renderer &renderer, const void *data, size_t dataSize)
+Texture::Texture(unsigned int id, const void *data, size_t dataSize)
+    : m_id {id}
 {
-    const auto sdlRwops = std::make_unique<RWops>(data, dataSize);
-    const auto sdlSurface = std::make_unique<Surface>(*sdlRwops);
+    const RWops rwops(data, dataSize);
+    const Surface surface(rwops);
 
-    loadTextureFromSurface(renderer, *sdlSurface);
+    loadTextureFromSurface(surface);
 }
 
-Texture::Texture(const Renderer &renderer, int width, int height, Color color)
+unsigned int Texture::id() const
 {
-    const auto sdlSurface = std::make_unique<Surface>(width, height, 32);
-    const auto sdlSurfaceObject = (SDL_Surface *) sdlSurface->nativeObject();
+    return m_id;
+}
 
-    const auto rgbUint = SDL_MapRGB(sdlSurfaceObject->format, color.r, color.g, color.b);
-    if (SDL_FillRect(sdlSurfaceObject, nullptr, rgbUint) < 0)
+void Texture::loadTextureFromSurface(const Surface &surface)
+{
+    const auto nativeSurface = surface.nativeObject();
+
+    GLint internalFormat;
+    GLenum format;
+
+    /*
+     * Desktop > bbp=4, rmask=0x00ff0000, format=GL_BGRA
+     * WebGL   > bbp=3, rmask=0x000000ff, format=GL_RGB
+     */
+    if (nativeSurface->format->BytesPerPixel == 4)
     {
-        throw std::runtime_error(SDL_GetError());
+        internalFormat = GL_RGBA;
+#ifdef EMSCRIPTEN
+        format = GL_RGBA;
+#else
+        format = nativeSurface->format->Rmask == 0xff ? GL_RGBA : GL_BGRA;
+#endif
+    }
+    else // assume bbp = 3
+    {
+        internalFormat = GL_RGB;
+#ifdef EMSCRIPTEN
+        format = GL_RGB;
+#else
+        format = nativeSurface->format->Rmask == 0xff ? GL_RGB : GL_BGR;
+#endif
     }
 
-    loadTextureFromSurface(renderer, *sdlSurface);
-}
+    GL_CALL(glBindTexture(GL_TEXTURE_2D, m_id));
 
-Texture::Texture(const Renderer &renderer, const Font &font, const std::string &text, Color foreground)
-{
-    const auto sdlSurface = std::make_unique<Surface>(font, text, foreground);
+    GL_CALL(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT));
+    GL_CALL(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT));
+    GL_CALL(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
+    GL_CALL(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
 
-    loadTextureFromSurface(renderer, *sdlSurface);
-}
-
-Texture::~Texture()
-{
-    SDL_DestroyTexture(m_texture);
-}
-
-int Texture::width() const
-{
-    return m_width;
-}
-
-int Texture::height() const
-{
-    return m_height;
-}
-
-void Texture::loadTextureFromSurface(const Renderer &renderer, const Surface &surface)
-{
-    const auto sdlRenderer = renderer.m_renderer;
-
-    m_texture = SDL_CreateTextureFromSurface(sdlRenderer, surface.nativeObject());
-    if (nullptr == m_texture)
-    {
-        throw std::runtime_error(SDL_GetError());
-    }
-
-    if (SDL_QueryTexture(m_texture, nullptr, nullptr, &m_width, &m_height) < 0)
-    {
-        throw std::runtime_error(SDL_GetError());
-    }
+    GL_CALL(glTexImage2D(
+        GL_TEXTURE_2D,
+        0,
+        internalFormat,
+        nativeSurface->w,
+        nativeSurface->h,
+        0,
+        format,
+        GL_UNSIGNED_BYTE,
+        nativeSurface->pixels
+    ));
 }
 
 }

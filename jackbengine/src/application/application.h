@@ -20,7 +20,6 @@
 #include "core/time/timer.h"
 #include "core/render/cursor/cursor.h"
 #include "core/render/window/window.h"
-#include "core/render/renderer/glRenderer.h"
 #include "core/render/renderer/renderer.h"
 
 namespace Jackbengine {
@@ -67,7 +66,9 @@ private:
     std::unique_ptr<details::Timer> m_timer;
     std::unique_ptr<details::Cursor> m_cursor;
     std::unique_ptr<details::Window> m_window;
-    std::unique_ptr<details::GlRenderer> m_renderer;
+    std::unique_ptr<details::TextureManager> m_textureManager;
+    std::unique_ptr<details::ShaderManager> m_shaderManager;
+    std::unique_ptr<details::Renderer> m_renderer;
     std::unique_ptr<details::EventManager> m_eventManager;
     std::unique_ptr<details::LayerManager> m_layerManager;
 

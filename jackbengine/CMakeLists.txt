@@ -3,7 +3,7 @@ project(jackbengine)
 
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
     add_definitions(/D__DEBUG__)
@@ -47,19 +47,21 @@ add_custom_command(
     OUTPUT ${PROJECT_SOURCE_DIR}/resources.cpp
     COMMAND resourceGenerator
     ${PROJECT_SOURCE_DIR}/resources.cpp
-    -t${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/color.vertex.default.glsl
-    -t${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/color.fragment.default.glsl
-    -t${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/texture.vertex.default.glsl
-    -t${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/texture.fragment.default.glsl
-    -t${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/texture.fragment.grayscale.glsl
+    -t${PROJECT_SOURCE_DIR}/src/core/render/shader/glsl/color.vertex.default.glsl
+    -t${PROJECT_SOURCE_DIR}/src/core/render/shader/glsl/color.fragment.default.glsl
+    -t${PROJECT_SOURCE_DIR}/src/core/render/shader/glsl/texture.vertex.default.glsl
+    -t${PROJECT_SOURCE_DIR}/src/core/render/shader/glsl/texture.fragment.default.glsl
+    -t${PROJECT_SOURCE_DIR}/src/core/render/shader/glsl/texture.fragment.grayscale.glsl
+    -t${PROJECT_SOURCE_DIR}/src/core/render/shader/glsl/texture.fragment.pixelate.glsl
     -b${PROJECT_SOURCE_DIR}/resource/aquarelle_damien_square.png
     -b${PROJECT_SOURCE_DIR}/resource/aquarelle_damien_square_alpha.png
     DEPENDS
-    ${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/color.vertex.default.glsl
-    ${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/color.fragment.default.glsl
-    ${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/texture.vertex.default.glsl
-    ${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/texture.fragment.default.glsl
-    ${PROJECT_SOURCE_DIR}/src/core/render/renderer/shader/texture.fragment.grayscale.glsl
+    ${PROJECT_SOURCE_DIR}/src/core/render/shader/glsl/color.vertex.default.glsl
+    ${PROJECT_SOURCE_DIR}/src/core/render/shader/glsl/color.fragment.default.glsl
+    ${PROJECT_SOURCE_DIR}/src/core/render/shader/glsl/texture.vertex.default.glsl
+    ${PROJECT_SOURCE_DIR}/src/core/render/shader/glsl/texture.fragment.default.glsl
+    ${PROJECT_SOURCE_DIR}/src/core/render/shader/glsl/texture.fragment.grayscale.glsl
+    ${PROJECT_SOURCE_DIR}/src/core/render/shader/glsl/texture.fragment.pixelate.glsl
     ${PROJECT_SOURCE_DIR}/resource/aquarelle_damien_square.png
     ${PROJECT_SOURCE_DIR}/resource/aquarelle_damien_square_alpha.png
 )
@@ -82,14 +84,18 @@ set(
     src/core/sdl/sdlLoader.cpp
     src/core/log/log.cpp
     src/core/log/profile.cpp
+    src/core/log/tracer.cpp
     src/core/render/color.cpp
     src/core/render/cursor/cursor.cpp
     src/core/render/font/defaultFont.cpp
     src/core/render/font/font.cpp
-    src/core/render/renderer/glRenderer.cpp
+    src/core/render/renderer/glUtils.cpp
     src/core/render/renderer/renderer.cpp
+    src/core/render/shader/shader.cpp
+    src/core/render/shader/shaderManager.cpp
     src/core/render/surface/surface.cpp
     src/core/render/texture/texture.cpp
+    src/core/render/texture/textureManager.cpp
     src/core/render/window/window.cpp
     src/core/time/timer.cpp
     src/application/application.cpp

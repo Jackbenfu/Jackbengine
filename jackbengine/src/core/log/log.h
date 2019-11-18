@@ -18,7 +18,7 @@ class Log
 public:
     static void init();
 
-    inline static std::shared_ptr<spdlog::logger> &getLogger()
+    inline static std::shared_ptr<spdlog::logger> &logger()
     {
         return s_logger;
     }
@@ -34,12 +34,12 @@ private:
 template<typename... Args>
 static inline void LOG_TRACE(spdlog::string_view_t fmt, const Args &... args)
 {
-    Jackbengine::Log::getLogger()->trace(fmt, args...);
+    Jackbengine::Log::logger()->trace(fmt, args...);
 }
 template<typename T>
 static inline void LOG_TRACE(const T& msg)
 {
-    Jackbengine::Log::getLogger()->trace(msg);
+    Jackbengine::Log::logger()->trace(msg);
 }
 #else
 #define LOG_TRACE
@@ -47,31 +47,31 @@ static inline void LOG_TRACE(const T& msg)
 template<typename... Args>
 static inline void LOG_INFO(spdlog::string_view_t fmt, const Args &... args)
 {
-    Jackbengine::Log::getLogger()->info(fmt, args...);
+    Jackbengine::Log::logger()->info(fmt, args...);
 }
 template<typename T>
 static inline void LOG_INFO(const T& msg)
 {
-    Jackbengine::Log::getLogger()->info(msg);
+    Jackbengine::Log::logger()->info(msg);
 }
 template<typename... Args>
 static inline void LOG_ERROR(spdlog::string_view_t fmt, const Args &... args)
 {
-    Jackbengine::Log::getLogger()->error(fmt, args...);
+    Jackbengine::Log::logger()->error(fmt, args...);
 }
 template<typename T>
 static inline void LOG_ERROR(const T& msg)
 {
-    Jackbengine::Log::getLogger()->error(msg);
+    Jackbengine::Log::logger()->error(msg);
 }
 #else
 #ifdef __DEBUG__
-#define LOG_TRACE(...)  Jackbengine::Log::getLogger()->trace(__VA_ARGS__)
+#define LOG_TRACE(...)  Jackbengine::Log::logger()->trace(__VA_ARGS__)
 #else
 #define LOG_TRACE(...)
 #endif
-#define LOG_INFO(...)   Jackbengine::Log::getLogger()->info(__VA_ARGS__)
-#define LOG_ERROR(...)  Jackbengine::Log::getLogger()->error(__VA_ARGS__)
+#define LOG_INFO(...)   Jackbengine::Log::logger()->info(__VA_ARGS__)
+#define LOG_ERROR(...)  Jackbengine::Log::logger()->error(__VA_ARGS__)
 #endif
 
 #endif // __LOG_H__

@@ -6,6 +6,7 @@
 // Copyright © 2019 Damien Bendejacq. All rights reserved.
 //
 
+#include "core/log/tracer.h"
 #include "core/sdl/sdlinc.h"
 #include "eventManager.h"
 #include "impl/eventImpl.h"
@@ -51,6 +52,8 @@ bool EventManager::isMouseClicked(MouseButton button) const
 
 void EventManager::update(float)
 {
+    TRACE("EventManager::update");
+
     int mouseX;
     int mouseY;
     SDL_GetMouseState(&mouseX, &mouseY);

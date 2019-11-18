@@ -19,7 +19,7 @@ namespace Jackbengine::details {
 
 class Window
 {
-    friend class Renderer;
+    friend class OldRenderer;
 
 public:
     Window(const std::string &title, int width, int height, bool fullscreen);

@@ -10,6 +10,7 @@
 #include "imgui/imgui_impl_sdl.h"
 #include "imgui/imgui_impl_opengl3.h"
 
+#include "core/log/tracer.h"
 #include "core/event/event.h"
 #include "debugLayer.h"
 
@@ -28,6 +29,8 @@ void DebugLayer::update(float)
     {
         return;
     }
+
+    TRACE("DebugLayer::update");
 
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplSDL2_NewFrame(m_window->nativeWindow());

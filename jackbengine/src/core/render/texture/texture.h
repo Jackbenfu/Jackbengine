@@ -2,44 +2,32 @@
 // texture.h
 // jackbengine
 //
-// Created by Damien Bendejacq on 13/07/2017.
-// Copyright © 2017 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 19/10/2019.
+// Copyright © 2019 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __TEXTURE_H__
 #define __TEXTURE_H__
 
-#include "core/render/surface/surface.h"
-#include "core/render/color.h"
-#include "core/render/font/font.h"
+#include <string>
 
-typedef struct SDL_Texture SDL_Texture;
+#include "core/render/surface/surface.h"
 
 namespace Jackbengine::details {
 
-class Renderer;
-
 class Texture
 {
-    friend class Renderer;
-
 public:
-    Texture(const Renderer &renderer, const std::string &file);
-    Texture(const Renderer &renderer, const void *data, size_t dataSize);
-    Texture(const Renderer &renderer, int width, int height, Color color);
-    Texture(const Renderer &renderer, const Font &font, const std::string &text, Color foreground);
+    Texture(unsigned int id, const std::string &file);
+    Texture(unsigned int id, const void *data, size_t dataSize);
+    ~Texture() = default;
 
-    ~Texture();
-
-    [[nodiscard]] int width() const;
-    [[nodiscard]] int height() const;
+    unsigned int id() const;
 
 private:
-    void loadTextureFromSurface(const Renderer &renderer, const Surface &surface);
+    void loadTextureFromSurface(const Surface &surface);
 
-    SDL_Texture *m_texture {nullptr};
-    int m_width {0};
-    int m_height {0};
+    unsigned int m_id;
 };
 
 }

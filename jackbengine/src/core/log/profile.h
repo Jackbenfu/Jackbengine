@@ -31,15 +31,11 @@ private:
 }
 
 #ifdef __RELEASE_PROFILE__
-
-#define PROFILE(name)       Profile p(name);
-#define NO_PROFILE(name)
-
+#define PROFILE(name)   Profile TOKENPASTE(profile, __LINE__)(name)
 #else
-
 #define PROFILE(name)
-#define NO_PROFILE(name)
-
 #endif
+
+#define NO_PROFILE(name)
 
 #endif // __PROFILE_H__

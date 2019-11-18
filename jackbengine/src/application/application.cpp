@@ -7,6 +7,7 @@
 //
 
 #include "core/log/profile.h"
+#include "core/log/tracer.h"
 #include "core/imgui/imguiLoader.h"
 #include "core/sdl/sdlLoader.h"
 #include "application.h"
@@ -15,40 +16,38 @@ namespace Jackbengine {
 
 Application::Application(ApplicationConfig &config)
 {
+    TRACE("Application::Application");
+
     Log::init();
     srand(time(nullptr));
 
-    {
-        NO_PROFILE("Application::Application")
+    details::initSDL();
 
-        details::initSDL();
+    m_timer = std::make_unique<details::Timer>(config.core_fps);
+    m_cursor = std::make_unique<details::Cursor>();
+    m_window = std::make_unique<details::Window>(
+        config.general_title,
+        config.render_width,
+        config.render_height,
+        config.render_fullscreen
+    );
+    m_textureManager = std::make_unique<details::TextureManager>();
+    m_shaderManager = std::make_unique<details::ShaderManager>();
+    m_renderer = std::make_unique<details::Renderer>(*m_window, *m_textureManager, *m_shaderManager);
+    m_eventManager = std::make_unique<details::EventManager>(BIND_EVENT_CALLBACK(&Application::onEvent));
+    m_layerManager = std::make_unique<details::LayerManager>();
 
-        m_timer = std::make_unique<details::Timer>(config.core_fps);
-        m_cursor = std::make_unique<details::Cursor>();
-        m_window = std::make_unique<details::Window>(
-            config.general_title,
-            config.render_width,
-            config.render_height,
-            config.render_fullscreen
-        );
-        m_renderer = std::make_unique<details::GlRenderer>(*m_window);
-        m_eventManager = std::make_unique<details::EventManager>(BIND_EVENT_CALLBACK(&Application::onEvent));
-        m_layerManager = std::make_unique<details::LayerManager>();
+    details::initImGui(m_window.get());
 
-        details::initImGui(m_window.get());
-
-        addLayer<DebugLayer>(m_timer.get(), m_window.get(), true);
-    }
+    addLayer<DebugLayer>(m_timer.get(), m_window.get(), true);
 }
 
 Application::~Application()
 {
-    {
-        NO_PROFILE("Application::~Application")
+    TRACE("Application::~Application");
 
-        details::destroyImGui();
-        details::destroySDL();
-    }
+    details::destroyImGui();
+    details::destroySDL();
 }
 
 bool Application::running() const
@@ -58,31 +57,26 @@ bool Application::running() const
 
 void Application::update()
 {
-    {
-        NO_PROFILE("Application::frame")
+    TRACE("Application::update");
 
-        const auto delta = m_timer->elapsedSeconds();
-        m_timer->start();
-        m_renderer->clear();
+    const auto delta = m_timer->elapsedSeconds();
+    m_timer->start();
+    m_renderer->clear();
 
-        m_eventManager->update(delta);
-        userUpdate(delta);
+    m_eventManager->update(delta);
+    userUpdate(delta);
 
-        m_renderer->textureTest();
-//        m_renderer->colorTest();
-        m_layerManager->update(delta);
+    m_renderer->textureTest();
+    m_layerManager->update(delta);
 
-        m_renderer->present();
-        m_timer->snapshot();
-    }
+    m_renderer->present();
+    m_timer->snapshot();
 }
 
 void Application::userUpdate(float delta)
 {
-    {
-        NO_PROFILE("Application::userFrame")
-        update(delta);
-    }
+    TRACE("Application::userUpdate");
+    update(delta);
 }
 
 void Application::onEvent(Event &e)

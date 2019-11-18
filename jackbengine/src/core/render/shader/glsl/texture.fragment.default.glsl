@@ -1,9 +1,9 @@
 precision mediump float;
 
+uniform sampler2D uTexture;
+
 in vec3 vColor;
 in vec2 vTexcoord;
-
-uniform sampler2D uTexture;
 
 out vec4 outColor;
 

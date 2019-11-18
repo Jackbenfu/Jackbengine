@@ -74,10 +74,8 @@ SOURCES             = resources.cpp \
 					  src/core/render/cursor/cursor.cpp \
 					  src/core/render/font/defaultFont.cpp \
 					  src/core/render/font/font.cpp \
-					  src/core/render/renderer/glRenderer.cpp \
 					  src/core/render/renderer/renderer.cpp \
 					  src/core/render/surface/surface.cpp \
-					  src/core/render/texture/texture.cpp \
 					  src/core/render/window/window.cpp \
 					  src/core/time/timer.cpp \
 					  src/application/application.cpp \

@@ -2,53 +2,46 @@
 // renderer.h
 // jackbengine
 //
-// Created by Damien Bendejacq on 12/07/2017.
-// Copyright © 2017 Damien Bendejacq. All rights reserved.
+// Created by Damien Bendejacq on 13/09/2019.
+// Copyright © 2019 Damien Bendejacq. All rights reserved.
 //
 
-#ifndef __RENDERER_H__
-#define __RENDERER_H__
+#ifndef __GL_RENDERER_H__
+#define __GL_RENDERER_H__
 
-#include "core/render/color.h"
+#include "core/render/surface/surface.h"
 #include "core/render/window/window.h"
+#include "core/render/texture/textureManager.h"
+#include "core/render/shader/shaderManager.h"
 
-typedef struct SDL_Renderer SDL_Renderer;
+typedef int GLint;
+typedef unsigned int GLenum;
 
 namespace Jackbengine::details {
 
-class Texture;
-
 class Renderer
 {
-    friend class Texture;
-
 public:
-    explicit Renderer(const Window &window);
-    ~Renderer();
+    explicit Renderer(const Window &window, TextureManager &textureManager, ShaderManager &shaderManager);
+    ~Renderer() = default;
 
-    void clear();
+    static void clear();
     void present();
 
-    void setClearColor(Color color);
-    void setRenderColor(Color color) const;
-
-    void renderTexture(int x, int y, const Texture &texture) const;
-    void renderTexture(int x, int y, const Texture &texture, double angle) const;
-    void renderLine(float x1, float y1, float x2, float y2, Color color) const;
-    void renderPoint(float x, float y, Color color) const;
-
-    int width() const;
-    int height() const;
+    void colorTest();
+    void textureTest();
+    void renderToTextureTest();
 
 private:
-    SDL_Renderer *m_renderer {nullptr};
+    const Window &m_window;
+    TextureManager &m_textureManager;
+    ShaderManager &m_shaderManager;
 
-    mutable Color m_clearColor {Color(0, 0, 0)};
-
-    int m_width {0};
-    int m_height {0};
+    unsigned int m_textureShader {0};
+    unsigned int m_colorShader {0};
+    unsigned int m_texture {0};
 };
 
 }
 
-#endif // __RENDERER_H__
+#endif // __GL_RENDERER_H__

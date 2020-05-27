@@ -1,3 +1,5 @@
+### ***[v2](https://github.com/Jackbenfu/Jackbengine/tree/v2) is under development with lots of changes (low level rendering instead of SDL2's one, use of libraries such as [imgui](https://github.com/ocornut/imgui), [spdlog](https://github.com/gabime/spdlog), [fmt](https://github.com/fmtlib/fmt), [enTT](https://github.com/skypjack/entt)...).***
+
 # Jackbengine
 A multi-platform C++ 2D game engine.
 

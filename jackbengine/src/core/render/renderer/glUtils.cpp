@@ -3,7 +3,6 @@
 // jackbengine
 //
 // Created by Damien Bendejacq on 19/10/2019.
-// Copyright © 2019 Damien Bendejacq. All rights reserved.
 //
 
 #include <string>
@@ -45,7 +44,7 @@ void logGlError([[maybe_unused]] const char *func, [[maybe_unused]] const char *
     }
 }
 
-const char *glEnumName(GLenum enumName)
+[[maybe_unused]] const char *glEnumName(GLenum enumName)
 {
     switch (enumName)
     {

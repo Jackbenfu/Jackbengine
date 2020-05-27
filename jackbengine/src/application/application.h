@@ -3,7 +3,6 @@
 // jackbengine
 //
 // Created by Damien Bendejacq on 10/07/2017.
-// Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __APPLICATION_H__
@@ -46,7 +45,7 @@ protected:
     void addLayer(Args &&...args);
 
     template<typename TLayer>
-    void removeLayer();
+    [[maybe_unused]] void removeLayer();
 
 #ifdef EMSCRIPTEN
     public:
@@ -64,7 +63,7 @@ private:
     bool onApplicationCloseEvent(const ApplicationCloseEvent &e);
 
     std::unique_ptr<details::Timer> m_timer;
-    std::unique_ptr<details::Cursor> m_cursor;
+    [[maybe_unused]] std::unique_ptr<details::Cursor> m_cursor;
     std::unique_ptr<details::Window> m_window;
     std::unique_ptr<details::TextureManager> m_textureManager;
     std::unique_ptr<details::ShaderManager> m_shaderManager;
@@ -82,7 +81,7 @@ void Application::addLayer(Args &&...args)
 }
 
 template<typename TLayer>
-void Application::removeLayer()
+[[maybe_unused]] void Application::removeLayer()
 {
     m_layerManager->remove<TLayer>();
 }

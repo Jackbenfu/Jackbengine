@@ -3,7 +3,6 @@
 // jackbengine
 //
 // Created by Damien Bendejacq on 13/11/2019.
-// Copyright © 2019 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __SHADER_MANAGER_H__
@@ -21,14 +20,14 @@ public:
     ShaderManager() = default;
     ~ShaderManager() = default;
 
-    unsigned int load(const char *vertexShader, const char *fragmentShader);
+    [[nodiscard]] unsigned int load(const char *vertexShader, const char *fragmentShader);
 
     void unload(unsigned int id);
 
     static void bind(unsigned int id);
 
 private:
-    int generateId() const;
+    [[nodiscard]] static unsigned int generateId();
 
     std::unordered_map<unsigned int, std::unique_ptr<Shader>> m_shaders;
 

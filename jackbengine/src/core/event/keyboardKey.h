@@ -3,7 +3,6 @@
 // jackbengine
 //
 // Created by Damien Bendejacq on 10/06/2015.
-// Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __KEYBOARD_KEY_H__

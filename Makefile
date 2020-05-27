@@ -14,6 +14,7 @@ CFLAGS_D            = -g \
                       -s DISABLE_EXCEPTION_CATCHING=0 \
                       -s USE_WEBGL2=1 \
                       -s ALLOW_MEMORY_GROWTH=1 \
+                      -s BINARYEN_TRAP_MODE=clamp \
                       -DFMT_HEADER_ONLY
 
 CFLAGS_RP           = -O3 -DNDEBUG \

@@ -3,7 +3,6 @@
 // jackbengine
 //
 // Created by Damien Bendejacq on 22/09/2019.
-// Copyright © 2019 Damien Bendejacq. All rights reserved.
 //
 
 #include "core/log/tracer.h"
@@ -14,6 +13,7 @@ namespace Jackbengine::details {
 void LayerManager::update(float delta)
 {
     TRACE("LayerManager::update");
+
     for (auto &layer : m_layers)
     {
         layer->update(delta);

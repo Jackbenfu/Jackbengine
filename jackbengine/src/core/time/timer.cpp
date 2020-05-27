@@ -3,7 +3,6 @@
 // jackbengine
 //
 // Created by Damien Bendejacq on 10/07/2017.
-// Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
 #include <vector>
@@ -128,7 +127,7 @@ unsigned int Timer::totalFrames() const
     return m_totalFrames;
 }
 
-void Timer::delay(unsigned int ms) const
+void Timer::delay(unsigned int ms)
 {
 #ifndef EMSCRIPTEN
     SDL_Delay(ms);
@@ -137,7 +136,7 @@ void Timer::delay(unsigned int ms) const
 #endif
 }
 
-float Timer::ticks() const
+float Timer::ticks()
 {
     return (float) SDL_GetTicks();
 }

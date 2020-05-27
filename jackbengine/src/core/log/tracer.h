@@ -3,7 +3,6 @@
 // jackbengine
 //
 // Created by Damien Bendejacq on 18/11/2019.
-// Copyright © 2019 Damien Bendejacq. All rights reserved.
 //
 
 /*
@@ -28,7 +27,7 @@ public:
 
     static Tracer &tracer();
 
-    void trace(const char *name, long long start, long long end, uint32_t threadId);
+    void trace(const char *name, long long start, long long end, unsigned int threadId);
 
 private:
     std::ofstream m_os;

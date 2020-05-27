@@ -3,7 +3,6 @@
 // jackbengine
 //
 // Created by Damien Bendejacq on 13/09/2019.
-// Copyright © 2019 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __GL_RENDERER_H__
@@ -14,8 +13,9 @@
 #include "core/render/texture/textureManager.h"
 #include "core/render/shader/shaderManager.h"
 
-typedef int GLint;
-typedef unsigned int GLenum;
+#include "core/render/buffer/vertexBuffer.h"
+#include "core/render/buffer/indexBuffer.h"
+#include "core/render/buffer/vertexArray.h"
 
 namespace Jackbengine::details {
 
@@ -28,9 +28,8 @@ public:
     static void clear();
     void present();
 
-    void colorTest();
+    void colorTest() const;
     void textureTest();
-    void renderToTextureTest();
 
 private:
     const Window &m_window;
@@ -40,6 +39,10 @@ private:
     unsigned int m_textureShader {0};
     unsigned int m_colorShader {0};
     unsigned int m_texture {0};
+
+    std::unique_ptr<VertexArray> m_vao;
+    std::unique_ptr<VertexBuffer> m_vbo;
+    std::unique_ptr<IndexBuffer> m_ibo;
 };
 
 }

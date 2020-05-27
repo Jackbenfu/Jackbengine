@@ -67,42 +67,12 @@ add_custom_command(
 )
 
 set(
-    SOURCE_FILES
+    RESOURCE_FILES
     ${PROJECT_SOURCE_DIR}/resources.cpp
-    src/core/audio/sound.cpp
-    src/core/event/eventManager.cpp
-    src/core/event/impl/keyEvent.cpp
-    src/core/event/impl/keyDownEvent.cpp
-    src/core/event/impl/keyUpEvent.cpp
-    src/core/event/impl/mouseMotionEvent.cpp
-    src/core/event/impl/mouseDownEvent.cpp
-    src/core/event/impl/mouseUpEvent.cpp
-    src/core/io/rwops.cpp
-    src/core/layer/layerManager.cpp
-    src/core/layer/impl/debugLayer.cpp
-    src/core/imgui/imguiLoader.cpp
-    src/core/sdl/sdlLoader.cpp
-    src/core/log/log.cpp
-    src/core/log/profile.cpp
-    src/core/log/tracer.cpp
-    src/core/render/color.cpp
-    src/core/render/cursor/cursor.cpp
-    src/core/render/font/defaultFont.cpp
-    src/core/render/font/font.cpp
-    src/core/render/renderer/glUtils.cpp
-    src/core/render/renderer/renderer.cpp
-    src/core/render/shader/shader.cpp
-    src/core/render/shader/shaderManager.cpp
-    src/core/render/surface/surface.cpp
-    src/core/render/texture/texture.cpp
-    src/core/render/texture/textureManager.cpp
-    src/core/render/window/window.cpp
-    src/core/time/timer.cpp
-    src/application/application.cpp
-    src/application/entryPoint.cpp
 )
+file(GLOB_RECURSE SOURCE_FILES src/*.cpp)
 
-add_library(jackbengine STATIC ${SOURCE_FILES})
+add_library(jackbengine STATIC ${SOURCE_FILES} ${RESOURCE_FILES})
 target_link_libraries(
     ${PROJECT_NAME}
     ${SDL2_LIBRARY}

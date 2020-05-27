@@ -3,7 +3,6 @@
 // jackbengine
 //
 // Created by Damien Bendejacq on 23/08/2019.
-// Copyright © 2019 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __MOUSE_UP_EVENT_H__

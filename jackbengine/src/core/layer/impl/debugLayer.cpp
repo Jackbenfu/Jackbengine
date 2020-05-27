@@ -3,7 +3,6 @@
 // jackbengine
 //
 // Created by Damien Bendejacq on 22/09/2019.
-// Copyright © 2019 Damien Bendejacq. All rights reserved.
 //
 
 #include "imgui/imgui.h"
@@ -37,7 +36,7 @@ void DebugLayer::update(float)
     ImGui::NewFrame();
 
     ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiCond_Always);
-    ImGui::SetNextWindowSize(ImVec2(m_window->width(), 20), ImGuiCond_Always);
+    ImGui::SetNextWindowSize(ImVec2((float) m_window->width(), 20), ImGuiCond_Always);
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
     ImGui::Begin(
         "DebugLayerTimer",
@@ -85,6 +84,7 @@ void DebugLayer::update(float)
 
 void DebugLayer::onEvent(Event &)
 {
+    // Nothing
 }
 
 }

@@ -3,7 +3,6 @@
 // jackbengine
 //
 // Created by Damien Bendejacq on 20/08/2019.
-// Copyright © 2019 Damien Bendejacq. All rights reserved.
 //
 
 #include "core/log/tracer.h"
@@ -20,32 +19,32 @@ EventManager::EventManager(std::function<void(Event &)> callback)
 {
 }
 
-bool EventManager::isKeyDown(KeyboardKey key) const
+[[maybe_unused]] bool EventManager::isKeyDown(KeyboardKey key) const
 {
     return m_keyDown[(int) key];
 }
 
-bool EventManager::isKeyUp(KeyboardKey key) const
+[[maybe_unused]] bool EventManager::isKeyUp(KeyboardKey key) const
 {
     return !m_keyDown[(int) key];
 }
 
-bool EventManager::isKeyPressed(KeyboardKey key) const
+[[maybe_unused]] bool EventManager::isKeyPressed(KeyboardKey key) const
 {
     return m_keyPress[(int) key];
 }
 
-bool EventManager::isMouseDown(MouseButton button) const
+[[maybe_unused]] bool EventManager::isMouseDown(MouseButton button) const
 {
     return m_mouseDown[(int) button];
 }
 
-bool EventManager::isMouseUp(MouseButton button) const
+[[maybe_unused]] bool EventManager::isMouseUp(MouseButton button) const
 {
     return !m_mouseDown[(int) button];
 }
 
-bool EventManager::isMouseClicked(MouseButton button) const
+[[maybe_unused]] bool EventManager::isMouseClicked(MouseButton button) const
 {
     return m_mouseClick[(int) button];
 }
@@ -235,7 +234,7 @@ void EventManager::handleMouseUp(const SDL_MouseButtonEvent &event, int button, 
     m_mouseDownRepeat[button] = 0;
 }
 
-int EventManager::getScanCode(Jackbengine::KeyboardKey key) const
+int EventManager::getScanCode(Jackbengine::KeyboardKey key)
 {
     switch (key)
     {
@@ -359,7 +358,7 @@ int EventManager::getScanCode(Jackbengine::KeyboardKey key) const
     }
 }
 
-KeyboardKey EventManager::getPhysicalKey(int scanCode) const
+KeyboardKey EventManager::getPhysicalKey(int scanCode)
 {
     switch (scanCode)
     {
@@ -487,7 +486,7 @@ KeyboardKey EventManager::getPhysicalKey(int scanCode) const
     }
 }
 
-KeyboardKey EventManager::getVirtualKey(int sym) const
+KeyboardKey EventManager::getVirtualKey(int sym)
 {
     switch (sym)
     {
@@ -615,7 +614,7 @@ KeyboardKey EventManager::getVirtualKey(int sym) const
     }
 }
 
-MouseButton EventManager::getButton(int button) const
+MouseButton EventManager::getButton(int button)
 {
     switch (button)
     {

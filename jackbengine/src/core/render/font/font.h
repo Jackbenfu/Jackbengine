@@ -3,7 +3,6 @@
 // jackbengine
 //
 // Created by Damien Bendejacq on 13/07/2017.
-// Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __FONT_H__

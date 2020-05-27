@@ -3,7 +3,6 @@
 // jackbengine
 //
 // Created by Damien Bendejacq on 19/10/2019.
-// Copyright © 2019 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __TEXTURE_MANAGER_H__
@@ -22,16 +21,16 @@ public:
     TextureManager() = default;
     ~TextureManager() = default;
 
-    unsigned int load(const std::string &file);
-    unsigned int load(const void *data, size_t dataSize);
-    unsigned int load(const std::string &atlas, int dummy);
+    [[nodiscard]] unsigned int load(const std::string &file);
+    [[nodiscard]] unsigned int load(const void *data, size_t dataSize);
+    [[nodiscard]] static unsigned int load(const std::string &atlas, int dummy);
 
     void unload(unsigned int id);
 
     static void bind(unsigned int id);
 
 private:
-    int generateId() const;
+    [[nodiscard]] static unsigned generateId();
 
     std::unordered_map<unsigned int, std::unique_ptr<Texture>> m_textures;
 };

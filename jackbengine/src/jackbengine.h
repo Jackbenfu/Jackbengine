@@ -3,7 +3,6 @@
 // jackbengine
 //
 // Created by Damien Bendejacq on 22/04/2014.
-// Copyright © 2014 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __JACKBENGINE_H__

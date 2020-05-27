@@ -3,7 +3,6 @@
 // jackbengine
 //
 // Created by Damien Bendejacq on 26/07/2017.
-// Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __HETEROGENEOUS_COLLECTION_H__

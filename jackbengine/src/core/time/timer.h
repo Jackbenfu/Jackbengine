@@ -3,7 +3,6 @@
 // jackbengine
 //
 // Created by Damien Bendejacq on 10/07/2017.
-// Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __TIMER_H__
@@ -37,8 +36,8 @@ public:
     [[nodiscard]] unsigned int totalFrames() const;
 
 private:
-    void delay(unsigned int ms) const;
-    [[nodiscard]] float ticks() const;
+    static void delay(unsigned int ms);
+    [[nodiscard]] static float ticks();
 
     unsigned int m_targetFps {0};
     unsigned int m_totalFrames {0};

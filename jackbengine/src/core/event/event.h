@@ -3,7 +3,6 @@
 // jackbengine
 //
 // Created by Damien Bendejacq on 19/08/2019.
-// Copyright © 2019 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __EVENT_H__
@@ -48,7 +47,7 @@ public:
     {}
 
     template<typename T>
-    bool dispatch(std::function<bool(T &)> callback)
+    bool dispatch(std::function<bool(const T &)> callback)
     {
         if (m_event.eventType() == T::staticType())
         {

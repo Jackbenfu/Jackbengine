@@ -3,7 +3,6 @@
 // jackbengine
 //
 // Created by Damien Bendejacq on 22/11/2018.
-// Copyright © 2018 Damien Bendejacq. All rights reserved.
 //
 
 #include "log.h"

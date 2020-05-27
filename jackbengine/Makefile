@@ -47,6 +47,7 @@ CFLAGS              = -O3 -DNDEBUG \
                       -s DISABLE_EXCEPTION_CATCHING=0 \
                       -s USE_WEBGL2=1 \
                       -s ALLOW_MEMORY_GROWTH=1 \
+                      -s BINARYEN_TRAP_MODE=clamp \
                       -DFMT_HEADER_ONLY
 
 INCLUDES            = -Isrc \
@@ -70,12 +71,21 @@ SOURCES             = resources.cpp \
 					  src/core/sdl/sdlLoader.cpp \
 					  src/core/log/log.cpp \
 					  src/core/log/profile.cpp \
+					  src/core/render/buffer/bufferLayout.cpp \
+					  src/core/render/buffer/indexBuffer.cpp \
+					  src/core/render/buffer/vertexArray.cpp \
+					  src/core/render/buffer/vertexBuffer.cpp \
 					  src/core/render/color.cpp \
 					  src/core/render/cursor/cursor.cpp \
 					  src/core/render/font/defaultFont.cpp \
 					  src/core/render/font/font.cpp \
+					  src/core/render/renderer/glUtils.cpp \
 					  src/core/render/renderer/renderer.cpp \
+					  src/core/render/shader/shader.cpp \
+					  src/core/render/shader/shaderManager.cpp \
 					  src/core/render/surface/surface.cpp \
+					  src/core/render/texture/texture.cpp \
+					  src/core/render/texture/textureManager.cpp \
 					  src/core/render/window/window.cpp \
 					  src/core/time/timer.cpp \
 					  src/application/application.cpp \
@@ -89,11 +99,11 @@ BUILD_RESOURCE_GENERATOR  = @echo "\033[0;32mBuilding ResourceGenerator...\033[0
 GENERATE_RESOURCES  = @echo "\033[0;32mGenerating resources.cpp...\033[0m" \
 					  && ./external/resourceGenerator/resourceGenerator \
 					  resources.cpp \
-					  -tsrc/core/render/renderer/shader/color.vertex.default.glsl \
-                      -tsrc/core/render/renderer/shader/color.fragment.default.glsl \
-                      -tsrc/core/render/renderer/shader/texture.vertex.default.glsl \
-                      -tsrc/core/render/renderer/shader/texture.fragment.default.glsl \
-                      -tsrc/core/render/renderer/shader/texture.fragment.grayscale.glsl \
+					  -tsrc/core/render/shader/glsl/color.vertex.default.glsl \
+                      -tsrc/core/render/shader/glsl/color.fragment.default.glsl \
+                      -tsrc/core/render/shader/glsl/texture.vertex.default.glsl \
+                      -tsrc/core/render/shader/glsl/texture.fragment.default.glsl \
+                      -tsrc/core/render/shader/glsl/texture.fragment.grayscale.glsl \
                       -bresource/aquarelle_damien_square.png \
                       -bresource/aquarelle_damien_square_alpha.png
 

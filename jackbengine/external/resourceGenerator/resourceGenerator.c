@@ -3,7 +3,6 @@
  *  Resource generator
  *
  *  Created by Damien Bendejacq on 21/05/2016.
- *  Copyright © 2016 Damien Bendejacq. All rights reserved.
 */
 
 #include <stdlib.h>

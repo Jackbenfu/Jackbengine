@@ -3,7 +3,6 @@
 // jackbengine
 //
 // Created by Damien Bendejacq on 13/11/2019.
-// Copyright © 2019 Damien Bendejacq. All rights reserved.
 //
 
 #include "shaderManager.h"
@@ -32,7 +31,7 @@ void ShaderManager::bind(unsigned int id)
     GL_CALL(glUseProgram(id));
 }
 
-int ShaderManager::generateId() const
+unsigned int ShaderManager::generateId()
 {
     unsigned int id;
     id = GL_CALL(glCreateProgram());

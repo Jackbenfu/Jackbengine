@@ -3,7 +3,6 @@
 // jackbengine
 //
 // Created by Damien Bendejacq on 20/08/2019.
-// Copyright © 2019 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __EVENT_MANAGER_H__
@@ -32,13 +31,13 @@ public:
     explicit EventManager(std::function<void(Event &)> callback);
     ~EventManager() = default;
 
-    [[nodiscard]] bool isKeyDown(KeyboardKey key) const;
-    [[nodiscard]] bool isKeyUp(KeyboardKey key) const;
-    [[nodiscard]] bool isKeyPressed(KeyboardKey key) const;
+    [[maybe_unused]] [[nodiscard]] bool isKeyDown(KeyboardKey key) const;
+    [[maybe_unused]] [[nodiscard]] bool isKeyUp(KeyboardKey key) const;
+    [[maybe_unused]] [[nodiscard]] bool isKeyPressed(KeyboardKey key) const;
 
-    [[nodiscard]] bool isMouseDown(MouseButton button) const;
-    [[nodiscard]] bool isMouseUp(MouseButton button) const;
-    [[nodiscard]] bool isMouseClicked(MouseButton button) const;
+    [[maybe_unused]] [[nodiscard]] bool isMouseDown(MouseButton button) const;
+    [[maybe_unused]] [[nodiscard]] bool isMouseUp(MouseButton button) const;
+    [[maybe_unused]] [[nodiscard]] bool isMouseClicked(MouseButton button) const;
 
 private:
     void update(float delta);
@@ -51,10 +50,10 @@ private:
     void handleMouseDownRepeat(int button, int mouseX, int mouseY);
     void handleMouseUp(const SDL_MouseButtonEvent &event, int button, int mouseX, int mouseY);
 
-    [[nodiscard]] int getScanCode(KeyboardKey key) const;
-    [[nodiscard]] KeyboardKey getPhysicalKey(int scanCode) const;
-    [[nodiscard]] KeyboardKey getVirtualKey(int sym) const;
-    [[nodiscard]] MouseButton getButton(int button) const;
+    [[nodiscard]] static int getScanCode(KeyboardKey key);
+    [[nodiscard]] static KeyboardKey getPhysicalKey(int scanCode);
+    [[nodiscard]] static KeyboardKey getVirtualKey(int sym);
+    [[nodiscard]] static MouseButton getButton(int button);
 
     std::function<void(Event &)> m_callback;
 

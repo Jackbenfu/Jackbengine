@@ -3,7 +3,6 @@
 // jackbengine
 //
 // Created by Damien Bendejacq on 22/11/2018.
-// Copyright © 2018 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __LOG_H__
@@ -32,17 +31,17 @@ private:
 #ifdef EMSCRIPTEN
 #ifdef __DEBUG__
 template<typename... Args>
-static inline void LOG_TRACE(spdlog::string_view_t fmt, const Args &... args)
+static inline void LOG_DEBUG(spdlog::string_view_t fmt, const Args &... args)
 {
     Jackbengine::Log::logger()->trace(fmt, args...);
 }
 template<typename T>
-static inline void LOG_TRACE(const T& msg)
+static inline void LOG_DEBUG(const T& msg)
 {
     Jackbengine::Log::logger()->trace(msg);
 }
 #else
-#define LOG_TRACE
+#define LOG_DEBUG
 #endif
 template<typename... Args>
 static inline void LOG_INFO(spdlog::string_view_t fmt, const Args &... args)
@@ -66,9 +65,9 @@ static inline void LOG_ERROR(const T& msg)
 }
 #else
 #ifdef __DEBUG__
-#define LOG_TRACE(...)  Jackbengine::Log::logger()->trace(__VA_ARGS__)
+#define LOG_DEBUG(...)  Jackbengine::Log::logger()->trace(__VA_ARGS__)
 #else
-#define LOG_TRACE(...)
+#define LOG_DEBUG(...)
 #endif
 #define LOG_INFO(...)   Jackbengine::Log::logger()->info(__VA_ARGS__)
 #define LOG_ERROR(...)  Jackbengine::Log::logger()->error(__VA_ARGS__)

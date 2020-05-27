@@ -3,7 +3,6 @@
 // jackbengine
 //
 // Created by Damien Bendejacq on 19/10/2019.
-// Copyright © 2019 Damien Bendejacq. All rights reserved.
 //
 
 #include "textureManager.h"
@@ -47,7 +46,7 @@ void TextureManager::bind(unsigned int id)
     GL_CALL(glBindTexture(GL_TEXTURE_2D, id));
 }
 
-int TextureManager::generateId() const
+unsigned int TextureManager::generateId()
 {
     unsigned int id;
     GL_CALL(glGenTextures(1, &id));

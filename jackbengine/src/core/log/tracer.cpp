@@ -3,7 +3,6 @@
 // jackbengine
 //
 // Created by Damien Bendejacq on 18/11/2019.
-// Copyright © 2019 Damien Bendejacq. All rights reserved.
 //
 
 #include <thread>
@@ -23,7 +22,7 @@ Tracer::Tracer()
 {
     m_os.open("trace.json");
 
-    m_os << "{\"otherData\": {},\"traceEvents\":[";
+    m_os << R"delim({"otherData": {},"traceEvents":[)delim";
     m_os.flush();
 }
 
@@ -35,21 +34,21 @@ Tracer::~Tracer()
     m_os.close();
 }
 
-void Tracer::trace(const char *name, long long start, long long end, uint32_t threadId)
+void Tracer::trace(const char *name, long long start, long long end, unsigned int threadId)
 {
     if (m_count++ > 0)
     {
-        m_os << ",";
+        m_os << ',';
     }
 
     m_os << "{";
-    m_os << "\"cat\":\"function\",";
-    m_os << "\"dur\":" << (end - start) << ',';
-    m_os << "\"name\":\"" << name << "\",";
-    m_os << "\"ph\":\"X\",";
-    m_os << "\"pid\":0,";
-    m_os << "\"tid\":" << threadId << ",";
-    m_os << "\"ts\":" << start;
+    m_os << R"delim("cat":"function",)delim";
+    m_os << R"delim("dur":)delim" << (end - start) << ',';
+    m_os << R"delim("name":")delim" << name << R"delim(",)delim";
+    m_os << R"delim("ph":"X",)delim";
+    m_os << R"delim("pid":0,)delim";
+    m_os << R"delim("tid":)delim" << threadId << ',';
+    m_os << R"delim("ts":)delim" << start;
     m_os << "}";
 
     m_os.flush();

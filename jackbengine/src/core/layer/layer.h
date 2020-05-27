@@ -3,7 +3,6 @@
 // jackbengine
 //
 // Created by Damien Bendejacq on 05/09/2019.
-// Copyright © 2019 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __LAYER_H__

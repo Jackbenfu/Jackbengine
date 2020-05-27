@@ -3,7 +3,6 @@
 // jackbengine
 //
 // Created by Damien Bendejacq on 11/07/2017.
-// Copyright © 2017 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __WINDOW_H__
@@ -19,8 +18,6 @@ namespace Jackbengine::details {
 
 class Window
 {
-    friend class OldRenderer;
-
 public:
     Window(const std::string &title, int width, int height, bool fullscreen);
     ~Window();

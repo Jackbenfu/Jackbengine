@@ -3,7 +3,6 @@
 // jackbengine
 //
 // Created by Damien Bendejacq on 10/09/2013.
-// Copyright © 2013 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __VECTOR2D_H__

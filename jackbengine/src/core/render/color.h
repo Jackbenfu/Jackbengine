@@ -3,7 +3,6 @@
 // jackbengine
 //
 // Created by Damien Bendejacq on 18/06/2015.
-// Copyright © 2015 Damien Bendejacq. All rights reserved.
 //
 
 #ifndef __COLOR_H__

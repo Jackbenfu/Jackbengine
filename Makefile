@@ -54,7 +54,7 @@ INCLUDES            = -Isandbox/src \
 					  -Ijackbengine/src \
 					  -Ijackbengine/external
 
-SOURCES             = sandbox/src/app.cpp
+SOURCES             = $(wildcard sandbox/src/*.cpp)
 
 BUILD_JACKBENGINE_D  = cd jackbengine \
  					   && make debug \

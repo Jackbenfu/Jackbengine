@@ -7,12 +7,7 @@ CFLAGS              = -O3 -DNDEBUG \
                       -s WARN_ON_UNDEFINED_SYMBOLS=1 \
                       -s BINARYEN_TRAP_MODE=clamp
 
-SOURCES             = imgui_widgets.cpp \
-                      imgui_draw.cpp \
-                      imgui_demo.cpp \
-                      imgui.cpp \
-                      imgui_impl_sdl.cpp \
-                      imgui_impl_opengl3.cpp
+SOURCES             = $(wildcard *.cpp)
 
 OUT                 = libimgui.bc
 

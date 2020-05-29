@@ -14,7 +14,7 @@
 
 namespace Jackbengine::details {
 
-Shader::Shader(unsigned int id, const char *vertexShader, const char *fragmentShader, const char *glslVersion)
+Shader::Shader(unsigned int id, const char* vertexShader, const char* fragmentShader, const char* glslVersion)
     : m_id {id}
 {
     const auto vs = compileShader(GL_VERTEX_SHADER, vertexShader, glslVersion);
@@ -29,10 +29,10 @@ Shader::Shader(unsigned int id, const char *vertexShader, const char *fragmentSh
     GL_CALL(glDetachShader(m_id, fs));
 }
 
-unsigned int Shader::compileShader(unsigned int type, const char *source, const char *glslVersion)
+unsigned int Shader::compileShader(unsigned int type, const char* source, const char* glslVersion)
 {
     const auto shader = GL_CALL(glCreateShader(type));
-    const GLchar *sourceWithVersion[3] = {glslVersion, "\n", source};
+    const GLchar* sourceWithVersion[3] = {glslVersion, "\n", source};
 
     GL_CALL(glShaderSource(shader, 3, sourceWithVersion, nullptr));
     GL_CALL(glCompileShader(shader));
@@ -43,12 +43,12 @@ unsigned int Shader::compileShader(unsigned int type, const char *source, const 
     {
         int length;
         GL_CALL(glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &length));
-        const auto message = (char *) alloca(length * sizeof(char));
+        const auto message = (char*) alloca(length * sizeof(char));
         GL_CALL(glGetShaderInfoLog(shader, length, &length, message));
 
         GL_CALL(glDeleteShader(shader));
 
-        const char *typeS;
+        const char* typeS;
         switch (type)
         {
             case GL_VERTEX_SHADER:

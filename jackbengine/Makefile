@@ -3,7 +3,7 @@ CC                  = emcc
 CDFLAGS             = -g \
 				      -D__DEBUG__ \
                       -Wall -Wextra -Wpedantic \
-                      -std=c++17 \
+                      -std=c++2a \
                       -s USE_SDL=2 \
                       -s USE_SDL_TTF=2 \
                       -s USE_SDL_MIXER=2 \
@@ -19,7 +19,7 @@ CDFLAGS             = -g \
 CRPFLAGS            = -O3 -DNDEBUG \
 				      -D__RELEASE_PROFILE__ \
                       -Wall -Wextra -Wpedantic \
-                      -std=c++17 \
+                      -std=c++2a \
                       -s USE_SDL=2 \
                       -s USE_SDL_TTF=2 \
                       -s USE_SDL_MIXER=2 \
@@ -36,7 +36,7 @@ CRPFLAGS            = -O3 -DNDEBUG \
 CFLAGS              = -O3 -DNDEBUG \
 				      -D__RELEASE__ \
                       -Wall -Wextra -Wpedantic \
-                      -std=c++17 \
+                      -std=c++2a \
                       -s USE_SDL=2 \
                       -s USE_SDL_TTF=2 \
                       -s USE_SDL_MIXER=2 \
@@ -55,8 +55,8 @@ INCLUDES            = -Isrc \
 					  -Iexternal/glad/include \
 					  -Iexternal/fmt
 
-SOURCES             = resources.cpp \
-                      $(wildcard src/*.cpp)
+SOURCES            := resources.cpp \
+                      $(shell find src -name '*.cpp')
 
 BUILD_RESOURCE_GENERATOR  = @echo "\033[0;32mBuilding ResourceGenerator...\033[0m" \
 					        && cd external/resourceGenerator \

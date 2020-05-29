@@ -19,11 +19,11 @@ class Profile
     using clock = std::chrono::high_resolution_clock;
 
 public:
-    explicit Profile(const char *name);
+    explicit Profile(const char* name);
     ~Profile();
 
 private:
-    const char *m_name;
+    const char* m_name;
     clock::time_point m_start;
 };
 

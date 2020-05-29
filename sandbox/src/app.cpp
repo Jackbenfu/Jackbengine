@@ -18,7 +18,7 @@ std::unique_ptr<Application> createApplication(bool fullscreen)
 
 }
 
-Sandbox::App::App(Jackbengine::ApplicationConfig &config)
+Sandbox::App::App(Jackbengine::ApplicationConfig& config)
     : Application(config)
 {
 }

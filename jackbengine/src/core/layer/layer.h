@@ -21,7 +21,7 @@ public:
     virtual ~Layer() = default;
 
     virtual void update(float delta) = 0;
-    virtual void onEvent(Event &e) = 0;
+    virtual void onEvent(Event& e) = 0;
 };
 
 }

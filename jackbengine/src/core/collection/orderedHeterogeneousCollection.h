@@ -23,13 +23,13 @@ public:
     ~OrderedHeterogeneousCollection() = default;
 
     template<typename TItem>
-    TItem *get() const;
+    TItem* get() const;
 
     template<typename TItem>
     bool any() const;
 
     template<typename TItem, typename ...Args>
-    void add(int index, Args &&...args);
+    void add(int index, Args&& ...args);
 
     template<typename TItem>
     void remove();
@@ -47,16 +47,16 @@ public:
 
 private:
     template<typename TItem>
-    std::tuple<size_t, bool, std::unique_ptr<TBase>> &find();
+    std::tuple<size_t, bool, std::unique_ptr<TBase>>& find();
     template<typename TItem>
-    const std::tuple<size_t, bool, std::unique_ptr<TBase>> &find() const;
+    const std::tuple<size_t, bool, std::unique_ptr<TBase>>& find() const;
 
     std::map<int, std::tuple<size_t, bool, std::unique_ptr<TBase>>> m_collection;
 };
 
 template<typename TBase>
 template<typename TItem>
-TItem *OrderedHeterogeneousCollection<TBase>::get() const
+TItem* OrderedHeterogeneousCollection<TBase>::get() const
 {
     static_assert(std::is_base_of<TBase, TItem>::value);
 
@@ -68,7 +68,7 @@ TItem *OrderedHeterogeneousCollection<TBase>::get() const
         );
     }
 
-    return dynamic_cast<TItem *>(item.get());
+    return dynamic_cast<TItem*>(item.get());
 }
 
 template<typename TBase>
@@ -79,7 +79,7 @@ bool OrderedHeterogeneousCollection<TBase>::any() const
 
     const auto typeId = GET_TYPE_ID(TItem);
     const auto it = std::find_if(
-        m_collection.cbegin(), m_collection.cend(), [&typeId](const auto &pair)
+        m_collection.cbegin(), m_collection.cend(), [&typeId](const auto& pair)
         {
             return std::get<0>(pair.second) == typeId;
         }
@@ -90,7 +90,7 @@ bool OrderedHeterogeneousCollection<TBase>::any() const
 
 template<typename TBase>
 template<typename TItem, typename ...Args>
-void OrderedHeterogeneousCollection<TBase>::add(int index, Args &&...args)
+void OrderedHeterogeneousCollection<TBase>::add(int index, Args&& ...args)
 {
     static_assert(std::is_base_of<TBase, TItem>::value);
 
@@ -120,7 +120,7 @@ void OrderedHeterogeneousCollection<TBase>::remove()
 
     const auto typeId = GET_TYPE_ID(TItem);
     const auto it = std::find_if(
-        m_collection.cbegin(), m_collection.cend(), [&typeId](const auto &pair)
+        m_collection.cbegin(), m_collection.cend(), [&typeId](const auto& pair)
         {
             return std::get<0>(pair.second) == typeId;
         }
@@ -138,7 +138,7 @@ void OrderedHeterogeneousCollection<TBase>::enable(bool enable)
 {
     static_assert(std::is_base_of<TBase, TItem>::value);
 
-    auto &tuple = find<TItem>();
+    auto& tuple = find<TItem>();
 
     std::get<1>(tuple) = enable;
 }
@@ -171,15 +171,15 @@ template<typename TBase>
 template<typename TFunction>
 void OrderedHeterogeneousCollection<TBase>::apply(TFunction func)
 {
-    for (const auto &pair : m_collection)
+    for (const auto& pair : m_collection)
     {
-        const auto &tuple = pair.second;
+        const auto& tuple = pair.second;
         if (!std::get<1>(tuple))
         {
             continue;
         }
 
-        auto &item = *std::get<2>(tuple);
+        auto& item = *std::get<2>(tuple);
         if (func(item))
         {
             break;
@@ -189,11 +189,11 @@ void OrderedHeterogeneousCollection<TBase>::apply(TFunction func)
 
 template<typename TBase>
 template<typename TItem>
-std::tuple<size_t, bool, std::unique_ptr<TBase>> &OrderedHeterogeneousCollection<TBase>::find()
+std::tuple<size_t, bool, std::unique_ptr<TBase>>& OrderedHeterogeneousCollection<TBase>::find()
 {
     const auto typeId = GET_TYPE_ID(TItem);
     const auto it = std::find_if(
-        m_collection.cbegin(), m_collection.cend(), [&typeId](const auto &pair)
+        m_collection.cbegin(), m_collection.cend(), [&typeId](const auto& pair)
         {
             return std::get<0>(pair.second) == typeId;
         }
@@ -211,11 +211,11 @@ std::tuple<size_t, bool, std::unique_ptr<TBase>> &OrderedHeterogeneousCollection
 
 template<typename TBase>
 template<typename TItem>
-const std::tuple<size_t, bool, std::unique_ptr<TBase>> &OrderedHeterogeneousCollection<TBase>::find() const
+const std::tuple<size_t, bool, std::unique_ptr<TBase>>& OrderedHeterogeneousCollection<TBase>::find() const
 {
     const auto typeId = GET_TYPE_ID(TItem);
     const auto it = std::find_if(
-        m_collection.cbegin(), m_collection.cend(), [&typeId](const auto &pair)
+        m_collection.cbegin(), m_collection.cend(), [&typeId](const auto& pair)
         {
             return std::get<0>(pair.second) == typeId;
         }

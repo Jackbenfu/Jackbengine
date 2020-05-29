@@ -13,7 +13,7 @@ namespace Jackbengine {
 class IndexBuffer
 {
 public:
-    IndexBuffer(const unsigned int *indices, unsigned int size);
+    IndexBuffer(const unsigned int* indices, unsigned int size);
     ~IndexBuffer();
 
     void bind();

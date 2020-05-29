@@ -25,8 +25,8 @@
 
 namespace Jackbengine::details {
 
-void logGlError(const char *func, const char *file, int line);
-const char *getGlEnumName(GLenum enumName);
+void logGlError(const char* func, const char* file, int line);
+const char* getGlEnumName(GLenum enumName);
 
 }
 

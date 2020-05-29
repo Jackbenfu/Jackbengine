@@ -10,7 +10,7 @@
 
 namespace Jackbengine {
 
-Profile::Profile(const char *name)
+Profile::Profile(const char* name)
     : m_name {name},
       m_start {clock::now()}
 {

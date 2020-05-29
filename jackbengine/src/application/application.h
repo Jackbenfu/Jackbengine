@@ -35,14 +35,14 @@ class Application
 
 public:
     Application() = delete;
-    explicit Application(ApplicationConfig &config);
+    explicit Application(ApplicationConfig& config);
     virtual ~Application();
 
 protected:
     virtual void update(float delta) = 0;
 
     template<typename TLayer, typename ...Args>
-    void addLayer(Args &&...args);
+    void addLayer(Args&& ...args);
 
     template<typename TLayer>
     [[maybe_unused]] void removeLayer();
@@ -59,8 +59,8 @@ private:
     [[nodiscard]] bool running() const;
     void userUpdate(float delta);
 
-    void onEvent(Event &e);
-    bool onApplicationCloseEvent(const ApplicationCloseEvent &e);
+    void onEvent(Event& e);
+    bool onApplicationCloseEvent(const ApplicationCloseEvent& e);
 
     std::unique_ptr<details::Timer> m_timer;
     [[maybe_unused]] std::unique_ptr<details::Cursor> m_cursor;
@@ -75,7 +75,7 @@ private:
 };
 
 template<typename TLayer, typename ...Args>
-void Application::addLayer(Args &&...args)
+void Application::addLayer(Args&& ...args)
 {
     m_layerManager->add<TLayer>(args...);
 }

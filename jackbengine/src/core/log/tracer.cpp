@@ -11,7 +11,7 @@
 
 namespace Jackbengine {
 
-Tracer &Tracer::tracer()
+Tracer& Tracer::tracer()
 {
     static Tracer s_tracer;
 
@@ -34,7 +34,7 @@ Tracer::~Tracer()
     m_os.close();
 }
 
-void Tracer::trace(const char *name, long long start, long long end, unsigned int threadId)
+void Tracer::trace(const char* name, long long start, long long end, unsigned int threadId)
 {
     if (m_count++ > 0)
     {
@@ -54,7 +54,7 @@ void Tracer::trace(const char *name, long long start, long long end, unsigned in
     m_os.flush();
 }
 
-Trace::Trace(const char *name)
+Trace::Trace(const char* name)
     : m_name {name},
       m_start {clock::now()}
 {

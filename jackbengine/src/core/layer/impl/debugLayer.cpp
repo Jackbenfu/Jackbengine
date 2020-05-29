@@ -15,7 +15,7 @@
 
 namespace Jackbengine {
 
-DebugLayer::DebugLayer(const details::Timer *timer, const details::Window *window, bool demo)
+DebugLayer::DebugLayer(const details::Timer* timer, const details::Window* window, bool demo)
     : m_timer {timer},
       m_window {window},
       m_demo {demo}
@@ -82,7 +82,7 @@ void DebugLayer::update(float)
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
-void DebugLayer::onEvent(Event &)
+void DebugLayer::onEvent(Event&)
 {
     // Nothing
 }

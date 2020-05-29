@@ -13,7 +13,7 @@
 
 namespace Jackbengine {
 
-Application::Application(ApplicationConfig &config)
+Application::Application(ApplicationConfig& config)
 {
     TRACE("Application::Application");
 
@@ -74,7 +74,7 @@ void Application::userUpdate(float delta)
     update(delta);
 }
 
-void Application::onEvent(Event &e)
+void Application::onEvent(Event& e)
 {
     EventDispatcher dispatcher(e);
     dispatcher.dispatch<ApplicationCloseEvent>(BIND_EVENT_CALLBACK(&Application::onApplicationCloseEvent));
@@ -82,7 +82,7 @@ void Application::onEvent(Event &e)
     m_layerManager->onEvent(e);
 }
 
-bool Application::onApplicationCloseEvent(const ApplicationCloseEvent &)
+bool Application::onApplicationCloseEvent(const ApplicationCloseEvent&)
 {
     m_running = false;
     return true;

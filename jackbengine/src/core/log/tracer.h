@@ -25,9 +25,9 @@ public:
     Tracer();
     ~Tracer();
 
-    static Tracer &tracer();
+    static Tracer& tracer();
 
-    void trace(const char *name, long long start, long long end, unsigned int threadId);
+    void trace(const char* name, long long start, long long end, unsigned int threadId);
 
 private:
     std::ofstream m_os;
@@ -39,11 +39,11 @@ class Trace
     using clock = std::chrono::high_resolution_clock;
 
 public:
-    explicit Trace(const char *name);
+    explicit Trace(const char* name);
     ~Trace();
 
 private:
-    const char *m_name;
+    const char* m_name;
     clock::time_point m_start;
 };
 

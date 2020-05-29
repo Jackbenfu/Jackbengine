@@ -25,9 +25,9 @@ public:
     [[nodiscard]] std::optional<float> fps() const;
 
     [[nodiscard]] float elapsedSeconds() const;
-    [[nodiscard]] float elapsedMilliseconds() const;
-    [[nodiscard]] float spentMilliseconds() const;
-    [[nodiscard]] float waitingMilliseconds() const;
+    [[maybe_unused]] [[nodiscard]] float elapsedMilliseconds() const;
+    [[maybe_unused]] [[nodiscard]] float spentMilliseconds() const;
+    [[maybe_unused]] [[nodiscard]] float waitingMilliseconds() const;
 
     [[nodiscard]] float averageElapsedMilliseconds() const;
     [[nodiscard]] float averageSpentMilliseconds() const;

@@ -29,7 +29,7 @@ public:
     void showCursor(bool visible);
 
 private:
-    SDL_Cursor *m_cursor {nullptr};
+    SDL_Cursor* m_cursor {nullptr};
 };
 
 }

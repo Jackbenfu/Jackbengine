@@ -23,13 +23,13 @@ public:
     ~HeterogeneousCollection() = default;
 
     template<typename TItem>
-    TItem *get() const;
+    TItem* get() const;
 
     template<typename TItem>
     bool any() const;
 
     template<typename TItem, typename ...Args>
-    TItem *add(Args &&...args);
+    TItem* add(Args&& ...args);
 
     template<typename TItem>
     void remove();
@@ -42,16 +42,16 @@ public:
 
 private:
     template<typename TItem>
-    std::pair<bool, std::unique_ptr<TBase>> &find();
+    std::pair<bool, std::unique_ptr<TBase>>& find();
     template<typename TItem>
-    const std::pair<bool, std::unique_ptr<TBase>> &find() const;
+    const std::pair<bool, std::unique_ptr<TBase>>& find() const;
 
     std::unordered_map<size_t, std::pair<bool, std::unique_ptr<TBase>>> m_collection;
 };
 
 template<typename TBase>
 template<typename TItem>
-TItem *HeterogeneousCollection<TBase>::get() const
+TItem* HeterogeneousCollection<TBase>::get() const
 {
     static_assert(std::is_base_of<TBase, TItem>::value);
 
@@ -63,7 +63,7 @@ TItem *HeterogeneousCollection<TBase>::get() const
         );
     }
 
-    return dynamic_cast<TItem *>(item.get());
+    return dynamic_cast<TItem*>(item.get());
 }
 
 template<typename TBase>
@@ -80,7 +80,7 @@ bool HeterogeneousCollection<TBase>::any() const
 
 template<typename TBase>
 template<typename TItem, typename ...Args>
-TItem *HeterogeneousCollection<TBase>::add(Args &&...args)
+TItem* HeterogeneousCollection<TBase>::add(Args&& ...args)
 {
     static_assert(std::is_base_of<TBase, TItem>::value);
 
@@ -117,7 +117,7 @@ void HeterogeneousCollection<TBase>::enable(bool enable)
 {
     static_assert(std::is_base_of<TBase, TItem>::value);
 
-    auto &pair = find<TItem>();
+    auto& pair = find<TItem>();
 
     pair.first = enable;
 }
@@ -141,7 +141,7 @@ void HeterogeneousCollection<TBase>::apply(TFunction func)
 
 template<typename TBase>
 template<typename TItem>
-std::pair<bool, std::unique_ptr<TBase>> &HeterogeneousCollection<TBase>::find()
+std::pair<bool, std::unique_ptr<TBase>>& HeterogeneousCollection<TBase>::find()
 {
     const auto typeId = GET_TYPE_ID(TItem);
     const auto it = m_collection.find(typeId);
@@ -158,7 +158,7 @@ std::pair<bool, std::unique_ptr<TBase>> &HeterogeneousCollection<TBase>::find()
 
 template<typename TBase>
 template<typename TItem>
-const std::pair<bool, std::unique_ptr<TBase>> &HeterogeneousCollection<TBase>::find() const
+const std::pair<bool, std::unique_ptr<TBase>>& HeterogeneousCollection<TBase>::find() const
 {
     const auto typeId = GET_TYPE_ID(TItem);
     const auto it = m_collection.find(typeId);

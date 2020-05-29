@@ -92,17 +92,17 @@ float Timer::elapsedSeconds() const
     return m_elapsedMilliseconds * .001f;
 }
 
-float Timer::elapsedMilliseconds() const
+[[maybe_unused]] float Timer::elapsedMilliseconds() const
 {
     return m_elapsedMilliseconds;
 }
 
-float Timer::spentMilliseconds() const
+[[maybe_unused]] float Timer::spentMilliseconds() const
 {
     return m_spentMilliseconds;
 }
 
-float Timer::waitingMilliseconds() const
+[[maybe_unused]] float Timer::waitingMilliseconds() const
 {
     return m_waitingMilliseconds;
 }

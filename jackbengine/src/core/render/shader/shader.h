@@ -13,11 +13,11 @@ namespace Jackbengine::details {
 class Shader
 {
 public:
-    Shader(unsigned int id, const char *vertexShader, const char *fragmentShader, const char *glslVersion);
+    Shader(unsigned int id, const char* vertexShader, const char* fragmentShader, const char* glslVersion);
     ~Shader() = default;
 
 private:
-    static unsigned int compileShader(unsigned int type, const char *glslVersion, const char *source);
+    static unsigned int compileShader(unsigned int type, const char* glslVersion, const char* source);
 
     unsigned int m_id {0};
 };

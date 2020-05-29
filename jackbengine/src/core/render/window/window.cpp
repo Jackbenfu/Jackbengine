@@ -20,7 +20,7 @@
 
 namespace Jackbengine::details {
 
-Window::Window(const std::string &title, int width, int height, bool fullscreen)
+Window::Window(const std::string& title, int width, int height, bool fullscreen)
 {
     SDL_WindowFlags flags;
     int x;
@@ -104,12 +104,12 @@ int Window::height() const
     return m_height;
 }
 
-SDL_Window *Window::nativeWindow() const
+SDL_Window* Window::nativeWindow() const
 {
     return m_window;
 }
 
-SDL_Surface *Window::nativeSurface() const
+SDL_Surface* Window::nativeSurface() const
 {
     return m_surface;
 }

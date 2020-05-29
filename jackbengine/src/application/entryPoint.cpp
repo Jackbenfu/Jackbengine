@@ -11,7 +11,7 @@
 #include <emscripten.h>
 #endif
 
-void parseArguments(int argc, char **argv, bool *fullscreen)
+void parseArguments(int argc, char** argv, bool* fullscreen)
 {
     const auto FullscreenOption = "-fullscreen";
 
@@ -38,7 +38,7 @@ void updateMock()
 
 #endif
 
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
     auto fullscreen = false;
     parseArguments(argc, argv, &fullscreen);

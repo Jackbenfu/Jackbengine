@@ -24,7 +24,7 @@ IMPORT_BINARY_RESOURCE(aquarelle_damien_square_alpha_png)
 
 namespace Jackbengine::details {
 
-Renderer::Renderer(const Window &window, TextureManager &textureManager, ShaderManager &shaderManager)
+Renderer::Renderer(const Window& window, TextureManager& textureManager, ShaderManager& shaderManager)
     : m_window {window},
       m_textureManager {textureManager},
       m_shaderManager {shaderManager}
@@ -34,8 +34,8 @@ Renderer::Renderer(const Window &window, TextureManager &textureManager, ShaderM
     GL_CALL(glEnable(GL_BLEND));
     GL_CALL(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 
-    m_textureShader = m_shaderManager.load((const char *) texture_vertex_default_glsl, (const char *) texture_fragment_default_glsl);
-    m_colorShader = m_shaderManager.load((const char *) color_vertex_default_glsl, (const char *) color_fragment_default_glsl);
+    m_textureShader = m_shaderManager.load((const char*) texture_vertex_default_glsl, (const char*) texture_fragment_default_glsl);
+    m_colorShader = m_shaderManager.load((const char*) color_vertex_default_glsl, (const char*) color_fragment_default_glsl);
     m_texture = m_textureManager.load(aquarelle_damien_square_alpha_png, aquarelle_damien_square_alpha_png_size);
 
     m_vao = std::make_unique<VertexArray>();
@@ -54,11 +54,11 @@ Renderer::Renderer(const Window &window, TextureManager &textureManager, ShaderM
 //    m_vbo = std::make_unique<VertexBuffer>(vertices, sizeof(vertices));
 
     GL_CALL(glEnableVertexAttribArray(0));
-    GL_CALL(glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (const void *) nullptr));
+    GL_CALL(glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (const void*) nullptr));
     GL_CALL(glEnableVertexAttribArray(1));
-    GL_CALL(glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (const void *) (3 * sizeof(float))));
+    GL_CALL(glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (const void*) (3 * sizeof(float))));
     GL_CALL(glEnableVertexAttribArray(2));
-    GL_CALL(glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (const void *) (6 * sizeof(float))));
+    GL_CALL(glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (const void*) (6 * sizeof(float))));
 
     unsigned int indices[] = {
         0, 1, 3,
@@ -113,9 +113,9 @@ void Renderer::colorTest() const
     GL_CALL(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo));
     GL_CALL(glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW));
 
-    GL_CALL(glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *) nullptr));
+    GL_CALL(glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*) nullptr));
     GL_CALL(glEnableVertexAttribArray(0));
-    GL_CALL(glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *) (3 * sizeof(float))));
+    GL_CALL(glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*) (3 * sizeof(float))));
     GL_CALL(glEnableVertexAttribArray(1));
 
     ShaderManager::bind(m_colorShader);

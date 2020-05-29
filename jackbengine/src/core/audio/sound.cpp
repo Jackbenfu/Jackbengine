@@ -11,7 +11,7 @@
 
 namespace Jackbengine::details {
 
-Sound::Sound(const std::string &file)
+Sound::Sound(const std::string& file)
 {
     m_chunk = Mix_LoadWAV(file.c_str());
     if (nullptr == m_chunk)
@@ -20,7 +20,7 @@ Sound::Sound(const std::string &file)
     }
 }
 
-Sound::Sound(const void *data, size_t dataSize)
+Sound::Sound(const void* data, size_t dataSize)
 {
     const auto sdlRwops = std::make_unique<RWops>(data, dataSize);
 

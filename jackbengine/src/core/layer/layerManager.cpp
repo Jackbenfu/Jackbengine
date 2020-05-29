@@ -14,13 +14,13 @@ void LayerManager::update(float delta)
 {
     TRACE("LayerManager::update");
 
-    for (auto &layer : m_layers)
+    for (auto& layer : m_layers)
     {
         layer->update(delta);
     }
 }
 
-void LayerManager::onEvent(Event &e)
+void LayerManager::onEvent(Event& e)
 {
     for (auto it = m_layers.rbegin(); it != m_layers.rend(); ++it)
     {

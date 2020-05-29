@@ -17,7 +17,7 @@ class Log
 public:
     static void init();
 
-    inline static std::shared_ptr<spdlog::logger> &logger()
+    inline static std::shared_ptr<spdlog::logger>& logger()
     {
         return s_logger;
     }

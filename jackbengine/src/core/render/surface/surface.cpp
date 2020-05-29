@@ -13,7 +13,7 @@
 
 namespace Jackbengine::details {
 
-Surface::Surface(const std::string &file)
+Surface::Surface(const std::string& file)
 {
     m_surface = IMG_Load(file.c_str());
     if (nullptr == m_surface)
@@ -22,7 +22,7 @@ Surface::Surface(const std::string &file)
     }
 }
 
-Surface::Surface(const RWops &rwops)
+Surface::Surface(const RWops& rwops)
 {
     m_surface = IMG_Load_RW(rwops.nativeObject(), 0);
     if (nullptr == m_surface)
@@ -31,7 +31,7 @@ Surface::Surface(const RWops &rwops)
     }
 }
 
-Surface::Surface(const Window &window)
+Surface::Surface(const Window& window)
 {
     m_mustBeFreed = false;
     m_surface = SDL_GetWindowSurface(window.nativeWindow());
@@ -46,7 +46,7 @@ Surface::Surface(int width, int height, int depth)
     }
 }
 
-Surface::Surface(const Font &font, const std::string &text, Color foreground)
+Surface::Surface(const Font& font, const std::string& text, Color foreground)
 {
     const auto sdlFont = font.m_font;
 
@@ -63,11 +63,11 @@ Surface::~Surface()
 {
     if (m_mustBeFreed)
     {
-        SDL_FreeSurface((SDL_Surface *) m_surface);
+        SDL_FreeSurface((SDL_Surface*) m_surface);
     }
 }
 
-SDL_Surface *Surface::nativeObject() const
+SDL_Surface* Surface::nativeObject() const
 {
     return m_surface;
 }

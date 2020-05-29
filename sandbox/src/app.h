@@ -15,7 +15,7 @@ namespace Sandbox {
 class App : public Jackbengine::Application
 {
 public:
-    explicit App(Jackbengine::ApplicationConfig &config);
+    explicit App(Jackbengine::ApplicationConfig& config);
     ~App() override = default;
 
     void update(float delta) final;

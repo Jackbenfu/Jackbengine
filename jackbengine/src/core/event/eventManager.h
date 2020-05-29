@@ -28,7 +28,7 @@ class EventManager
     friend class Jackbengine::Application;
 
 public:
-    explicit EventManager(std::function<void(Event &)> callback);
+    explicit EventManager(std::function<void(Event&)> callback);
     ~EventManager() = default;
 
     [[maybe_unused]] [[nodiscard]] bool isKeyDown(KeyboardKey key) const;
@@ -42,20 +42,20 @@ public:
 private:
     void update(float delta);
 
-    void handleKeyDown(const SDL_Keysym &keysym);
+    void handleKeyDown(const SDL_Keysym& keysym);
     void handleKeyDownRepeat(KeyboardKey key);
-    void handleKeyUp(const SDL_Keysym &keysym);
+    void handleKeyUp(const SDL_Keysym& keysym);
 
-    void handleMouseDown(const SDL_MouseButtonEvent &event, int button, int mouseX, int mouseY);
+    void handleMouseDown(const SDL_MouseButtonEvent& event, int button, int mouseX, int mouseY);
     void handleMouseDownRepeat(int button, int mouseX, int mouseY);
-    void handleMouseUp(const SDL_MouseButtonEvent &event, int button, int mouseX, int mouseY);
+    void handleMouseUp(const SDL_MouseButtonEvent& event, int button, int mouseX, int mouseY);
 
     [[nodiscard]] static int getScanCode(KeyboardKey key);
     [[nodiscard]] static KeyboardKey getPhysicalKey(int scanCode);
     [[nodiscard]] static KeyboardKey getVirtualKey(int sym);
     [[nodiscard]] static MouseButton getButton(int button);
 
-    std::function<void(Event &)> m_callback;
+    std::function<void(Event&)> m_callback;
 
     std::vector<bool> m_keyDown = std::vector<bool>((int) KeyboardKey::KeyboardKeyCount, false);
     std::vector<bool> m_keyDownOnFrame = std::vector<bool>((int) KeyboardKey::KeyboardKeyCount, false);

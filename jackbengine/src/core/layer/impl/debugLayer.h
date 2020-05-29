@@ -18,15 +18,15 @@ namespace Jackbengine {
 class DebugLayer : public Layer
 {
 public:
-    DebugLayer(const details::Timer *timer, const details::Window *window, bool demo = false);
+    DebugLayer(const details::Timer* timer, const details::Window* window, bool demo = false);
     ~DebugLayer() override = default;
 
     void update(float delta) override;
-    void onEvent(Event &e) override;
+    void onEvent(Event& e) override;
 
 private:
-    const details::Timer *m_timer;
-    const details::Window *m_window;
+    const details::Timer* m_timer;
+    const details::Window* m_window;
     bool m_demo {false};
 };
 

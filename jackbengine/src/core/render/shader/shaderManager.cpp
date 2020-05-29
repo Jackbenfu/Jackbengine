@@ -10,7 +10,7 @@
 
 namespace Jackbengine::details {
 
-unsigned int ShaderManager::load(const char *vertexShader, const char *fragmentShader)
+unsigned int ShaderManager::load(const char* vertexShader, const char* fragmentShader)
 {
     const auto id = generateId();
 

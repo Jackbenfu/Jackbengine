@@ -17,14 +17,14 @@ namespace Jackbengine::details {
 class Texture
 {
 public:
-    Texture(unsigned int id, const std::string &file);
-    Texture(unsigned int id, const void *data, size_t dataSize);
+    Texture(unsigned int id, const std::string& file);
+    Texture(unsigned int id, const void* data, size_t dataSize);
     ~Texture() = default;
 
     unsigned int id() const;
 
 private:
-    void loadTextureFromSurface(const Surface &surface);
+    void loadTextureFromSurface(const Surface& surface);
 
     unsigned int m_id;
 };

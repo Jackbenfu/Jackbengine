@@ -13,7 +13,7 @@
 
 namespace Jackbengine::details {
 
-Texture::Texture(unsigned int id, const std::string &file)
+Texture::Texture(unsigned int id, const std::string& file)
     : m_id {id}
 {
     const Surface surface(file);
@@ -21,7 +21,7 @@ Texture::Texture(unsigned int id, const std::string &file)
     loadTextureFromSurface(surface);
 }
 
-Texture::Texture(unsigned int id, const void *data, size_t dataSize)
+Texture::Texture(unsigned int id, const void* data, size_t dataSize)
     : m_id {id}
 {
     const RWops rwops(data, dataSize);
@@ -35,7 +35,7 @@ unsigned int Texture::id() const
     return m_id;
 }
 
-void Texture::loadTextureFromSurface(const Surface &surface)
+void Texture::loadTextureFromSurface(const Surface& surface)
 {
     const auto nativeSurface = surface.nativeObject();
 

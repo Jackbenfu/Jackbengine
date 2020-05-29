@@ -10,11 +10,11 @@
 #include "eventManager.h"
 #include "impl/eventImpl.h"
 
-bool ImGui_ImplSDL2_ProcessEvent(const SDL_Event *event);
+bool ImGui_ImplSDL2_ProcessEvent(const SDL_Event* event);
 
 namespace Jackbengine::details {
 
-EventManager::EventManager(std::function<void(Event &)> callback)
+EventManager::EventManager(std::function<void(Event&)> callback)
     : m_callback {std::move(callback)}
 {
 }
@@ -126,7 +126,7 @@ void EventManager::update(float)
     }
 }
 
-void EventManager::handleKeyDown(const SDL_Keysym &keysym)
+void EventManager::handleKeyDown(const SDL_Keysym& keysym)
 {
     const auto physicalKey = getPhysicalKey(keysym.scancode);
     if (KeyboardKey::Unknown == physicalKey)
@@ -165,7 +165,7 @@ void EventManager::handleKeyDownRepeat(KeyboardKey key)
     }
 }
 
-void EventManager::handleKeyUp(const SDL_Keysym &keysym)
+void EventManager::handleKeyUp(const SDL_Keysym& keysym)
 {
     const auto physicalKey = getPhysicalKey(keysym.scancode);
     if (KeyboardKey::Unknown == physicalKey)
@@ -187,7 +187,7 @@ void EventManager::handleKeyUp(const SDL_Keysym &keysym)
     m_keyDownRepeat[(int) physicalKey] = 0;
 }
 
-void EventManager::handleMouseDown(const SDL_MouseButtonEvent &event, int button, int mouseX, int mouseY)
+void EventManager::handleMouseDown(const SDL_MouseButtonEvent& event, int button, int mouseX, int mouseY)
 {
     if (event.button != button)
     {
@@ -213,7 +213,7 @@ void EventManager::handleMouseDownRepeat(int button, int mouseX, int mouseY)
     }
 }
 
-void EventManager::handleMouseUp(const SDL_MouseButtonEvent &event, int button, int mouseX, int mouseY)
+void EventManager::handleMouseUp(const SDL_MouseButtonEvent& event, int button, int mouseX, int mouseY)
 {
     if (event.button != button)
     {

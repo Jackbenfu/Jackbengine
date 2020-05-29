@@ -20,7 +20,7 @@ public:
     ShaderManager() = default;
     ~ShaderManager() = default;
 
-    [[nodiscard]] unsigned int load(const char *vertexShader, const char *fragmentShader);
+    [[nodiscard]] unsigned int load(const char* vertexShader, const char* fragmentShader);
 
     void unload(unsigned int id);
 
@@ -34,7 +34,7 @@ private:
 #ifdef EMSCRIPTEN
     const char *m_glslVersion = "#version 300 es";
 #else
-    const char *m_glslVersion = "#version 330 core";
+    const char* m_glslVersion = "#version 330 core";
 #endif
 };
 

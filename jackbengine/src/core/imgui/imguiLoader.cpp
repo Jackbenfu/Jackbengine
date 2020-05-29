@@ -13,11 +13,11 @@
 
 namespace Jackbengine::details {
 
-void initImGui(const Window *window)
+void initImGui(const Window* window)
 {
     ImGui::CreateContext();
 
-    ImGuiIO &io = ImGui::GetIO();
+    ImGuiIO& io = ImGui::GetIO();
     io.IniFilename = nullptr;
     io.DisplaySize = ImVec2 {(float) window->width(), (float) window->height()};
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;

@@ -10,7 +10,7 @@
 
 namespace Jackbengine::details {
 
-unsigned int TextureManager::load(const std::string &file)
+unsigned int TextureManager::load(const std::string& file)
 {
     const auto id = generateId();
 
@@ -19,7 +19,7 @@ unsigned int TextureManager::load(const std::string &file)
     return id;
 }
 
-unsigned int TextureManager::load(const void *data, size_t dataSize)
+unsigned int TextureManager::load(const void* data, size_t dataSize)
 {
     const auto id = generateId();
 
@@ -28,7 +28,7 @@ unsigned int TextureManager::load(const void *data, size_t dataSize)
     return id;
 }
 
-unsigned int TextureManager::load(const std::string &, /* TODO insert atlas info here */ int)
+unsigned int TextureManager::load(const std::string&, /* TODO insert atlas info here */ int)
 {
     return -1;
 }

@@ -21,7 +21,7 @@ enum class VertexAttributeType
 class VertexBuffer
 {
 public:
-    VertexBuffer(const float *vertices, unsigned int size, const std::initializer_list<VertexAttributeType> &layout);
+    VertexBuffer(const float* vertices, unsigned int size, const std::initializer_list<VertexAttributeType>& layout);
     ~VertexBuffer();
 
     void bind();

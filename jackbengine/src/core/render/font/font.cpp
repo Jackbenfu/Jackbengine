@@ -11,7 +11,7 @@
 
 namespace Jackbengine::details {
 
-Font::Font(const std::string &file, int size)
+Font::Font(const std::string& file, int size)
 {
     m_font = TTF_OpenFont(file.c_str(), size);
     if (nullptr == m_font)
@@ -20,7 +20,7 @@ Font::Font(const std::string &file, int size)
     }
 }
 
-Font::Font(const void *data, size_t dataSize, int size)
+Font::Font(const void* data, size_t dataSize, int size)
 {
     const auto sdlRwops = std::make_unique<RWops>(data, dataSize);
 
@@ -36,7 +36,7 @@ Font::~Font()
     TTF_CloseFont(m_font);
 }
 
-void Font::glyphMetrics(unsigned short glyph, int *minX, int *maxX, int *minY, int *maxY, int *advance) const
+void Font::glyphMetrics(unsigned short glyph, int* minX, int* maxX, int* minY, int* maxY, int* advance) const
 {
     if (TTF_GlyphMetrics(m_font, glyph, minX, maxX, minY, maxY, advance) < 0)
     {
@@ -44,7 +44,7 @@ void Font::glyphMetrics(unsigned short glyph, int *minX, int *maxX, int *minY, i
     }
 }
 
-void Font::glyphMinX(unsigned short glyph, int *minX) const
+void Font::glyphMinX(unsigned short glyph, int* minX) const
 {
     int maxX;
     int minY;
@@ -54,7 +54,7 @@ void Font::glyphMinX(unsigned short glyph, int *minX) const
     glyphMetrics(glyph, minX, &maxX, &minY, &maxY, &advance);
 }
 
-void Font::glyphMaxX(unsigned short glyph, int *maxX) const
+void Font::glyphMaxX(unsigned short glyph, int* maxX) const
 {
     int minX;
     int minY;
@@ -64,7 +64,7 @@ void Font::glyphMaxX(unsigned short glyph, int *maxX) const
     return glyphMetrics(glyph, &minX, maxX, &minY, &maxY, &advance);
 }
 
-void Font::glyphMinY(unsigned short glyph, int *minY) const
+void Font::glyphMinY(unsigned short glyph, int* minY) const
 {
     int minX;
     int maxX;
@@ -74,7 +74,7 @@ void Font::glyphMinY(unsigned short glyph, int *minY) const
     return glyphMetrics(glyph, &minX, &maxX, minY, &maxY, &advance);
 }
 
-void Font::glyphMaxY(unsigned short glyph, int *maxY) const
+void Font::glyphMaxY(unsigned short glyph, int* maxY) const
 {
     int minX;
     int maxX;
@@ -84,7 +84,7 @@ void Font::glyphMaxY(unsigned short glyph, int *maxY) const
     return glyphMetrics(glyph, &minX, &maxX, &minY, maxY, &advance);
 }
 
-void Font::glyphAdvance(unsigned short glyph, int *advance) const
+void Font::glyphAdvance(unsigned short glyph, int* advance) const
 {
     int minX;
     int maxX;

@@ -10,7 +10,7 @@
 
 namespace Jackbengine {
 
-IndexBuffer::IndexBuffer(const unsigned int *indices, unsigned int count)
+IndexBuffer::IndexBuffer(const unsigned int* indices, unsigned int count)
     : m_count {count}
 {
     (glGenBuffers(1, &m_id));

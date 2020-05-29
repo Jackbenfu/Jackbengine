@@ -22,7 +22,7 @@ namespace Jackbengine::details {
 class Renderer
 {
 public:
-    explicit Renderer(const Window &window, TextureManager &textureManager, ShaderManager &shaderManager);
+    explicit Renderer(const Window& window, TextureManager& textureManager, ShaderManager& shaderManager);
     ~Renderer() = default;
 
     static void clear();
@@ -32,9 +32,9 @@ public:
     void textureTest();
 
 private:
-    const Window &m_window;
-    TextureManager &m_textureManager;
-    ShaderManager &m_shaderManager;
+    const Window& m_window;
+    TextureManager& m_textureManager;
+    ShaderManager& m_shaderManager;
 
     unsigned int m_textureShader {0};
     unsigned int m_colorShader {0};

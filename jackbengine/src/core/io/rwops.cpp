@@ -12,7 +12,7 @@
 
 namespace Jackbengine::details {
 
-RWops::RWops(const void *data, size_t dataSize)
+RWops::RWops(const void* data, size_t dataSize)
 {
     m_rwops = SDL_RWFromConstMem(data, (int) dataSize);
 
@@ -27,7 +27,7 @@ RWops::~RWops()
     SDL_RWclose(m_rwops);
 }
 
-SDL_RWops *RWops::nativeObject() const
+SDL_RWops* RWops::nativeObject() const
 {
     return m_rwops;
 }

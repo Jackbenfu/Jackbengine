@@ -12,7 +12,7 @@
 
 namespace Jackbengine::details {
 
-void logGlError([[maybe_unused]] const char *func, [[maybe_unused]] const char *file, [[maybe_unused]] int line)
+void logGlError([[maybe_unused]] const char* func, [[maybe_unused]] const char* file, [[maybe_unused]] int line)
 {
     GLenum error;
     while ((error = glGetError()) != GL_NO_ERROR)
@@ -44,7 +44,7 @@ void logGlError([[maybe_unused]] const char *func, [[maybe_unused]] const char *
     }
 }
 
-[[maybe_unused]] const char *glEnumName(GLenum enumName)
+[[maybe_unused]] const char* glEnumName(GLenum enumName)
 {
     switch (enumName)
     {

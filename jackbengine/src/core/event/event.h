@@ -42,16 +42,16 @@ public:
 class EventDispatcher
 {
 public:
-    explicit EventDispatcher(Event &e)
+    explicit EventDispatcher(Event& e)
         : m_event {e}
     {}
 
     template<typename T>
-    bool dispatch(std::function<bool(const T &)> callback)
+    bool dispatch(std::function<bool(const T&)> callback)
     {
         if (m_event.eventType() == T::staticType())
         {
-            m_event.handled = (callback(*(T *) &m_event));
+            m_event.handled = (callback(*(T*) &m_event));
             return true;
         }
 
@@ -59,7 +59,7 @@ public:
     }
 
 private:
-    Event &m_event;
+    Event& m_event;
 };
 
 }

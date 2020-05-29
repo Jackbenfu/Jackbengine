@@ -10,7 +10,7 @@
 
 namespace Jackbengine {
 
-VertexBuffer::VertexBuffer(const float *vertices, unsigned int size, const std::initializer_list<VertexAttributeType> &layout)
+VertexBuffer::VertexBuffer(const float* vertices, unsigned int size, const std::initializer_list<VertexAttributeType>& layout)
 {
     GL_CALL(glGenBuffers(1, &m_id));
     GL_CALL(glBindBuffer(GL_ARRAY_BUFFER, m_id));

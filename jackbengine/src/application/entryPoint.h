@@ -19,7 +19,7 @@ namespace details {
 class ApplicationWrapper
 {
 public:
-    explicit ApplicationWrapper(Application *application)
+    explicit ApplicationWrapper(Application* application)
         : m_application {application}
     {}
 
@@ -34,7 +34,7 @@ public:
     }
 
 private:
-    Application *m_application;
+    Application* m_application;
 };
 
 }

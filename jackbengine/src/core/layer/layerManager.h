@@ -21,10 +21,10 @@ public:
     ~LayerManager() = default;
 
     void update(float delta);
-    void onEvent(Event &e);
+    void onEvent(Event& e);
 
     template<typename TLayer, typename ...Args>
-    void add(Args &&...args);
+    void add(Args&& ...args);
 
     template<typename TLayer>
     void remove();
@@ -34,7 +34,7 @@ private:
 };
 
 template<typename TLayer, typename... Args>
-void LayerManager::add(Args &&... args)
+void LayerManager::add(Args&& ... args)
 {
     m_layers.emplace_back(
         std::make_unique<TLayer>(std::forward<Args>(args)...)

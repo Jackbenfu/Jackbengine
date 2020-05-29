@@ -12,7 +12,7 @@
 
 namespace Jackbengine::details {
 
-void initImGui(const Window *window);
+void initImGui(const Window* window);
 void destroyImGui();
 
 }

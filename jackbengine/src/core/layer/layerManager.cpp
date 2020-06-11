@@ -5,14 +5,14 @@
 // Created by Damien Bendejacq on 22/09/2019.
 //
 
-#include "core/log/tracer.h"
+#include "core/profile/profile.h"
 #include "layerManager.h"
 
 namespace Jackbengine::details {
 
 void LayerManager::update(float delta)
 {
-    TRACE("LayerManager::update");
+    PROFILE("LayerManager::update");
 
     for (auto& layer : m_layers)
     {

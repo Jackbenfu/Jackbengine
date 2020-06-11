@@ -10,13 +10,18 @@
 
 namespace Jackbengine {
 
-std::shared_ptr<spdlog::logger> Log::s_logger;
+std::shared_ptr<spdlog::logger>& Log::instance()
+{
+    static std::shared_ptr<spdlog::logger> instance;
+
+    return instance;
+}
 
 void Log::init()
 {
     spdlog::set_pattern("%^[%D %T.%e] [%P] [%t] [%n] [%l] %v%$");
-    s_logger = spdlog::stdout_color_mt("DEFAULT");
-    s_logger->set_level(spdlog::level::trace);
+    instance() = spdlog::stdout_color_mt("DEFAULT");
+    instance()->set_level(spdlog::level::trace);
 }
 
 }

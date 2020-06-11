@@ -24,6 +24,8 @@ public:
 
     [[nodiscard]] std::optional<float> fps() const;
 
+    [[nodiscard]] unsigned int targetFps() const;
+
     [[nodiscard]] float elapsedSeconds() const;
     [[maybe_unused]] [[nodiscard]] float elapsedMilliseconds() const;
     [[maybe_unused]] [[nodiscard]] float spentMilliseconds() const;

@@ -14,6 +14,7 @@ CDFLAGS             = -g \
                       -s DISABLE_EXCEPTION_CATCHING=0 \
                       -s USE_WEBGL2=1 \
                       -s ALLOW_MEMORY_GROWTH=1 \
+                      -s BINARYEN_TRAP_MODE=clamp \
                       -DFMT_HEADER_ONLY
 
 CRPFLAGS            = -O3 -DNDEBUG \
@@ -30,6 +31,7 @@ CRPFLAGS            = -O3 -DNDEBUG \
                       -s DISABLE_EXCEPTION_CATCHING=0 \
                       -s USE_WEBGL2=1 \
                       -s ALLOW_MEMORY_GROWTH=1 \
+                      -s BINARYEN_TRAP_MODE=clamp \
                       --profiling \
                       -DFMT_HEADER_ONLY
 

@@ -10,7 +10,7 @@
 
 // Core
 #include "core/resource/importResource.h"
-#include "core/log/profile.h"
+#include "core/profile/profile.h"
 
 // Application
 #include "application/application.h"

@@ -87,6 +87,11 @@ std::optional<float> Timer::fps() const
     return m_fps;
 }
 
+unsigned int Timer::targetFps() const
+{
+    return m_targetFps;
+}
+
 float Timer::elapsedSeconds() const
 {
     return m_elapsedMilliseconds * .001f;

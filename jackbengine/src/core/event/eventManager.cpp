@@ -5,7 +5,7 @@
 // Created by Damien Bendejacq on 20/08/2019.
 //
 
-#include "core/log/tracer.h"
+#include "core/profile/profile.h"
 #include "core/sdl/sdlinc.h"
 #include "eventManager.h"
 #include "impl/eventImpl.h"
@@ -51,7 +51,7 @@ EventManager::EventManager(std::function<void(Event&)> callback)
 
 void EventManager::update(float)
 {
-    TRACE("EventManager::update");
+    PROFILE("EventManager::update");
 
     int mouseX;
     int mouseY;

@@ -25,6 +25,9 @@ public:
     void onEvent(Event& e) override;
 
 private:
+    void printTiming();
+    void printSampleProfiler();
+
     const details::Timer* m_timer;
     const details::Window* m_window;
     bool m_demo {false};

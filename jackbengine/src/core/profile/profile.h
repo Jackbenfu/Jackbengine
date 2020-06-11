@@ -10,7 +10,8 @@
 
 #include <chrono>
 
-#include "log.h"
+#include "core/common/common.h"
+#include "core/log/log.h"
 
 namespace Jackbengine {
 
@@ -30,11 +31,9 @@ private:
 }
 
 #ifdef __RELEASE_PROFILE__
-#define PROFILE(name)   Profile TOKENPASTE(profile, __LINE__)(name)
+#define PROFILE(name)       Profile TOKENPASTE(profile, __LINE__)(name)
 #else
-#define PROFILE(name)
+#define PROFILE(name)       void(0)
 #endif
-
-#define NO_PROFILE(name)
 
 #endif // __PROFILE_H__

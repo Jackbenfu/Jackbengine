@@ -14,12 +14,14 @@
 #include "core/event/impl/eventImpl.h"
 
 #include "core/layer/layerManager.h"
-#include "core/layer/impl/debugLayer.h"
+#include "core/layer/impl/debug/debugLayer.h"
 
 #include "core/time/timer.h"
 #include "core/render/cursor/cursor.h"
 #include "core/render/window/window.h"
 #include "core/render/renderer/renderer.h"
+
+#include "core/profile/profiler.h"
 
 namespace Jackbengine {
 

@@ -8,7 +8,7 @@
 //#include "core/render/buffer/bufferLayout.h"
 #include "renderer.h"
 #include "glUtils.h"
-#include "core/log/tracer.h"
+#include "core/profile/profile.h"
 #include "core/sdl/sdlinc.h"
 #include "core/render/surface/surface.h"
 #include "core/resource/importResource.h"
@@ -40,17 +40,17 @@ Renderer::Renderer(const Window& window, TextureManager& textureManager, ShaderM
 
     m_vao = std::make_unique<VertexArray>();
 
-    float vertices[] = {
-        1.0f, 1.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, // top right
-        1.0f, -1.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f, // bottom right
-        -1.0f, -1.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f, // bottom left
-        -1.0f, 1.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f, // top left
-
-        0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, // top right
-        0.5f, -0.5f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f, // bottom right
-        -0.5f, -0.5f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f, // bottom left
-        -0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f, // top left
-    };
+//    float vertices[] = {
+//        1.0f, 1.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, // top right
+//        1.0f, -1.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f, // bottom right
+//        -1.0f, -1.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f, // bottom left
+//        -1.0f, 1.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f, // top left
+//
+//        0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, // top right
+//        0.5f, -0.5f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f, // bottom right
+//        -0.5f, -0.5f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f, // bottom left
+//        -0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f, // top left
+//    };
 //    m_vbo = std::make_unique<VertexBuffer>(vertices, sizeof(vertices));
 
     GL_CALL(glEnableVertexAttribArray(0));
@@ -68,11 +68,11 @@ Renderer::Renderer(const Window& window, TextureManager& textureManager, ShaderM
     };
     m_ibo = std::make_unique<IndexBuffer>(indices, sizeof(indices));
 
-    auto vboAttributes = {
-        VertexAttributeType::Float3,
-        VertexAttributeType::Float3,
-        VertexAttributeType::Float2,
-    };
+//    auto vboAttributes = {
+//        VertexAttributeType::Float3,
+//        VertexAttributeType::Float3,
+//        VertexAttributeType::Float2,
+//    };
 }
 
 void Renderer::clear()
@@ -87,6 +87,8 @@ void Renderer::present()
 
 void Renderer::colorTest() const
 {
+    PROFILE("Renderer::colorTest");
+
     float vertices[] = {
         0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
         0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f,
@@ -125,7 +127,7 @@ void Renderer::colorTest() const
 
 void Renderer::textureTest()
 {
-    TRACE("Renderer::textureTest");
+    PROFILE("Renderer::textureTest");
 
     ShaderManager::bind(m_textureShader);
     TextureManager::bind(m_texture);

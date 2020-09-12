@@ -20,8 +20,8 @@ void initImGui(const Window* window)
     ImGuiIO& io = ImGui::GetIO();
     io.IniFilename = nullptr;
     io.DisplaySize = ImVec2 {(float) window->width(), (float) window->height()};
-    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
-    io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;
+    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard; // NOLINT(hicpp-signed-bitwise)
+    io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad; // NOLINT(hicpp-signed-bitwise)
 
     ImGui::StyleColorsDark();
 

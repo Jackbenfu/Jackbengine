@@ -12,24 +12,25 @@
 
 namespace Jackbengine::details {
 
-Tracer& Tracer::instance()
-{
-    static Tracer instance;
-
-    return instance;
-}
-
-Tracer::Tracer()
-{
-    m_os.open("trace.json");
-    m_os << R"({"otherData": {},"traceEvents":[)";
-}
+static Tracer s_tracer;
+std::ofstream Tracer::m_os;
 
 Tracer::~Tracer()
 {
     m_os << "]}";
     m_os.flush();
     m_os.close();
+}
+
+Tracer& Tracer::instance()
+{
+    return s_tracer;
+}
+
+void Tracer::init()
+{
+    m_os.open("trace.json");
+    m_os << R"({"otherData": {},"traceEvents":[)";
 }
 
 void Tracer::duration(const char* name, long long start, long long end, unsigned int threadId)

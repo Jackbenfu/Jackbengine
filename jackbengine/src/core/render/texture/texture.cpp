@@ -35,7 +35,7 @@ unsigned int Texture::id() const
     return m_id;
 }
 
-void Texture::loadTextureFromSurface(const Surface& surface)
+void Texture::loadTextureFromSurface(const Surface& surface) const
 {
     const auto nativeSurface = surface.nativeObject();
 

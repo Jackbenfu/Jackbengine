@@ -20,9 +20,6 @@ class Profiler
     friend class Jackbengine::Profile;
 
 public:
-    Profiler() = default;
-    ~Profiler() = default;
-
     static Profiler& instance();
 
     static void init(const Timer* timer);

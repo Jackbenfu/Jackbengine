@@ -53,12 +53,12 @@ Renderer::Renderer(const Window& window, TextureManager& textureManager, ShaderM
 //    };
 //    m_vbo = std::make_unique<VertexBuffer>(vertices, sizeof(vertices));
 
-    GL_CALL(glEnableVertexAttribArray(0));
-    GL_CALL(glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (const void*) nullptr));
-    GL_CALL(glEnableVertexAttribArray(1));
-    GL_CALL(glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (const void*) (3 * sizeof(float))));
-    GL_CALL(glEnableVertexAttribArray(2));
-    GL_CALL(glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (const void*) (6 * sizeof(float))));
+//    GL_CALL(glEnableVertexAttribArray(0));
+//    GL_CALL(glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (const void*) nullptr));
+//    GL_CALL(glEnableVertexAttribArray(1));
+//    GL_CALL(glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (const void*) (3 * sizeof(float))));
+//    GL_CALL(glEnableVertexAttribArray(2));
+//    GL_CALL(glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (const void*) (6 * sizeof(float))));
 
     unsigned int indices[] = {
         0, 1, 3,

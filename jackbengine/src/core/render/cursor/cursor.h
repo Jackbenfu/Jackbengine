@@ -26,7 +26,7 @@ public:
 
     void setCursor(CursorType cursor);
 
-    void showCursor(bool visible);
+    static void showCursor(bool visible);
 
 private:
     SDL_Cursor* m_cursor {nullptr};

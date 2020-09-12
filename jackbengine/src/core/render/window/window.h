@@ -26,7 +26,6 @@ public:
     [[nodiscard]] int height() const;
 
     [[nodiscard]] SDL_Window* nativeWindow() const;
-    [[nodiscard]] SDL_Surface* nativeSurface() const;
     [[nodiscard]] SDL_GLContext nativeGLContext() const;
 
 private:

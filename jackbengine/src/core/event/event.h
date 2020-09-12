@@ -28,7 +28,7 @@ enum class EventType
 #define EVENT_CLASS_TYPE(type)  inline static EventType staticType() { return type; }                           \
                                 inline virtual EventType eventType() const override { return staticType(); }
 
-#define BIND_EVENT_CALLBACK(func) std::bind(func, this, std::placeholders::_1)
+#define BIND_EVENT_CALLBACK(func)   [this](auto& e) { return func(e); }
 
 class Event
 {

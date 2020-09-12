@@ -104,7 +104,7 @@ int Font::descent() const
     return TTF_FontDescent(m_font);
 }
 
-int Font::lineSkip() const
+[[maybe_unused]] int Font::lineSkip() const
 {
     return TTF_FontLineSkip(m_font);
 }

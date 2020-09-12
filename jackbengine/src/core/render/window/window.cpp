@@ -34,8 +34,8 @@ Window::Window(const std::string& title, int width, int height, bool fullscreen)
     else
     {
         flags = (SDL_WindowFlags) (SDL_WINDOW_OPENGL);
-        x = SDL_WINDOWPOS_CENTERED;
-        y = SDL_WINDOWPOS_CENTERED;
+        x = SDL_WINDOWPOS_CENTERED; // NOLINT(hicpp-signed-bitwise)
+        y = SDL_WINDOWPOS_CENTERED; // NOLINT(hicpp-signed-bitwise)
     }
 
 #ifdef EMSCRIPTEN
@@ -107,11 +107,6 @@ int Window::height() const
 SDL_Window* Window::nativeWindow() const
 {
     return m_window;
-}
-
-SDL_Surface* Window::nativeSurface() const
-{
-    return m_surface;
 }
 
 SDL_GLContext Window::nativeGLContext() const

@@ -10,18 +10,33 @@
 
 namespace Jackbengine {
 
-std::shared_ptr<spdlog::logger>& Log::instance()
-{
-    static std::shared_ptr<spdlog::logger> instance;
+std::shared_ptr<spdlog::logger> Log::s_logger;
 
-    return instance;
-}
-
-void Log::init()
+void Log::init(LogLevel level)
 {
     spdlog::set_pattern("%^[%D %T.%e] [%P] [%t] [%n] [%l] %v%$");
-    instance() = spdlog::stdout_color_mt("DEFAULT");
-    instance()->set_level(spdlog::level::trace);
+    s_logger = spdlog::stdout_color_mt("DEFAULT");
+
+    spdlog::level::level_enum lvl;
+    switch (level)
+    {
+        case LogLevel::Debug:
+            lvl = spdlog::level::debug;
+            break;
+        case LogLevel::Info:
+            lvl = spdlog::level::info;
+            break;
+        case LogLevel::Error:
+            lvl = spdlog::level::err;
+            break;
+        case LogLevel::Off:
+            lvl = spdlog::level::off;
+            break;
+        default:
+            throw std::runtime_error("Unsupported LogLevel for Log");
+    }
+
+    s_logger->set_level(lvl);
 }
 
 }

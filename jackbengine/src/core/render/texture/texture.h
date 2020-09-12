@@ -21,10 +21,10 @@ public:
     Texture(unsigned int id, const void* data, size_t dataSize);
     ~Texture() = default;
 
-    unsigned int id() const;
+    [[nodiscard]] unsigned int id() const;
 
 private:
-    void loadTextureFromSurface(const Surface& surface);
+    void loadTextureFromSurface(const Surface& surface) const;
 
     unsigned int m_id;
 };

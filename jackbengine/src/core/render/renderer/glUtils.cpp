@@ -59,7 +59,7 @@ void logGlError([[maybe_unused]] const char* func, [[maybe_unused]] const char* 
             return "GL_BGRA";
 #endif
         default:
-            throw new std::runtime_error(fmt::format("Unsupported GLenum value {}", enumName));
+            throw std::runtime_error(fmt::format("Unsupported GLenum value {}", enumName));
     }
 }
 

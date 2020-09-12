@@ -65,7 +65,7 @@ private:
     bool onApplicationCloseEvent(const ApplicationCloseEvent& e);
 
     std::unique_ptr<details::Timer> m_timer;
-    [[maybe_unused]] std::unique_ptr<details::Cursor> m_cursor;
+    std::unique_ptr<details::Cursor> m_cursor;
     std::unique_ptr<details::Window> m_window;
     std::unique_ptr<details::TextureManager> m_textureManager;
     std::unique_ptr<details::ShaderManager> m_shaderManager;

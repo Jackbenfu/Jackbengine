@@ -22,6 +22,11 @@ void LayerManager::update(float delta)
 
 void LayerManager::onEvent(Event& e)
 {
+    if (e.handled)
+    {
+        return;
+    }
+
     for (auto it = m_layers.rbegin(); it != m_layers.rend(); ++it)
     {
         (*it)->onEvent(e);

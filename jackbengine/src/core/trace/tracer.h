@@ -22,16 +22,17 @@ namespace Jackbengine::details {
 class Tracer
 {
 public:
-    Tracer();
     ~Tracer();
 
     static Tracer& instance();
+
+    static void init();
 
     void duration(const char* name, long long start, long long end, unsigned int threadId);
     void instant(const char* name, long long timestamp, unsigned int threadId);
 
 private:
-    std::ofstream m_os;
+    static std::ofstream m_os;
     std::mutex m_mutex;
     int m_count {0};
 };

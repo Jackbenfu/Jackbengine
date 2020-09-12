@@ -10,12 +10,11 @@
 namespace Jackbengine::details {
 
 const Timer* Profiler::s_timer;
+static Profiler s_profiler;
 
 Profiler& Profiler::instance()
 {
-    static Profiler instance;
-
-    return instance;
+    return s_profiler;
 }
 
 void Profiler::init(const Timer* timer)

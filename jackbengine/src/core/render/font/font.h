@@ -10,7 +10,7 @@
 
 #include <string>
 
-typedef struct _TTF_Font TTF_Font;
+typedef struct _TTF_Font TTF_Font; // NOLINT(bugprone-reserved-identifier)
 
 namespace Jackbengine::details {
 
@@ -34,7 +34,7 @@ public:
 
     [[nodiscard]] int ascent() const;
     [[nodiscard]] int descent() const;
-    [[nodiscard]] int lineSkip() const;
+    [[maybe_unused]] [[nodiscard]] int lineSkip() const;
 
 private:
     TTF_Font* m_font {nullptr};

@@ -1,6 +1,6 @@
 CC                  = emcc
 
-CDFLAGS             = -g \
+CFLAGS_D            = -shared -g \
 				      -D__DEBUG__ \
                       -Wall -Wextra -Wpedantic \
                       -std=c++2a \
@@ -14,7 +14,6 @@ CDFLAGS             = -g \
                       -s DISABLE_EXCEPTION_CATCHING=0 \
                       -s USE_WEBGL2=1 \
                       -s ALLOW_MEMORY_GROWTH=1 \
-                      -s BINARYEN_TRAP_MODE=clamp \
                       -DFMT_HEADER_ONLY
 
 CRPFLAGS            = -O3 -DNDEBUG \
@@ -31,7 +30,6 @@ CRPFLAGS            = -O3 -DNDEBUG \
                       -s DISABLE_EXCEPTION_CATCHING=0 \
                       -s USE_WEBGL2=1 \
                       -s ALLOW_MEMORY_GROWTH=1 \
-                      -s BINARYEN_TRAP_MODE=clamp \
                       --profiling \
                       -DFMT_HEADER_ONLY
 
@@ -49,7 +47,6 @@ CFLAGS              = -O3 -DNDEBUG \
                       -s DISABLE_EXCEPTION_CATCHING=0 \
                       -s USE_WEBGL2=1 \
                       -s ALLOW_MEMORY_GROWTH=1 \
-                      -s BINARYEN_TRAP_MODE=clamp \
                       -DFMT_HEADER_ONLY
 
 INCLUDES            = -Isrc \
@@ -92,14 +89,14 @@ debug:
 	$(BUILD_LIB_IMGUI)
 	$(GENERATE_RESOURCES)
 	$(BUILD_JACKBENGINE)
-	$(CC) $(CDFLAGS) $(INCLUDES) $(LIB_IMGUI) $(SOURCES) -o $(OUT)
+	$(CC) $(CFLAGS_D) $(INCLUDES) $(LIB_IMGUI) $(SOURCES) -o $(OUT)
 
 release_profile:
 	$(BUILD_RESOURCE_GENERATOR)
 	$(BUILD_LIB_IMGUI)
 	$(GENERATE_RESOURCES)
 	$(BUILD_JACKBENGINE)
-	$(CC) $(CRPFLAGS) $(INCLUDES) $(LIB_IMGUI) $(SOURCES) -o $(OUT)
+	$(CC) $(CFLAGS_RP) $(INCLUDES) $(LIB_IMGUI) $(SOURCES) -o $(OUT)
 
 release:
 	$(BUILD_RESOURCE_GENERATOR)

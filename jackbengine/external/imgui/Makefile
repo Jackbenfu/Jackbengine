@@ -4,8 +4,7 @@ CFLAGS              = -O3 -DNDEBUG \
                       -std=c++17 \
                       -s USE_SDL=2 \
 					  -s DEMANGLE_SUPPORT=1 \
-                      -s WARN_ON_UNDEFINED_SYMBOLS=1 \
-                      -s BINARYEN_TRAP_MODE=clamp
+                      -s WARN_ON_UNDEFINED_SYMBOLS=1
 
 SOURCES             = $(wildcard *.cpp)
 

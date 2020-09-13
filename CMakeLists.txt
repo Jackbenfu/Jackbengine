@@ -18,5 +18,5 @@ add_subdirectory(${PROJECT_SOURCE_DIR}/jackbengine)
 
 file(GLOB_RECURSE SOURCE_FILES sandbox/*.cpp)
 
-add_executable(sandbox ${SOURCE_FILES})
-target_link_libraries(sandbox jackbengine)
+add_executable(${PROJECT_NAME} ${SOURCE_FILES})
+target_link_libraries(${PROJECT_NAME} jackbengine)

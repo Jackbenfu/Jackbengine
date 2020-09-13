@@ -42,7 +42,7 @@ Window::Window(const std::string& title, int width, int height, bool fullscreen)
     EmscriptenWebGLContextAttributes attrs;
     attrs.majorVersion = 2;
     attrs.minorVersion = 0;
-    auto webgl_context = emscripten_webgl_create_context(0, &attrs);
+    auto webgl_context = emscripten_webgl_create_context("canvas", &attrs);
     emscripten_webgl_make_context_current(webgl_context);
 #else
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
@@ -63,6 +63,7 @@ Window::Window(const std::string& title, int width, int height, bool fullscreen)
         throw std::runtime_error(SDL_GetError());
     }
 
+#ifndef EMSCRIPTEN
     m_glContext = SDL_GL_CreateContext(m_window);
     if (nullptr == m_glContext)
     {
@@ -70,7 +71,6 @@ Window::Window(const std::string& title, int width, int height, bool fullscreen)
         throw std::runtime_error(SDL_GetError());
     }
 
-#ifndef EMSCRIPTEN
     auto gladStatus = gladLoadGLLoader(SDL_GL_GetProcAddress);
     if (!gladStatus)
     {
@@ -78,9 +78,10 @@ Window::Window(const std::string& title, int width, int height, bool fullscreen)
         SDL_DestroyWindow(m_window);
         throw std::runtime_error("Failed to initialize Glad");
     }
-#endif
 
     SDL_GL_MakeCurrent(m_window, m_glContext);
+#endif
+
     SDL_GL_SetSwapInterval(0);
     SDL_GetWindowSize(m_window, &m_width, &m_height);
 

@@ -13,7 +13,7 @@ namespace Jackbengine::details {
 void initSDL()
 {
 #ifdef EMSCRIPTEN
-    if (SDL_Init(SDL_INIT_EVERYTHING & ~(SDL_INIT_TIMER | SDL_INIT_HAPTIC | SDL_INIT_GAMECONTROLLER | SDL_INIT_JOYSTICK)) < 0)
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS | SDL_INIT_AUDIO) < 0)
 #else
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
 #endif
@@ -31,6 +31,7 @@ void initSDL()
         throw std::runtime_error(TTF_GetError());
     }
 
+#ifndef EMSCRIPTEN
     if (0 == Mix_Init((unsigned) MIX_INIT_FLAC | MIX_INIT_MOD | MIX_INIT_MP3 | MIX_INIT_OGG))
     {
         throw std::runtime_error(Mix_GetError());
@@ -40,11 +41,15 @@ void initSDL()
     {
         throw std::runtime_error(Mix_GetError());
     }
+#endif
 }
 
 void destroySDL()
 {
+#ifndef EMSCRIPTEN
     Mix_Quit();
+#endif
+
     TTF_Quit();
     IMG_Quit();
     SDL_Quit();

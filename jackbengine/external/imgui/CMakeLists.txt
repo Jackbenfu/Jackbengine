@@ -22,5 +22,5 @@ set(
     imgui_impl_opengl3.cpp
 )
 
-add_library(imgui STATIC ${SOURCE_FILES})
-target_link_libraries(imgui ${SDL2_LIBRARY})
+add_library(${PROJECT_NAME} STATIC ${SOURCE_FILES})
+target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARY})
